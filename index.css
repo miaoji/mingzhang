@@ -200,6 +200,10 @@ body {
 .main_news>ul>li.main_news_item:last-child{
 	border: none;
 }
+.main_news>ul>li.main_news_item>a{
+	text-decoration: none;
+	color: inherit;
+}
 
 /* 客户服务 */
 
@@ -335,7 +339,7 @@ body {
 }
 .express_info>ul>li:nth-child(2)>.ico1{
 	height: 50%;
-	top: 32px;
+	top: 29px;
 }
 .express_info>ul>li:last-child>.ico1{
 	height: 50%;
@@ -402,4 +406,15 @@ body {
 	cursor:pointer;
 	user-select: none;
 	-webkit-user-select: none;
+}
+/* 新闻子页部分 */
+.news{
+	background-color: #fff;
+	padding: 30px;
+	box-sizing: border-box;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+.news>p{
+	color: #555;
 }

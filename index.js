@@ -17,7 +17,7 @@ window.onload=function(){
 		var lis=info.getElementsByTagName("li");
 		$.ajax({
 			type:"get",
-			url:"http://api.didalive.net/api/orderInfo/getOrderInfoByOrderNo",
+			url:"http://api.mingz-tech.com/api/orderInfo/getOrderInfoByOrderNo",
 			data:{
 				orderNo:oInp.value
 			},
@@ -34,7 +34,7 @@ window.onload=function(){
                		kdCompanyCodeCn = obj.kdCompanyCodeCn;
                		$.ajax({
                			type: 'get',
-               			url:"http://api.didalive.net/api/order/queryByCompany",
+               			url:"http://api.mingz-tech.com/api/order/queryByCompany",
                			data:{
                				num:cnNo,
                				company:kdCompanyCodeCn||'zhongtong'
@@ -49,7 +49,7 @@ window.onload=function(){
 								info.removeChild(lis[1]);
 							};
 							var data = data.obj.data;
-							if (data.length>0) {
+							if (data.length>0 || false) {
 								for (var i=0;i<data.length;i++) {
 									var Li = document.createElement("li");
 									var context=data[i].context.replace("中通快递", "明彰");
@@ -64,38 +64,38 @@ window.onload=function(){
 							}
                			}
                		})
-               		$.ajax({
-               			type: 'get',
-               			url: "http://api.didalive.net/api/order/queryByCompany",
-               			data: {
-               				num:intlNo,
-               				company:kdCompanyCode
-               			},
-               			async:true,
-						beforeSend: function(request) {
-	                        request.setRequestHeader("token", token);
-			            },
-               			success:function(data){
-							var index=lis.length;
-							for (var i=1;i<index;i++) {
-								info.removeChild(lis[1]);
-							};
-							var data = data.obj.data;
-							if (data.length>0) {
-								for (var i=0;i<data.length;i++) {
-									var Li = document.createElement("li");
-									var context=data[i].context.replace("中通快递", "明彰");
-									Li.innerHTML="<span class='title'>"+data[i].time+"</span><span class='ico'></span><span class='ico1'></span><span class='info'>"+context+"</span>";
-									info.appendChild(Li);
-								}
-							}else{
-								var Li = document.createElement("li");
-								Li.style.textAlign="center";
-								Li.innerHTML="暂无快递信息";
-								info.appendChild(Li);
-							}
-               			}
-               		})
+      //          		$.ajax({
+      //          			type: 'get',
+      //          			url: "http://api.mingz-tech.com/api/order/queryByCompany",
+      //          			data: {
+      //          				num:intlNo,
+      //          				company:kdCompanyCode
+      //          			},
+      //          			async:true,
+						// beforeSend: function(request) {
+	     //                    request.setRequestHeader("token", token);
+			   //          },
+      //          			success:function(data){
+						// 	var index=lis.length;
+						// 	for (var i=1;i<index;i++) {
+						// 		info.removeChild(lis[1]);
+						// 	};
+						// 	var data = data.obj.data;
+						// 	if (data.length>0) {
+						// 		for (var i=0;i<data.length;i++) {
+						// 			var Li = document.createElement("li");
+						// 			var context=data[i].context.replace("中通快递", "明彰");
+						// 			Li.innerHTML="<span class='title'>"+data[i].time+"</span><span class='ico'></span><span class='ico1'></span><span class='info'>"+context+"</span>";
+						// 			info.appendChild(Li);
+						// 		}
+						// 	}else{
+						// 		var Li = document.createElement("li");
+						// 		Li.style.textAlign="center";
+						// 		Li.innerHTML="暂无快递信息";
+						// 		info.appendChild(Li);
+						// 	}
+      //          			}
+      //          		})
                	}
             }
 		});

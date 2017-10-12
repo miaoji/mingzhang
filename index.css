@@ -29,6 +29,10 @@ body {
 	content: "";
 	clear: both;
 }
+a{
+	text-decoration: none;
+	color: inherit;
+}
 
 /*头部导航栏*/
 .header_nav {
@@ -310,13 +314,17 @@ body {
 	font-weight: 600;
 }
 .express_info>ul>li>.title{
-	width: 235px;
+	// width: 235px;
 	padding-right:30px ;
 	display: inline-block;
 }
 .express_info>ul>li>.info{
 	padding-left:50px ;
-	display: inline-block;
+	display: block;
+	float: right;
+	white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;
+	height: 58px;
+	width: 750px;
 }
 .express_info>ul>li>.ico{
 	display: inline-block;
@@ -406,6 +414,9 @@ body {
 	cursor:pointer;
 	user-select: none;
 	-webkit-user-select: none;
+}
+.order_main>.main_inquire>.main_inquire_btn:hover{
+	background-color: #ff0000;
 }
 /* 新闻子页部分 */
 .news{

@@ -4,8 +4,8 @@
 		<meta charset="UTF-8">
 		<title>上海明樟网络科技有限公司</title>
 		<link rel="stylesheet" type="text/css" href="index.css"/>
-		<script type="text/javascript" src="index.js" ></script>
-		<script type="text/javascript" src="jquery.min.js" ></script>
+		<!-- <script type="text/javascript" src="index.js" ></script> -->
+		<!-- <script type="text/javascript" src="jquery.min.js" ></script> -->
 	</head>
 	<body>
 		<div class="header_nav">
@@ -38,11 +38,11 @@
 						<li class="left item1"><div class="btn">我要寄件</div></li>
 						<li class="left item2"><img src="images/tp1.jpg"/></li>
 						<li class="left item3"><img src="images/tp2.jpg"/></li>
-						<li class="left item4"><div class="btn">派送时效</div></li>
+						<li class="left item4"><div class="btn">参考时效</div></li>
 						<li class="left item5"><div class="btn">服务站点</div></li>
 						<li class="left item6"><img src="images/tp3.jpg"/></li>
-						<li class="left item7"><img src="images/tp4.png"/></li>
-						<li class="left item8"><div class="btn">会员登录</div></li>
+						<!-- <li class="left item7"><img src="images/tp4.png"/></li>
+						<li class="left item8"><div class="btn">会员登录</div></li> -->
 					</ul>
 				</div>
 				<div class="main_hint">
@@ -51,11 +51,11 @@
 				</div>	
 				<div class="main_news">
 					<ul>
-						<li class="main_news_item"><a href="./news005.html">香港机场客机起火 火势猛烈烧毁不少货物</a></li>
-						<li class="main_news_item"><a href="./news004.html">中秋国庆假期服务安排</a></li>
-						<li class="main_news_item"><a href="./news003.html">关于国际快递服务中心快递时效受佛罗里达州飓风“艾尔玛”影响的提示</a></li>
-						<li class="main_news_item"><a href="./news002.html">国际快递服务中心扩大校园服务范围</a></li>
-						<li class="main_news_item"><a href="./news001.html">国际快递服务中心微信公众号上线！</a></li>
+						<li class="main_news_item"><a href="./news005.html">2017-10-09 年香港机场客机起火 火势猛烈烧毁不少货物</a></li>
+						<li class="main_news_item"><a href="./news004.html">2017-09-28 中秋国庆假期服务安排</a></li>
+						<li class="main_news_item"><a href="./news003.html">2017-09-11 关于国际快递服务中心快递时效受佛罗里达州飓风“艾尔玛”影响的提示</a></li>
+						<li class="main_news_item"><a href="./news002.html">2017-09-01 国际快递服务中心扩大校园服务范围</a></li>
+						<li class="main_news_item"><a href="./news001.html">2017-08-28 国际快递服务中心微信公众号上线！</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,26 +73,6 @@
 					</ul>
 				</div>
 			</div>
-		</div>
-		<div class="order_box hide">
-			<div class="order_main w">
-				<div class="order_main_title">运单状态</div>
-				<div class="main_inquire clear">
-					<div class="main_inquire_tit left">快件查询</div>
-					<div class="main_inquire_inp left">
-						<input id="orderInput" type="text" placeholder="请输入单号进行查询" />
-					</div>
-					<div id="orderBtn" class="main_inquire_btn left">查询</div>
-				</div>
-				<div class="express_info">
-					<div class="express_info_tit"><span class="express_code" id="express_code">123456 </span> 的运单状态</div>
-					<ul id="info_ul">
-						<li><span class="title">时间</span><span class="info">地点和跟踪进度</span></li>
-						<!--<li><span class="title">时间</span><span class="ico"></span><span class="ico1"></span><span class="info">地点和跟踪进度</span></li>-->
-						<li style="text-align: center;">暂无快递信息</li>
-					</ul>
-				</div>	
-			</div>
 		</div>			
 		<div class="footer">
 			<div class="footer_main w">
@@ -103,14 +83,14 @@
 					</li>
 					<li class="left">
 						<div class="tit">保值服务</div>
-						<div class="footer_item">禁运物品</div>
-						<div class="footer_item">快件面单服务协议条约</div>
-						<div class="footer_item">疑难解答</div>
+						<div class="footer_item"><a href="#">禁运物品</a></div>
+						<div class="footer_item"><a href="#">快件面单服务协议条约</a></div>
+						<div class="footer_item"><a href="#">疑难解答</a></div>
 					</li>
 					<li class="left">
 						<div class="tit">关于我们</div>
-						<div class="footer_item">公司介绍</div>
-						<div class="footer_item">人才招募</div>
+						<div class="footer_item"><a href="#">公司介绍</a></div>
+						<div class="footer_item"><a href="#">人才招募</a></div>
 					</li>
 					<li class="left">
 						<div class="tit">地址信息</div>
@@ -123,4 +103,11 @@
 			</div>
 		</div>		
 	</body>
+	<script>
+		var oBtn = document.getElementById('btn')
+		var oInp = document.getElementById('input')
+		oBtn.onclick=function () {
+			window.location = './getOrderInfo.html?order='+oInp.value
+		}
+	</script>
 </html>

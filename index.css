@@ -271,6 +271,14 @@ a{
 	list-style: none;
 	width: 280px;
 }
+.footer>.footer_main>ul>li>.img{
+	width: 130px;
+	height: 130px;
+}
+.footer>.footer_main>ul>li>.img>img{
+	width: inherit;
+	height: inherit;
+}
 .footer>.footer_main>ul>li>.tit{
 	font-size: 18px;
 	font-weight: 400;
@@ -286,7 +294,7 @@ a{
 	text-align: center;
 	font-size: 16px;
 	color: #ccc;
-	padding-bottom: 24px;
+	// padding-bottom: 24px;
 }
 
 /* 快递查询  */
@@ -540,7 +548,7 @@ a{
 	font-size: 24px;
 	font-weight: bold;
 	color: #555;
-	padding-bottom: 20px;q
+	padding-bottom: 20px;
 }
 .violate{
 	background-color: #fff;

@@ -24,6 +24,7 @@
 export default {
 	name: 'Send',
 	created(){
+		window.document.title = '我要寄件-上海明彰网络科技有限公司'
 		this.menu()
 	},
 	methods:{

@@ -11,6 +11,7 @@
 export default {
 	name: 'News',
 	async created(){
+		window.document.title = '新闻动态-上海明彰网络科技有限公司'
 		this.menu()
 	},
 	methods: {

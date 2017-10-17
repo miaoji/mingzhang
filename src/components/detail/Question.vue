@@ -35,6 +35,7 @@
 export default {
 	name: 'Question',
 	created(){
+		window.document.title = '疑难解答-上海明彰网络科技有限公司'
 		this.menu()
 	},
 	methods:{

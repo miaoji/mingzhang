@@ -19,6 +19,7 @@ export default {
 	name: 'Introduce',
 	created(){
 		window.document.title = '公司介绍-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods:{

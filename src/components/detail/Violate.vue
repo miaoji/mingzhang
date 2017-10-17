@@ -137,6 +137,7 @@ export default {
 	name: 'Violate',
 	created(){
 		window.document.title = '禁运物品-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods:{

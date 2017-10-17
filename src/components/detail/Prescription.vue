@@ -116,6 +116,7 @@ export default {
 	name: 'Prescription',
 	created(){
 		window.document.title = '参考时效-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods:{

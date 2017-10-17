@@ -4,7 +4,7 @@
 			<li class="left">
 				<router-link to="/"><img src="/static/img/logo.png"/></router-link>
 			</li>
-			<li class="right"><router-link to="/">回到首页</router-link></li>
+			<li class="right"><router-link to="/" v-if='show'>回到首页</router-link></li>
 			<!--<li class="left"><router-link to="#">货件查询</router-link></li>
 			<li class="left"><router-link to="#">寄件服务</router-link></li>
 			<li class="left"><router-link to="#">派送时效</router-link></li>
@@ -28,6 +28,12 @@ export default {
 	methods:{
 		menu(){
 			window.scrollTo(0,0)
+		}
+	},
+	props:{
+		show:{
+			type:Boolean,
+			default:true
 		}
 	}
 }

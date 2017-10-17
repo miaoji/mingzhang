@@ -36,6 +36,7 @@ export default {
 	},
 	created(){
 		window.document.title = '订单查询-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.order = location.hash.split('?order=')[1]
 		this.getOrderInfo()
 		this.menu()

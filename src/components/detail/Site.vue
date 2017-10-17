@@ -12,6 +12,7 @@ export default {
 	name: 'Site',
 	created(){
 		window.document.title = '服务站点-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods:{

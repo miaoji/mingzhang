@@ -10,6 +10,7 @@ export default {
 	name: 'News',
 	created(){
 		window.document.title = '新闻动态-上海明彰网络科技有限公司'
+		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods: {

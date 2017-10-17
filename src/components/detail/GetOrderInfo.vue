@@ -82,7 +82,6 @@ export default {
 					console.log('intlorder111',intlorder)
 				}else{
 					this.intlOrderData=[]
-					this.show = true
 				}
 			}else{
 				this.show = true

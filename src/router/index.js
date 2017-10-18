@@ -14,18 +14,25 @@ import new2 from '@/components/news/new2'       // 新闻动态
 import new3 from '@/components/news/new3'       // 新闻动态
 import new4 from '@/components/news/new4'       // 新闻动态
 import new5 from '@/components/news/new5'       // 新闻动态
+import Errors from '@/components/Error'       // 新闻动态
 
 // 英文版-路由地址
 import enIndex from '@/componentenglish/IndexMain'       // 英文版主页
 import enSend from '@/componentenglish/detail/Send'                 // 我要寄件
 import enPrescription from '@/componentenglish/detail/Prescription' // 参考时效
 import enSite from '@/componentenglish/detail/Site'                 // 服务站点
+import enGetOrderInfo from '@/componentenglish/detail/GetOrderInfo'                 // 服务站点
 
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/enGetOrderInfo',
+      name: 'enGetOrderInfo',
+      component: enGetOrderInfo
+    },
     {
       path: '/enSite',
       name: 'enSite',
@@ -120,6 +127,11 @@ export default new Router({
       path: '/new5',
       name: 'new5',
       component: new5
+    },
+    {
+      path: '/*',
+      name: 'error',
+      component: Errors
     }
   ]
 })

@@ -32,7 +32,7 @@ import Footers from '@/componentenglish/Footers'
 
 import { getOrderInfoByOrderNo, queryByCompany } from '@/services/orderInfo'
 export default {
-	name: 'GetOrderInfo',
+	name: 'enGetOrderInfo',
 	components:{
 		Headers,
 		Footers
@@ -46,7 +46,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '订单查询-上海明彰网络科技有限公司'
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.order = location.hash.split('?order=')[1]
 		this.getOrderInfo()
 		this.menu()
@@ -56,7 +56,7 @@ export default {
 			window.scrollTo(0,0);
 		},
 		async getOrderInfo(){
-			this.$router.push({path:'/GetOrderInfo?order='+this.order})
+			this.$router.push({path:'/enGetOrderInfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
 			})

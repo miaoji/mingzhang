@@ -89,7 +89,7 @@ export default {
 		return {
 			msg: '',
 			show: false,
-			link: '/GetOrderInfo',
+			link: '/enGetOrderInfo',
 		}
 	},
 	created(){
@@ -106,7 +106,7 @@ export default {
 			if (this.msg == '') {
 				alert('您输入的订单号为空!!!')
 			}else{
-				this.$router.push({path:'/GetOrderInfo?order='+this.msg})
+				this.$router.push({path:'/enGetOrderInfo?order='+this.msg})
 			}
 		}
 	}

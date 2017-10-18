@@ -39,7 +39,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '我要寄件-上海明彰网络科技有限公司'
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{

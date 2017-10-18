@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<Headers :show='show'></Headers>
 		<div class="img_send w"><img src="static/img/banner_send.jpg" alt=""></div>
 		<div class="send w">
 			<div class="heaer_info">提供速快、经济、大货等物品递送，给客户最合适的快递服务，可以将货物通过空运、海运、路运等运输至各地。</div>
@@ -18,11 +19,24 @@
 			<div class="tit">四、关注公众号,体验国际快递服务</div>
 			<div class="comtent"><img src="/static/img/weixin.jpg" alt=""></div>
 		</div>	
+		<Footers></Footers>
 	</div>
 </template>
 <script>
+import Headers from '@/components/Headers'
+import Footers from '@/components/Footers'
+
 export default {
 	name: 'Send',
+	components:{
+		Headers,
+		Footers
+	},
+	data(){
+		return {
+			show: true
+		}
+	},
 	created(){
 		window.document.title = '我要寄件-上海明彰网络科技有限公司'
 		this.$emit('showbtn',true)

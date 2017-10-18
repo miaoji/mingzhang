@@ -2,71 +2,71 @@
 	<div>
 		<Headers :show='show'></Headers>
 		<div class="main_box show">
-			<div class="banner"><img src="/static/img/banner1.jpg"/></div>
+			<div class="banner"><img src="/static/img/banner2.jpg"/></div>
 			<div class="main w">
 				<div class="main_inquire clear">
-					<div class="main_inquire_tit left">快件查询</div>
+					<div class="main_inquire_tit left">EXPRESS TRACK</div>
 					<div class="main_inquire_inp left">
-						<input id="input" type="text" placeholder="请输入单号进行查询" v-model='msg' />
+						<input id="input" type="text" placeholder="Please Input Your Courier Numbe" v-model='msg' />
 					</div>
-					<div @click='handleClick' id="btn" class="main_inquire_btn left">查询</div>
+					<div @click='handleClick' id="btn" class="main_inquire_btn left">Enter</div>
 				</div>
 				<div class="main_hint">
-					<div class="main_hint_text">立即体验</div>
+					<div class="main_hint_text">Experience Now</div>
 					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
 				</div>	
 				<div class="main_experience">
 					<ul class="clear">
-						<li class="left item1"><router-link to="/Send"><div class="btn">我要寄件</div></router-link></li>
+						<li class="left item1"><router-link to="/enSend"><div class="btn">Send Out</div></router-link></li>
 						<li class="left item2"><img src="/static/img/tp4.jpg"/></li>
 						<li class="left item3"><img src="/static/img/tp5.jpg"/></li>
-						<li class="left item4"><router-link to="/Prescription"><div class="btn">参考时效</div></router-link></li>
-						<li class="left item5"><router-link to="/Site"><div class="btn">服务站点</div></router-link></li>
+						<li class="left item4"><router-link to="/enPrescription"><div class="btn">Reference Time</div></router-link></li>
+						<li class="left item5"><router-link to="/enSite"><div class="btn">Service Site</div></router-link></li>
 						<li class="left item6"><img src="/static/img/tp6.jpg"/></li>
 						<!-- <li class="left item7"><img src="/static/img/tp4.png"/></li>
 						<li class="left item8"><div class="btn">会员登录</div></li> -->
 					</ul>
 				</div>
-				<div class="main_hint">
-					<div class="main_hint_text">快递服务中心新闻</div>
+				<div class="main_hint hide">
+					<div class="main_hint_text">ANNOUNCEMENT</div>
 					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
 				</div>	
-				<div class="main_news">
+				<div class="main_news hide">
 					<ul>
-						<li class="main_news_item"><router-link target='_blank' to="/new5">2017-10-09 年香港机场客机起火 火势猛烈烧毁不少货物</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new4">2017-09-28 中秋国庆假期服务安排</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new3">2017-09-11 关于国际快递服务中心快递时效受佛罗里达州飓风“艾尔玛”影响的提示</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new2">2017-09-01 国际快递服务中心扩大校园服务范围</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new1">2017-08-28 国际快递服务中心微信公众号上线！</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new5">2017-10-09 A lot of goods ruined due to the big fire in Hongkong airport.</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new4">2017-09-28 Service arrangement during Mid-Autumn Festival and National Day.</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new3">2017-09-11 Tips for hurricane in Florida, "Alma" will influent delivery of goods.</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new2">2017-09-01 International express service center expanded service area in campus.</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new1">2017-08-28 Online! We-chat official accounts of International express service center.</router-link></li>
 					</ul>
 				</div>
 			</div>
 			<div class="service w">
 				<div class="main_hint">
-					<div class="main_hint_text">服务优势</div>
+					<div class="main_hint_text">advantages Services</div>
 					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
 				</div>	
 				<div class="service_items">
 					<ul class="clear">
 						<li class="service_items_item item1 left">
 							<div class="img"></div>
-							<div class="text">优质服务</div>
-							<div>提供客户最需要的增值服务，为客户带来便利及节省费用。</div>
+							<div class="text">Quality Service</div>
+							<div>Provide value-added services for customers, bring convenience and cost saving for customers.</div>
 						</li>
 						<li class="service_items_item item2 left">
 							<div class="img"></div>
-							<div class="text">性价比高</div>
-							<div>在要求时效性和安全运输的同时，运输价格更优惠。</div>
+							<div class="text">Reasonable Price Ratio</div>
+							<div>Well-established system Competitive price Safer & Faster.</div>
 						</li>
 						<li class="service_items_item item3 left">
 							<div class="img"></div>
-							<div class="text">专业性强</div>
-							<div>有着丰富的国际快递运输经验，对世界各国运输物品政策非常了解，让客户省心放心。</div>
+							<div class="text">Highly Professional</div>
+							<div>Extensive experience in international express.Deep knowledge about global express policy.</div>
 						</li>
 						<li class="service_items_item item4 left">
 							<div class="img"></div>
-							<div class="text">自主灵活</div>
-							<div>提供多种快递运输线路，为客户选择性价比最高的物流解决方案。</div>
+							<div class="text">Unrestrained & Flexible</div>
+							<div>Focus on customer needs.Various routes to choose.Perfect logistics solution.</div>
 						</li>
 					</ul>
 				</div>
@@ -76,8 +76,8 @@
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
 
 export default {
 	name: 'IndexMain',
@@ -88,13 +88,14 @@ export default {
 	data(){
 		return {
 			msg: '',
-			show:false,
-			link:'/GetOrderInfo',
+			show: false,
+			link: '/GetOrderInfo',
 		}
 	},
 	created(){
 		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
+		this.$emit('showbtn',false)
 	},
 	methods:{
 		menu(){
@@ -134,7 +135,7 @@ export default {
 	background-color: #666666;
 	position: relative;
 	z-index: 99;
-	padding: 42px 100px;
+	padding: 42px 40px;
 }
 .main>.main_inquire>.main_inquire_tit{
 	font-size: 30px;
@@ -214,9 +215,9 @@ export default {
 	background-color: #56c998;
 }
 .main_experience ul li .btn{
-	width: 158px;
+	width: 200px;
 	height: 58px;
-	margin: 122px 212px;
+	margin: 122px 190px;
 	background-color: inherit;
 	border: 1px #fff solid;
 	text-align: center;

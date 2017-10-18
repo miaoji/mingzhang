@@ -1,28 +1,12 @@
 <template>
   <div id="app">
-    <Headers :show='show'></Headers>
-    <router-view @showbtn='showbtn'/>
-    <Footers></Footers>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Headers from './components/Headers'
-import IndexMain from './components/IndexMain'
-import Footers from './components/Footers'
 export default {
   name: 'app',
-  data(){
-    return {
-      show: true
-    }
-  },
-  components:{Headers,IndexMain,Footers},
-  methods:{
-    showbtn(e){
-      this.show = e
-    }
-  }
 }
 </script>
 

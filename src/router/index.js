@@ -15,10 +15,37 @@ import new3 from '@/components/news/new3'       // 新闻动态
 import new4 from '@/components/news/new4'       // 新闻动态
 import new5 from '@/components/news/new5'       // 新闻动态
 
+// 英文版-路由地址
+import enIndex from '@/componentenglish/IndexMain'       // 英文版主页
+import enSend from '@/componentenglish/detail/Send'                 // 我要寄件
+import enPrescription from '@/componentenglish/detail/Prescription' // 参考时效
+import enSite from '@/componentenglish/detail/Site'                 // 服务站点
+
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/enSite',
+      name: 'enSite',
+      component: enSite
+    },
+    {
+      path: '/enSend',
+      name: 'enSend',
+      component: enSend
+    },
+    {
+      path: '/enPrescription',
+      name: 'enPrescription',
+      component: enPrescription
+    },
+    {
+      path: '/enIndex',
+      name: 'enIndex',
+      component: enIndex
+    },
     {
       path: '/',
       name: 'IndexMain',
@@ -61,7 +88,7 @@ export default new Router({
     },
     {
       path: '/Callme',
-      name: 'Introduce',
+      name: 'Callme',
       component: Introduce
     },
     {

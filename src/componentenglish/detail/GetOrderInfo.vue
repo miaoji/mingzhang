@@ -27,11 +27,10 @@
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
 
 import { getOrderInfoByOrderNo, queryByCompany } from '@/services/orderInfo'
-
 export default {
 	name: 'GetOrderInfo',
 	components:{
@@ -43,7 +42,7 @@ export default {
 			order:'',
 			cnOrderdData:[],
 			intlOrderData:[],
-			show:true
+			show: true
 		}
 	},
 	created(){

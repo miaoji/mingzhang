@@ -1,6 +1,4 @@
 <template>
-	<div>
-		<Headers :show='show'></Headers>
 		<div class="news w">
 			<h1>关于国际快递服务中心快递时效受佛罗里达州飓风“艾尔玛”影响的提示</h1>
 			<p>尊敬的客户</p>
@@ -8,25 +6,11 @@
 			<p>如有疑问请咨询客服热线021—34120053。感谢您一直以来对国际快递服务中心的信任与支持！</p>
 			<p class="clear"><span class="right">国际快递服务中心</span></p>
 			<p class="clear"><span class="right">2017年9月11日</span></p>
-		</div>
-		<Footers></Footers>
-	</div>
+		</div>	
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
-
 export default {
 	name: 'News',
-	components:{
-		Headers,
-		Footers
-	},
-	data(){
-		return {
-			show: true
-		}
-	},
 	created(){
 		window.document.title = '新闻动态-上海明彰网络科技有限公司'
 		this.$emit('showbtn',true)

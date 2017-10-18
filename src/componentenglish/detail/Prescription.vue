@@ -3,109 +3,109 @@
 		<Headers :show='show'></Headers>
 		<div class="img_prescription w"><img src="/static/img/banner_prescription.jpg" alt=""></div>
 		<div class="prescription w">
-			<div class="header">秉承"快捷、高效、安全"的现代化物流服务理念，为客户提供：专业化、高效能、一步到位的丰富完善的集运服务</div>
+			<div class="header">We adhere to the modern logistics service concept: fast, efficient and safe. So we provide customers professional and high-performance services</div>
 			<table border="1" cellspacing="0">
-				<tr><td colspan="4" class="title">国际快递服务中心参考时效</td></tr>
+				<tr><td colspan="4" class="title">Reference Time（calculate from picking up）</td></tr>
 				<tr>
-					<th>区域</th>
-					<th>分区</th>
-					<th>国家/地区</th>
-					<th>时效(工作日)(出仓开始计算)</th>
+					<th>Region</th>
+					<th>Sub-region</th>
+					<th>Country</th>
+					<th>Delivery Duration</th>
 				</tr>
 				<tr>
-					<td rowspan="6">亚洲</td>
+					<td rowspan="6">Asia</td>
 					<td>1</td>
-					<td>澳门</td>
+					<td>Macau</td>
 					<td>2-3</td>
 				</tr>
 				<tr>
 					<td>2</td>
-					<td>韩国等</td>
+					<td>Korea etc</td>
 					<td>2-3</td>
 				</tr>
 				<tr>
 					<td>3</td>
-					<td>日本</td>
+					<td>Japan</td>
 					<td>2-3</td>
 				</tr>
 				<tr>
 					<td>4</td>
-					<td>缅甸等</td>
+					<td>Burma etc</td>
 					<td>2-4</td>
 				</tr>
 				<tr>
 					<td>5</td>
-					<td>印度等</td>
+					<td>India etc</td>
 					<td>4-5</td>
 				</tr>
 				<tr>
 					<td>6</td>
-					<td>巴基斯坦</td>
+					<td>Pakistan</td>
 					<td>4-5</td>
 				</tr>
 				<tr>
-					<td rowspan="5">美洲</td>
+					<td rowspan="5">America</td>
 					<td>7</td>
-					<td>美国</td>
+					<td>USA</td>
 					<td>2-3</td>
 				</tr>
 				<tr>
 					<td>8</td>
-					<td>加拿大</td>
+					<td>Canada</td>
 					<td>3-4</td>
 				</tr>
 				<tr>
 					<td>9</td>
-					<td>墨西哥</td>
+					<td>Mexico</td>
 					<td>3-4</td>
 				</tr>
 				<tr>
 					<td>10</td>
-					<td>巴拿马等</td>
+					<td>Panama etc</td>
 					<td>5-6</td>
 				</tr>
 				<tr>
 					<td>11</td>
-					<td>智利等</td>
+					<td>Chile etc</td>
 					<td>5-6</td>
 				</tr>
 				<tr>
-					<td rowspan="3">欧洲</td>
+					<td rowspan="3">Europe</td>
 					<td>12</td>
-					<td>德国等</td>
+					<td>German etc</td>
 					<td>3-4</td>
 				</tr>
 				<tr>
 					<td>13</td>
-					<td>冰岛等</td>
+					<td>Iceland etc</td>
 					<td>5-6</td>
 				</tr>
 				<tr>
 					<td>14</td>
-					<td>俄罗斯</td>
+					<td>Russia</td>
 					<td>5-7</td>
 				</tr>
 				<tr>
-					<td>中东</td>
+					<td>Middle East</td>
 					<td>15</td>
-					<td>阿联酋等</td>
+					<td>UAE etc</td>
 					<td>4-5</td>
 				</tr>
 				<tr>
-					<td rowspan="2">非洲</td>
+					<td rowspan="2">Africa</td>
 					<td>16</td>
-					<td>埃及等</td>
+					<td>Egypt etc</td>
 					<td>4-5</td>
 				</tr>
 				<tr>
 					<td>17</td>
-					<td>安哥拉等</td>
+					<td>Angola etc</td>
 					<td>5-6</td>
 				</tr>
 				<tr>
-					<td>大洋洲</td>
+					<td>Oceania</td>
 					<td>18</td>
-					<td>新西兰等</td>
+					<td>New Zealand etc</td>
 					<td>3-4</td>
 				</tr>
 			</table>
@@ -114,8 +114,8 @@
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
 
 export default {
 	name: 'Prescription',
@@ -125,12 +125,11 @@ export default {
 	},
 	data(){
 		return {
-			show: true
+			show: true,
 		}
 	},
 	created(){
-		window.document.title = '参考时效-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{

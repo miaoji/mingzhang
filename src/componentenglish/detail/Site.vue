@@ -3,15 +3,17 @@
 		<Headers :show='show'></Headers>
 		<div class="img_site w"><img src="/static/img/banner_site.jpg" alt=""></div>
 		<div class="site w">
-			<div class="header">国际快递服务中心，已在上海、北京、广东、江苏、浙江、山东等多个省份拥有服务站点，并在多个高校开设面向大学生寄递服务的站点，致力于不断向客户提供富有创新和满足客户不同需求的解决方案。</div>
+			<div class="header">International express center has service sites in Shanghai, Beijing, Guangdong, Jiangsu, Zhejiang, Shandong and other provinces, at the same time we specially set up service sites in many campus so that university and college students can send courier more convenient.
+			 we committed to provide customers with innovative solutions and satisfy their different needs.
+			</div>
 			<div class="chinamap"><img src="/static/img/china.png" alt="中国地图"></div>
 		</div>
 		<Footers></Footers>
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
 
 export default {
 	name: 'Site',
@@ -21,12 +23,11 @@ export default {
 	},
 	data(){
 		return {
-			show: true
+			show: true,
 		}
 	},
 	created(){
-		window.document.title = '服务站点-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{

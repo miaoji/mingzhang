@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
 		<div class="img_question w"><img src="/static/img/banner_question.jpg" alt=""></div>
 		<div class="question w clear">
 			<div class="question_nav left">
@@ -30,24 +29,11 @@
 				<div class="answer">答：因为出货，智能按照收到货物给您确认的实际重量来收费。您在线填写的价格，可能存在国家错误、描述不准确、称重方法错误、无法测量体积、测量体积未测量最凸出部分，电子称误差、测量物品未装箱等原因，会和实际收费存在误差。</div>
 			</div>
 		</div>	
-		<Footers></Footers>
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
-
 export default {
 	name: 'Question',
-	components:{
-		Headers,
-		Footers
-	},
-	data(){
-		return {
-			show: true
-		}
-	},
 	created(){
 		window.document.title = '疑难解答-上海明彰网络科技有限公司'
 		this.$emit('showbtn',true)

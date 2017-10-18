@@ -1,6 +1,4 @@
 <template>
-	<div>
-		<Headers :show='show'></Headers>
 		<div class="news w">
 			<h1>香港机场客机起火 火势猛烈烧毁不少货物</h1>
 			<p>10月9日下午17时许，停在香港国际机场的美国航空航班编号为AA192的飞机，在工作人员将行李搬上飞机时，运送行李车的起落架怀疑漏油起火，部份行李被火焚烧，一时间火光熊熊，冒出	滚滚黑烟。</p>
@@ -9,25 +7,11 @@
 			<p>据报道，香港机管局发言人表示，下午约17时30分，该局接到42号停机位地面发生火警的消息。事发时飞机上没有乘客，一名机场员工受伤，已送院治理。该航班已经取消，航空公司正为受	到影响的乘客作出安排，香港机管局正对事件进行调查。</p>
 			<p>报道称，被引燃的货物并非乘客行李，而是物流公司的出口货物。货单显示为衣物，但好像混杂了锂电池，故不知起火原因是否与电池有关。</p>
 			<p>香港专业教育学院(青衣)工程系高级讲师卢镇江表示，受高温波及的波音777客机，机身金属影响不大，但藏于里面的感应器、喉管、电线及塑胶物料等或被烧毁甚至烧溶，进而影响飞机飞行	安全。因此，飞机必须进行详细检查，检查时间可能持续一天或更长事件，需至证实无损或修理好之后才能重飞。</p>
-		</div>
-		<Footers></Footers>
-	</div>
+		</div>	
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
-
 export default {
 	name: 'News',
-	components:{
-		Headers,
-		Footers
-	},
-	data(){
-		return {
-			show: true
-		}
-	},
 	created(){
 		window.document.title = '新闻动态-上海明彰网络科技有限公司'
 		this.$emit('showbtn',true)

@@ -2,9 +2,9 @@
 	<div class="header_nav">
 		<ul class="w clear">
 			<li class="left">
-				<router-link to="/"><img src="/static/img/logo1.png"/><span class="logo">上海明彰网络科技有限公司</span></router-link>
+				<router-link to="/"><img src="/static/img/logo1.png"/><span class="logo">Shanghai Mingzhang Network Technology Co., Ltd.</span></router-link>
 			</li>
-			<li class="right btn" v-if='show'><router-link to="/">回到首页</router-link></li>
+			<li class="right btn" v-if='show'><router-link to="/enIndex">homepage</router-link></li>
 			<li class="right language" v-if='!show'><router-link to="/enIndex">English</router-link> <span> | </span> <router-link to="/">中文</router-link></li>
 			<!--<li class="left"><router-link to="#">货件查询</router-link></li>
 			<li class="left"><router-link to="#">寄件服务</router-link></li>

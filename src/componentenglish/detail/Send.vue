@@ -26,6 +26,7 @@
 import Headers from '@/componentenglish/Headers'
 import Footers from '@/componentenglish/Footers'
 
+
 export default {
 	name: 'Send',
 	components:{

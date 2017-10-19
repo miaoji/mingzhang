@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_prescription w"><img src="/static/img/banner_prescription.jpg" alt=""></div>
+		<div class="img_prescription w"><img src="/static/img/banner_prescription_en.jpg" alt=""></div>
 		<div class="prescription w">
 			<div class="header">We adhere to the modern logistics service concept: fast, efficient and safe. So we provide customers professional and high-performance services</div>
 			<table border="1" cellspacing="0">

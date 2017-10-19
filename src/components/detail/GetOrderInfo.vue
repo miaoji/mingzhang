@@ -106,7 +106,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 /* 快递查询  */
 .express_info{
 	width: 1030px;

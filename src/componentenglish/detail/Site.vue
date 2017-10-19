@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_site w"><img src="/static/img/banner_site.jpg" alt=""></div>
+		<div class="img_site w"><img src="/static/img/banner_site_en.jpg" alt=""></div>
 		<div class="site w">
 			<div class="header">International express center has service sites in Shanghai, Beijing, Guangdong, Jiangsu, Zhejiang, Shandong and other provinces, at the same time we specially set up service sites in many campus so that university and college students can send courier more convenient.
 			 we committed to provide customers with innovative solutions and satisfy their different needs.

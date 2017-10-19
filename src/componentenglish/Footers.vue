@@ -8,13 +8,13 @@
 				</li>
 				<li class="left">
 					<div class="tit">Help&Support</div>
-					<div class="footer_item"><router-link to="/Question">Troubleshooting</router-link></div>
-					<div class="footer_item"><router-link to="/Violate">Prohibited Goods</router-link></div>
+					<div class="footer_item"><router-link to="/enQuestion">Troubleshooting</router-link></div>
+					<div class="footer_item"><router-link to="/enViolate">Prohibited Goods</router-link></div>
 				</li>
 				<li class="left">
 					<div class="tit">About us</div>
-					<div class="footer_item"><router-link to="/Introduce">Company Profile</router-link></div>
-					<div class="footer_item"><router-link to="/Callme">Contact us</router-link></div>
+					<div class="footer_item"><router-link to="/enIntroduce">Company Profile</router-link></div>
+					<div class="footer_item"><router-link to="/enCallme">Contact us</router-link></div>
 				</li>
 				<li class="left">
 					<div class="tit">Address</div>

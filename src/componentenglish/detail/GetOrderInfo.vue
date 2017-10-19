@@ -3,22 +3,22 @@
 		<Headers :show='show'></Headers>
 		<div class="order_box">
 			<div class="order_main w">
-				<div class="order_main_title">运单状态</div>
+				<div class="order_main_title">Waybill Status</div>
 				<div class="main_inquire clear">
-					<div class="main_inquire_tit left">快件查询</div>
+					<div class="main_inquire_tit left">EXPRESS TRACK</div>
 					<div class="main_inquire_inp left">
-						<input id="orderInput" type="text" placeholder="请输入单号进行查询" v-model='order'/>
+						<input id="orderInput" type="text" placeholder="Please Input Your Courier Numbe" v-model='order'/>
 					</div>
-					<div id="orderBtn" class="main_inquire_btn left" @click="getOrderInfo">查询</div>
+					<div id="orderBtn" class="main_inquire_btn left" @click="getOrderInfo">Enter</div>
 				</div>
 				<div class="express_info">
-					<div class="express_info_tit"><span class="express_code" id="express_code">{{order}}</span> 的运单状态</div>
+					<div class="express_info_tit"><span class="express_code" id="express_code">{{order}}</span> waybill status</div>
 					<ul id="info_ul">
-						<li class="tit"><span class="title">时间</span><span class="info">地点和跟踪进度</span></li>
+						<li class="tit"><span class="title">Time</span><span class="info">Trajectory</span></li>
 						<!--<li><span class="title">时间</span><span class="ico"></span><span class="ico1"></span><span class="info">地点和跟踪进度</span></li>-->
 						<li v-for='item in cnOrderdData'><span class='title'>{{item.time}}</span><span class='ico'></span><span class='ico1'></span><span class='info'>{{item.context}}</span></li>
 						<li v-for='item in intlOrderData'><span class='title'>{{item.time}}</span><span class='ico'></span><span class='ico1'></span><span class='info'>{{item.context}}</span></li>
-						<li style="text-align: center;" v-if="show">暂无快递信息</li>
+						<li style="text-align: center;" v-if="show">Express information</li>
 					</ul>
 				</div>	
 			</div>
@@ -27,12 +27,13 @@
 	</div>
 </template>
 <script>
-import Headers from '@/componentenglish/Headers'
-import Footers from '@/componentenglish/Footers'
+import Headers from '@/components/Headers'
+import Footers from '@/components/Footers'
 
 import { getOrderInfoByOrderNo, queryByCompany } from '@/services/orderInfo'
+
 export default {
-	name: 'enGetOrderInfo',
+	name: 'GetOrderInfo',
 	components:{
 		Headers,
 		Footers
@@ -42,7 +43,7 @@ export default {
 			order:'',
 			cnOrderdData:[],
 			intlOrderData:[],
-			show: true
+			show:true
 		}
 	},
 	created(){
@@ -56,7 +57,7 @@ export default {
 			window.scrollTo(0,0);
 		},
 		async getOrderInfo(){
-			this.$router.push({path:'/enGetOrderInfo?order='+this.order})
+			this.$router.push({path:'/GetOrderInfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
 			})
@@ -64,45 +65,48 @@ export default {
 				if (res.obj.cnNo) {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
-							company:res.obj.kdCompanyCodeCn||'zhongtong'
+							company:res.obj.kdCompanyCodeCn||'zhongtong',
+							source:'frontend'
 					})
 					console.log('cnorder',cnorder)
 					if (cnorder.code === 200) {
 						this.cnOrderdData = cnorder.obj.data
 						console.log('cnOrderdData',this.cnOrderdData)
 					}
-					if (cnorder.obj.data) {
+					if (cnorder.code === 200) {
 						this.show = false
 					}
 				}else{
-					this.cnOrderdData=[]
+					this.cnOrderdData = []
 					this.show = true
 				}
 				if (res.obj.intlNo) {
 					let intlorder = await queryByCompany({
 						num:res.obj.intlNo,
-						company:res.obj.kdCompanyCode
+						company:res.obj.kdCompanyCode,
+						source:'frontend'
 					})
 					if (intlorder.code === 200) {
 						this.intlOrderData = intlorder.obj.data
 					}
-					if (intlorder.obj.data) {
+					if (intlorder.code === 200) {
 						this.show = false
 					}
 					console.log('intlorder111',intlorder)
 				}else{
-					this.intlOrderData=[]
+					this.intlOrderData = []
 				}
 			}else{
+				console.log('查询失败了',res)
 				this.show = true
-				this.cnOrderdData=[]
-				this.intlOrderData=[]
+				this.cnOrderdData = []
+				this.intlOrderData = []
 			}
 		}
 	}
 }
 </script>
-<style>
+<style scoped>
 /* 快递查询  */
 .express_info{
 	width: 1030px;
@@ -217,7 +221,7 @@ export default {
 .order_main>.main_inquire>.main_inquire_inp>input{
 	font-size: 16px;
 	height: 38px;
-	width: 610px;
+	width: 490px;
 	padding-left: 10px;
 	color: #ccc;
 	border-radius: 3px;

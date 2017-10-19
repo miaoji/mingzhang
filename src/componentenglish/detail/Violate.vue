@@ -1,143 +1,158 @@
 <template>
 <div>
+	<Headers :show='show'></Headers>
 	<div class="img_question w"><img src="/static/img/banner_question.jpg" alt=""></div>
 	<div class="violate w clear">
 		<div class="question_nav left">
-			<div class="tit">帮助支持</div>
-			<div class="comtent"><router-link to="/Question">疑难解答</router-link><span></span></div>
-			<div class="comtent"><router-link to="/Violate">禁运物品</router-link></div>
+			<div class="tit">Help&Support</div>
+			<div class="comtent"><router-link to="/enQuestion">Troubleshooting</router-link><span></span></div>
+			<div class="comtent"><router-link to="/enViolate">Prohibited Articles</router-link></div>
 		</div>
 		<div class="right">
-			<div class="title">国际快递违禁物品范围</div>
+			<div class="title">Prohibited Articles</div>
 			<ul class="clear">
 				<li>
 					<div>
-						<img src="/static/img/vj1.jpg" alt="酒">
-						<span>1</span>
+						<img src="/static/img/vj1.jpg" alt="wine">
+						<span>1.wine</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj2.jpg" alt="发胶摩丝">
-						<span>2</span>
+						<img src="/static/img/vj2.jpg" alt="hair-gel & mousse">
+						<span>2.hair-gel & mousse</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj3.jpg" alt="火柴">
-						<span>3</span>
+						<img src="/static/img/vj3.jpg" alt="match">
+						<span>3.match</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj4.jpg" alt="酒精">
-						<span>4</span>
+						<img src="/static/img/vj4.jpg" alt="alcohol">
+						<span>4.alcohol</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj5.jpg" alt="煤油">
-						<span>5</span>
+						<img src="/static/img/vj5.jpg" alt="kerosene">
+						<span>5.kerosene</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj6.jpg" alt="灌装气体">
-						<span>6</span>
+						<img src="/static/img/vj6.jpg" alt="canned gas">
+						<span>6.canned gas</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj7.jpg" alt="油漆">
-						<span>7</span>
+						<img src="/static/img/vj7.jpg" alt="paint">
+						<span>7.paint</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj8.jpg" alt="汽油">
-						<span>8</span>
+						<img src="/static/img/vj8.jpg" alt="gasoline">
+						<span>8.gasoline</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj9.jpg" alt="鞭炮">
-						<span>9</span>
+						<img src="/static/img/vj9.jpg" alt="firecrackers">
+						<span>9.firecrackers</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj10.jpg" alt="枪弹">
-						<span>10</span>
+						<img src="/static/img/vj10.jpg" alt="gun & bullet">
+						<span>10.gun & bullet</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj11.jpg" alt="剧毒">
-						<span>11</span>
+						<img src="/static/img/vj11.jpg" alt="toxic">
+						<span>11.toxic</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj12.jpg" alt="易燃品">
-						<span>12</span>
+						<img src="/static/img/vj12.jpg" alt="flammables">
+						<span>12.flammables</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj13.jpg" alt="化学原料">
-						<span>13</span>
+						<img src="/static/img/vj13.jpg" alt="chemical material">
+						<span>13.chemical material</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj14.jpg" alt="电池">
-						<span>14</span>
+						<img src="/static/img/vj14.jpg" alt="battery">
+						<span>14.battery</span>
 					</div>
 				</li>
 				<li>
 					<div>
-						<img src="/static/img/vj15.jpg" alt="磁铁">
-						<span>15</span>
+						<img src="/static/img/vj15.jpg" alt="magnet">
+						<span>15.magnet</span>
 					</div>
 				</li>
 			</ul>
 			<dl>
-				<dt>一、上图中1至15号均属航空禁运物品；14、15号可以通过网络车运输。</dt>
+				<dt>Ⅰ. The above images 1 to 15 are forbidden by air transportation; 14,15 can be transported by land.</dt>
 				<dd></dd>
-				<dt>二、其它禁止和限制寄递的物品：</dt>
-				<dd>1、爆炸性、易燃性、腐蚀性、毒性、强酸碱性和放射性的各种危险物品，如雷管、火药、爆竹、汽油、酒精、煤油、桐油、生漆、火柴、农药等所有列入化学工业出版社出版的“化学危险品实用手册”中的化工产品；</dd>
-				<dd>2、麻醉药物和精神物品，如鸦片、吗啡、可卡因（高根）等；国家法令禁止流通或寄递的物品，如军火武器、本国或外国货币等；</dd>
-				<dd>3、容易腐烂的物品、各种活的动物（如鲜鱼、鲜肉等）；</dd>
-				<dd>4、妨碍公共卫生的物品，如尸骨（包括已焚化的尸骨）、未经硝制的兽皮、未经药制的兽骨等；</dd>
-				<dd>5、反动报刊、书籍、窗口或者淫秽物品等；</dd>
-				<dd>6、如你交寄的化工产品未列入“化学危险品实用手册”中的，你必须提供地市面上一级化工产品鉴定部门出具的鉴定书，证实相关物品属非危险化工产品方可交寄，相关鉴定部门必须对鉴定结果负责。</dd>
-				<dt>三、国家禁止进、出口（境）物品：</dt>
-				<dd>1、禁止进境的物品：<br/>
-				（1）各种武器、弹药、仿真武器及爆炸物品；<br/>
-				（2）仿造的货币及仿造的有价证券等；<br/>
-				（4）对中国政治经济文化道德有害的印刷品、胶卷、照片、唱片、影片、录音带、激光视盘、计算机存储介质及其他物品；<br/>
-				（4）各种烈性毒药；<br/>
-				（5）鸦片、吗啡、海洛英、大麻及其它能使人成瘾的麻醉品、精神药物；<br/>
-				（6）带有危险性病菌、害虫及其它有害生物的动物、植物及其它产品；<br/>
-				（7）有碍人畜健康的来自疫区的及其它能传播疾病的食品、药品或其它物品。<br/>
+
+				<dt>Ⅱ. Other prohibited and restricted delivery items:</dt>
+				<dd>1. All Chemical products that list in the "Handbook of Chemical Dangerous Goods" which published by chemical industry: explosive, flammable, corrosive, toxic, strongly acidic and radioactive, such as detonators, gunpowder, firecrackers, gasoline, alcohol, kerosene, tung oil, raw lacquers, matches, pesticides, etc.</dd>
+				<dd>2. Narcotic drugs and psychiatric items such as opium, morphine, cocaine (high root), etc., national laws prohibit the circulation or delivery of items such as arms, national or foreign currencies.</dd>
+				<dd>3. Easy rotten items, all kinds of live animals (such as fresh fish, fresh meat, etc.)</dd>
+				<dd>4. Obstruction of public health items, such as bones (including incineration of the bones), the animal skins without skining, the animal bones without the medical preparation, etc.</dd>
+				<dd>5. Reactionary newspapers, books, windows or obscene articles.</dd>
+				<dd>6.If the chemical product you send is not included in the "Handbook of Chemical Dangerous Goods", you must provide certificate which issued by first-class chemical product identification department, to confirm that the relevant items are non-hazardous chemical products, ONLY with this certificate that your product can be delivered, and the relevant identification department must be responsible for the identification results.</dd>
+
+				<dt>Ⅲ. China prohibit entry and exit (territory) items</dt>
+				<dd>1. Prohibit entry items<br/>
+					1）Various weapons, ammunition, simulated weapons and explosives.<br/>
+					2）Imitation of currency and imitation of securities and so on.<br/>
+					3）Prints, film, photographs, records, videos, tapes, laser discs, computer storage media and other items that are harmful to China's political economy and culture.<br/>
+					4) All kinds of drugs.<br/>
+					5) Opium, morphine, heroin, marijuana and other addictive narcotics, psychotropic substances.<br/>
+					6) Animals, plants and other products with dangerous bacteria, pests and harmful animals.<br/>
+					7) Any food, medicine or other thing from the affected area or anything that is harmful to the health of the population.<br/>
 				</dd>
-				<dd>2、禁止出境的所有物品：<br/>
-				（1）列入禁止进境范围的所有物品；<br/>
-				（2）内容涉及国家秘密的手稿、印刷品、胶卷、照片、唱片、影片、录音带、激光视盘、计算机存储介质及其他物品；<br/>
-				（3）珍贵文物及其它禁止出境的文物；<br/>
-				（4）濒临的和珍贵的动物、植物（均含标本）及其种子和繁殖材料。<br/>
+				<dd>2. Prohibit exit items<br/>
+					1) All items that prohibited entry.<br/>
+					2) Content covers documents of state secrets, prints, film, photographs, records, videos, tapes, laser discs, computer storage media and other items.<br/>
+					3) Precious cultural relics and other prohibited cultural relics.<br/>
+					4) On the verge of precious animals and plants (both containing specimens) and their seeds and propagation materials.<br/>
 				</dd>
 			</dl>
 		</div>
 	</div>	
+	<Footers></Footers>
 </div>
 </template>
 <script>
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
+
 export default {
-	name: 'Violate',
+	name: 'enViolate',
+	components:{
+		Headers,
+		Footers
+	},
+	data(){
+		return {
+			show: true,
+		}
+	},
 	created(){
 		window.document.title = '禁运物品-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
 		this.menu()
 	},
 	methods:{
@@ -147,7 +162,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 /* 疑难解答部分 */
 /* banner 部分 */
 .img_question{
@@ -161,7 +176,7 @@ export default {
 }
 /* 违禁物品 */
 .violate>.question_nav{
-	width: 180px;
+	width: 200px;
 	padding: 44px 22px;
 	box-sizing: border-box;
 	color: #555;
@@ -177,10 +192,11 @@ export default {
 }
 .violate>.question_nav>.comtent{
 	font-size: 18px;
+	line-height: 24px;
 }
 /* 右侧正文部分 */
 .violate>.right{
-	width: 988px;
+	width: 968px;
 	box-sizing: border-box;
 	padding: 0px 30px 30px;
 	border-left: 1px #a0a0a0 dashed;
@@ -225,6 +241,6 @@ export default {
 	font-size: 18px;
 	color: #666;
 	line-height: 1.5em;
-
+	margin-top: 10px;
 }
 </style>

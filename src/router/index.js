@@ -22,12 +22,29 @@ import enSend from '@/componentenglish/detail/Send'                 // 我要寄
 import enPrescription from '@/componentenglish/detail/Prescription' // 参考时效
 import enSite from '@/componentenglish/detail/Site'                 // 服务站点
 import enGetOrderInfo from '@/componentenglish/detail/GetOrderInfo'                 // 服务站点
-
+import enQuestion from '@/componentenglish/detail/Question'         // 疑难问题
+import enViolate from '@/componentenglish/detail/Violate'
+import enIntroduce from '@/componentenglish/detail/Introduce'   
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/enIntroduce',
+      name: 'enIntroduce',
+      component: enIntroduce
+    },
+    {
+      path: '/enQuestion',
+      name: 'enQuestion',
+      component: enQuestion
+    },
+    {
+      path: '/enViolate',
+      name: 'enViolate',
+      component: enViolate
+    },
     {
       path: '/enGetOrderInfo',
       name: 'enGetOrderInfo',

@@ -7,7 +7,7 @@
 				<div class="main_inquire clear">
 					<div class="main_inquire_tit left">EXPRESS TRACK</div>
 					<div class="main_inquire_inp left">
-						<input id="input" type="text" placeholder="Please Input Your Courier Numbe" v-model='msg' />
+						<input id="input" type="text" placeholder="Please Input Your Waybill No. " v-model='msg' />
 					</div>
 					<div @click='handleClick' id="btn" class="main_inquire_btn left">Enter</div>
 				</div>
@@ -51,12 +51,12 @@
 						<li class="service_items_item item1 left">
 							<div class="img"></div>
 							<div class="text">Quality Service</div>
-							<div>Provide value-added services for customers, bring convenience and cost saving for customers.</div>
+							<div>Well-established system.Various logistics routes to choose.</div>
 						</li>
 						<li class="service_items_item item2 left">
 							<div class="img"></div>
 							<div class="text">Reasonable Price Ratio</div>
-							<div>Well-established system Competitive price Safer & Faster.</div>
+							<div>Competitive price.Safer & Faster.</div>
 						</li>
 						<li class="service_items_item item3 left">
 							<div class="img"></div>

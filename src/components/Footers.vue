@@ -14,7 +14,6 @@
 				<li class="left">
 					<div class="tit">关于我们</div>
 					<div class="footer_item"><router-link to="/Introduce">公司介绍</router-link></div>
-					<div class="footer_item"><router-link to="/Callme">联系我们</router-link></div>
 				</li>
 				<li class="left">
 					<div class="tit">地址信息</div>

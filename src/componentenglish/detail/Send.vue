@@ -7,7 +7,10 @@
 			<div class="tit">Send out：</div>
 			<div class="comtent">1. Way of sending: scan a QR code to follow we-chat official account: international express service center, or call the customer service hotline: 021-34120053.</div>
 			<div class="comtent">2. Provide goods information: item name, weight, destination, item value, etc. Then place an order online.</div>
-			<div class="comtent">3. Confirm delivery mode: pick up : arrange picking time according to your request.</div>
+			<div class="comtent">3. Confirm delivery mode: 
+				1) Pick up : arrange picking time according to your request.
+                2)Post delivery: place order online first, then put your goods in nearby post box according to online indication, we will send our courier to take out and send
+			</div>
 			<div class="tit">Packing & Transportation</div>
 			<div class="comtent">1. Make sure the goods item name and package meet the transport standards.</div>
 			<div class="comtent">2.Free package reinforcement, free replacement packaging, free compression volume, in order to avoid transport risks.</div>

@@ -3,7 +3,7 @@
 		<Headers :show='show'></Headers>
 		<div class="img_site w"><img src="/static/img/banner_site.jpg" alt=""></div>
 		<div class="site w">
-			<div class="header">国际快递服务中心，已在上海、北京、广东、江苏、浙江、山东等多个省份拥有服务站点，并在多个高校开设面向大学生寄递服务的站点，致力于不断向客户提供富有创新和满足客户不同需求的解决方案。</div>
+			<div class="header">国际快递服务中心，已在上海、北京、广东、江苏、浙江、山东等多个省份拥有服务站点，并在多个高校开设面向大学生寄递服务的站点，致力于向客户提供优质安全多元化的快递解决方案。</div>
 			<div class="chinamap"><img src="/static/img/china.png" alt="中国地图"></div>
 		</div>
 		<Footers></Footers>

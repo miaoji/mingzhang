@@ -33,9 +33,9 @@
 				</div>	
 				<div class="main_news">
 					<ul>
-						<li class="main_news_item"><router-link target='_blank' to="/new5">2017-10-09 年香港机场客机起火 火势猛烈烧毁不少货物</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new4">2017-09-28 中秋国庆假期服务安排</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new3">2017-09-11 关于国际快递服务中心快递时效受佛罗里达州飓风“艾尔玛”影响的提示</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new5">2017-10-09 香港机场客机起火,部分货物烧毁</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new4">2017-09-28 中秋国庆假期服务时间安排</router-link></li>
+						<li class="main_news_item"><router-link target='_blank' to="/new3">2017-09-11 关于国际快递服务中心时效受佛罗里达州飓风“艾尔玛”影响的通知</router-link></li>
 						<li class="main_news_item"><router-link target='_blank' to="/new2">2017-09-01 国际快递服务中心扩大校园服务范围</router-link></li>
 						<li class="main_news_item"><router-link target='_blank' to="/new1">2017-08-28 国际快递服务中心微信公众号上线！</router-link></li>
 					</ul>
@@ -51,22 +51,22 @@
 						<li class="service_items_item item1 left">
 							<div class="img"></div>
 							<div class="text">优质服务</div>
-							<div>提供客户最需要的增值服务，为客户带来便利及节省费用。</div>
+							<div>多元化,多链路,保障快件妥投，一站式寄件体验。</div>
 						</li>
 						<li class="service_items_item item2 left">
 							<div class="img"></div>
 							<div class="text">性价比高</div>
-							<div>在要求时效性和安全运输的同时，运输价格更优惠。</div>
+							<div>在保障时效性和安全性的同时，提供更优惠的价格。</div>
 						</li>
 						<li class="service_items_item item3 left">
 							<div class="img"></div>
 							<div class="text">专业性强</div>
-							<div>有着丰富的国际快递运输经验，对世界各国运输物品政策非常了解，让客户省心放心。</div>
+							<div>丰富的国际快递从业经验，了解世界各国运输政策。</div>
 						</li>
 						<li class="service_items_item item4 left">
 							<div class="img"></div>
 							<div class="text">自主灵活</div>
-							<div>提供多种快递运输线路，为客户选择性价比最高的物流解决方案。</div>
+							<div>多种快递运输链路，为客户提供多元化的解决方案。</div>
 						</li>
 					</ul>
 				</div>

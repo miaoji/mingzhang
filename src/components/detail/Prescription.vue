@@ -3,7 +3,7 @@
 		<Headers :show='show'></Headers>
 		<div class="img_prescription w"><img src="/static/img/banner_prescription.jpg" alt=""></div>
 		<div class="prescription w">
-			<div class="header">秉承"快捷、高效、安全"的现代化物流服务理念，为客户提供：专业化、高效能、一步到位的丰富完善的集运服务</div>
+			<div class="header">秉承"快捷、高效、安全"的现代化物流服务理念，为客户提供：专业化、高效能、一站式的丰富完善的投递服务</div>
 			<table border="1" cellspacing="0">
 				<tr><td colspan="4" class="title">国际快递服务中心参考时效</td></tr>
 				<tr>

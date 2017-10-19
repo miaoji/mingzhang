@@ -65,39 +65,42 @@ export default {
 				if (res.obj.cnNo) {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
-							company:res.obj.kdCompanyCodeCn||'zhongtong'
+							company:res.obj.kdCompanyCodeCn||'zhongtong',
+							source:'frontend'
 					})
 					console.log('cnorder',cnorder)
 					if (cnorder.code === 200) {
 						this.cnOrderdData = cnorder.obj.data
 						console.log('cnOrderdData',this.cnOrderdData)
 					}
-					if (cnorder.obj.data) {
+					if (cnorder.code === 200) {
 						this.show = false
 					}
 				}else{
-					this.cnOrderdData=[]
+					this.cnOrderdData = []
 					this.show = true
 				}
 				if (res.obj.intlNo) {
 					let intlorder = await queryByCompany({
 						num:res.obj.intlNo,
-						company:res.obj.kdCompanyCode
+						company:res.obj.kdCompanyCode,
+						source:'frontend'
 					})
 					if (intlorder.code === 200) {
 						this.intlOrderData = intlorder.obj.data
 					}
-					if (intlorder.obj.data) {
+					if (intlorder.code === 200) {
 						this.show = false
 					}
 					console.log('intlorder111',intlorder)
 				}else{
-					this.intlOrderData=[]
+					this.intlOrderData = []
 				}
 			}else{
+				console.log('查询失败了',res)
 				this.show = true
-				this.cnOrderdData=[]
-				this.intlOrderData=[]
+				this.cnOrderdData = []
+				this.intlOrderData = []
 			}
 		}
 	}

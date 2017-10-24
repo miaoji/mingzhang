@@ -1,28 +1,30 @@
 <template>
-<div>
-	<Headers :show='show'></Headers>
-	<div class="img_introduce w"><img src="/static/img/banner_introduce.jpg" alt=""></div>
-	<div class="introduce w">
-		<div class="header">1. Company Profile</div>
-		<div class="tit">International Express Service Center belongs to Shanghai Ming Zhang Network Technology Co., Ltd, specialized in international express delivery, cloud storage transport, e-commerce distribution, committed to providing reliable and convenient international courier service to the manufacturing enterprises, trade enterprises, cross-border electricity providers and consumers. To create "high-quality international logistics integration services", we will spare no effort.</div>			
-		<div class="tit">Through the construction of information network platform and advanced delivery system, our service center continue to provide customer service to meet their delivery needs, and, together with customer design the best solution for the whole logistics procedure including warehousing business with customers. In the storage, distribution, courier services, air transport and other aspects of global real-time monitoring, ready to provide customer tracking information.</div>
-		<div class="tit">International express center has service sites in Shanghai, Beijing, Shandong, Guangdong, Zhejiang, Jiangsu and other provinces. You send express, we send qualified courier, door-to-door collection. Faster and safer.</div>
-		<div class="tit">We think what customer think, we focus on what customer focus on. International express service center, look forward to cooperating with you together to achieve a win-win situation.</div>
-		<div class="header">2. Contact us</div>
-		<div class="tit">TEL:  021-34120053</div>			
-		<div class="tit">Operating Hours:  9:00-18:00  Mon - Fri</div>
-		<div class="tit">Website:  www.mingz-tech.com</div>
-		<div class="tit">Address：Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai, China.</div>
+	<div>
+		<Headers :show='show'></Headers>
+		<div class="clear w">
+			<div class="site_left left">
+				<div class="info">Service Site</div>
+				<div class="line"></div>
+				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
+			</div>
+			<div class="site right">
+				<div class="tit">Sending online，quick response，door-to-door collection and delivery.</div>
+				<div class="header_info">International express center has service sites in Shanghai, Beijing, Guangdong, Jiangsu, Zhejiang, Shandong and other provinces, at the same time we specially set up service sites in many campus so that university and college students can send courier more convenient.</div>
+				<div class="header_info">We committed to provide customers with innovative solutions and satisfy their different needs.</div>
+				<div class="map">
+					<img src="/static/image/china.png" alt="">
+				</div>
+			</div>
+		</div>
+		<Footers></Footers>
 	</div>
-	<Footers></Footers>
-</div>
 </template>
 <script>
 import Headers from '@/componentenglish/Headers'
 import Footers from '@/componentenglish/Footers'
 
 export default {
-	name: 'enIntroduce',
+	name: 'Site',
 	components:{
 		Headers,
 		Footers
@@ -33,8 +35,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '公司介绍-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{
@@ -45,33 +46,87 @@ export default {
 }
 </script>
 <style scoped>
-/* 公司介绍 */
-.img_introduce{
-	margin-top: 30px;
-	height: 356px;
+.clear{
+	margin-top: 35px;
+}
+/* 左侧边栏 */
+.site_left{
+	padding-top: 22px;
+	width: 198px;
+	height: 488px;
+	border: 1px #e1e1e0 solid;
+	background-color: #fff;
+}
+.site_left>.info{
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 28px 28px 10px;
+	color: #333333;
+}
+.site_left>.img{
+	margin: 0px auto;
+	width: 180px;
+	height: 180px;
 	overflow: hidden;
 }
-.img_introduce>img{
-	height: inherit;
+.site_left>.img>img{
 	width: inherit;
+	height: inherit;
 }
-.introduce{
-	// margin-top: 30px;
+/* 右侧边栏 */
+
+.site{
+	width: 1064px;
+	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding:40px;
+	padding: 0px 40px 200px;
 	box-sizing: border-box;
-	color: #555;
+	color: #333;
+	margin-bottom: 150px;
 }
-.introduce>.tit{
-	margin-bottom: 10px;
+.site>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	background-color: #ea000a;
+}
+.site_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 2px;
+	margin-left: 28px;
+	background-color: #ea000a;
+}
+.site>.header_info{
+	margin-top: 8px;
+	font-size: 16px;
+	line-height: 30px;
+	color: #999999;
+}
+.site>.tit{
+	margin-top: 20px;
 	font-size: 18px;
-	line-height: 1.5em;
-}
-.introduce>.header{
-	// text-align: center;
-	font-size: 24px;
-	line-height: 2em;
 	font-weight: bold;
-	// margin-bottom: 30px;
+	line-height: 1.8em;
+}
+.site>.tit>.icon{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #333333;
+	border-radius: 50%;
+	margin-bottom: 2px;
+	margin-right: 8px;
+}
+.site>.comtent{
+	margin-top: 6px;
+	font-size: 16px;
+	line-height: 1.8em;
+	font-weight: bold;
+}
+.map{
+	text-align: center;
+	margin-top: 30px;
 }
 </style>

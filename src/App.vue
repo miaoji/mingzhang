@@ -15,7 +15,7 @@ export default {
 body {
   padding: 0px;
   margin: 0px;
-  background-color: #f7f4ef;
+  background-color: #fff;
   font-family: "微软雅黑";
 }
 .show{
@@ -25,7 +25,7 @@ body {
   display: none;
 }
 .w {
-  width: 1170px;
+  width: 1300px;
   margin: 0 auto;
 }
 

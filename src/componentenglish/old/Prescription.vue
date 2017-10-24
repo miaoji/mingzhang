@@ -1,19 +1,11 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="clear w">
-			<div class="prescription_left left">
-				<div class="info">REFERENCE  TIME</div>
-				<div class="line"></div>
-				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
-			</div>
-			<div class="prescription right">
-				<div class="tit">Integrate international express service center Wholeheartedly，efficiently，globally</div>
-				<div class="heaer_info">We adhere to the modern logistics service concept: fast, efficient and safe. So we provide customers professional and high-performance services</div>
-				<table border="1" cellspacing="0">
-				<tr>
-					<td colspan="4" class="title">Reference Time（calculate from picking up）</td>
-				</tr>
+		<div class="img_prescription w"><img src="/static/img/banner_prescription_en.jpg" alt=""></div>
+		<div class="prescription w">
+			<div class="header">We adhere to the modern logistics service concept: fast, efficient and safe. So we provide customers professional and high-performance services</div>
+			<table border="1" cellspacing="0">
+				<tr><td colspan="4" class="title">Reference Time（calculate from picking up）</td></tr>
 				<tr>
 					<th>Region</th>
 					<th>Sub-region</th>
@@ -117,7 +109,6 @@
 					<td>3-4</td>
 				</tr>
 			</table>
-			</div>	
 		</div>
 		<Footers></Footers>
 	</div>
@@ -127,7 +118,7 @@ import Headers from '@/componentenglish/Headers'
 import Footers from '@/componentenglish/Footers'
 
 export default {
-	name: 'prescription',
+	name: 'Prescription',
 	components:{
 		Headers,
 		Footers
@@ -148,79 +139,28 @@ export default {
 	}
 }
 </script>
-<style scoped>
-.clear{
-	margin-top: 35px;
-}
-/* 左侧边栏 */
-.prescription_left{
-	padding-top: 22px;
-	width: 198px;
-	height: 488px;
-	border: 1px #e1e1e0 solid;
-	background-color: #fff;
-}
-.prescription_left>.info{
-	font-size: 16px;
-	font-weight: 600;
-	line-height: 30px;
-	padding: 28px 28px 10px;
-	color: #333333;
-}
-.prescription_left>.img{
-	margin: 0px auto;
-	width: 180px;
-	height: 180px;
+<style>
+
+/* 配送时效 */
+.img_prescription{
+	margin-top: 30px;
+	height: 356px;
 	overflow: hidden;
 }
-.prescription_left>.img>img{
-	width: inherit;
+.img_prescription>img{
 	height: inherit;
+	width: inherit;
 }
-/* 右侧边栏 */
-
 .prescription{
-	width: 1064px;
-	border: 1px solid #e1e1e0;
+	// margin-top: 30px;
 	background-color: #fff;
-	padding: 0px 40px 200px;
+	padding:40px;
 	box-sizing: border-box;
-	color: #333;
-	margin-bottom: 150px;
+	color: #555;
 }
-.prescription>.line{
-	width: 55px;
-	height: 3px;
-	margin-top: 14px;
-	background-color: #ea000a;
-}
-.prescription_left>.line{
-	width: 55px;
-	height: 3px;
-	margin-top: 2px;
-	margin-left: 28px;
-	background-color: #ea000a;
-}
-.prescription>.heaer_info{
-	margin-top: 8px;
-	font-size: 16px;
-	line-height: 30px;
-	color: #999999;
-}
-.prescription>.tit{
-	margin-top: 20px;
-	font-size: 18px;
-	font-weight: bold;
-	line-height: 1.8em;
-}
-.prescription>.tit>.icon{
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	background-color: #333333;
-	border-radius: 50%;
-	margin-bottom: 2px;
-	margin-right: 8px;
+.prescription>.header{
+	font-size: 24px;
+	line-height: 2em;
 }
 .prescription>table{
 	width: 800px;

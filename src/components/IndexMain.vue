@@ -149,7 +149,7 @@ export default {
 	height: 38px;
 	width: 610px;
 	padding-left: 10px;
-	color: #ccc;
+	color: #aaa;
 	border-radius: 3px;
 	border-width: 1px;
 	border-top-color: #cbcbcb!important;
@@ -157,6 +157,15 @@ export default {
 	border-left-color: #cbcbcb!important;
 	border-right-color: #cbcbcb!important;
 	outline: none;
+}
+.main>.main_inquire>.main_inquire_inp>input::-webkit-input-placeholder {
+	color: #aaa;
+}
+.main>.main_inquire>.main_inquire_inp>input::-moz-placeholder {
+	color: #aaa;
+}
+.main>.main_inquire>.main_inquire_inp>input::-ms-input-placeholder {
+	color: #aaa;
 }
 .main>.main_inquire .main_inquire_btn{
 	font-size: 16px;

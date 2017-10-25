@@ -24,6 +24,7 @@
 		</ul>
 		<div class="header_nav_item">
 			<ul class="w clear">
+				<li class="left"><router-link to="/enIndex">HOME</router-link></li>
 				<li class="left"><router-link to="/enSend">SEND&nbsp;&nbsp;OUT</router-link></li>
 				<li class="left"><router-link to="/enPrescription">REFERENCE&nbsp;&nbsp;TIME</router-link></li>
 				<li class="left"><router-link to="/enSite">SERVICE&nbsp;&nbsp;SITE</router-link></li>

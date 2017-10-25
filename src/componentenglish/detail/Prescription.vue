@@ -3,9 +3,9 @@
 		<Headers :show='show'></Headers>
 		<div class="clear w">
 			<div class="prescription_left left">
-				<div class="info">REFERENCE  TIME</div>
+				<div class="info">Reference Time</div>
 				<div class="line"></div>
-				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
+				<div class="img"><img src="/static/image/banner_prescription.png" alt=""></div>
 			</div>
 			<div class="prescription right">
 				<div class="tit">Integrate international express service center Wholeheartedly，efficiently，globally</div>
@@ -155,7 +155,7 @@ export default {
 /* 左侧边栏 */
 .prescription_left{
 	padding-top: 22px;
-	width: 198px;
+	width: 288px;
 	height: 488px;
 	border: 1px #e1e1e0 solid;
 	background-color: #fff;
@@ -168,9 +168,9 @@ export default {
 	color: #333333;
 }
 .prescription_left>.img{
-	margin: 0px auto;
-	width: 180px;
-	height: 180px;
+	margin: 70px auto 0px;
+	width: 250px;
+	height: 250px;
 	overflow: hidden;
 }
 .prescription_left>.img>img{
@@ -180,10 +180,10 @@ export default {
 /* 右侧边栏 */
 
 .prescription{
-	width: 1064px;
+	width: 978px;
 	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding: 0px 40px 200px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
 	color: #333;
 	margin-bottom: 150px;

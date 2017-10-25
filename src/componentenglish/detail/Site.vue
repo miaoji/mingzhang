@@ -5,7 +5,7 @@
 			<div class="site_left left">
 				<div class="info">Service Site</div>
 				<div class="line"></div>
-				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
+				<div class="img"><img src="/static/image/banner_site.png" alt=""></div>
 			</div>
 			<div class="site right">
 				<div class="tit">Sending online，quick response，door-to-door collection and delivery.</div>
@@ -52,7 +52,7 @@ export default {
 /* 左侧边栏 */
 .site_left{
 	padding-top: 22px;
-	width: 198px;
+	width: 288px;
 	height: 488px;
 	border: 1px #e1e1e0 solid;
 	background-color: #fff;
@@ -65,9 +65,9 @@ export default {
 	color: #333333;
 }
 .site_left>.img{
-	margin: 0px auto;
-	width: 180px;
-	height: 180px;
+	margin: 70px auto 0px;
+	width: 250px;
+	height: 250px;
 	overflow: hidden;
 }
 .site_left>.img>img{
@@ -77,10 +77,10 @@ export default {
 /* 右侧边栏 */
 
 .site{
-	width: 1064px;
+	width: 978px;
 	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding: 0px 40px 200px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
 	color: #333;
 	margin-bottom: 150px;
@@ -127,6 +127,6 @@ export default {
 }
 .map{
 	text-align: center;
-	margin-top: 30px;
+	margin-top: 60px;
 }
 </style>

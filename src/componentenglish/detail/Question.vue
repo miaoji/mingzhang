@@ -1,15 +1,19 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_question w"><img src="/static/img/banner_question.jpg" alt=""></div>
-		<div class="question w clear">
-			<div class="question_nav left">
-				<div class="tit">Help&Support</div>
-				<div class="comtent"><router-link to="/enQuestion">Questions & Answers</router-link><span></span></div>
-				<div class="comtent"><router-link to="/enViolate">Prohibited Articles</router-link></div>
+		<div class="clear w">
+			<div class="question_left left">
+				<div class="info">Contact Us</div>
+				<div class="line"></div>
+				<div class="content action"><router-link to='/enQuestion'>Questions & Answers</router-link></div>
+				<div class="content"><router-link to='/enViolate'>Prohibited Articles</router-link></div>
 			</div>
-			<div class="right">
-				<div class="title">Questions & Answers</div>
+			<div class="question right">
+				<div class="image">
+					<img src="/static/image/banner_question.png" alt="">
+				</div>
+				<div class="tit">Questions & Answers</div>
+				<div class="line"></div>
 				<div class="question_tit">Q1:How is the freight calculated?</div>
 				<div class="answer">A1:Freight is according to the actual weight and volume weight, actual weight is the weight of the goods on the scale, Volume weight refers to the weight of carton or package which is filled with goods, it need to measure length and width of carton or package(measure from the most prominent part), and the unit is centimeter. The volume weight formula is: Length * Width * Height / 5000 = Volume Weight (kg), same as DHL, UPS, TNT(EMS is divided by 8000). Volume weight takes the transit center measurement as final version after receiving.</div>
 
@@ -42,7 +46,7 @@ import Headers from '@/componentenglish/Headers'
 import Footers from '@/componentenglish/Footers'
 
 export default {
-	name: 'enQuestion',
+	name: 'question',
 	components:{
 		Headers,
 		Footers
@@ -53,8 +57,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '疑难解答-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{
@@ -65,76 +68,116 @@ export default {
 }
 </script>
 <style scoped>
-/* 疑难解答部分 */
-/* banner 部分 */
-.img_question{
-	margin-top: 30px;
-	height: 356px;
+.clear{
+	margin-top: 35px;
+}
+/* 左侧边栏 */
+.question_left{
+	padding-top: 22px;
+	width: 288px;
+	height: 488px;
+	border: 1px #e1e1e0 solid;
+	background-color: #fff;
+}
+.question_left>.info{
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 38px 38px 10px;
+	color: #333333;
+}
+.question_left>.content{
+	font-size: 14px;
+	color: #666;
+	line-height: 30px;
+	margin: 0px 38px 10px;
+	border-bottom: 1px #555 solid;
+}
+.question_left>.content.action{
+	color: red;
+}
+.question_left>.info:last-child{}
+.question_left>.img{
+	margin: 70px auto 0px;
+	width: 180px;
+	height: 180px;
 	overflow: hidden;
 }
-.img_question>img{
-	height: inherit;
+.question_left>.img>img{
 	width: inherit;
+	height: inherit;
 }
+/* 右侧边栏 */
 
-/* 左侧nav导航栏部分 */
-.question>.question_nav{
-	width: 200px;
-	padding: 44px 22px;
-	box-sizing: border-box;
-	color: #555;
-}
-.question>.question_nav>div{
-	border-bottom: 1px #a0a0a0 dashed;
-	line-height: 2em;
-	text-align: center;
-}
-.question>.question_nav>.tit{
-	font-size: 22px;
-	font-weight: bold;
-}
-.question>.question_nav>.comtent{
-	font-size: 18px;
-	line-height: 24px;
-}
-/* 右侧正文部分 */
-.question>.right{
-	width: 968px;
-	box-sizing: border-box;
-	padding: 0px 30px 30px;
-	border-left: 1px #a0a0a0 dashed;
-}
-.question>.right>.title{
-	text-align: center;
-	font-size: 24px;
-	font-weight: bold;
-	color: #555;
-}
 .question{
+	width: 978px;
+	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding: 30px 0px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
-	// margin-top: 30px;
-	margin-bottom: 100px;
+	color: #333;
+	margin-bottom: 150px;
 }
-
-.question>div>.question_tit{
-	font-size: 20px;
-	color: #555;
+.question>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	margin-bottom: 20px;
+	background-color: #ea000a;
+}
+.question_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 2px;
+	margin-left: 38px;
+	margin-bottom: 30px;
+	background-color: #ea000a;
+}
+.question>.header_info{
+	text-indent: 1em;
+	margin-top: 8px;
+	font-size: 16px;
+	line-height: 30px;
+	color: #666;
+}
+.question>.tit{
+	margin-top: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	line-height: 1.8em;
 }
-.question>div>.answer{
+.question>.tit>.icon{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #333333;
+	border-radius: 50%;
+	margin-bottom: 2px;
+	margin-right: 8px;
+}
+.question>.comtent{
+	margin-top: 6px;
+	font-size: 16px;
+	line-height: 1.8em;
+	font-weight: bold;
+}
+.question>.image{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.question>.question_tit{
 	font-size: 18px;
+	color: #333;
+	font-weight: bold;
+	line-height: 1.8em;
+}
+.question>.answer{
+	font-size: 16px;
 	color: #666;
 	line-height: 1.5em;
 	margin-bottom: 10px;
-	padding-left: 40px;
+	/* padding-left: 40px; */
 	padding-bottom: 10px;
-	// border-bottom: 1px #999999 dotted;
 }
-.question>div>.answer:last-child{
-	border-bottom: none;
-}
-
 </style>

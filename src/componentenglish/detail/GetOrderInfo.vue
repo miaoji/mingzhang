@@ -27,13 +27,13 @@
 	</div>
 </template>
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
+import Headers from '@/componentenglish/Headers'
+import Footers from '@/componentenglish/Footers'
 
 import { getOrderInfoByOrderNo, queryByCompany } from '@/services/orderInfo'
 
 export default {
-	name: 'GetOrderInfo',
+	name: 'enGetOrderInfo',
 	components:{
 		Headers,
 		Footers
@@ -57,7 +57,7 @@ export default {
 			window.scrollTo(0,0);
 		},
 		async getOrderInfo(){
-			this.$router.push({path:'/GetOrderInfo?order='+this.order})
+			this.$router.push({path:'/enGetOrderInfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
 			})
@@ -66,7 +66,8 @@ export default {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
 							company:res.obj.kdCompanyCodeCn||'zhongtong',
-							source:'frontend'
+							// source:'frontend'
+							source:'php'
 					})
 					console.log('cnorder',cnorder)
 					if (cnorder.code === 200) {
@@ -84,7 +85,8 @@ export default {
 					let intlorder = await queryByCompany({
 						num:res.obj.intlNo,
 						company:res.obj.kdCompanyCode,
-						source:'frontend'
+						// source:'frontend'
+						source:'php'
 					})
 					if (intlorder.code === 200) {
 						this.intlOrderData = intlorder.obj.data

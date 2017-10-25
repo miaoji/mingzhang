@@ -113,6 +113,7 @@ export default {
 	font-size: 18px;
 	font-weight: bold;
 	line-height: 1.8em;
+	color: #555;
 }
 .send>.tit>.icon{
 	display: inline-block;
@@ -125,6 +126,7 @@ export default {
 }
 .send>.comtent{
 	margin-top: 6px;
+	color: #666;
 	font-size: 16px;
 	line-height: 1.8em;
 	font-weight: bold;

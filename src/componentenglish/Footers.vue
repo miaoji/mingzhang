@@ -18,6 +18,10 @@
 					<div class="footer_item">Operating Hours : 9:00-18:00  Mon - Fri</div>
 					<div class="footer_item">TEL : 021-34120053</div>
 					<div class="footer_item">Address : Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai, China.</div>
+					<div class="footer_item">wechat : IESC007</div>
+					<div class="footer_item">QQ : 3187904519</div>
+					<div class="footer_item">Email : custom_service@ming-tech.net</div>
+					<div class="footer_item">AliTM : 明彰国际快递服务中心</div>
 				</li>
 				<li class="right">
 					<div class="tit">We-chat Official Accounts</div>
@@ -47,7 +51,7 @@ export default {
 	}
 }
 </script>
-<style>
+<style scoped>
 /* 底部导航栏  */
 .footer_line{
 	height: 7px;
@@ -68,7 +72,7 @@ export default {
 	margin-left: -19px;
 }
 .footer>.footer_main>ul{
-	padding: 30px 0;
+	padding: 30px 100px;
 	margin: 0px;
 }
 .footer>.footer_main>ul>li{

@@ -1,26 +1,26 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="order_box">
-			<div class="order_main w">
-				<div class="order_main_title">Waybill Status</div>
-				<div class="main_inquire clear">
-					<div class="main_inquire_tit left">EXPRESS TRACK</div>
-					<div class="main_inquire_inp left">
-						<input id="orderInput" type="text" placeholder="Please Input Your Courier Numbe" v-model='order'/>
-					</div>
-					<div id="orderBtn" class="main_inquire_btn left" @click="getOrderInfo">Enter</div>
-				</div>
-				<div class="express_info">
-					<div class="express_info_tit"><span class="express_code" id="express_code">{{order}}</span> waybill status</div>
-					<ul id="info_ul">
-						<li class="tit"><span class="title">Time</span><span class="info">Trajectory</span></li>
-						<!--<li><span class="title">时间</span><span class="ico"></span><span class="ico1"></span><span class="info">地点和跟踪进度</span></li>-->
-						<li v-for='item in cnOrderdData'><span class='title'>{{item.time}}</span><span class='ico'></span><span class='ico1'></span><span class='info'>{{item.context}}</span></li>
-						<li v-for='item in intlOrderData'><span class='title'>{{item.time}}</span><span class='ico'></span><span class='ico1'></span><span class='info'>{{item.context}}</span></li>
-						<li style="text-align: center;" v-if="show">Express information</li>
+		<div class="clear w">
+			<div class="order_left left">
+				<div class="info">EXPRESS TRACK</div>
+				<div class="line"></div>
+				<div class="input"><input placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
+				<div class="button" @click="getOrderInfo">Search</div>
+			</div>
+			<div class="order right">
+				<div class="tit">SEARCH RESULT</div>
+				<div class="line"></div>
+				<div class="order_info">
+					<ul>
+						<!-- <li><span class="order_info_tit">2017.05.14</span><span class="icon"></span><span class="line"></span><span class="order_info_content">快递已签收,感谢您使用圆通快递! </span></li>
+						<li><span class="order_info_tit">2017.05.13</span><span class="icon"></span><span class="line"></span><span class="order_info_content">成都市洞子口公司 的 刘云辉 正在派件 (电话:13456789)</span></li>
+						<li><span class="order_info_tit">2017.05.12</span><span class="icon"></span><span class="line"></span><span class="order_info_content">成都市洞子口公司 已收入 (电话:13456789)</span></li> -->
+						<li v-for='item in cnOrderdData'><span class='order_info_tit'>{{item.time}}</span><span class='icon'></span><span class='line'></span><span class='order_info_content' :title="item.context">{{item.context}}</span></li>
+						<li v-for='item in intlOrderData'><span class='order_info_tit'>{{item.time}}</span><span class='icon'><span class='line'></span></span><span class='order_info_content' :title="item.context">{{item.context}}</span></li>
+						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">Express information</li>
 					</ul>
-				</div>	
+				</div>
 			</div>
 		</div>
 		<Footers></Footers>
@@ -29,11 +29,10 @@
 <script>
 import Headers from '@/componentenglish/Headers'
 import Footers from '@/componentenglish/Footers'
-
 import { getOrderInfoByOrderNo, queryByCompany } from '@/services/orderInfo'
 
 export default {
-	name: 'enGetOrderInfo',
+	name: 'GetOrderInfo',
 	components:{
 		Headers,
 		Footers
@@ -66,7 +65,6 @@ export default {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
 							company:res.obj.kdCompanyCodeCn||'zhongtong',
-							// source:'frontend'
 							source:'php'
 					})
 					console.log('cnorder',cnorder)
@@ -85,7 +83,6 @@ export default {
 					let intlorder = await queryByCompany({
 						num:res.obj.intlNo,
 						company:res.obj.kdCompanyCode,
-						// source:'frontend'
 						source:'php'
 					})
 					if (intlorder.code === 200) {
@@ -109,142 +106,150 @@ export default {
 }
 </script>
 <style scoped>
-/* 快递查询  */
-.express_info{
-	width: 1030px;
-	margin: 0 auto;
-	color: #555;
+.clear{
+	margin-top: 35px;
+	margin-bottom: 35px;
 }
-.express_info>.express_info_tit{
-	line-height: 60px;
-}
-.express_code{
-	color: #ff525e;
-}
-.express_info>ul{
-	padding: 0px;
-	margin: 0px;
+/* 左侧边栏 */
+.order_left{
+	width: 510px;
+	border: 1px #e1e1e0 solid;
 	background-color: #fff;
 }
-.express_info>ul>li{
-	list-style: none;
-	position: relative;
-	border-bottom:1px #ccc solid;
-	border-left: 1px #ccc solid;
-	border-right: 1px #ccc solid;
-	height: 58px;
-	text-align: left;
-	line-height: 58px;
-	padding-left:30px;
-}
-.express_info>ul>li:first-child{
-	padding-left: 90px;
-	border-top: 1px #ccc solid;
-	font-weight: 600;
-}
-.express_info>ul>li>.title{
-	// width: 235px;
-	padding-right:30px ;
-	display: inline-block;
-}
-.express_info>ul>li>.info{
-	padding-left:50px ;
-	display: block;
-	float: right;
-	white-space:nowrap; text-overflow:ellipsis; -o-text-overflow:ellipsis; overflow:hidden;
-	height: 58px;
-	width: 750px;
-}
-.express_info>ul>li>.ico{
-	display: inline-block;
-	height: 26px;
-	width: 26px;
-	position: absolute;
-	left: 230px;
-	top: 17px;
-	z-index: 22;
-	background-image: url(/static/img/ico_1.png);
-	background-repeat: no-repeat;
-}
-.express_info>ul>li>.ico1{
-	display: inline-block;
-	height: 100%;
-	width: 26px;
-	position: absolute;
-	left: 230px;
-	background-image: url(/static/img/lines.png);
-}
-.express_info>ul>li:nth-child(2)>.ico1{
-	height: 50%;
-	top: 29px;
-}
-.express_info>ul>li:last-child>.ico1{
-	height: 50%;
-}
-.express_info>ul>li:nth-child(2)>.ico{
-	background-image: url(/static/img/ico_2.png);
-}
-.express_info>ul>li:last-child>.ico{
-	background-image: url(/static/img/ico_3.png);
-}
-/* order 部分 */
-.order_box{
-	margin: 30px auto;
-	background-color: #fff;
-	width: 1170px;
-	padding: 30px 0px;
-}
-.order_main>.order_main_title{
-	font-size: 24px;
-	color: #555;
-	line-height: 66px;
-	margin: 0 55px 28px;
-	border-bottom: 1px #ccc solid;
-}
-.order_main>.main_inquire{
-	width: 1060px;
-	box-sizing: border-box;
-	height: 100px;
-	margin: 0 auto;
-	background-color: #fff;
-	position: relative;
-	z-index: 99;
-	padding: 29px 48px;
-	border: 1px #ccc solid;
-}
-.order_main>.main_inquire>.main_inquire_tit{
-	font-size: 30px;
-	line-height: 42px;
-	color: #555;
-}
-.order_main>.main_inquire>.main_inquire_inp{
-	margin: 0px 28px;
-}
-.order_main>.main_inquire>.main_inquire_inp>input{
+.order_left>.info{
+	height: 41px;
 	font-size: 16px;
-	height: 38px;
-	width: 490px;
-	padding-left: 10px;
-	color: #ccc;
-	border-radius: 3px;
-	border: 1px #cbcbcb solid;
-	outline: none;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 39px 50px 0px;
+	color: #333333;
 }
+.order_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-left: 50px;
+	margin-bottom: 30px;
+	background-color: #ea000a;
+}
+.order_left>.input{
+	margin: 31px 50px 32px;
+}
+.order_left>.input>input{
+	box-sizing: border-box;
+	width: 410px;
+	height: 63px;
+	padding: 0px 22px;
+	border: 1px #e1e1e0 solid;
+	border-radius: 3px;
+	font-size: 14px;
+	color: #a3a1a6;
+}
+.order_left>.input>input::-webkit-input-placeholder {
+	color: #a3a1a6;
+}
+.order_left>.input>input::-moz-placeholder {
+	color: #a3a1a6;
+}
+.order_left>.input>input::-ms-input-placeholder {
+	color: #a3a1a6;
+}
+.order_left>.button{
+	cursor: pointer;
+	margin-left: 50px;
+	width: 150px;
+	height: 62px;
+	background-color: #d7132e;
+	color: #fff;
+	line-height: 62px;
+	text-align: center;
+	font-size: 18px;
+	border-radius: 5px;
+	margin-bottom: 33px;
+}
+.order_left>.button:hover{
 
-.order_main>.main_inquire>.main_inquire_btn{
+}
+/* 右侧边栏 */
+
+.order{
+	width: 770px;
+	min-height: 306px;
+	border: 1px solid #e1e1e0;
+	background-color: #fff;
+	padding: 0px 40px 100px;
+	box-sizing: border-box;
+	color: #333;
+	margin-bottom: 150px;
+}
+.order>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	margin-bottom: 20px;
+	background-color: #ea000a;
+}
+.order>.tit{
+	margin-top: 20px;
 	font-size: 16px;
 	font-weight: bold;
-	line-height: 40px;
-	color: #fff;
-	width: 160px;
-	background-color: #ff535f;
-	border-radius: 3px;
-	text-align: center;
-	cursor:pointer;
-	user-select: none;
-	-webkit-user-select: none;
+	line-height: 1.8em;
 }
-.order_main>.main_inquire>.main_inquire_btn:hover{
-	background-color: #ff0000;
+.order>.order_info{
+}
+.order>.order_info>ul{
+	list-style: none;
+	padding: 0px;
+	color: #999999;
+	margin: 0px;
+}
+.order>.order_info>ul>li{
+	position: relative;
+}
+.order>.order_info>ul>li:first-child{
+	color: #333333;
+}
+.order>.order_info>ul>li>span{
+	display: inline-block;
+	line-height: 50px;
+}
+.order>.order_info>ul>li>span.order_info_tit{
+	font-size: 14px;
+	margin-right: 20px;
+}
+.order>.order_info>ul>li>span.icon{
+	width: 8px;
+	height: 8px;
+	margin-right: 20px;
+	background-color: #999;
+	border-radius: 50%;
+	position: relative;
+	top: -2px;
+}
+.order>.order_info>ul>li:first-child>span.icon{
+	background-color: #333;
+}
+.order>.order_info>ul>li:last-child>span.icon{
+	background-color: #333;
+}
+.order>.order_info>ul>li>span.icon>span.line{
+	width: 2px;
+	height: 36px;
+	background-color: #3f3f3f;
+	position: absolute;
+	top: -50px;
+	left: 3px;
+}
+.order>.order_info>ul>li:first-child>span.icon>span.line{
+	display: none;
+}
+.order>.order_info>ul>li>span.order_info_content{
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+	overflow:hidden;
+	width: 480px;
+	font-size: 14px;
+	position: relative;
+	top: 19px;
 }
 </style>

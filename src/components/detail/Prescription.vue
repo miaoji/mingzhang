@@ -1,9 +1,15 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_prescription w"><img src="/static/img/banner_prescription.jpg" alt=""></div>
-		<div class="prescription w">
-			<div class="header">秉承"快捷、高效、安全"的现代化物流服务理念，为客户提供：专业化、高效能、一站式的丰富完善的投递服务</div>
+		<div class="clear w">
+			<div class="prescription_left left">
+				<div class="info">参考时效</div>
+				<div class="line"></div>
+				<div class="img"><img src="/static/image/banner_prescription.png" alt=""></div>
+			</div>
+			<div class="prescription right">
+				<div class="tit">国际快递服务中心 - 全心、全速、全球</div>
+				<div class="heaer_info">秉承"快捷、高效、安全"的现代化物流服务理念，为客户提供：专业化、高效能、一站式的丰富完善的投递服务</div>
 			<table border="1" cellspacing="0">
 				<tr><td colspan="4" class="title">国际快递服务中心参考时效</td></tr>
 				<tr>
@@ -109,6 +115,7 @@
 					<td>3-4</td>
 				</tr>
 			</table>
+			</div>	
 		</div>
 		<Footers></Footers>
 	</div>
@@ -118,19 +125,18 @@ import Headers from '@/components/Headers'
 import Footers from '@/components/Footers'
 
 export default {
-	name: 'Prescription',
+	name: 'prescription',
 	components:{
 		Headers,
 		Footers
 	},
 	data(){
 		return {
-			show: true
+			show: true,
 		}
 	},
 	created(){
-		window.document.title = '参考时效-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{
@@ -140,28 +146,79 @@ export default {
 	}
 }
 </script>
-<style>
-
-/* 配送时效 */
-.img_prescription{
-	margin-top: 30px;
-	height: 356px;
+<style scoped>
+.clear{
+	margin-top: 35px;
+}
+/* 左侧边栏 */
+.prescription_left{
+	padding-top: 22px;
+	width: 288px;
+	height: 488px;
+	border: 1px #e1e1e0 solid;
+	background-color: #fff;
+}
+.prescription_left>.info{
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 28px 28px 10px;
+	color: #333333;
+}
+.prescription_left>.img{
+	margin: 70px auto 0px;
+	width: 250px;
+	height: 250px;
 	overflow: hidden;
 }
-.img_prescription>img{
-	height: inherit;
+.prescription_left>.img>img{
 	width: inherit;
+	height: inherit;
 }
+/* 右侧边栏 */
+
 .prescription{
-	// margin-top: 30px;
+	width: 978px;
+	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding:40px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
-	color: #555;
+	color: #333;
+	margin-bottom: 150px;
 }
-.prescription>.header{
-	font-size: 24px;
-	line-height: 2em;
+.prescription>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	background-color: #ea000a;
+}
+.prescription_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 2px;
+	margin-left: 28px;
+	background-color: #ea000a;
+}
+.prescription>.heaer_info{
+	margin-top: 8px;
+	font-size: 16px;
+	line-height: 30px;
+	color: #999999;
+}
+.prescription>.tit{
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.8em;
+}
+.prescription>.tit>.icon{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #333333;
+	border-radius: 50%;
+	margin-bottom: 2px;
+	margin-right: 8px;
 }
 .prescription>table{
 	width: 800px;

@@ -2,71 +2,43 @@
 	<div>
 		<Headers :show='show'></Headers>
 		<div class="main_box show">
-			<div class="banner"><img src="/static/img/banner1.jpg"/></div>
+			<div class="banner"><img src="/static/image/index_banner.jpg"/></div>
 			<div class="main w">
 				<div class="main_inquire clear">
-					<div class="main_inquire_tit left">快件查询</div>
+					<div class="main_inquire_tit left"><span class="ico"></span>快件查询</div>
 					<div class="main_inquire_inp left">
 						<input id="input" type="text" placeholder="请输入单号进行查询" v-model='msg' />
 					</div>
-					<div @click='handleClick' id="btn" class="main_inquire_btn left">查询</div>
-				</div>
-				<div class="main_hint">
-					<div class="main_hint_text">立即体验</div>
-					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
-				</div>	
-				<div class="main_experience">
-					<ul class="clear">
-						<li class="left item1"><router-link to="/Send"><div class="btn">我要寄件</div></router-link></li>
-						<li class="left item2"><img src="/static/img/tp4.jpg"/></li>
-						<li class="left item3"><img src="/static/img/tp5.jpg"/></li>
-						<li class="left item4"><router-link to="/Prescription"><div class="btn">参考时效</div></router-link></li>
-						<li class="left item5"><router-link to="/Site"><div class="btn">服务站点</div></router-link></li>
-						<li class="left item6"><img src="/static/img/tp6.jpg"/></li>
-						<!-- <li class="left item7"><img src="/static/img/tp4.png"/></li>
-						<li class="left item8"><div class="btn">会员登录</div></li> -->
-					</ul>
-				</div>
-				<div class="main_hint">
-					<div class="main_hint_text">快递服务中心新闻</div>
-					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
-				</div>	
-				<div class="main_news">
-					<ul>
-						<li class="main_news_item"><router-link target='_blank' to="/new5">2017-10-09 香港机场客机起火,部分货物烧毁</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new4">2017-09-28 中秋国庆假期服务时间安排</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new3">2017-09-11 关于国际快递服务中心时效受佛罗里达州飓风“艾尔玛”影响的通知</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new2">2017-09-01 国际快递服务中心扩大校园服务范围</router-link></li>
-						<li class="main_news_item"><router-link target='_blank' to="/new1">2017-08-28 国际快递服务中心微信公众号上线！</router-link></li>
-					</ul>
+					<div class="main_inquire_btn_box right">
+						<div @click='handleClick' id="btn" class="main_inquire_btn left">查询</div>
+					</div>
 				</div>
 			</div>
 			<div class="service w">
 				<div class="main_hint">
-					<div class="main_hint_text">服务优势</div>
-					<div class="main_hint_img"><img src="/static/img/line.png"/></div>
+					<div class="main_hint_text"><span class="tit">优势服务</span><span class="line"></span></div>
 				</div>	
 				<div class="service_items">
 					<ul class="clear">
 						<li class="service_items_item item1 left">
 							<div class="img"></div>
-							<div class="text">优质服务</div>
-							<div>多元化,多链路,保障快件妥投，一站式寄件体验。</div>
+							<div class="text">服务优势</div>
+							<div class="text_item">多元化,多链路,保障快件妥投，一站式寄件体验。</div>
 						</li>
 						<li class="service_items_item item2 left">
 							<div class="img"></div>
 							<div class="text">性价比高</div>
-							<div>在保障时效性和安全性的同时，提供更优惠的价格。</div>
+							<div class="text_item">在保障时效性和安全性的同时，提供更优惠的价格。</div>
 						</li>
 						<li class="service_items_item item3 left">
 							<div class="img"></div>
 							<div class="text">专业性强</div>
-							<div>丰富的国际快递从业经验，了解世界各国运输政策。</div>
+							<div class="text_item">丰富的国际快递从业经验，了解世界各国运输政策。</div>
 						</li>
 						<li class="service_items_item item4 left">
 							<div class="img"></div>
 							<div class="text">自主灵活</div>
-							<div>多种快递运输链路，为客户提供多元化的解决方案。</div>
+							<div class="text_item">多种快递运输链路，为客户提供多元化的解决方案。</div>
 						</li>
 					</ul>
 				</div>
@@ -88,13 +60,14 @@ export default {
 	data(){
 		return {
 			msg: '',
-			show:false,
-			link:'/GetOrderInfo',
+			show: false,
+			link: '/GetOrderInfo',
 		}
 	},
 	created(){
 		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
+		this.$emit('showbtn',false)
 	},
 	methods:{
 		menu(){
@@ -113,67 +86,94 @@ export default {
 </script>
 <style scoped>
 /* banner图部分 */
-
-.banner{
+.main_box{
 	width: 100%;
 	overflow: hidden;
 }
-.banner>img{
+.banner{
+	width: 1920px;
+	height: 640px;
+	overflow: hidden;
+	/*background-color: blue;*/
 	position: relative;
 	left: 50%;
-	margin-left: -950px;
-	height: 500px;
+	margin-left: -960px;
+}
+.banner>img{
+	width: inherit;
+	height: inherit;
 }
 
-/* 快件查询部分 */
+/* 快件查询部分-查询按钮部分 */
 
 .main{}
 .main>.main_inquire{
-	height: 42px;
-	margin-top: -63px;
-	background-color: #666666;
+	border-radius: 5px;
+	height: 86px;
+	width: 874px;
+	margin-top: -86px;
+	background: -webkit-linear-gradient(#494949, #1d1d1d); /* Safari 5.1 - 6.0 */
+	background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
+	background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
+	background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
 	position: relative;
 	z-index: 99;
-	padding: 42px 100px;
 }
 .main>.main_inquire>.main_inquire_tit{
-	font-size: 30px;
-	line-height: 42px;
+	font-size: 14px;
+	line-height: 86px;
+	margin-left: 32px;
 	color: #fff;
+}
+.main>.main_inquire>.main_inquire_tit>.ico{
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background-image: url(/static/image/search.png);
+	background-repeat: no-repeat;
+	margin-right: 16px;
+	position: relative;
+	top: 10px;
 }
 .main>.main_inquire>.main_inquire_inp{
 	margin: 0px 30px;
 }
 .main>.main_inquire>.main_inquire_inp>input{
 	font-size: 16px;
-	height: 38px;
-	width: 610px;
-	padding-left: 10px;
-	color: #aaa;
-	border-radius: 3px;
-	border-width: 1px;
-	border-top-color: #cbcbcb!important;
-	border-bottom-color: #cbcbcb!important;
-	border-left-color: #cbcbcb!important;
-	border-right-color: #cbcbcb!important;
+	height: 48px;
+	width: 362px;
+	padding-left: 20px;
+	margin: 18px 0px;
+	color: #ccc;
+	border-radius: 1px;
+	border: 1px solid #d9d9d9;
 	outline: none;
 }
 .main>.main_inquire>.main_inquire_inp>input::-webkit-input-placeholder {
-	color: #aaa;
+	color: #a3a1a6;
 }
 .main>.main_inquire>.main_inquire_inp>input::-moz-placeholder {
-	color: #aaa;
+	color: #a3a1a6;
 }
 .main>.main_inquire>.main_inquire_inp>input::-ms-input-placeholder {
-	color: #aaa;
+	color: #a3a1a6;
+}
+.main>.main_inquire .main_inquire_btn_box{
+	height: 100%;
+	width: 196px;
+	/*padding-left: 30px;*/
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	background-color: #fff;
 }
 .main>.main_inquire .main_inquire_btn{
-	font-size: 16px;
-	font-weight: bold;
-	line-height: 40px;
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 50px;
 	color: #fff;
-	width: 160px;
-	background-color: #ff535f;
+	width: 130px;
+	margin: 18px 33px;
+	background-color: #d7132e;
 	border-radius: 3px;
 	text-align: center;
 	cursor:pointer;
@@ -184,15 +184,27 @@ export default {
 /* 提示文字 */
 
 .main_hint{
-	text-align: center;
-	height: 114px;
+	/*text-align: center;*/
+	/*height: 114px;*/
+	margin-bottom: 44px;
 }
 .main_hint>.main_hint_text{
-	color: #555;
-	font-size: 24px;
-	font-weight: bold;
-	padding-top: 25px;
-	padding-bottom: 10px;
+	height: 80px;
+	color: #333333;
+	font-size: 20px;
+	font-weight: 500;
+}
+.main_hint>.main_hint_text>span{
+	display: block;
+}
+.main_hint>.main_hint_text>.tit{
+	padding-top: 13px;
+	line-height: 64px;
+}
+.main_hint>.main_hint_text>.line{
+	width: 55px;
+	height: 3px;
+	background-color: #ea000a;
 }
 .main_hint>.main_hint_img{}
 .main_hint>.main_hint_img>img{}
@@ -223,9 +235,9 @@ export default {
 	background-color: #56c998;
 }
 .main_experience ul li .btn{
-	width: 158px;
+	width: 200px;
 	height: 58px;
-	margin: 122px 212px;
+	margin: 122px 190px;
 	background-color: inherit;
 	border: 1px #fff solid;
 	text-align: center;
@@ -268,49 +280,43 @@ export default {
 /* 客户服务 */
 
 .service{
-	/*font-family: '宋体';*/
-	margin-top: 30px;
 	background-color: #fff;
 }
 .service>.service_items{}
 .service>.service_items>ul{
 	padding: 0px 0px 30px 0px;
 	margin: 0px;
-	// margin: 0px 0px 30px 0px;
-	// padding: 0px 84px 29px;
 }
 .service>.service_items>ul>li.service_items_item{
-	font-size: 14px;
+	font-size: 18px;
 	text-align: center;
 	box-sizing: border-box;
 	list-style: none;
-	width: 292px;
-	color: #333;
-	// margin-right: 203px;
-	padding: 0px 60px;
+	width: 293px;
+	color: #999;
+	margin-right: 42px;
+	/*padding: 0px 60px;*/
 }
 .service>.service_items>ul>li.service_items_item:last-child{
 	margin-right: 0px;
 }
 .service>.service_items>ul>li.service_items_item>.img{
-	margin: 0 auto;
-	width: 98px;
-	height: 98px;
+	/*margin: 0 auto;*/
+	width: 293px;
+	height: 250px;
 }
-.service>.service_items>ul>li.item1>.img{background-image: url(/static/img/ftp01.png);}
-.service>.service_items>ul>li.item2>.img{background-image: url(/static/img/ftp02.png);}
-.service>.service_items>ul>li.item3>.img{background-image: url(/static/img/ftp03.png);}
-.service>.service_items>ul>li.item4>.img{background-image: url(/static/img/ftp04.png);}
-.service>.service_items>ul>li.item1>.img:hover{background-image: url(/static/img/ftph01.png);}
-.service>.service_items>ul>li.item2>.img:hover{background-image: url(/static/img/ftph02.png);}
-.service>.service_items>ul>li.item3>.img:hover{background-image: url(/static/img/ftph03.png);}
-.service>.service_items>ul>li.item4>.img:hover{background-image: url(/static/img/ftph04.png);}
+.service>.service_items>ul>li.item1>.img{background-image: url(/static/image/picf.png);}
+.service>.service_items>ul>li.item2>.img{background-image: url(/static/image/pics.png);}
+.service>.service_items>ul>li.item3>.img{background-image: url(/static/image/pict.png);}
+.service>.service_items>ul>li.item4>.img{background-image: url(/static/image/picfo.png);}
 .service>.service_items>ul>li.service_items_item>.text{
 	text-align: center;
 	font-weight: bold;
-	font-size: 18px;
-	padding-top: 30px;
-	padding-bottom: 10px;
-	// line-height: 64px;
+	font-size: 20px;
+	padding: 30px 24px 0px;
+	color: #666;
+}
+.service>.service_items>ul>li.service_items_item>.text_item{
+	padding: 30px 24px 140px;
 }
 </style>

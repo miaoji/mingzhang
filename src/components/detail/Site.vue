@@ -1,10 +1,20 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_site w"><img src="/static/img/banner_site.jpg" alt=""></div>
-		<div class="site w">
-			<div class="header">国际快递服务中心，已在上海、北京、广东、江苏、浙江、山东等多个省份拥有服务站点，并在多个高校开设面向大学生寄递服务的站点，致力于向客户提供优质安全多元化的快递解决方案。</div>
-			<div class="chinamap"><img src="/static/img/china.png" alt="中国地图"></div>
+		<div class="clear w">
+			<div class="site_left left">
+				<div class="info">服务站点</div>
+				<div class="line"></div>
+				<div class="img"><img src="/static/image/banner_site.png" alt=""></div>
+			</div>
+			<div class="site right">
+				<div class="tit">在线寄件,快速响应,上门取件</div>
+				<div class="header_info">国际快递服务中心，已在上海、北京、广东、江苏、浙江、山东等多个省份拥有服务站点，并在多个高校开设面向大学生寄递服务的站点。</div>
+				<div class="header_info">我们致力于向客户提供优质安全多元化的快递解决方案。</div>
+				<div class="map">
+					<img src="/static/image/china.png" alt="">
+				</div>
+			</div>
 		</div>
 		<Footers></Footers>
 	</div>
@@ -21,12 +31,11 @@ export default {
 	},
 	data(){
 		return {
-			show: true
+			show: true,
 		}
 	},
 	created(){
-		window.document.title = '服务站点-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{
@@ -36,31 +45,88 @@ export default {
 	}
 }
 </script>
-<style>
-/* 服务站点 */
-.img_site{
-	margin-top: 30px;
-	height: 356px;
+<style scoped>
+.clear{
+	margin-top: 35px;
+}
+/* 左侧边栏 */
+.site_left{
+	padding-top: 22px;
+	width: 288px;
+	height: 488px;
+	border: 1px #e1e1e0 solid;
+	background-color: #fff;
+}
+.site_left>.info{
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 28px 28px 10px;
+	color: #333333;
+}
+.site_left>.img{
+	margin: 70px auto 0px;
+	width: 250px;
+	height: 250px;
 	overflow: hidden;
 }
-.img_site>img{
-	height: inherit;
+.site_left>.img>img{
 	width: inherit;
+	height: inherit;
 }
+/* 右侧边栏 */
+
 .site{
-	// margin-top: 30px;
+	width: 978px;
+	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding:40px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
-	color: #555;
+	color: #333;
+	margin-bottom: 150px;
 }
-.site>.header{
-	font-size: 24px;
-	line-height: 2em;
+.site>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	background-color: #ea000a;
 }
-.site>.chinamap{
-	width: 100%;
-	margin: 30px 0px;
+.site_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 2px;
+	margin-left: 28px;
+	background-color: #ea000a;
+}
+.site>.header_info{
+	margin-top: 8px;
+	font-size: 16px;
+	line-height: 30px;
+	color: #999999;
+}
+.site>.tit{
+	margin-top: 20px;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 1.8em;
+}
+.site>.tit>.icon{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #333333;
+	border-radius: 50%;
+	margin-bottom: 2px;
+	margin-right: 8px;
+}
+.site>.comtent{
+	margin-top: 6px;
+	font-size: 16px;
+	line-height: 1.8em;
+	font-weight: bold;
+}
+.map{
 	text-align: center;
+	margin-top: 60px;
 }
 </style>

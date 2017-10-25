@@ -1,15 +1,19 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="img_question w"><img src="/static/img/banner_question.jpg" alt=""></div>
-		<div class="question w clear">
-			<div class="question_nav left">
-				<div class="tit">帮助支持</div>
-				<div class="comtent"><router-link to="/Question">疑难解答</router-link><span></span></div>
-				<div class="comtent"><router-link to="/Violate">禁运物品</router-link></div>
+		<div class="clear w">
+			<div class="question_left left">
+				<div class="info">帮助支持</div>
+				<div class="line"></div>
+				<div class="content action"><router-link to='/Question'>疑难解答</router-link></div>
+				<div class="content"><router-link to='/Violate'>禁运物品</router-link></div>
 			</div>
-			<div class="right">
-				<div class="title">疑难解答</div>
+			<div class="question right">
+				<div class="image">
+					<img src="/static/image/banner_question.png" alt="">
+				</div>
+				<div class="tit">疑难解答</div>
+				<div class="line"></div>
 				<div class="question_tit">一、问：运费是怎样计算的？</div>
 				<div class="answer">答：快递按照实际重量和体积重量两者取大者计算运费，实际重量就是货物放在秤上面的重量，体积重量指的是货物装好箱子之后，测量箱子的长宽高，并且是最突出部分的尺寸，单位按照厘米计算，体积重量计算公式为：长度*宽度*高度/5000=体积重量（单位为kg）。国际快递DHL/UPS/TNT等都是按照长宽高相称除以5000计算，EMS邮政快递按照长宽高相乘除以8000计算，关于体积重量，最终以收货后，在国际快递服务中心的转运中心测量为准。</div>
 				<div class="question_tit">二、问：可以快递贵重物品吗？</div>
@@ -29,7 +33,7 @@
 				<div class="question_tit">五、问：为什么在线填写的寄递价格和实际收费存在误差？</div>
 				<div class="answer">答：因为出货，智能按照收到货物给您确认的实际重量来收费。您在线填写的价格，可能存在国家错误、描述不准确、称重方法错误、无法测量体积、测量体积未测量最凸出部分，电子称误差、测量物品未装箱等原因，会和实际收费存在误差。</div>
 			</div>
-		</div>	
+		</div>
 		<Footers></Footers>
 	</div>
 </template>
@@ -38,19 +42,18 @@ import Headers from '@/components/Headers'
 import Footers from '@/components/Footers'
 
 export default {
-	name: 'Question',
+	name: 'question',
 	components:{
 		Headers,
 		Footers
 	},
 	data(){
 		return {
-			show: true
+			show: true,
 		}
 	},
 	created(){
-		window.document.title = '疑难解答-上海明彰网络科技有限公司'
-		this.$emit('showbtn',true)
+		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
 		this.menu()
 	},
 	methods:{
@@ -60,76 +63,117 @@ export default {
 	}
 }
 </script>
-<style>
-/* 疑难解答部分 */
-/* banner 部分 */
-.img_question{
-	margin-top: 30px;
-	height: 356px;
+<style scoped>
+.clear{
+	margin-top: 35px;
+}
+/* 左侧边栏 */
+.question_left{
+	padding-top: 22px;
+	width: 288px;
+	height: 488px;
+	border: 1px #e1e1e0 solid;
+	background-color: #fff;
+}
+.question_left>.info{
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 30px;
+	padding: 38px 38px 10px;
+	color: #333333;
+}
+.question_left>.content{
+	font-size: 16px;
+	color: #666;
+	line-height: 30px;
+	margin: 0px 38px 10px;
+	border-bottom: 1px #555 solid;
+}
+.question_left>.content.action{
+	color: red;
+}
+.question_left>.info:last-child{}
+.question_left>.img{
+	margin: 70px auto 0px;
+	width: 180px;
+	height: 180px;
 	overflow: hidden;
 }
-.img_question>img{
-	height: inherit;
+.question_left>.img>img{
 	width: inherit;
+	height: inherit;
 }
+/* 右侧边栏 */
 
-/* 左侧nav导航栏部分 */
-.question>.question_nav{
-	width: 180px;
-	padding: 44px 22px;
-	box-sizing: border-box;
-	color: #555;
-}
-.question>.question_nav>div{
-	border-bottom: 1px #a0a0a0 dashed;
-	line-height: 2em;
-	text-align: center;
-}
-.question>.question_nav>.tit{
-	font-size: 22px;
-	font-weight: bold;
-}
-.question>.question_nav>.comtent{
-	font-size: 18px;
-}
-/* 右侧正文部分 */
-.question>.right{
-	width: 988px;
-	box-sizing: border-box;
-	padding: 0px 30px 30px;
-	border-left: 1px #a0a0a0 dashed;
-}
-.question>.right>.title{
-	text-align: center;
-	font-size: 24px;
-	font-weight: bold;
-	color: #555;
-}
 .question{
+	width: 978px;
+	border: 1px solid #e1e1e0;
 	background-color: #fff;
-	padding: 30px 0px;
+	padding: 0px 40px 100px;
 	box-sizing: border-box;
-	// margin-top: 30px;
-	margin-bottom: 100px;
+	color: #333;
+	margin-bottom: 150px;
 }
-
-.question>div>.question_tit{
-	font-size: 20px;
-	color: #555;
+.question>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 14px;
+	margin-bottom: 20px;
+	background-color: #ea000a;
+}
+.question_left>.line{
+	width: 55px;
+	height: 3px;
+	margin-top: 2px;
+	margin-left: 38px;
+	margin-bottom: 30px;
+	background-color: #ea000a;
+}
+.question>.header_info{
+	text-indent: 1em;
+	margin-top: 8px;
+	font-size: 16px;
+	line-height: 30px;
+	color: #666;
+}
+.question>.tit{
+	margin-top: 20px;
+	font-size: 18px;
 	font-weight: bold;
 	line-height: 1.8em;
 }
-.question>div>.answer{
+.question>.tit>.icon{
+	display: inline-block;
+	width: 8px;
+	height: 8px;
+	background-color: #333333;
+	border-radius: 50%;
+	margin-bottom: 2px;
+	margin-right: 8px;
+}
+.question>.comtent{
+	margin-top: 6px;
+	font-size: 16px;
+	line-height: 1.8em;
+	font-weight: bold;
+}
+.question>.image{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.question>.question_tit{
 	font-size: 18px;
+	color: #333;
+	font-weight: bold;
+	line-height: 1.8em;
+}
+.question>.answer{
+	font-size: 16px;
 	color: #666;
 	line-height: 1.5em;
 	margin-bottom: 10px;
-	padding-left: 40px;
+	/* padding-left: 40px; */
 	padding-bottom: 10px;
-	// border-bottom: 1px #999999 dotted;
 }
-.question>div>.answer:last-child{
-	border-bottom: none;
-}
-
 </style>

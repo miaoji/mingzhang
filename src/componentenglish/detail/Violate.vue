@@ -3,7 +3,7 @@
 		<Headers :show='show'></Headers>
 		<div class="clear w">
 			<div class="violate_left left">
-				<div class="info">Contact Us</div>
+				<div class="info">Help&Support</div>
 				<div class="line"></div>
 				<div class="content"><router-link to='/enQuestion'>Questions & Answers</router-link></div>
 				<div class="content action"><router-link to='/enViolate'>Prohibited Articles</router-link></div>

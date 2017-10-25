@@ -4,12 +4,13 @@
 			<li class="left">
 				<router-link to="/"><img src="/static/image/logo.png"/><span class="logo">International Express Service Center</span></router-link>
 			</li>
-			<li class="right btn" v-if='show'><router-link to="/enIndex">homepage</router-link></li>
+			<!-- <li class="right btn" v-if='show'><router-link to="/enIndex">homepage</router-link></li> -->
 			<li class="right language" v-if='!show'>
-				<router-link to="/enIndex">Language</router-link>
+				<!-- <router-link to="/enIndex">Language</router-link> -->
+				<a href="javascript:;">Language</a>
 				<a href="javascript:;">|</a>
-				<router-link to="/">English</router-link>
-				<span><img src="/static/image/sca_ico_arr.png" alt=""></span>
+				<router-link to="/">中文</router-link>
+				<!-- <span><img src="/static/image/sca_ico_arr.png" alt=""></span> -->
 				<div class="eject hide">
 					<router-link to="/">中文</router-link>
 					<router-link to="/">English</router-link>
@@ -125,10 +126,6 @@ export default {
 }
 .header_nav>.header_nav_item>ul>li:hover{
 	color: #d7132e;
-	background: -webkit-linear-gradient(#1a1a1a, #333); /* Safari 5.1 - 6.0 */
-	background: -o-linear-gradient(#1a1a1a, #333); /* Opera 11.1 - 12.0 */
-	background: -moz-linear-gradient(#1a1a1a, #333); /* Firefox 3.6 - 15 */
-	background: linear-gradient(#1a1a1a, #333); /* 标准的语法 */
 }
 
 /* 回到首页按钮 */

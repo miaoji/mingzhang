@@ -3,12 +3,14 @@
 		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="order_left left">
+				<div class="icon"><img src="/static/image/sen_sea.png" /></div>
 				<div class="info">EXPRESS TRACK</div>
 				<div class="line"></div>
 				<div class="input"><input placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
 				<div class="button" @click="getOrderInfo">Search</div>
 			</div>
 			<div class="order right">
+				<div class="icon"><img src="/static/image/sen_res.png" /></div>
 				<div class="tit">SEARCH RESULT</div>
 				<div class="line"></div>
 				<div class="order_info">
@@ -66,7 +68,7 @@ export default {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
 							company:res.obj.kdCompanyCodeCn||'zhongtong',
-							source:'php'
+							source:'frontend'
 					})
 					console.log('cnorder',cnorder)
 					if (cnorder.code === 200) {
@@ -84,7 +86,7 @@ export default {
 					let intlorder = await queryByCompany({
 						num:res.obj.intlNo,
 						company:res.obj.kdCompanyCode,
-						source:'php'
+						source:'frontend'
 					})
 					if (intlorder.code === 200) {
 						this.intlOrderData = intlorder.obj.data
@@ -117,18 +119,28 @@ export default {
 	border: 1px #e1e1e0 solid;
 	background-color: #fff;
 }
+.order_left>.icon{
+	position: relative;
+	top: 74px;
+	left: 53px;
+}
+.order>.icon{
+	position: relative;
+	top: 74px;
+	left: 0px;
+}
 .order_left>.info{
 	height: 41px;
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 30px;
-	padding: 39px 50px 0px;
+	padding: 39px 90px 0px;
 	color: #333333;
 }
 .order_left>.line{
 	width: 55px;
 	height: 3px;
-	margin-left: 50px;
+	margin-left: 90px;
 	margin-bottom: 30px;
 	background-color: #ea000a;
 }
@@ -187,10 +199,12 @@ export default {
 	height: 3px;
 	margin-top: 14px;
 	margin-bottom: 20px;
+	margin-left: 30px;
 	background-color: #ea000a;
 }
 .order>.tit{
-	margin-top: 20px;
+	margin-left: 30px;
+	margin-top: 40px;
 	font-size: 16px;
 	font-weight: bold;
 	line-height: 1.8em;

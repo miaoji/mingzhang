@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="site_left left">
 				<div class="info">Service Site</div>
@@ -32,6 +32,7 @@ export default {
 	data(){
 		return {
 			show: true,
+			link:'/Site'
 		}
 	},
 	created(){

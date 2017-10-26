@@ -147,8 +147,8 @@ export default new Router({
     },
     {
       path: '/*',
-      name: 'error',
-      component: Errors
+      name: 'IndexMain',
+      component: IndexMain
     }
   ]
 })

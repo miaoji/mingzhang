@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="question_left left">
 				<div class="info">Help&Support</div>
@@ -54,6 +54,7 @@ export default {
 	data(){
 		return {
 			show: true,
+			link:'/Question'
 		}
 	},
 	created(){

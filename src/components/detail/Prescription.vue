@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="prescription_left left">
 				<div class="info">参考时效</div>
@@ -133,6 +133,7 @@ export default {
 	data(){
 		return {
 			show: true,
+			link: '/enPrescription'
 		}
 	},
 	created(){

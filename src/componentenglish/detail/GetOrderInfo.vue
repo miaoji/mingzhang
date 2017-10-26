@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="order_left left">
 				<div class="info">EXPRESS TRACK</div>
@@ -42,7 +42,8 @@ export default {
 			order:'',
 			cnOrderdData:[],
 			intlOrderData:[],
-			show:true
+			show:true,
+			link:'/GetOrderInfo'
 		}
 	},
 	created(){

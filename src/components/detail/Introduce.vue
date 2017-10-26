@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="introduce_left left">
 				<div class="info">联系我们</div>
@@ -41,6 +41,7 @@ export default {
 	data(){
 		return {
 			show: true,
+			link:'/enIntroduce'
 		}
 	},
 	created(){

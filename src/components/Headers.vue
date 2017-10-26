@@ -4,10 +4,10 @@
 			<li class="left">
 				<router-link to="/"><img src="/static/image/logo.png"/><span class="logo">上海明彰网络科技有限公司</span></router-link>
 			</li>
-			<li class="right language" v-if='!show'>
+			<li class="right language">
 				<a href="javascript:;">Language</a>
 				<a href="javascript:;">|</a>
-				<router-link to="/enIndex">English</router-link>
+				<router-link :to="link">English</router-link>
 				<!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
 				<div class="eject hide">
 					<router-link to="/">中文</router-link>
@@ -46,6 +46,10 @@ export default {
 		show:{
 			type:Boolean,
 			default:true
+		},
+		link:{
+			type:String,
+			default:'/enIndex'
 		}
 	}
 }

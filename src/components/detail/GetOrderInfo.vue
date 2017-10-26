@@ -1,14 +1,15 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="order_left left">
 				<div class="info">快件查询</div>
 				<div class="line"></div>
-				<div class="input"><input placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
+				<div class="input"><input placeholder="请输入单号进行查询" type="text" v-model='order'/></div>
 				<div class="button" @click="getOrderInfo">搜索</div>
 			</div>
 			<div class="order right">
+				<div class="icon"><img src="" alt=""></div>
 				<div class="tit">快件轨迹</div>
 				<div class="line"></div>
 				<div class="order_info">
@@ -42,7 +43,8 @@ export default {
 			order:'',
 			cnOrderdData:[],
 			intlOrderData:[],
-			show:true
+			show:true,
+			link:'/enGetOrderInfo'
 		}
 	},
 	created(){

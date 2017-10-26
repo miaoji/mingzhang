@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="introduce_left left">
 				<div class="info">Contact Us</div>
@@ -42,6 +42,7 @@ export default {
 	data(){
 		return {
 			show: true,
+			link:'/Introduce'
 		}
 	},
 	created(){

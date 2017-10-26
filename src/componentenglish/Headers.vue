@@ -5,11 +5,11 @@
 				<router-link to="/"><img src="/static/image/logo.png"/><span class="logo">International Express Service Center</span></router-link>
 			</li>
 			<!-- <li class="right btn" v-if='show'><router-link to="/enIndex">homepage</router-link></li> -->
-			<li class="right language" v-if='!show'>
+			<li class="right language">
 				<!-- <router-link to="/enIndex">Language</router-link> -->
 				<a href="javascript:;">Language</a>
 				<a href="javascript:;">|</a>
-				<router-link to="/">中文</router-link>
+				<router-link :to="link">中文</router-link>
 				<!-- <span><img src="/static/image/sca_ico_arr.png" alt=""></span> -->
 				<div class="eject hide">
 					<router-link to="/">中文</router-link>
@@ -54,6 +54,10 @@ export default {
 		show:{
 			type:Boolean,
 			default:true
+		},
+		link:{
+			type:String,
+			default:'/'
 		}
 	}
 }

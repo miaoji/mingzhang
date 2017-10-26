@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Headers :show='show'></Headers>
+		<Headers :show='show' :link='link'></Headers>
 		<div class="main_box show">
 			<div class="banner"><img src="/static/image/index_banner.jpg"/></div>
 			<div class="main w">
@@ -90,7 +90,7 @@ export default {
 		return {
 			msg: '',
 			show: false,
-			link: '/enGetOrderInfo',
+			link: '/',
 		}
 	},
 	created(){

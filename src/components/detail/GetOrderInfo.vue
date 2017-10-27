@@ -50,6 +50,7 @@ export default {
 		}
 	},
 	created(){
+		window.document.title = '上海明彰网络科技有限公司'
 		this.order = location.hash.split('?order=')[1]
 		this.getOrderInfo()
 		this.menu()

@@ -6,13 +6,14 @@
 				<div class="info">联系我们</div>
 				<div class="line"></div>
 				<div class="content">服务电话 ： 021-34120053</div>
-				<div class="content">服务时间 : 周一至周五 9:00-18:00</div>
+				<div class="content">服务时间 : 9:00-18:00</div>
+				<div class="content">加拿大客服热线 : 647-995-2600</div>
 				<div class="content">网址：www.mingz-tech.com</div>
-				<div class="content">地址: 上海市闵行区泰虹路168弄1号</div>
+				<div class="content">地址: 上海市闵行区泰虹路168弄1号楼302室</div>
 				<div class="content">微信号: IESC007</div>
 				<div class="content">QQ: 3187904519</div>
-				<div class="content">Email: kefu@ming-tech.net</div>
-				<div class="content">旺旺: 明彰国际快递服务中心</div>
+				<div class="content">Email: custom_service@ming-tech.net</div>
+				<div class="content">阿里旺旺: 明彰国际快递服务中心</div>
 			</div>
 			<div class="introduce right">
 				<div class="image">
@@ -45,7 +46,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
+		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
 	},
 	methods:{

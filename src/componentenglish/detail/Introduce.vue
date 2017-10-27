@@ -6,12 +6,13 @@
 				<div class="info">Contact Us</div>
 				<div class="line"></div>
 				<div class="content">TEL:  021-34120053</div>
-				<div class="content">Operating Hours:<br/>9:00-18:00  Mon - Fri</div>
-				<div class="content">Website:<br/>www.mingz-tech.com</div>
-				<div class="content">Address:<br/>Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai, China.</div>
+				<div class="content">Canada Hotline : 647-995-2600</div>
+				<div class="content">Operating Hours : 9:00-18:00</div>
+				<div class="content">Website : www.mingz-tech.com</div>
+				<div class="content">Address : Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai, China.</div>
 				<div class="content">Wechat : IESC007</div>
 				<div class="content">QQ : 3187904519</div>
-				<div class="content">Email : kefu@ming-tech.net</div>
+				<div class="content">Email : custom_service@ming-tech.net</div>
 				<div class="content">AliTM : 明彰国际快递服务中心</div>
 			</div>
 			<div class="introduce right">

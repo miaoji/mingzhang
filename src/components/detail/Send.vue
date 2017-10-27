@@ -12,7 +12,7 @@
 					<ul class="clear">
 						<li>
 							<div class="img"><img src="/static/image/sen.png" alt="寄件渠道"></div>
-							<div class="info">寄件渠道:扫码关注"国际快递服务中心"微信公总号,或者拨打客服热线021-34120053</div>
+							<div class="info">寄件渠道:扫码关注"国际快递服务中心"微信公总号,或者拨打客服热线021-34120053,加拿大热线647-995-2600。</div>
 						</li>
 						<li>
 							<div class="img"><img src="/static/image/pay.png" alt="下单方式"></div>
@@ -95,7 +95,7 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = 'Shanghai Mingzhang Network Technology Co., Ltd.'
+		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
 	},
 	methods:{
@@ -194,7 +194,7 @@ ul{
 .send>.send_header>ul>li>.info{
 	width: 321px;
 	height: 134px;
-	font-size: 18px;
+	font-size: 14px;
 	color: #333333;
 	padding: 22px;
 	line-height: 30px;

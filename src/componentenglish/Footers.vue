@@ -14,9 +14,10 @@
 					<div class="footer_item"><router-link to="/enIntroduce">Company Profile</router-link></div>
 				</li>
 				<li class="left">
-					<div class="tit">Address</div>
-					<div class="footer_item">Operating Hours : 9:00-18:00  Mon - Fri</div>
+					<div class="tit">Contact Us</div>
+					<div class="footer_item">Operating Hours : 9:00-18:00</div>
 					<div class="footer_item">TEL : 021-34120053</div>
+					<div class="footer_item">Canada Hotline : 647-995-2600</div>
 					<div class="footer_item">Address : Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai, China.</div>
 					<div class="footer_item">wechat : IESC007</div>
 					<div class="footer_item">QQ : 3187904519</div>

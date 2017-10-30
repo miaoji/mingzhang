@@ -16,7 +16,7 @@ export default {
     console.log('aaa',document.body.offsetWidth )
     console.log('bbb',document.body.clientWidth)
     console.log('ccc',window.screen.availWidth)
-    if (document.body.offsetWidth==980) {
+    if (document.body.offsetWidth<1400) {
       // this.wid='width:1400px'
       document.body.style.width='1400px'
     }else{

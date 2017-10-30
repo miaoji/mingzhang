@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div  @scroll='handleScroll(e)'>
 		<Headers :show='show' :link='link'></Headers>
 		<div class="clear w">
 			<div class="order_left left">
@@ -16,11 +16,16 @@
 				<div class="line"></div>
 				<div class="order_info">
 					<ul>
-						<!-- <li><span class="order_info_tit">2017.05.14</span><span class="icon"></span><span class="line"></span><span class="order_info_content">快递已签收,感谢您使用圆通快递! </span></li>
-						<li><span class="order_info_tit">2017.05.13</span><span class="icon"></span><span class="line"></span><span class="order_info_content">成都市洞子口公司 的 刘云辉 正在派件 (电话:13456789)</span></li>
-						<li><span class="order_info_tit">2017.05.12</span><span class="icon"></span><span class="line"></span><span class="order_info_content">成都市洞子口公司 已收入 (电话:13456789)</span></li> -->
-						<li v-for='item in cnOrderdData'><span class='order_info_tit'>{{item.time}}</span><span class='icon'></span><span class='line'></span><span class='order_info_content' :title="item.context">{{item.context}}</span></li>
-						<li v-for='item in intlOrderData'><span class='order_info_tit'>{{item.time}}</span><span class='icon'><span class='line'></span></span><span class='order_info_content' :title="item.context">{{item.context}}</span></li>
+						<li v-for='item in cnOrderdData'>
+							<span class='order_info_tit'>{{item.time}}</span>
+							<span class='icon'><span class='line'></span></span>
+							<span class='order_info_content' :title="item.context">{{item.context}}</span>
+						</li>
+						<li v-for='item in intlOrderData'>
+							<span class='order_info_tit'>{{item.time}}</span>
+							<span class='icon'><span class='line'></span></span>
+							<span class='order_info_content' :title="item.context">{{item.context}}</span>
+						</li>
 						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">暂无快递信息</li>
 					</ul>
 				</div>
@@ -59,6 +64,9 @@ export default {
 		menu() {
 			window.scrollTo(0,0);
 		},
+		handleScroll(e){
+			console.log('e',e)
+		},
 		async getOrderInfo(){
 			this.$router.push({path:'/GetOrderInfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
@@ -69,7 +77,7 @@ export default {
 					let cnorder = await queryByCompany({
 							num:res.obj.cnNo,
 							company:res.obj.kdCompanyCodeCn||'zhongtong',
-							source:'frontend'
+							// source:'frontend'
 					})
 					console.log('cnorder',cnorder)
 					if (cnorder.code === 200) {

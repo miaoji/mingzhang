@@ -7,7 +7,9 @@
 				<div class="img"><img src="/static/image/WeChat.jpg" alt=""></div>
 			</div>
 			<div class="send right">
-				<div class="title">寄件</div>
+				<div class="tit_banner"><img src="/static/image/send_banner.png" alt="寄件banner"></div>
+				<div class="title">直邮</div>
+				<div class="title_explain">关注“国际快递服务中心公众号”在线寄件，将物品信息、寄件信息填好、准备好物品，等待工作人员上门取件。适用于国内朋友、亲戚将快递寄送到国外。</div>
 				<div class="send_header">
 					<ul class="clear">
 						<li>
@@ -24,6 +26,17 @@
 						</li>
 					</ul>
 				</div>
+				<div class="title">集运</div>
+				<div class="title_explain">将一个两个到多个包裹拼成一个大包裹寄到海外的过程。适用于在中国各大电商平台购买多个物品寄到国外。</div>
+				<div class="send_contents send_cargo">
+					<ul class="clear">
+						<li class="send_info left"><img src="/static/image/send_cargo01.png" alt="关注"></li>
+						<li class="send_info left"><img src="/static/image/send_cargo02.png" alt="投递"></li>
+						<li class="send_info left"><img src="/static/image/send_cargo03.png" alt="核实信息"></li>
+						<li class="send_info left"><img src="/static/image/send_cargo04.png" alt="收货成功"></li>
+					</ul>
+				</div>
+				<div class="send_cargo_img"><img src="/static/image/send_cargo05.png" alt="寄件流程"></div>
 
 				<div class="title">快件处理</div>
 				<div class="send_content">
@@ -105,7 +118,24 @@ export default {
 	}
 }
 </script>
+
 <style scoped>
+@media screen and (max-width: 980px) {
+    .send_left {
+    	display: none;
+    }
+    .send{
+		width: 1094px;
+		border: 1px solid #e1e1e0;
+		background-color: #fff;
+		/* padding: 0px 40px 0px; */
+		float: none;
+		margin: 0 auto;
+		box-sizing: border-box;
+		color: #333;
+		margin-bottom: 150px;
+    }
+}
 ul{
 	list-style: none;
 	padding: 0px;
@@ -158,6 +188,14 @@ ul{
 	margin-bottom: 40px;
 	margin-top: 80px;
 }
+.send>.tit_banner{
+	margin-top: 40px;
+}
+.send>.title_explain{
+	text-align: center;
+	font-size: 18px;
+	line-height: 1.5em;
+}
 .send>.send_header{
 	margin-top: 80px;
 }
@@ -200,6 +238,26 @@ ul{
 	line-height: 30px;
 	box-sizing: border-box;
 }
+
+.send>.send_contents{}
+.send>.send_contents>ul{
+	margin-left: 32px;
+}
+.send>.send_contents>ul>li{
+	margin-right: 48px;
+}
+.send>.send_contents>ul>li:nth-child(3){
+	margin-left: 74px;
+}
+.send>.send_contents>ul>li:last-child{
+	margin-right: 0px;
+}
+.send>.send_cargo_img{
+	text-align: center;
+	position: relative;
+	top: -17px;
+}
+
 
 .send>.send_content{
 	margin-top: 80px;

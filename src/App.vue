@@ -27,17 +27,10 @@ export default {
 </script>
 
 <style>
-/*基础样式配置*/ 
-/* #app{
-  width: 1400px;
-} */
+
 body {
-  /* width: 2000px; */
-  /* left: 50%; */
-  /* position: relative; */
   padding: 0px;
   margin: 0px;
-  /* margin-left: -787px; */
   background-color: #fff;
   font-family: "微软雅黑";
 }
@@ -65,6 +58,7 @@ body {
   content: "";
   clear: both;
 }
+
 a{
   text-decoration: none;
   color: inherit;

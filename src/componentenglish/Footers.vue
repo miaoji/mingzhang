@@ -26,7 +26,7 @@
 				</li>
 				<li class="right">
 					<div class="tit">We-chat Official Accounts</div>
-					<div class="img"><img src="/static/img/weixin.jpg"/></div>
+					<div class="img"><img src="/static/image/WeChat.jpg"/></div>
 				</li>
 			</ul>
 			<div class="footer_info">All Rights Reserved 明彰网络科技有限公司版权所有</div>

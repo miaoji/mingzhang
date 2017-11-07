@@ -6,7 +6,7 @@
 				<div class="info">
 					Please follow our we-chat official account to experience the new express world.
 				</div>
-				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
+				<div class="img"><img src="/static/image/WeChat.jpg" alt=""></div>
 			</div>
 			<div class="send right">
 				<div class="tit">Integrate international express service Provide more choice</div>

@@ -26,7 +26,7 @@
 				</li>
 				<li class="right">
 					<div class="tit">微信公众号</div>
-					<div class="img"><img src="/static/img/weixin.jpg"/></div>
+					<div class="img"><img src="/static/image/WeChat.jpg"/></div>
 				</li>
 			</ul>
 			<div class="footer_info">All Rights Reserved 上海明彰网络科技有限公司版权所有</div>

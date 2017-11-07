@@ -4,7 +4,7 @@
 		<div class="clear w">
 			<div class="send_left left">
 				<div class="info">关注公众号:</div>
-				<div class="img"><img src="/static/image/weixin.jpg" alt=""></div>
+				<div class="img"><img src="/static/image/WeChat.jpg" alt=""></div>
 			</div>
 			<div class="send right">
 				<div class="title">寄件</div>

@@ -120,6 +120,7 @@ export default {
 </script>
 
 <style scoped>
+
 @media screen and (max-width: 980px) {
     .send_left {
     	display: none;
@@ -128,7 +129,6 @@ export default {
 		width: 1094px;
 		border: 1px solid #e1e1e0;
 		background-color: #fff;
-		/* padding: 0px 40px 0px; */
 		float: none;
 		margin: 0 auto;
 		box-sizing: border-box;

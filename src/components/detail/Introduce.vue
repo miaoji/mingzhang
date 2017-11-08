@@ -57,6 +57,12 @@ export default {
 }
 </script>
 <style scoped>
+
+@media screen and (max-width: 980px) {
+	.introduce>.header_info{
+		padding-top: 2em;
+	}
+}
 .clear{
 	margin-top: 35px;
 }

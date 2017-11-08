@@ -10,7 +10,7 @@
 			</div>
 			<div class="send right">
 				<div class="tit">Integrate international express service Provide more choice</div>
-				<div class="heaer_info">We provide documents, parcels and other items delivery, offer customer the most appropriate services. The goods can be transported to all over the world by air, sea, and land.</div>
+				<div class="header_info">We provide documents, parcels and other items delivery, offer customer the most appropriate services. The goods can be transported to all over the world by air, sea, and land.</div>
 				<div class="tit">Send Process</div>
 				<div class="line"></div>
 				<div class="tit"><span class="icon"></span>Send Out</div>
@@ -58,6 +58,28 @@ export default {
 }
 </script>
 <style scoped>
+
+@media screen and (max-width: 980px) {
+    .send_left {
+    	display: none;
+    }
+    .send{
+		width: 1094px;
+		border: 1px solid #e1e1e0;
+		background-color: #fff;
+		float: none;
+		margin: 0 auto;
+		box-sizing: border-box;
+		color: #333;
+		margin-bottom: 150px;
+    }
+    .send>.header_info{
+    	padding: 40px 0px;
+    }
+    .send>.comtent{
+    	padding: 20px 0px; 
+    }
+}
 .clear{
 	margin-top: 35px;
 }
@@ -103,7 +125,7 @@ export default {
 	margin-top: 14px;
 	background-color: #ea000a;
 }
-.send>.heaer_info{
+.send>.header_info{
 	margin-top: 8px;
 	font-size: 16px;
 	line-height: 30px;

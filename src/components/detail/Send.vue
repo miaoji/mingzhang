@@ -14,7 +14,7 @@
 					<ul class="clear">
 						<li>
 							<div class="img"><img src="/static/image/sen.png" alt="寄件渠道"></div>
-							<div class="info">寄件渠道:扫码关注"国际快递服务中心"微信公总号,或者拨打客服热线021-34120053,加拿大热线647-995-2600。</div>
+							<div class="info">寄件渠道:扫码关注"国际快递服务中心"微信公众号,或者拨打客服热线021-34120053,加拿大热线647-995-2600。</div>
 						</li>
 						<li>
 							<div class="img"><img src="/static/image/pay.png" alt="下单方式"></div>

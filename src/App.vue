@@ -5,6 +5,10 @@
 </template>
 
 <script>
+// import { getToken } from '@/services/token'
+// import md5 from 'js-md5'
+import { beforeCreate as getToken } from '@/utils'
+
 export default {
   name: 'app',
   data(){
@@ -12,12 +16,13 @@ export default {
       wid:'width:1024px'
     }
   },
+  methods: {
+  },
+  beforeCreate(){
+    getToken()
+  },
   created(){
-    console.log('aaa',document.body.offsetWidth )
-    console.log('bbb',document.body.clientWidth)
-    console.log('ccc',window.screen.availWidth)
     if (document.body.offsetWidth<1400) {
-      // this.wid='width:1400px'
       document.body.style.width='1400px'
     }else{
       this.wid='width:'+document.body.offsetWidth+'px'

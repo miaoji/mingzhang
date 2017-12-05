@@ -1,5 +1,5 @@
 import axios from 'axios'
-let token = "eyJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoiMjQxMiIsIm1vYmlsZSI6IjE1ODM4ODk2NTM4In0.xbahGpqROjayGZRXttlnnhERsH4pLt8yUiVyW4y1YZ8"
+import { beforeCreate as getToken } from '@/utils';
 
 const fetch = (options) => {
   let {
@@ -8,6 +8,7 @@ const fetch = (options) => {
     params,
     url,
     auth,
+    token
   } = options
 
   switch (method.toLowerCase()) {
@@ -47,8 +48,9 @@ const fetch = (options) => {
 }
 
 export default function request (options) {
-  options.token = window.localStorage.getItem('mj_token')
+  options.token = window.sessionStorage.winnerKey
   return fetch(options).then((response) => {
+    console.log('response', response)
     const { status } = response
     let data = response.data
     data = typeof data === 'object' ? data : {'stringData': data}
@@ -65,6 +67,13 @@ export default function request (options) {
       const { data, statusText } = response
       statusCode = response.status
       msg = data.message || statusText
+      // 判断token失效
+      if (response.status === 401) {
+        window.sessionStorage.clear()
+        // alert('网络故障,请刷新页面后重试!!!')
+        getToken()
+        return { success: false, statusCode: 401, msg: '用户登陆状态已失效' }
+      }
     } else {
       statusCode = 600
       msg = error.message || '网络错误'

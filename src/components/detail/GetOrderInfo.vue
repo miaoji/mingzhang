@@ -26,7 +26,7 @@
 							<span class='icon'><span class='line'></span></span>
 							<span class='order_info_content' :title="item.context">{{item.context}}</span>
 						</li>
-						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">暂无快递信息</li>
+						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">暂无相关快递信息</li>
 					</ul>
 				</div>
 			</div>
@@ -72,6 +72,7 @@ export default {
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
 			})
+			console.log('daeee', res)
 			if(res.code === 200){
 				if (res.obj.cnNo) {
 					let cnorder = await queryByCompany({

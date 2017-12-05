@@ -9,6 +9,7 @@ import Prescription from '@/components/detail/Prescription' // 参考时效
 import Site from '@/components/detail/Site'                 // 服务站点
 import Introduce from '@/components/detail/Introduce'       // 公司简介+联系我们
 import Errors from '@/components/Error'       // 新闻动态
+import OrderSend from '@/components/page/OrderSend'
 
 // 英文版-路由地址
 import enIndex from '@/componentenglish/IndexMain'       // 英文版主页
@@ -108,6 +109,11 @@ export default new Router({
       path: '/Callme',
       name: 'Callme',
       component: Introduce
+    },
+    {
+      path: '/OrderSend',
+      name: 'OrderSend',
+      component: OrderSend
     },
     {
       path: '/*',

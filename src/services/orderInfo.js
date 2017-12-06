@@ -1,6 +1,6 @@
 /*
-获取订单信息,获取快件轨迹信息
-*/
+ * 获取订单信息,获取快件轨迹信息
+ */
 import request from '@/utils/request'
 import { order } from '@/api'
 

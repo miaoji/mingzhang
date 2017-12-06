@@ -2,14 +2,39 @@
 	<div>
 		<Headers :show='show' :link='link'></Headers>
 		<div class="sendorder">
-			<div class="box">123</div>
-			<el-form ref="form" :model="form" label-width="80px">
-			  <el-form-item label="寄件地址">
-			    <el-input v-model="form.name" />
+			<el-form class="form" ref="form" :model="form" label-width="100px">
+				<h1 class="page_tit">寄件人信息</h1>
+			  <el-form-item label="寄件人姓名">
+			    <el-input v-model="form.senderName" />
 			  </el-form-item>
-			  <el-form-item label="收件地址">
-			    <el-input v-model="form.name" />
+			  <el-form-item label="电话">
+			    <el-input v-model="form.senderMobile" />
 			  </el-form-item>
+			  <country v-model="form.aa" label="国家/地区" @coutryChange="coutryChange"/>
+			  <select-city label="地区选择"/>
+			  <el-form-item label="街道地址">
+			    <el-input v-model="form.senderAddress" />
+			  </el-form-item>
+			  <el-form-item label="邮编">
+			    <el-input v-model="form.senderPostcode" />
+			  </el-form-item>
+				<h1 class="page_tit">收件人信息</h1>
+			  <el-form-item label="收件人姓名">
+			    <el-input v-model="form.receiverName" />
+			  </el-form-item>
+			  <el-form-item label="电话">
+			    <el-input v-model="form.receiverMobile" />
+			  </el-form-item>
+			  <el-form-item label="国家/地区">
+			    <el-input v-model="form.receiverCountry" />
+			  </el-form-item>
+			  <el-form-item label="街道地址">
+			    <el-input v-model="form.receiverAddress" />
+			  </el-form-item>
+			  <el-form-item label="邮编">
+			    <el-input v-model="form.receiverPostcode" />
+			  </el-form-item>
+				<h1 class="page_tit">包裹信息</h1>
 			  <el-form-item label="产品类型">
 			    <el-input v-model="form.name" />
 			  </el-form-item>
@@ -36,7 +61,7 @@
 			  </el-form-item>
 
 			  <el-form-item>
-			    <el-button type="primary" @click="onSubmit">立即创建</el-button>
+			    <el-button type="primary" @click="onSubmit">确认下单</el-button>
 			    <el-button>取消</el-button>
 			  </el-form-item>
 			</el-form>
@@ -49,27 +74,22 @@
 <script>
 import Headers from '@/components/Headers'
 import Footers from '@/components/Footers'
+import Country from '@/parts/Country'
+import SelectCity from '@/parts/SelectCity'
 export default {
-	name: 'Send',
+	name: 'orderSend',
 	components:{
 		Headers,
-		Footers
+		Footers,
+		Country,
+		SelectCity
 	},
 	data(){
 		return {
 			show: true,
 			link: '/OrderSend',
 			dialogVisible: false,
-			form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+			form: {}
 		}
 	},
 	created(){
@@ -82,6 +102,11 @@ export default {
 		},
 		menu(){
 			window.scrollTo(0,0)
+		},
+		coutryChange(data) {
+			// 获取寄件人国家信息
+			console.log('datasss', data)
+			this.form.country=data
 		}
 	}
 }
@@ -89,11 +114,20 @@ export default {
 
 <style scoped lang="less">
 .sendorder{
-	width: 800px;
-	height: 500px;
+	width: 998px;
+	padding: 0px 40px;
+	border: 1px #ddd solid;
+	border-radius: 3px;
 	margin: 50px auto 200px;
-	.box{
-		color: red;
+	.page_tit {
+		font-size: 20px;
+		color: #555;
+		margin-top: 30px;
+		text-align: center;
+	}
+	.form {
+		width: 800px;
+		margin: 0px auto;
 	}
 }
 </style>

@@ -1,18 +1,41 @@
 // 订单
 
-let url
+let API
 // 本地
-url = 'http://192.168.0.231:8077'
+// API = 'http://192.168.0.231:8077'
 // 线上正式版
-// url = 'http://api.mingz-tech.com'
+// API = 'http://api.mingz-tech.com'
 // 线上测试版
-// url = 'http://api.didalive.net/'
+API = 'http://api.didalive.net/mzkd/'
 
+// 订单信息
 export const order = {
-  getOrderInfoByOrderNo: `${url}/api/orderInfo/getOrderInfoByOrderNo`,
-  queryByCompany: `${url}/api/order/queryByCompany`,
+  getOrderInfoByOrderNo: `${API}/api/orderInfo/getOrderInfoByOrderNo`,
+  queryByCompany: `${API}/api/order/queryByCompany`,
 }
 
+// 用户信息
 export const user = {
-	token: `${url}/login/getToken` 
+	token: `${API}/login/getToken` 
+}
+
+//国家信息
+export const country = {
+	show: `${API}/api/country/index`,
+	cascade: `${API}/api/country/provCityCountyList`
+}
+
+// 省份信息
+export const province = {
+  show: `${API}/api/provinces/index`
+}
+
+// 市级信息
+export const city = {
+	show: `${API}/api/cities/index`
+}
+
+// 县区信息
+export const county = {
+	show: `${API}/api/districts/index`
 }

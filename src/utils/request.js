@@ -7,7 +7,7 @@ const fetch = (options) => {
     data,
     params,
     url,
-    auth,
+    auth = true,
     token
   } = options
 
@@ -16,7 +16,7 @@ const fetch = (options) => {
       return axios({
         url,
         method: 'get',
-        params: data,
+        params: data || params,
         timeout: 5000,
         headers: auth ? {'token': token} : {}
       })
@@ -50,7 +50,6 @@ const fetch = (options) => {
 export default function request (options) {
   options.token = window.sessionStorage.winnerKey
   return fetch(options).then((response) => {
-    console.log('response', response)
     const { status } = response
     let data = response.data
     data = typeof data === 'object' ? data : {'stringData': data}

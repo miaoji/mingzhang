@@ -18,10 +18,11 @@
 		<div class="header_nav_item">
 			<ul class="w clear">
 				<li class="left"><router-link to="/">首页</router-link></li>
-				<li class="left"><router-link to="/Send">我要寄件</router-link></li>
+				<li class="left"><router-link to="/OrderSend">我要寄件</router-link></li>
 				<li class="left"><router-link to="/Prescription">参考时效</router-link></li>
 				<li class="left"><router-link to="/Site">服务站点</router-link></li>
 				<li class="left"><router-link to="/Introduce">关于我们</router-link></li>
+				<li class="left"><router-link to="/Send">寄件流程</router-link></li>
 			</ul>
 		</div>
 	</div>

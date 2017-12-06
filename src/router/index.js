@@ -10,6 +10,7 @@ import Site from '@/components/detail/Site'                 // 服务站点
 import Introduce from '@/components/detail/Introduce'       // 公司简介+联系我们
 import Errors from '@/components/Error'       // 新闻动态
 import OrderSend from '@/components/page/OrderSend'
+import Demo from '@/components/page/Demo'
 
 // 英文版-路由地址
 import enIndex from '@/componentenglish/IndexMain'       // 英文版主页
@@ -116,9 +117,14 @@ export default new Router({
       component: OrderSend
     },
     {
+      path: '/Demo',
+      name: 'Demo',
+      component: Demo
+    },
+    {
       path: '/*',
-      name: 'IndexMain',
-      component: IndexMain
+      name: 'Errors',
+      component: Errors
     }
   ]
 })

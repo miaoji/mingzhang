@@ -22,7 +22,7 @@ export default {
     getToken()
   },
   created(){
-    if (document.body.offsetWidth<1400) {
+    if (document.body.offsetWidth<1300) {
       document.body.style.width='1400px'
     }else{
       this.wid='width:'+document.body.offsetWidth+'px'

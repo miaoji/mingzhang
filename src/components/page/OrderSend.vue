@@ -2,6 +2,7 @@
 	<div>
 		<Headers :show='show' :link='link'></Headers>
 		<div class="sendorder">
+			<div class="box">123</div>
 			<el-form ref="form" :model="form" label-width="80px">
 			  <el-form-item label="寄件地址">
 			    <el-input v-model="form.name" />
@@ -86,10 +87,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .sendorder{
 	width: 800px;
 	height: 500px;
 	margin: 50px auto 200px;
+	.box{
+		color: red;
+	}
 }
 </style>

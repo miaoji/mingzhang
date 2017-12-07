@@ -68,5 +68,13 @@ a{
   text-decoration: none;
   color: inherit;
 }
-
+.circular {
+  width: 50px!important;
+  height: 50px!important;
+}
+.el-loading-text {
+  margin: 20px 0px !important;
+  color: #000!important;
+  font-size: 18px!important;
+}
 </style>

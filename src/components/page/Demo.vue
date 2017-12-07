@@ -1,45 +1,30 @@
 <template>
-<div>
-	<Headers :show='show' :link='link'></Headers>
+<div class="demo">
 	<h1>测试页面</h1>
 	<div>
-		<el-form :model="numberValidateForm" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
-		  <el-form-item
-		    label="年龄"
-		    prop="age"
-		    :rules="[
-		      { required: true, message: '年龄不能为空'},
-		      { type: 'number', message: '年龄必须为数字值'}
-		    ]"
-		  >
-		    <el-input type="age" v-model.number="numberValidateForm.age" auto-complete="off"></el-input>
-		  </el-form-item>
-		  <el-form-item>
-		    <el-button type="primary" @click="submitForm('numberValidateForm')">提交</el-button>
-		    <el-button @click="resetForm('numberValidateForm')">重置</el-button>
-		  </el-form-item>
-		</el-form>
+		<Inputs v-model="aaa"></Inputs>
 	</div>
-	<Footers></Footers>
+	<el-button @click="aaa=''">这是一个按钮</el-button>
+	<el-button @click="aaaaaa">这是一个按钮</el-button>
 </div>
 </template>
 <script>
 import Headers from '@/components/Headers'
 import Footers from '@/components/Footers'
-
+import Inputs from '@/parts/Input'
 export default {
 	name: 'orderSend',
 	components:{
 		Headers,
-		Footers
+		Footers,
+		Inputs
 	},
 	data(){
 		return {
 			show: true,
 			link: '/OrderSend',
-			numberValidateForm: {
-	          // age: ''
-	        }
+			numberValidateForm: {},
+			aaa: '',
 		}
 	},
 	created(){
@@ -52,6 +37,9 @@ export default {
 		},
 		menu(){
 			window.scrollTo(0,0)
+		},
+		aaaaaa(){
+			alert(this.aaa)
 		},
 		submitForm(formName) {
 			this.$refs[formName].validate((valid) => {
@@ -69,3 +57,10 @@ export default {
 	}
 }
 </script>
+
+<style scropd lang="less">
+	.demo{
+		padding: 50px;
+		text-align: center;
+	}
+</style>

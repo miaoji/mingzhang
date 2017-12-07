@@ -18,8 +18,7 @@
 					v-loading="orderLoading"
 					v-show="orderLoading"
 					customClass="loadingStyle"
-				    element-loading-text="查询中..."
-				    element-loading-spinner="el-icon-loading"
+				    element-loading-text="正在为您拼命的加载快件信息..."
 				    element-loading-background="#fff"
 				></div>
 				<div class="order_info" v-show="!orderLoading">
@@ -34,7 +33,7 @@
 							<span class='icon'><span class='line'></span></span>
 							<span class='order_info_content' :title="item.context">{{item.context}}</span>
 						</li>
-						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">暂无相关快递信息</li>
+						<li style="text-align: center;padding-top: 50px;font-size:20px;" v-if="show">暂无相关快件信息</li>
 					</ul>
 				</div>
 			</div>
@@ -118,17 +117,13 @@ export default {
 				}else{
 					this.intlOrderData = []
 				}
-				setTimeout(() => {
-			this.orderLoading = false
-				}, 500)
+				setTimeout(() => { this.orderLoading = false }, 500)
 			}else{
 				console.log('查询失败了',res)
 				this.show = true
 				this.cnOrderdData = []
 				this.intlOrderData = []
-				setTimeout(() => {
-				this.orderLoading = false
-				}, 1000)
+				setTimeout(() => { this.orderLoading = false }, 1000)
 			}
 		}
 	}
@@ -298,7 +293,7 @@ export default {
 	min-height: 98px;
 }
 .loadingStyle {
-	color: #000;
+	color: #000!important;
 	font-size: 20px;
 }
 </style>

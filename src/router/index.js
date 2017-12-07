@@ -9,7 +9,7 @@ import Prescription from '@/components/detail/Prescription' // 参考时效
 import Site from '@/components/detail/Site'                 // 服务站点
 import Introduce from '@/components/detail/Introduce'       // 公司简介+联系我们
 import Errors from '@/components/Error'       // 新闻动态
-import OrderSend from '@/components/page/OrderSend'
+import OrderSend from '@/components/page/OrderSend/index'
 import Demo from '@/components/page/Demo'
 
 // 英文版-路由地址

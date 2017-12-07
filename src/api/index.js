@@ -39,3 +39,14 @@ export const city = {
 export const county = {
 	show: `${API}/api/districts/index`
 }
+
+// 包裹类型
+export const packages = {
+	// 根据国家Id包裹类型
+	show: `${API}/api/packageType/getPackageTypeByCountry`
+}
+
+// 产品类型
+export const product = {
+	show: `${API}/api/productType/index`
+}

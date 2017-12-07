@@ -14,7 +14,15 @@
 				<div class="icon"><img src="" alt=""></div>
 				<div class="tit">快件轨迹</div>
 				<div class="line"></div>
-				<div class="order_info">
+				<div class="loading"
+					v-loading="orderLoading"
+					v-show="orderLoading"
+					customClass="loadingStyle"
+				    element-loading-text="查询中..."
+				    element-loading-spinner="el-icon-loading"
+				    element-loading-background="#fff"
+				></div>
+				<div class="order_info" v-show="!orderLoading">
 					<ul>
 						<li v-for='item in cnOrderdData'>
 							<span class='order_info_tit'>{{item.time}}</span>
@@ -51,7 +59,8 @@ export default {
 			cnOrderdData:[],
 			intlOrderData:[],
 			show:true,
-			link:'/enGetOrderInfo'
+			link:'/enGetOrderInfo',
+			orderLoading: true
 		}
 	},
 	created(){
@@ -68,6 +77,7 @@ export default {
 			console.log('e',e)
 		},
 		async getOrderInfo(){
+			this.orderLoading = true
 			this.$router.push({path:'/GetOrderInfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
@@ -108,11 +118,17 @@ export default {
 				}else{
 					this.intlOrderData = []
 				}
+				setTimeout(() => {
+			this.orderLoading = false
+				}, 500)
 			}else{
 				console.log('查询失败了',res)
 				this.show = true
 				this.cnOrderdData = []
 				this.intlOrderData = []
+				setTimeout(() => {
+				this.orderLoading = false
+				}, 1000)
 			}
 		}
 	}
@@ -220,6 +236,7 @@ export default {
 	line-height: 1.8em;
 }
 .order>.order_info{
+	min-height: 98px;
 }
 .order>.order_info>ul{
 	list-style: none;
@@ -276,5 +293,12 @@ export default {
 	font-size: 14px;
 	position: relative;
 	top: 19px;
+}
+.loading {
+	min-height: 98px;
+}
+.loadingStyle {
+	color: #000;
+	font-size: 20px;
 }
 </style>

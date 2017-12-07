@@ -1,74 +1,79 @@
+<!-- 
+可接收参数： 
+  label,默认 暂无
+
+向父组件通过 selectCityChange 传递信息
+
+父组件通过 @selectCityChange="事件名" 接收
+
+ -->
 <template>
   <el-form-item :label="label">
-    <el-cascader 
-      @active-item-change="handleItemChange" 
-      style="width: 100%" 
-      placeholder="试试搜索：指南" 
-      :options="options" 
+    <el-cascader
+      :options="options"
+      change-on-select
       filterable
-      :props="props"
       @change="handleChange"
-    />
+      style="width: 100%"
+      popper-class="select_model"
+    ></el-cascader>
   </el-form-item>
 </template>
 <script>
   import { cascade } from '@/services/country'
   export default {
+
     name:'SelectCity',
+
     props: {
       label: {
         type: String,
         default: '暂无'
       }
     },
+
     data() {
       return {
-        options: [],
-        props: {
-          value: 'label',
-          children: 'cities'
-        }
+        options: []
       }
     },
+
     created(){
-      this.getProvince()
+      this.getSelectCity()
     },
+
     methods: {
       handleChange(data){
-        console.log('dadsfsdf', data)
+        this.$emit('selectCityChange', data)
       },
       handleItemChange(data){
-        console.log('daata', data)
-
       },
-      async getProvince(){
+      async getSelectCity(){
         const data = await cascade()
         if (data.code === 200 && data.obj) {
           for (let i=0; i < data.obj[0].provincesList.length; i++) {
             const item = data.obj[0].provincesList[i]
             this.options.push({
-              value: JSON.stringify(item), 
+              value: item.id+'/'+item.province, 
               label: item.province, 
               children: []
             })
-            for (let j = 0; j < item.citiesList.length; j++) {
+            for (let j = 0; j < (item.citiesList.length); j++) {
               const cityItem = item.citiesList[j]
               this.options[i].children.push({
-                value: JSON.stringify(cityItem), 
+                value: cityItem.id+'/'+cityItem.city, 
                 label: cityItem.city, 
                 children: []
               })
               for (let k = 0; k < cityItem.districtsList.length; k++) {
-                console.log(23)
                 const countyItem = cityItem.districtsList[k]
                 this.options[i].children[j].children.push({
-                  value: JSON.stringify(countyItem), 
+                  value: countyItem.id+'/'+countyItem.district, 
                   label: countyItem.district, 
                 })
               }
             }
           }
-          console.log(this.options)
         }else{
           this.$message({
             message: '获取省份信息失败,请刷新页面重试！！！',
@@ -80,3 +85,30 @@
 
   }
 </script>
+<style lang="less">
+.select_model {
+  .el-cascader-menu {
+    width: 200px!important;
+  }
+  /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/  
+  ::-webkit-scrollbar {  
+      width: 3px;  /*滚动条宽度*/
+      height: 12px;  /*滚动条高度*/
+  }  
+    
+  /*定义滚动条轨道 内阴影+圆角*/  
+  ::-webkit-scrollbar-track {  
+      /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);  */
+      border-radius: 10px;  /*滚动条的背景区域的圆角*/
+      background-color: #fff;/*滚动条的背景颜色*/
+  }  
+    
+  /*定义滑块 内阴影+圆角*/  
+  ::-webkit-scrollbar-thumb {  
+      border-radius: 10px;  /*滚动条的圆角*/
+      /*-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);  */
+      background-color: #ddd;  /*滚动条的背景颜色*/
+  } 
+}
+
+</style>

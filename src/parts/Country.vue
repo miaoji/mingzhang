@@ -50,7 +50,7 @@ import { query } from '@/services/country'
     		if (data.code === 200 && data.obj) {
     			for (let i = 0; i<data.obj.length; i++){
     				let item = data.obj[i]
-    				this.options.push({value: JSON.stringify(item),label:item.country_cn})
+    				this.options.push({value: item.country_cn,label:item.country_cn})
     			}
     		}else{
     			this.$message({

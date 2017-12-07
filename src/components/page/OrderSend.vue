@@ -10,8 +10,8 @@
 			  <el-form-item label="电话">
 			    <el-input v-model="form.senderMobile" />
 			  </el-form-item>
-			  <country v-model="form.aa" label="国家/地区" @coutryChange="coutryChange"/>
-			  <select-city label="地区选择"/>
+			  <country label="国家/地区" @coutryChange="coutrySendChange"/>
+			  <select-city label="地区选择" @selectCityChange="selectCityChange" v-show="showSendCitySelect"/>
 			  <el-form-item label="街道地址">
 			    <el-input v-model="form.senderAddress" />
 			  </el-form-item>
@@ -25,9 +25,7 @@
 			  <el-form-item label="电话">
 			    <el-input v-model="form.receiverMobile" />
 			  </el-form-item>
-			  <el-form-item label="国家/地区">
-			    <el-input v-model="form.receiverCountry" />
-			  </el-form-item>
+			  <country v-model="form.aa" label="国家/地区" @coutryChange="coutryReceiveChange"/>
 			  <el-form-item label="街道地址">
 			    <el-input v-model="form.receiverAddress" />
 			  </el-form-item>
@@ -89,7 +87,8 @@ export default {
 			show: true,
 			link: '/OrderSend',
 			dialogVisible: false,
-			form: {}
+			form: {},
+			showSendCitySelect: false
 		}
 	},
 	created(){
@@ -103,10 +102,26 @@ export default {
 		menu(){
 			window.scrollTo(0,0)
 		},
-		coutryChange(data) {
+		coutrySendChange(data) {
 			// 获取寄件人国家信息
-			console.log('datasss', data)
-			this.form.country=data
+			this.form.senderCountry=data
+			if (data === '中国') {
+				this.showSendCitySelect = true
+			}else{
+				this.showSendCitySelect = false
+			}
+		},
+		selectCityChange(data) {
+			// 获取寄件人地区三联信息
+			if (data && data.length === 3) {
+				this.form.province=data[0].split('/')[1]
+				this.form.city=data[1].split('/')[1]
+				this.form.county=data[2].split('/')[1]
+				console.log('from', this.form)
+			}
+		},
+		coutryReceiveChange(data) {
+			this.form.receiverCountry=data
 		}
 	}
 }

@@ -9,7 +9,7 @@ import Prescription from '@/components/detail/Prescription' // 参考时效
 import Site from '@/components/detail/Site'                 // 服务站点
 import Introduce from '@/components/detail/Introduce'       // 公司简介+联系我们
 import Errors from '@/components/Error'       // 新闻动态
-import OrderSend from '@/components/page/OrderSend/index'
+import OrderSend from '@/components/page/OrderSend'
 import Demo from '@/components/page/Demo'
 
 // 英文版-路由地址
@@ -20,7 +20,7 @@ import enSite from '@/componentenglish/detail/Site'                 // 服务站
 import enGetOrderInfo from '@/componentenglish/detail/GetOrderInfo'                 // 服务站点
 import enQuestion from '@/componentenglish/detail/Question'         // 疑难问题
 import enViolate from '@/componentenglish/detail/Violate'
-import enIntroduce from '@/componentenglish/detail/Introduce'   
+import enIntroduce from '@/componentenglish/detail/Introduce'
 
 Vue.use(Router)
 
@@ -117,7 +117,7 @@ export default new Router({
       component: OrderSend
     },
     {
-      path: '/Demo',
+      path: '/winnerdemo',
       name: 'Demo',
       component: Demo
     },

@@ -6,9 +6,10 @@ import request from '@/utils/request'
 import { product } from '@/api'
 
 export async function query (params) {
-	return {
-		url: 'product.show',
+	console.log('params', params)
+	return request({
+		url: product.show,
 		methods: 'get',
 		data: params
-	}
+	})
 }

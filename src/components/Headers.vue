@@ -15,7 +15,7 @@
 				</div>
 			</li>
 		</ul>
-		<div class="header_nav_item">
+		<div class="header_nav_item" :class="{ toptoptop: aaaaa }">
 			<ul class="w clear">
 				<li class="left"><router-link to="/">首页</router-link></li>
 				<li class="left"><router-link to="/OrderSend">我要寄件</router-link></li>
@@ -32,7 +32,8 @@ export default {
 	name: 'Header',
 	data(){
 		return{
-			msg: 'Header'
+			msg: 'Header',
+			aaaaa: false
 		}
 	},
 	created(){
@@ -42,6 +43,22 @@ export default {
 		menu(){
 			window.scrollTo(0,0)
 		}
+	},
+	mounted(){
+		let _this=this
+		window.onscroll=function(){
+			if (document.documentElement.scrollTop>115) {
+				console.log(document.documentElement.scrollTop)
+				_this.aaaaa=true
+				console.log(_this)
+				console.log(_this.msg)
+			}else{
+				_this.aaaaa=false
+				console.log(_this.aaaaa)
+			}
+		}
+	},
+	watch: {
 	},
 	props:{
 		show:{
@@ -108,6 +125,20 @@ export default {
 	background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
 	background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
 	background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
+	-webkit-transition: all .5s;
+	   -moz-transition: all .5s;
+	    -ms-transition: all .5s;
+	     -o-transition: all .5s;
+	        transition: all .5s;
+}
+.header_nav>.header_nav_item.toptoptop{
+	width: 100%;
+	background: rgba(100, 100, 100, .8);
+	position:fixed;
+	top: 0px;
+	z-index: 99999;
+	left: 50%;
+	margin-left: -50%;
 }
 .header_nav>.header_nav_item>ul{
 	list-style: none;

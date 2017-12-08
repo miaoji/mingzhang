@@ -23,7 +23,7 @@ export default {
   },
   created(){
     if (document.body.offsetWidth<1300) {
-      document.body.style.width='1400px'
+      document.body.style.width='1300px'
     }else{
       this.wid='width:'+document.body.offsetWidth+'px'
     }

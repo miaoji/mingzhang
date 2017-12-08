@@ -89,12 +89,12 @@ export default {
 .main_box{
 	width: 100%;
 	overflow: hidden;
+	/*background-color: #fafafa;*/
 }
 .banner{
 	width: 1920px;
 	height: 640px;
 	overflow: hidden;
-	/*background-color: blue;*/
 	position: relative;
 	left: 50%;
 	margin-left: -960px;
@@ -161,7 +161,6 @@ export default {
 .main>.main_inquire .main_inquire_btn_box{
 	height: 100%;
 	width: 196px;
-	/*padding-left: 30px;*/
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
 	background-color: #fff;
@@ -280,20 +279,21 @@ export default {
 /* 客户服务 */
 
 .service{
-	background-color: #fff;
+	/*background-color: #fff;*/
 }
 .service>.service_items{}
 .service>.service_items>ul{
 	padding: 0px 0px 30px 0px;
-	margin: 0px;
+	margin: 0px 0px 50px;
 }
 .service>.service_items>ul>li.service_items_item{
-	font-size: 18px;
+	font-size: 16px;
 	text-align: center;
 	box-sizing: border-box;
 	list-style: none;
 	width: 293px;
-	color: #999;
+	color: #666;
+	background-color: #fff;
 	margin-right: 42px;
 	/*padding: 0px 60px;*/
 }
@@ -314,9 +314,9 @@ export default {
 	font-weight: bold;
 	font-size: 20px;
 	padding: 30px 24px 0px;
-	color: #666;
+	color: #333;
 }
 .service>.service_items>ul>li.service_items_item>.text_item{
-	padding: 30px 24px 140px;
+	padding: 30px 24px 30px;
 }
 </style>

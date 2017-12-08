@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Headers :show='show'></Headers>
-		<div class="w error"><img src="/static/img/404.png" /></div>
+		<div class="w error"><img src="/static/image/404.png" /></div>
 		<Footers></Footers>
 	</div>
 </template>

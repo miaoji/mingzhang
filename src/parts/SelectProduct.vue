@@ -9,7 +9,7 @@
  -->
 <template>
 	<el-form-item :label="label">
-	  <el-select v-model="select_package" size="large" :disabled="!showPackageList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择">
+	  <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { query } from '@/services/parts/package'
+import { query } from '@/services/parts/product'
   export default {
   	
   	name: 'SelectPackage',
@@ -31,7 +31,7 @@ import { query } from '@/services/parts/package'
   			type: String,
   			default: '暂无'
   		},
-      showPackageList: {
+      showProductList: {
         type: Object,
         default: {}
       }
@@ -39,12 +39,13 @@ import { query } from '@/services/parts/package'
 
   	created(){
   		// this.getCountry()
+      // this.getCountry({packageTypeId: 53})
   	},
 
     data() {
       return {
         options: [],
-        select_package: ''
+        select_product: ''
       }
     },
 
@@ -52,28 +53,32 @@ import { query } from '@/services/parts/package'
     	async getCountry(payload={}){
         console.log('payload', payload)
     		let data = await query(payload)
+        console.log('data',data)
     		if (data.code === 200 && data.obj) {
           this.options=[]
     			for (let i = 0; i<data.obj.length; i++){
     				let item = data.obj[i]
-    				this.options.push({value: JSON.stringify(item), label:item.name_cn})
+    				this.options.push({value: JSON.stringify(item), label:item.product_name})
     			}
     		}else{
     			this.$message({
-	          message: '包裹类型列表获取失败',
+	          message: '产品类型列表获取失败',
 	          type: 'warning'
 	        })
     		}
     	},
     	handleChange(){
-    		this.$emit('selectPackageChange', this.select_package)
+    		this.$emit('selectPackageChange', this.select_product)
     	}
     },
     watch: {
-      showPackageList(data){
-        console.log('dadasda', data)
-        this.select_package = undefined
-        this.getCountry({countryId: JSON.parse(data.data).id})
+      showProductList(data){
+        console.log('ffffff', data)
+        this.select_product = undefined
+        if (data.show === false) {
+          return
+        }
+        this.getCountry({packageTypeId: JSON.parse(data.data).id})
       }
     }
 

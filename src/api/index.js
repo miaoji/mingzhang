@@ -3,10 +3,13 @@
 let API
 // 本地
 // API = 'http://192.168.0.231:8077'
-// 线上正式版
-// API = 'http://api.mingz-tech.com'
 // 线上测试版
 API = 'http://api.didalive.net/mzkd/'
+
+// 线上正式版
+if (process.env.NODE_ENV === 'production') {
+	API = 'http://api.mingz-tech.com'
+}
 
 // 订单信息
 export const order = {
@@ -48,5 +51,5 @@ export const packages = {
 
 // 产品类型
 export const product = {
-	show: `${API}/api/productType/index`
+	show: `${API}/api/productType/getProductByPackage`
 }

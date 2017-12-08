@@ -1,66 +1,65 @@
 <template>
-<div class="demo">
-	<h1>测试页面</h1>
-	<div>
-		<Inputs v-model="aaa"></Inputs>
+	<div class="index">
+		<div>
+			<h1>这是一个首页</h1>
+			<h1>state: -- {{count}} -- 为处理的状态</h1>
+			<p>state: -- {{index}} {{count}} -- </p>
+			<h2>getters: -- {{countaa}} -- 处理过的状态</h2>
+			<h2>getters: -- {{realindex}} -- 处理过的状态</h2>
+			<button @click='add(20)'>火星一号</button>
+			<button @click='handleClickA()'>handleClickA</button>
+			<button @click='increment()'>按钮二号</button>
+			<button @click='chengshi()'>按钮二号</button>
+			<el-button @click="$store.dispatch('iswinner')" type="success">handleClickB</el-button>
+		</div>
 	</div>
-	<el-button @click="aaa=''">这是一个按钮</el-button>
-	<el-button @click="aaaaaa">这是一个按钮</el-button>
-</div>
 </template>
+
 <script>
-import Headers from '@/components/Headers'
-import Footers from '@/components/Footers'
-import Inputs from '@/parts/Input'
+import store from '@/store'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex';
+
 export default {
-	name: 'orderSend',
-	components:{
-		Headers,
-		Footers,
-		Inputs
-	},
+	name: 'Demo',
 	data(){
 		return {
-			show: true,
-			link: '/OrderSend',
-			numberValidateForm: {},
-			aaa: '',
+			msg:'嘻嘻',
+			list: []
 		}
 	},
+	store,
 	created(){
-		window.document.title = '上海明彰网络科技有限公司'
-		this.menu()
 	},
-	methods:{
-		onSubmit(){
-			console.log('data', this.form)
+	computed:{
+		...mapState({
+			count: ({ demo }) => demo.count,
+			index: ({ demo }) => demo.index,
+		}),
+		...mapGetters([
+			'countaa',
+			'realindex'
+		])
+	},
+	methods: {
+		...mapMutations([
+	    	'add',
+	    	'reduce',
+	    	'chengshi',
+	    	'winner'
+	  	]),
+	  	...mapActions([
+	  		// 'increment'
+	  	]),
+		handleClickA(){
+			this.$store.dispatch('iswinner')
 		},
-		menu(){
-			window.scrollTo(0,0)
+		handleClickB(){
+			this.$store.commit('winner')
 		},
-		aaaaaa(){
-			alert(this.aaa)
-		},
-		submitForm(formName) {
-			this.$refs[formName].validate((valid) => {
-				if (valid) {
-					alert('submit!');
-				} else {
-					console.log('error submit!!');
-					return false;
-				}
-			})
-		},
-		resetForm(formName) {
-			this.$refs[formName].resetFields();
+		aaClick(e){
+			alert(e)
+			console.log('e',e)
 		}
 	}
 }
 </script>
-
-<style scropd lang="less">
-	.demo{
-		padding: 50px;
-		text-align: center;
-	}
-</style>

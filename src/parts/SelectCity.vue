@@ -8,14 +8,19 @@
 
  -->
 <template>
-  <el-form-item :label="label">
+  <el-form-item :label="label"
+    :rules="[
+      { required: true, message: '请选择您所在的城市'},
+    ]"
+  >
     <el-cascader
       :options="options"
       change-on-select
       filterable
       @change="handleChange"
-      style="width: 100%"
+      style="width: 80%"
       popper-class="select_model"
+      :value='value'
     ></el-cascader>
   </el-form-item>
 </template>
@@ -29,17 +34,28 @@
       label: {
         type: String,
         default: '暂无'
+      },
+      cancel: {
+        type: Boolean,
+        default: true
       }
     },
 
     data() {
       return {
-        options: []
+        options: [],
+        value: []
       }
     },
 
     created(){
       this.getSelectCity()
+    },
+
+    watch: {
+      cancel(){
+        this.value = []
+      }
     },
 
     methods: {

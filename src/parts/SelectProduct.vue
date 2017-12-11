@@ -4,12 +4,16 @@
 
 向父组件通过 coutryChange 传递信息
 
-父组件通过 @coutryChange="事件名" 接收
+父组件通过 @selectProductChange="事件名" 接收
 
  -->
 <template>
-	<el-form-item :label="label">
-	  <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择">
+	<el-form-item :label="label"
+    :rules="[
+      { required: true, message: '请选择产品规格'},
+    ]"
+  >
+	  <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange" style="width: 80%" filterable placeholder="请选择产品规格">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -68,12 +72,11 @@ import { query } from '@/services/parts/product'
     		}
     	},
     	handleChange(){
-    		this.$emit('selectPackageChange', this.select_product)
+    		this.$emit('selectProductChange', this.select_product)
     	}
     },
     watch: {
       showProductList(data){
-        console.log('ffffff', data)
         this.select_product = undefined
         if (data.show === false) {
           return

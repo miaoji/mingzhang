@@ -25,17 +25,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { query } from '@/services/country'
   export default {
   	
   	name: 'country',
-    computed: {
-      ...mapState({
-        cnDate: ({ country }) => country.cnDate,
-        enData: ({ country }) => country.enData,
-      }),
-    },
   	props: {
   		label: {
   			type: String,
@@ -67,11 +60,8 @@ import { query } from '@/services/country'
     methods: {
     	async getCountry(){
         if (this.type === 'cn') {
-          console.log('this.cnData',this.$store.state.country.cnData)
           this.options = this.$store.state.country.cnData
         }else{
-          console.log('this.enData',this.$store.state.country.enData)
-          console.log('this.enData',this.enData)
           this.options = this.$store.state.country.enData
         }
     	},
@@ -82,7 +72,6 @@ import { query } from '@/services/country'
 
     watch: {
       cancel(val){
-        console.log('123123456')
         this.country_name = ''
       }
     }

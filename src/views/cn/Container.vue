@@ -1,7 +1,7 @@
 <template>
   <div>
     <headers :link="location"/>
-    <transition>
+    <transition name="el-fade-in">
       <router-view @location='listen'></router-view>
     </transition>
     <footers/>
@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     listen(e){
-      console.log(e)
       const hash = e.split('/')
       if (hash && hash.length === 3) {
         this.location = '/en/' + hash[2]

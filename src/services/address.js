@@ -8,15 +8,23 @@ import { sender, receive } from '@/api'
 export async function showSendAddr (data) {
 	return request({
 		url: sender.show,
-		methods: 'get',
+		method: 'get',
 		data
 	})
 }
 
-export async function showReceiveAddr (data) {
+export async function showReceAddr (data) {
 	return request({
 		url: receive.show,
-		methods: 'get',
+		method: 'get',
 		data
+	})
+}
+
+export async function addReceAddrInfo (data) {
+	return request({
+		url: receive.add,
+		method: 'post',
+		params: data
 	})
 }

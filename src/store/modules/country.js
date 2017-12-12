@@ -14,9 +14,7 @@ export const actions = {
         if (state.cnData.length>0) {
             return
         }
-        console.log('sdfsdf', state)
         let data = await query()
-        console.log('data1111', data)
         if (data.code === 200 && data.obj) {
             state.cnData = []
             for (let i = 0; i<data.obj.length; i++){

@@ -1,7 +1,7 @@
 <template>
   <div>
     <headers :link="location"/>
-    <transition>
+    <transition name="el-fade-in">
       <router-view @location='listen'></router-view>
     </transition>
     <footers/>

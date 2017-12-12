@@ -45,6 +45,7 @@ export default {
 </script>
 
 <style>
+@import './assets/styles/helpers.less';
 
 body {
   padding: 0px;
@@ -52,42 +53,9 @@ body {
   background-color: #fff;
   font-family: "微软雅黑";
 }
-.show{
-  display: block;
-}
-.hide{
-  display: none;
-}
-.w {
-  width: 1300px;
-  margin: 0 auto;
-}
-
-.left {
-  float: left;
-}
-
-.right {
-  float: right;
-}
-
-.clear:after {
-  display: block;
-  content: "";
-  clear: both;
-}
 
 a{
   text-decoration: none;
   color: inherit;
-}
-.circular {
-  width: 50px!important;
-  height: 50px!important;
-}
-.el-loading-text {
-  margin: 20px 0px !important;
-  color: #000!important;
-  font-size: 18px!important;
 }
 </style>

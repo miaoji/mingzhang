@@ -15,6 +15,7 @@ const question = r => require.ensure([], () => r(require('@/views/cn/Question'))
 const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send')
 const site = r => require.ensure([], () => r(require('@/views/cn/Site')), 'site')
 const violate = r => require.ensure([], () => r(require('@/views/cn/Violate')), 'violate')
+const usercenter = r => require.ensure([], () => r(require('@/views/cn/user/Index')), 'usercenter')
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
@@ -113,6 +114,13 @@ export default new Router({
       component: violate,
       meta: {
         intro: '禁运物品'
+      }
+    },{
+      path: 'usercenter',
+      name: 'usercenter',
+      component: usercenter,
+      meta: {
+        intro: '用户中心'
       }
     }]
   },{

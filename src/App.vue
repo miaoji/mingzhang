@@ -45,7 +45,9 @@ export default {
 </script>
 
 <style>
+@import './assets/styles/colors.less';
 @import './assets/styles/helpers.less';
+@import './assets/styles/vars.less';
 
 body {
   padding: 0px;

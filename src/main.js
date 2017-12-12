@@ -9,7 +9,6 @@ Vue.use(ElementUI)
 Vue.config.productionTip = false
 
 router.afterEach((to, from) => {
-  // console.log(111)
   if (to.meta.intro) {
     window.document.title = to.meta.intro || ''
   }

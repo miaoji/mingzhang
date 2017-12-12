@@ -2,7 +2,6 @@
 	<div class="sendorder_box">
 		<div class="sendorder">
 			<el-form class="form" ref="form" :model="form" label-width="100px">
-
 				<div class="sendorder_item" v-show="true">
 					<h1 class="page_tit">寄件人信息</h1>
 					<div @click='sendAddress(key,item)' v-show="showSendAddr||key===sendAddrIndex?true:false" :class="{ active: key===sendAddrIndex?true:false}" v-for="(item,key) in sendAddrInfo" class="sendAddrInfo">
@@ -215,7 +214,7 @@ import SelectCity from '@/components/SelectCity'
 import SelectPackage from '@/components/SelectPackage'
 import SelectProduct from '@/components/SelectProduct'
 import TablePackage from '@/components/TablePackage'
-import { getPrice } from '@/services/parts/getPrice'
+import { getPrice } from '@/services/components/getPrice'
 import { showSendAddr,showReceiveAddr } from '@/services/address'
 
 export default {

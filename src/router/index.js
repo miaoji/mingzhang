@@ -1,130 +1,186 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import IndexMain from '@/components/IndexMain'              // 首页主体
-import GetOrderInfo from '@/components/detail/GetOrderInfo' // 订单查询
-import Send from '@/components/detail/Send'                 // 我要寄件
-import Question from '@/components/detail/Question'         // 疑难问题
-import Violate from '@/components/detail/Violate'           // 禁运物品
-import Prescription from '@/components/detail/Prescription' // 参考时效
-import Site from '@/components/detail/Site'                 // 服务站点
-import Introduce from '@/components/detail/Introduce'       // 公司简介+联系我们
-import Errors from '@/components/Error'       // 新闻动态
-import OrderSend from '@/components/page/OrderSend'
-import Demo from '@/components/page/Demo'
 
-// 英文版-路由地址
-import enIndex from '@/componentenglish/IndexMain'       // 英文版主页
-import enSend from '@/componentenglish/detail/Send'                 // 我要寄件
-import enPrescription from '@/componentenglish/detail/Prescription' // 参考时效
-import enSite from '@/componentenglish/detail/Site'                 // 服务站点
-import enGetOrderInfo from '@/componentenglish/detail/GetOrderInfo'                 // 服务站点
-import enQuestion from '@/componentenglish/detail/Question'         // 疑难问题
-import enViolate from '@/componentenglish/detail/Violate'
-import enIntroduce from '@/componentenglish/detail/Introduce'
+import cnContainer from '@/views/cn/Container'
+import enContainer from '@/views/en/Container'
 
 Vue.use(Router)
+// cn
+const cnindex = r => require.ensure([], () => r(require('@/views/cn/Index')), 'cnindex')
+const getorderinfo = r => require.ensure([], () => r(require('@/views/cn/GetOrderInfo')), 'getorderinfo')
+const introduce = r => require.ensure([], () => r(require('@/views/cn/Introduce')), 'introduce')
+const ordersend = r => require.ensure([], () => r(require('@/views/cn/OrderSend')), 'ordersend')
+const prescription = r => require.ensure([], () => r(require('@/views/cn/Prescription')), 'prescription')
+const question = r => require.ensure([], () => r(require('@/views/cn/Question')), 'question')
+const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send')
+const site = r => require.ensure([], () => r(require('@/views/cn/Site')), 'site')
+const violate = r => require.ensure([], () => r(require('@/views/cn/Violate')), 'violate')
+
+// en
+const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
+const engetorderinfo = r => require.ensure([], () => r(require('@/views/en/GetOrderInfo')), 'engetorderinfo')
+const enintroduce = r => require.ensure([], () => r(require('@/views/en/Introduce')), 'enintroduce')
+// const ordersend = r => require.ensure([], () => r(require('@/views/en/OrderSend')), 'ordersend')
+const enprescription = r => require.ensure([], () => r(require('@/views/en/Prescription')), 'enprescription')
+const enquestion = r => require.ensure([], () => r(require('@/views/en/Question')), 'enquestion')
+const ensend = r => require.ensure([], () => r(require('@/views/en/Send')), 'ensend')
+const ensite = r => require.ensure([], () => r(require('@/views/en/Site')), 'ensite')
+const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate')), 'enviolate')
+
 
 export default new Router({
-  routes: [
-    {
-      path: '/enIntroduce',
-      name: 'enIntroduce',
-      component: enIntroduce
-    },
-    {
-      path: '/enQuestion',
-      name: 'enQuestion',
-      component: enQuestion
-    },
-    {
-      path: '/enViolate',
-      name: 'enViolate',
-      component: enViolate
-    },
-    {
-      path: '/enGetOrderInfo',
-      name: 'enGetOrderInfo',
-      component: enGetOrderInfo
-    },
-    {
-      path: '/enSite',
-      name: 'enSite',
-      component: enSite
-    },
-    {
-      path: '/enSend',
-      name: 'enSend',
-      component: enSend
-    },
-    {
-      path: '/enPrescription',
-      name: 'enPrescription',
-      component: enPrescription
-    },
-    {
-      path: '/enIndex',
-      name: 'enIndex',
-      component: enIndex
-    },
-    {
+  base: __dirname,
+  routes: [{
+    path: '/',
+    component: cnContainer,
+    children: [{
       path: '/',
-      name: 'IndexMain',
-      component: IndexMain
-    },
-    {
-      path: '/GetOrderInfo',
-      name: 'GetOrderInfo',
-      component: GetOrderInfo
-    },
-    {
-      path: '/Send',
-      name: 'Send',
-      component: Send
-    },
-    {
-      path: '/Question',
-      name: 'Question',
-      component: Question
-    },
-    {
-      path: '/Violate',
-      name: 'Violate',
-      component: Violate
-    },
-    {
-      path: '/Prescription',
-      name: 'Prescription',
-      component: Prescription
-    },
-    {
-      path: '/Site',
-      name: 'Site',
-      component: Site
-    },
-    {
-      path: '/Introduce',
-      name: 'Introduce',
-      component: Introduce
-    },
-    {
-      path: '/Callme',
-      name: 'Callme',
-      component: Introduce
-    },
-    {
-      path: '/OrderSend',
-      name: 'OrderSend',
-      component: OrderSend
-    },
-    {
-      path: '/winnerdemo',
-      name: 'Demo',
-      component: Demo
-    },
-    {
-      path: '/*',
-      name: 'Errors',
-      component: Errors
-    }
-  ]
+      name: 'cnindex',
+      component: cnindex,
+      meta: {
+        intro: '首页'
+      }
+    }]
+  },{
+    path: '/cn',
+    component: cnContainer,
+    children: [{
+      path: '/',
+      name: 'cnindex1',
+      component: cnindex,
+      meta: {
+        intro: '首页'
+      }
+    },{
+      path: 'index',
+      name: 'cnindex2',
+      component: cnindex,
+      meta: {
+        intro: '首页'
+      }
+    },{
+      path: 'getorderinfo',
+      name: 'getorderinfo',
+      component: getorderinfo,
+      meta: {
+        intro: '订单查询'
+      }
+    },{
+      path: 'introduce',
+      name: 'introduce',
+      component: introduce,
+      meta: {
+        intro: '公司介绍'
+      }
+    },{
+      path: 'ordersend',
+      name: 'ordersend',
+      component: ordersend,
+      meta: {
+        intro: '线下寄件'
+      }
+    },{
+      path: 'prescription',
+      name: 'prescription',
+      component: prescription,
+      meta: {
+        intro: '参考时效'
+      }
+    },{
+      path: 'question',
+      name: 'question',
+      component: question,
+      meta: {
+        intro: '疑难解答'
+      }
+    },{
+      path: 'send',
+      name: 'send',
+      component: send,
+      meta: {
+        intro: '寄件流程'
+      }
+    },{
+      path: 'site',
+      name: 'site',
+      component: site,
+      meta: {
+        intro: '服务站点'
+      }
+    },{
+      path: 'violate',
+      name: 'violate',
+      component: violate,
+      meta: {
+        intro: '禁运物品'
+      }
+    }]
+  },{
+    path: '/en',
+    component: enContainer,
+    children: [{
+      path: 'index',
+      name: 'enindex1',
+      component: enindex,
+      meta: {
+        intro: '首页'
+      }
+    },{
+      path: '/',
+      name: 'enindex2',
+      component: enindex,
+      meta: {
+        intro: '首页'
+      }
+    },{
+      path: 'getorderinfo',
+      name: 'engetorderinfo',
+      component: engetorderinfo,
+      meta: {
+        intro: '英文寄件'
+      }
+    },{
+      path: 'introduce',
+      name: 'enintroduce',
+      component: enintroduce,
+      meta: {
+        intro: '公司介绍-英文'
+      }
+    },{
+      path: 'prescription',
+      name: 'enprescription',
+      component: enprescription,
+      meta: {
+        intro: '参考时效'
+      }
+    },{
+      path: 'question',
+      name: 'enquestion',
+      component: enquestion,
+      meta: {
+        intro: '疑难解答'
+      }
+    },{
+      path: 'send',
+      name: 'ensend',
+      component: ensend,
+      meta: {
+        intro: '寄件流程'
+      }
+    },{
+      path: 'site',
+      name: 'ensite',
+      component: ensite,
+      meta: {
+        intro: '服务站点'
+      }
+    },{
+      path: 'violate',
+      name: 'enviolate',
+      component: enviolate,
+      meta: {
+        intro: '禁运物品'
+      }
+    }]
+  }]
 })

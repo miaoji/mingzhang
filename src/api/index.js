@@ -58,6 +58,8 @@ export const product = {
 export const receive = {
 	show: `${API}/api/receiveAddr/index`,
 	add: `${API}/api/receiveAddr/add`,
+	del: `${API}/api/receiveAddr/delReceiveAddressById`,
+	modDefault: `${API}/api/receiveAddr/modReceiveAddressById`,
 /*	prov=0&
 	city=0&
 	county=0&
@@ -75,7 +77,8 @@ export const receive = {
 // 用户寄件地址地址信息
 export const sender = {
 	show: `${API}/api/mailingAddr/index`,
-	add: `${API}/api/receiveAddr/add`,
+	add: `${API}/api/mailingAddr/add`,
+	del: `${API}/api/mailingAddr/delMailingAddressById`,
 /*	prov:0
 	city:0
 	county:0

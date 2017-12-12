@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
 	<div class="index">
 		<div>
 			<h1>这是一个首页</h1>
@@ -80,11 +80,11 @@ export default {
 		}
 	}
 }
-</script> -->
+</script>
 
 
 
-<template>
+<!-- <template>
 <el-form :model="form" ref="form" label-width="100px" class="demo-form">
 	<el-form-item label="寄件人姓名 : " prop="senderName"
 	    :rules="[
@@ -171,4 +171,4 @@ export default {
       }
     }
   }
-</script>
+</script> -->

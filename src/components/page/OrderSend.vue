@@ -17,7 +17,7 @@
 						</p>
 					</div>
 					<div style="marginLeft: 28px">
-						<el-button type="text" size="mini" @click="addAddr(send)">创建新地址</el-button>
+						<el-button type="text" size="mini" @click="addAddr('send')">创建新地址</el-button>
 						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false">更多地址</el-button>
 						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">收起</el-button>
 					</div>
@@ -30,7 +30,7 @@
 						<p class="item3">地址 : {{item.address}}</p>
 						<p class="item4">备注 : {{item.remark}}</p>
 						<p class="item5">
-							<el-button type="text" size="mini" @click="addAddr(rece)">创建新地址</el-button>
+							<el-button type="text" size="mini" @click="addAddr('rece')">创建新地址</el-button>
 							<el-button type="text" @click="updateAddr(item,'rece')" style="color:#bd7e00">编辑</el-button>
 							<el-button type="text" @click="delAddr(item,'rece')" style="color:#fa5555">删除</el-button>
 						</p>
@@ -188,9 +188,7 @@
 			<el-form-item label="电话" :label-width="formLabelWidth">
 			  <el-input v-model="item.mobile" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="国家地区" :label-width="formLabelWidth">
-			  <el-input v-model="item.country" auto-complete="off"></el-input>
-			</el-form-item>
+			<country v-model="form.aa" :cancel="form.cancel" label="国家/地区 : " type="en" @coutryChange="coutryReceiveChange"/>
 			<el-form-item label="地址" :label-width="formLabelWidth">
 			  <el-input v-model="item.address" auto-complete="off"></el-input>
 			</el-form-item>
@@ -270,12 +268,48 @@ export default {
 	},
 	methods:{
 		confirm(){
-			// 地址信息修改
+			if (!this.item.name) {
+				this.$message({
+					type: 'warning',
+					message: '联系人姓名不能为空'
+				})
+				return
+			}
+			if (!this.item.mobile) {
+				this.$message({
+					type: 'warning',
+					message: '联系人电话不能为空'
+				})
+				return
+			}
+			if (!this.item.country) {
+				this.$message({
+					type: 'warning',
+					message: '联系人国家不能为空'
+				})
+				return
+			}
+			if (!this.item.address) {
+				this.$message({
+					type: 'warning',
+					message: '联系人地址不能为空'
+				})
+				return
+			}
+			if (!this.item.postcode) {
+				this.$message({
+					type: 'warning',
+					message: '邮编不能为空'
+				})
+			}
+			// if (!this.item.remark) {}
+			// if (!this.item.is_default) {}
+			console.log('data',this.item)
 		},
 		addAddr(type){
 			this.modalTitle= type==='send'?'新增寄件地址':'新增收件地址'
 			this.dialogFormVisible=true
-			this,item = {}
+			this.item = {}
 		},
 		updateAddr(item,type){
 			this.item = item			

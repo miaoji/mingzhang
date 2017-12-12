@@ -48,13 +48,9 @@ export default {
 		let _this=this
 		window.onscroll=function(){
 			if (document.documentElement.scrollTop>115) {
-				console.log(document.documentElement.scrollTop)
 				_this.aaaaa=true
-				console.log(_this)
-				console.log(_this.msg)
 			}else{
 				_this.aaaaa=false
-				console.log(_this.aaaaa)
 			}
 		}
 	},
@@ -125,13 +121,13 @@ export default {
 	background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
 	background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
 	background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
-	-webkit-transition: all .5s;
+	/*-webkit-transition: all .5s;
 	   -moz-transition: all .5s;
 	    -ms-transition: all .5s;
 	     -o-transition: all .5s;
-	        transition: all .5s;
+	        transition: all .5s;*/
 }
-.header_nav>.header_nav_item.toptoptop{
+/*.header_nav>.header_nav_item.toptoptop{
 	width: 100%;
 	background: rgba(100, 100, 100, .8);
 	position:fixed;
@@ -139,7 +135,7 @@ export default {
 	z-index: 99999;
 	left: 50%;
 	margin-left: -50%;
-}
+}*/
 .header_nav>.header_nav_item>ul{
 	list-style: none;
 	font-size: 14px;

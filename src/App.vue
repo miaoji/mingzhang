@@ -7,7 +7,7 @@
 <script>
 // import { getToken } from '@/services/token'
 // import md5 from 'js-md5'
-import { beforeCreate as getToken } from '@/utils'
+import { gettoken as getToken } from '@/utils'
 
 export default {
   name: 'app',
@@ -22,6 +22,19 @@ export default {
     getToken()
   },
   created(){
+    if (process.env.NODE_ENV === 'development') {
+      window.localStorage.setItem('mj_headimgurl', '//wx.qlogo.cn/mmopen/x9caeaMpHoWcicDmIZs0Ovicuibe1H0icp57ndKcmv4Rz0xB6khyCeSbN3miagPMuyHpia1JHraN9btZDAZibEBlaKJKkYiaGnDjic0Gic/0')
+      window.localStorage.setItem('mj_nickname', '明华')
+      window.localStorage.setItem('mj_customerNo', 'MZA10235400')
+      // window.localStorage.setItem('mj_openid', 'oPg2ZwiH1ASA_EiAj10XHcB2qgcM')
+      window.localStorage.setItem('mj_openid', 'oPg2ZwgwuALccM_V8UIW4qmhkOwo')
+      // window.localStorage.setItem('mj_mobile', '17602180495')
+      window.localStorage.setItem('mj_mobile', '12345678900')
+      // window.localStorage.setItem('mj_userId', '18')
+      window.localStorage.setItem('mj_userId', '212')
+      window.localStorage.setItem('mj_token', 'eyJhbGciOiJIUzI1NiJ9.eyJ3eFVzZXJJZCI6ODMwLCJjcmVhdGVUaW1lIjoxNTEyOTYxNDY5NjEzLCJvcGVuaWQiOiJvc2RIN3Z3NzRQaktsNHg4anZ4cGxyYUMtdGlFIn0.jLYx8w8kpUqM6vkh6RSP7nhaXZ_eK27CwOcZTQiaUwo')
+      return
+    }
     if (document.body.offsetWidth<1300) {
       document.body.style.width='1300px'
     }else{

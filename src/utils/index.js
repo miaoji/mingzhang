@@ -1,7 +1,7 @@
 import { getToken } from '@/services/token'
 import md5 from 'js-md5'
 
-export async function beforeCreate(){
+export async function gettoken(){
     const timestamp = new Date().getTime()
     const nonceStr = md5(timestamp+'winner')
     const key = 'mingz-tech.com'

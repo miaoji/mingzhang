@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { beforeCreate as getToken } from '@/utils';
+import { gettoken as getToken } from '@/utils';
 
 const fetch = (options) => {
   let {

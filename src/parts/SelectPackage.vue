@@ -8,8 +8,12 @@
 
  -->
 <template>
-	<el-form-item :label="label">
-	  <el-select v-model="select_package" size="large" :disabled="!showPackageList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择">
+	<el-form-item :label="label"
+    :rules="[
+      { required: true, message: '请选择产品类型'},
+    ]"
+  >
+	  <el-select v-model="select_package" size="large" :disabled="!showPackageList.show" @change="handleChange" style="width: 80%" filterable placeholder="请选择产品类型">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -73,6 +77,9 @@ import { query } from '@/services/parts/package'
       showPackageList(data){
         console.log('dadasda', data)
         this.select_package = undefined
+        if (data.show === false) {
+          return
+        }
         this.getCountry({countryId: JSON.parse(data.data).id})
       }
     }

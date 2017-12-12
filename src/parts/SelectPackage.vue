@@ -80,7 +80,7 @@ import { query } from '@/services/parts/package'
         if (data.show === false) {
           return
         }
-        this.getCountry({countryId: JSON.parse(data.data).id})
+        this.getCountry({countryId: JSON.parse(data.data).id || data.data})
       }
     }
 

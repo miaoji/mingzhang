@@ -11,19 +11,29 @@
 						<p class="item2">电话 : {{item.mobile}}</p>
 						<p class="item3">地址 : {{item.address}}</p>
 						<p class="item4">备注 : {{item.remark}}</p>
+						<p class="item5">
+							<el-button type="text" @click="updateAddr(item,'send')" style="color:#bd7e00">编辑</el-button>
+							<el-button type="text" @click="delAddr(item,'send')" style="color:#fa5555">删除</el-button>
+						</p>
 					</div>
 					<div style="marginLeft: 28px">
+						<el-button type="text" size="mini" @click="addAddr(send)">创建新地址</el-button>
 						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false">更多地址</el-button>
 						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">收起</el-button>
 					</div>
 				</div>
 				<div class="sendorder_item" v-show="true">
 					<h1 class="page_tit">收件人信息</h1>
-					<div @click='sendAddress(key,item)' v-show="showReceAddr||key===sendAddrIndex?true:false" :class="{ active: key===sendAddrIndex?true:false}" v-for="(item,key) in ReceAddrInfo" class="sendAddrInfo">
+					<div @click='receAddress(key,item)' v-show="showReceAddr||key===receAddrIndex?true:false" :class="{ active: key===receAddrIndex?true:false}" v-for="(item,key) in receAddrInfo" class="sendAddrInfo">
 						<p class="item1">姓名 : {{item.name}}</p>
 						<p class="item2">电话 : {{item.mobile}}</p>
 						<p class="item3">地址 : {{item.address}}</p>
 						<p class="item4">备注 : {{item.remark}}</p>
+						<p class="item5">
+							<el-button type="text" size="mini" @click="addAddr(rece)">创建新地址</el-button>
+							<el-button type="text" @click="updateAddr(item,'rece')" style="color:#bd7e00">编辑</el-button>
+							<el-button type="text" @click="delAddr(item,'rece')" style="color:#fa5555">删除</el-button>
+						</p>
 					</div>
 					<div style="marginLeft: 28px">
 						<el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false">更多地址</el-button>
@@ -159,6 +169,7 @@
 				</div>
 			</el-form>
 		</div>
+
 		<el-dialog title="关于保价" custom-class="dialog" :visible.sync="dialogTableVisible">
 			<p>此项服务以自愿为原则。寄件人选择此项服务时，应确定保价金额与每个邮件内件实际价值一致，每个邮件保价金额最高限额为二十万元人民币，保价费按申报的保价金额的0.5%收取，每件最低收取1.00元人民币。未按规定交纳保价费的快件，不属于保价快件。</p>
 		</el-dialog>
@@ -168,6 +179,36 @@
 		<el-dialog title="包裹报关" custom-class="dialog" :visible.sync="packageVisible">
 			<p>包裹用于清关使用，若不填，清关另需其他材料我们会电话联系您。</p>
 		</el-dialog>
+
+		<el-dialog class="dialog" :title="modalTitle" width="600px" :visible.sync="dialogFormVisible">
+			<el-form :model="item" label-width="90px">
+			<el-form-item label="联系人姓名" :label-width="formLabelWidth">
+			  <el-input v-model="item.name" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="电话" :label-width="formLabelWidth">
+			  <el-input v-model="item.mobile" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="国家地区" :label-width="formLabelWidth">
+			  <el-input v-model="item.country" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="地址" :label-width="formLabelWidth">
+			  <el-input v-model="item.address" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="邮编" :label-width="formLabelWidth">
+			  <el-input v-model="item.postcode" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="备注" :label-width="formLabelWidth">
+			  <el-input v-model="item.remark" auto-complete="off"></el-input>
+			</el-form-item>
+			<el-form-item label="设为默认地址" :label-width="formLabelWidth">
+			  <el-input v-model="item.is_default" auto-complete="off"></el-input>
+			</el-form-item>
+			</el-form>
+			<div slot="footer" class="dialog-footer">
+			<el-button type="primary" @click="confirm">确 定</el-button>
+			<el-button @click="dialogFormVisible = false">取 消</el-button>
+			</div>
+	    </el-dialog>
 		<Footers></Footers>
 	</div>
 </template>
@@ -212,9 +253,13 @@ export default {
 			sendAddrInfo:[],
 			sendAddrIndex: 0,
 			showSendAddr: false,
-			ReceAddrInfo: [],
-			ReceAddrIndex: 0,
-			showReceAddr: false
+			receAddrInfo: [],
+			receAddrIndex: 0,
+			showReceAddr: false,
+			dialogFormVisible: false,
+			formLabelWidth:'120px',
+			item:{},
+			modalTitle: '新建地址'
 		}
 	},
 	created(){
@@ -224,16 +269,55 @@ export default {
 		this.getReceiveAddr()
 	},
 	methods:{
+		confirm(){
+			// 地址信息修改
+		},
+		addAddr(type){
+			this.modalTitle= type==='send'?'新增寄件地址':'新增收件地址'
+			this.dialogFormVisible=true
+			this,item = {}
+		},
+		updateAddr(item,type){
+			this.item = item			
+			this.modalTitle= type==='send'?'寄件地址修改':'收件地址修改'
+			this.dialogFormVisible=true
+		},
+		delAddr(item,type){
+			this.$confirm('地址删除将无法回复, 是否继续本次操作?', '删除本条地址', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'warning'
+			}).then(() => {
+				this.$message({
+					type: 'success',
+					message: '删除成功!'
+				})
+			}).catch(() => {
+				this.$message({
+					type: 'info',
+					message: '已取消删除'
+				})          
+			})
+		},
 		sendAddress(e){
 			this.sendAddrIndex = e
-			// this.showSendAddr = false
+			this.showSendAddr = false
+			console.log(this.sendAddrInfo[e])
+		},
+		receAddress(e){
+			this.receAddrIndex = e
+			this.showReceAddr = false
+			this.form.receiverCountry=this.receAddrInfo[e].country
+			this.showPackageList = {show:true,data:this.receAddrInfo[e].country}
+			this.showProductList = {show:false}
+			this.getPrice()
 		},
 		async getReceiveAddr(){
 			let data = await showReceiveAddr({
     			wxUserId: localStorage.mj_userId
 			})
 			if (data.code===200&& data.obj) {
-				this.ReceAddrInfo = data.obj
+				this.receAddrInfo = data.obj
 				console.log('data1232',data)
 			}else{
 				this.$message({
@@ -325,10 +409,11 @@ export default {
 	     */
 	    async getPrice () {
 			try {
-				if (!this.form.receiverCountry) {
-				  this.freight = '请先选择收件地址'
-				  return
-				}
+
+				// if (!this.form.receiverCountry) {
+				//   this.freight = '请先选择收件地址'
+				//   return
+				// }
 				if (!this.form.weight) {
 				  this.freight = '请填写您的包裹重量'
 				  return
@@ -347,7 +432,7 @@ export default {
 				}
 				const payload = {
 					weight: this.form.weight,
-					countryId: JSON.parse(this.form.receiverCountry).id,
+					countryId: this.receAddrInfo[this.receAddrIndex].country,
 					packageTypeId: JSON.parse(this.form.packageType).id,
 					productTypeId: JSON.parse(this.form.productType).id
 				}
@@ -375,10 +460,30 @@ export default {
 }
 </script>
 <style lang="less">
-.el-dialog {
-	width: 40%!important;
-}
 .sendorder_box {
+	.el-dialog {
+		width: 420px!important;
+	}
+	.el-dialog__header {
+	padding:15px 15px 10px 25px!important;
+	}
+	.dialog {
+		.el-dialog {
+			width: 700px!important;
+		}
+	}
+	.el-dialog__body {
+		padding:30px 50px 20px;
+		border-top: 1px #ddd solid;
+		border-bottom: 1px #ddd solid;
+		.el-form-item__label {
+		  width: 120px!important;
+		}
+		.el-form-item__content {
+		  margin-left: 120px!important;
+		  margin-right: 40px!important;
+		}
+	}
 	background-color: #f0f0f0;
 	.sendorder{
 		// background-color: #fff;
@@ -406,12 +511,18 @@ export default {
 				padding: 30px;
 				margin: 50px 0px;
 				.sendAddrInfo.active {
-					border: 2px #66b1ff solid;
+					border: 2px #666 solid;
+				}
+				.sendAddrInfo.active:hover {
+					border: 2px #666 solid;
+				}
+				.sendAddrInfo:hover {
+					border: 2px solid #66b1ff;
 				}
 				.sendAddrInfo {
 					cursor: pointer;
 					border: 2px solid #ddd;
-					padding:20px 10px;
+					padding:20px 10px 0px;
 					margin: 10px 30px;
 					p {
 						padding: 0px;
@@ -421,16 +532,35 @@ export default {
 						line-height: 20px;
 					}
 					p.item1 {
-						width: 40%;
+						width: 45%;
+						padding-right: 10px;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+						overflow: hidden;
 					}
 					p.item2 {
-						width: 50%;
+						width: 45%;
+						padding-right: 10px;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+						overflow: hidden;
 					}
 					p.item3 {
-						width: 40%;
+						width: 45%;
+						padding-right: 10px;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+						overflow: hidden;
 					}
 					p.item4 {
-						width: 50%;
+						width: 45%;
+						padding-right: 10px;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+						overflow: hidden;
+					}
+					p.item5 {
+						width: 100%;
 					}
 				}
 				.send_submit {

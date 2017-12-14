@@ -22,3 +22,11 @@ export async function queryByCompany (data) {
     data: newdata
   })
 }
+
+export async function createOrder (params) {
+  return request({
+    url: order.add,
+    method: 'post',
+    params
+  })
+}

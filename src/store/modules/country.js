@@ -19,7 +19,7 @@ export const actions = {
             state.cnData = []
             for (let i = 0; i<data.obj.length; i++){
                 let item = data.obj[i]
-                state.cnData.push({value: JSON.stringify(item),label:item.country_cn})
+                state.cnData.push({value: JSON.stringify(item), label:item.country_cn})
             }
         }else{
             this.$message({
@@ -37,7 +37,7 @@ export const actions = {
             state.enData = []
             for (let i = 1; i<data.obj.length; i++){
                 let item = data.obj[i]
-                state.enData.push({value: JSON.stringify(item),label:item.country_cn})
+                state.enData.push({value: JSON.stringify(item), label:item.country_cn})
             }
         }else{
             this.$message({

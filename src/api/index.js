@@ -15,6 +15,7 @@ if (process.env.NODE_ENV === 'production') {
 export const order = {
   getOrderInfoByOrderNo: `${API}/api/orderInfo/getOrderInfoByOrderNo`,
   queryByCompany: `${API}/api/order/queryByCompany`,
+  add: `${API}/api/orderInfo/add`
 }
 
 // 用户信息
@@ -59,19 +60,10 @@ export const receive = {
 	show: `${API}/api/receiveAddr/index`,
 	add: `${API}/api/receiveAddr/add`,
 	del: `${API}/api/receiveAddr/delReceiveAddressById`,
+	update: `${API}/api/receiveAddr/modReceiveAddressById`,
 	modDefault: `${API}/api/receiveAddr/modReceiveAddressById`,
-/*	prov=0&
-	city=0&
-	county=0&
-	country=44&
-	name=123&
-	postcode=321&
-	mobile=18255458650&
-	address=123&
-	isDefault=1&
-	remark=3213123&
-	wxUserId=212
-*/
+	// 通过收件地址id查询地址信息
+	getReceiveAddressById: `${API}/api/receiveAddr/getReceiveAddressById`,
 }
 
 // 用户寄件地址地址信息
@@ -79,26 +71,12 @@ export const sender = {
 	show: `${API}/api/mailingAddr/index`,
 	add: `${API}/api/mailingAddr/add`,
 	del: `${API}/api/mailingAddr/delMailingAddressById`,
-/*	prov:0
-	city:0
-	county:0
-	country:44
-	name:123
-	postcode:123
-	mobile:13122302222
-	address:123
-	isDefault:1
-	remark:1231
-	wxUserId:212
-*/
+	update: `${API}/api/mailingAddr/modMailingAddressById`,
+	getMailingAddressById: `${API}/api/mailingAddr/getMailingAddressById`,
 	modDefault: `${API}/api/mailingAddr/modMailingAddressById`,
-	/*id=263&
-	isDefault=1&
-	wxUserId=212*/
 }
 
 // 获取预付款信息
-// /api/intlPrice/getIntlPrice?weight=1&countryId=44&productTypeId=46&packageTypeId=86
 export const getIntlPrice = {
 	show: `${API}/api/intlPrice/getIntlPrice`
 }

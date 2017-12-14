@@ -13,7 +13,7 @@
       { required: true, message: '国家不能为空'},
     ]"
   >
-	  <el-select v-model="country_name" size="large" @change="handleChange" style="width: 80%" filterable placeholder="请选择">
+	  <el-select v-model="country_data" size="large" @change="handleChange" style="width: 80%" filterable placeholder="请选择">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -41,24 +41,29 @@ import { query } from '@/services/country'
       type: {
         type: String,
         default: 'cn'
+      },
+      values: {
+        type: String,
+        default: ''
       }
   	},
 
-  	created(){
-      this.$store.dispatch('getCountryCnInfo')
-      this.$store.dispatch('getCountryEnInfo')
+  	async created(){
+      await this.$store.dispatch('getCountryCnInfo')
+      await this.$store.dispatch('getCountryEnInfo')
       this.getCountry()
+      console.log('123', this)
   	},
 
     data() {
       return {
         options: [],
-        country_name: ''
+        country_data: ''
       }
     },
 
     methods: {
-    	async getCountry(){
+    	getCountry(){
         if (this.type === 'cn') {
           this.options = this.$store.state.country.cnData
         }else{
@@ -66,13 +71,16 @@ import { query } from '@/services/country'
         }
     	},
     	handleChange(){
-    		this.$emit('coutryChange', this.country_name)
+    		this.$emit('coutryChange', this.country_data)
     	}
     },
 
     watch: {
       cancel(val){
-        this.country_name = ''
+        this.country_data = ''
+      },
+      values(val){
+        this.country_data = val
       }
     }
 

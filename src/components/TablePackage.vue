@@ -5,7 +5,7 @@
       style="width: 100%"
       >
       <el-table-column
-        prop="name"
+        prop="nameCn"
         label="中文品名"
         align="center"
         >
@@ -18,13 +18,13 @@
         >
       </el-table-column>
       <el-table-column
-        prop="size"
+        prop="quantity"
         label="数量"
         align="center"
         >
       </el-table-column>
       <el-table-column
-        prop="price"
+        prop="worth"
         label="价值/元"
         align="center"
         >
@@ -43,13 +43,13 @@
     <el-dialog calss="dialog" :title="modalTitle" width="600px" :visible.sync="dialogFormVisible">
       <el-form :model="item" label-width="20px">
         <el-form-item label="中文品名" :label-width="formLabelWidth">
-          <el-input v-model="item.name" auto-complete="off"></el-input>
+          <el-input v-model="item.nameCn" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品单价" :label-width="formLabelWidth">
           <el-input v-model="item.unitPrice" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="产品数量" :label-width="formLabelWidth">
-          <el-input v-model="item.size" auto-complete="off"></el-input>
+          <el-input v-model="item.quantity" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -99,15 +99,15 @@
         if (item.id || item.id === 0) {
           const id = item.id
           console.log('id', id)
-          this.tableDate.splice(id,1,{...item, price: Number(item.size) * Number(item.unitPrice)})
+          this.tableDate.splice(id,1,{...item, worth: Number(item.quantity) * Number(item.unitPrice)})
         }else{
-          this.tableDate.push({...item,price: Number(item.size) * Number(item.unitPrice)})
+          this.tableDate.push({...item,worth: Number(item.quantity) * Number(item.unitPrice)})
         }
           this.dialogFormVisible = false
       },
       test(item){
         // 判空
-        if (item.name === undefined || item.name === '') {
+        if (item.nameCn === undefined || item.nameCn === '') {
           this.$message({
             message: '您输入的中文品名不能为空',
             type: 'warning'
@@ -130,14 +130,14 @@
           return false
         }
         // 判空
-        if (item.size === undefined || item.size === '') {
+        if (item.quantity === undefined || item.quantity === '') {
           this.$message({
             message: '您输入的数量不能为空',
             type: 'warning'
           })
           return false
         }
-        if (!Number(item.size)) {
+        if (!Number(item.quantity)) {
           this.$message({
             message: '您输入的数量不是一个数字',
             type: 'warning'
@@ -157,6 +157,11 @@
         formLabelWidth: '120px',
         item: {}
 
+      }
+    },
+    watch:{
+      tableDate(val){
+        this.$emit('tablePackage', val)
       }
     }
   }

@@ -8,8 +8,7 @@
 		    element-loading-background="rgba(100, 100, 100, 0.4)"
 	    ></div>
 		<div class="sendorder">
-			<el-form class="form" ref="form" :model="form" label-width="100px">
-
+			<el-form class="form" ref="form" :model="form" label-width="120px">
 				<div id="item1" class="sendorder_item" v-show="true">
 					<h1 class="page_tit">寄件人信息</h1>
 					<div @click='sendAddressClick(key,item)' v-show="showSendAddr||key===sendAddrIndex?true:false" :class="{ active: key===sendAddrIndex?true:false}" v-for="(item,key) in sendAddrInfo" class="sendAddrInfo">
@@ -48,115 +47,142 @@
 				</div>
 				<div id="item1" class="sendorder_item" v-if="false">
 					<h1 class="page_tit">寄件人信息</h1>
-				  <el-form-item label="寄件人姓名 : " prop="senderName"
-				    :rules="[
-				      { required: true, message: '寄件人姓名不能为空'}
-				    ]"
-				  >
-				    <el-input placeholder="请输入寄件人姓名" v-model="form.senderName" />
-				  </el-form-item>
-				  <el-form-item label="电话 : " prop="senderMobile"
-				    :rules="[
-				      { required: true, message: '电话号码不能为空'},
-				      { type: 'number', message: '电话号码必须是数字值'}
-				    ]"
-				  >
-				    <el-input placeholder="请输入电话号码" v-model.number="form.senderMobile" />
-				  </el-form-item>
-				  <country label="国家/地区 : " :cancel="form.cancel" @coutryChange="coutrySendChange"/>
-				  <select-city label="地区选择 : " :cancel="form.cancel" @selectCityChange="selectCityChange" v-show="showSendCitySelect"/>
-				  <el-form-item label="街道地址 : " prop="senderAddress"
-				    :rules="[
-				      { required: true, message: '街道地址不能为空'},
-				    ]"
-				  >
-				    <el-input placeholder="请输入详细的街道地址" v-model="form.senderAddress" />
-				  </el-form-item>
-				  <el-form-item label="邮编 : " prop="senderPostcode"
-				    :rules="[
-				      { required: true, message: '邮编不能为空'},
-				    ]"
-				  >
-				    <el-input placeholder="请输入邮编" v-model="form.senderPostcode" />
-				  </el-form-item>
+					<el-form-item label="寄件人姓名 : " prop="senderName"
+						:rules="[
+							{ required: true, message: '寄件人姓名不能为空'}
+						]"
+					>
+						<el-input placeholder="请输入寄件人姓名" v-model="form.senderName" />
+					</el-form-item>
+					<el-form-item label="电话 : " prop="senderMobile"
+						:rules="[
+							{ required: true, message: '电话号码不能为空'},
+							{ type: 'number', message: '电话号码必须是数字值'}
+						]"
+					>
+						<el-input placeholder="请输入电话号码" v-model.number="form.senderMobile" />
+					</el-form-item>
+					<country label="国家/地区 : " :cancel="form.cancel" @coutryChange="coutrySendChange"/>
+					<select-city label="地区选择 : " :cancel="form.cancel" @selectCityChange="selectCityChange" v-show="showSendCitySelect"/>
+					<el-form-item label="街道地址 : " prop="senderAddress"
+						:rules="[
+							{ required: true, message: '街道地址不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入详细的街道地址" v-model="form.senderAddress" />
+					</el-form-item>
+					<el-form-item label="邮编 : " prop="senderPostcode"
+						:rules="[
+							{ required: true, message: '邮编不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入邮编" v-model="form.senderPostcode" />
+					</el-form-item>
 				</div>
 
 				<div id="item2" class="sendorder_item" v-if="false">
 					<h1 class="page_tit">收件人信息</h1>
-				  <el-form-item label="收件人姓名 : " prop="receiverName"
-				    :rules="[
-				      { required: true, message: '收件人姓名不能为空'},
-				    ]"
-				  >
-				    <el-input placeholder="请输入收件人姓名" v-model="form.receiverName" />
-				  </el-form-item>
-				  <el-form-item label="电话 : " prop="receiverMobile"
-				    :rules="[
-				      { required: true, message: '电话号码不能为空'},
-				    ]"
-				  >
-				    <el-input placeholder="请输入电话号码" v-model="form.receiverMobile" />
-				  </el-form-item>
-				  <country v-model="form.aa" :cancel="form.cancel" label="国家/地区 : " type="en" @coutryChange="coutryReceiveChange"/>
-				  <el-form-item label="街道地址 : " prop="receiverAddress"
-				    :rules="[
-				      { required: true, message: '街道地址不能为空'},
-				    ]"
-				  >
-				    <el-input placeholder="请输入详细的街道地址" v-model="form.receiverAddress" />
-				  </el-form-item>
-				  <el-form-item label="邮编 : " prop="receiverPostcode"
-				    :rules="[
-				      { required: true, message: '邮编不能为空'}
-				    ]"
-				  >
-				    <el-input placeholder="请输入邮编" v-model="form.receiverPostcode" />
-				  </el-form-item>
+					<el-form-item label="收件人姓名 : " prop="receiverName"
+						:rules="[
+							{ required: true, message: '收件人姓名不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入收件人姓名" v-model="form.receiverName" />
+					</el-form-item>
+					<el-form-item label="电话 : " prop="receiverMobile"
+						:rules="[
+							{ required: true, message: '电话号码不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入电话号码" v-model="form.receiverMobile" />
+					</el-form-item>
+					<country v-model="form.aa" :cancel="form.cancel" label="国家/地区 : " type="en" @coutryChange="coutryReceiveChange"/>
+					<el-form-item label="街道地址 : " prop="receiverAddress"
+						:rules="[
+							{ required: true, message: '街道地址不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入详细的街道地址" v-model="form.receiverAddress" />
+					</el-form-item>
+					<el-form-item label="邮编 : " prop="receiverPostcode"
+						:rules="[
+							{ required: true, message: '邮编不能为空'}
+						]"
+					>
+						<el-input placeholder="请输入邮编" v-model="form.receiverPostcode" />
+					</el-form-item>
 				</div>
 
 				<div id="item3" class="sendorder_item">
 					<h1 class="page_tit">包裹信息</h1>
-				  <el-form-item label="包裹重量 : " prop="weight"
-				    :rules="[
-				      { required: true, message: '包裹重量不能为空'},
-				    ]"
-				  >
-				  	<el-input-number v-model="form.weight" controls-position="right" @change="weightChange" :min="1"/>
-				  </el-form-item>
-				  <select-package :showPackageList="showPackageList" label="产品类型 : " @selectPackageChange="selectPackageChange"/>
-				  <select-product :showProductList="showProductList" label="产品规格 : " @selectProductChange="selectProductChange"/>
-				  <div class="img_ico"><img @click="dialogTableVisible = true" src="/static/image/question_ico.png" alt="退件说明"></div>
-				  <el-form-item label="是否保价 : " prop="insured"
-				    :rules="[
-				      { required: true, message: '请选择是否保价'},
-				    ]"
-				  >
-				    <el-radio-group @change='insuredChange' v-model="form.insured">
-				      <el-radio label="1">是</el-radio>
-				      <el-radio label="0">否</el-radio>
-				    </el-radio-group>
-				  </el-form-item>
-				  <el-form-item label="保价金额 : " v-show='showInsuredAmount' prop="insuredAmount"
-				    :rules="[
-				      { required: true, message: '请填写您的保价金额'},
-				    ]"
-				  >
-				    <el-input-number placeholder="请填写您的保价金额" @change='insuredAmountChange' controls-position="right" v-model="form.insuredAmount" :step='100' :min='200' :max='200000'/>
-				  </el-form-item>
-				  <div class="img_ico"><img @click="returnGoodVisible = true" src="/static/image/question_ico.png" alt="退件说明"></div>
-				  <el-form-item label="是否退件 : " prop="returnGood"
-				    :rules="[
-				      { required: true, message: '请选择是否退件'},
-				    ]"
-				  >
-				    <el-radio-group v-model="form.returnGood">
-				      <el-radio label="1">是</el-radio>
-				      <el-radio label="0">否</el-radio>
-				    </el-radio-group>
-				  </el-form-item>
-				  <el-form-item label="备注信息 : ">
-				    <el-input type="textarea"  placeholder="我想跟快递小哥说点什么" v-model="form.remark" />
-				  </el-form-item>
+					<el-row :gutter="12">
+						<el-col :span="5">
+							<el-form-item label="包裹重量(kg) : ">
+								<el-input-number v-model="form.weight" controls-position="right" :step='1' @change="weightChange" :min="1" :max="20"/>
+							</el-form-item>
+						</el-col>
+						<el-col :span="5" :offset="6">
+							<el-form-item label="包裹长度(cm) : ">
+								<el-input-number v-model="form.length" controls-position="right" :step='10' @change="lengthChange" :min="10"/>
+							</el-form-item>
+						</el-col>
+					</el-row>
+					<el-row :gutter="12">
+						<el-col :span="5">
+
+							<el-form-item label="包裹宽度(cm) : ">
+								<el-input-number v-model="form.width" controls-position="right" :step='10' @change="widthChange" :min="10"/>
+							</el-form-item>
+						</el-col>
+						<el-col :span="5" :offset="6">
+							<el-form-item label="包裹高度(cm) : ">
+								<el-input-number v-model="form.height" controls-position="right" :step='10' @change="heightChange" :min="10"/>
+							</el-form-item>
+
+						</el-col>
+					</el-row>
+					<el-row :gutter="12">
+						<el-col :span="10">
+							<select-package :showPackageList="showPackageList" label="产品类型 : " @selectPackageChange="selectPackageChange"/>
+						</el-col>
+						<el-col :span="10" :offset="1">
+							<select-product :showProductList="showProductList" label="产品规格 : " @selectProductChange="selectProductChange"/>
+						</el-col>
+					</el-row>
+					<el-row :gutter="12">
+						<el-col :span="11">
+							<div class="img_ico"><img @click="dialogTableVisible = true" src="/static/image/question_ico.png" alt="退件说明"></div>
+							<el-form-item label="是否保价 : " prop="insured"
+								:rules="[
+									{ required: true, message: '请选择是否保价'},
+								]"
+							>
+								<el-radio-group @change='insuredChange' v-model="form.insured">
+									<el-radio label="1">是</el-radio>
+									<el-radio label="0">否</el-radio>
+								</el-radio-group>
+							</el-form-item>
+						</el-col>
+						<el-col :span="11">
+							<el-form-item label="保价金额 : " v-show='showInsuredAmount'>
+								<el-input-number placeholder="请填写您的保价金额" @change='insuredAmountChange' controls-position="right" v-model="form.insuredAmount" :step='100' :min='200' :max='200000'/>
+							</el-form-item>
+						</el-col>
+					</el-row>
+					<div class="img_ico"><img @click="returnGoodVisible = true" src="/static/image/question_ico.png" alt="退件说明"></div>
+					<el-form-item label="是否退件 : " prop="returnGood"
+						:rules="[
+							{ required: true, message: '请选择是否退件'},
+						]"
+					>
+						<el-radio-group v-model="form.returnGood">
+							<el-radio label="1">是</el-radio>
+							<el-radio label="0">否</el-radio>
+						</el-radio-group>
+					</el-form-item>
+					<el-form-item label="备注信息 : ">
+						<el-input type="textarea" style="width: 70%"  placeholder="我想跟快递小哥说点什么" v-model="form.remark" />
+					</el-form-item>
 				</div>
 
 				<div id="item4" class="sendorder_item">
@@ -280,7 +306,9 @@ export default {
 			dialogVisible: false,
 			form: {
 				senderName: '',
-				cancel: true
+				cancel: true,
+				volumeWeight: 0.2,
+				volume: 1000
 			},
 			showSendCitySelect: false,
 			showPackageList: {},
@@ -399,6 +427,10 @@ export default {
 
 				const record = {
 					weight: this.form.weigth,
+					length:this.form.length,
+					height:this.form.height,
+					volume:this.form.volume,
+					volumeWeight:this.form.volumeWeight,
 					wxUserId: localStorage.mj_userId,
 					mailingAddrId: this.sendAddrInfo[this.sendAddrIndex].id,
 					receiveAddrId: this.receAddrInfo[this.receAddrIndex].id,
@@ -660,6 +692,47 @@ export default {
 		weightChange(e) {
 			this.form.weight = e
 			this.getPrice()
+		},
+		lengthChange(e) {
+			try{
+				if (this.form.width&&this.form.height) {
+					this.form.volume=Number(this.form.width)*Number(this.form.height)*e
+					this.form.volumeWeight=this.form.volume/5000
+					this.getPrice()
+				}
+				console.log(this.form.volume)
+				console.log(this.form.volumeWeight)
+			}catch (error) {
+				console.log('计算体积出错了',error)
+			}
+		},
+		widthChange(e) {
+			try{
+				if (this.form.length&&this.form.height) {
+					this.form.volume=Number(this.form.length)*Number(this.form.height)*e
+					this.form.volumeWeight=Number(this.form.volume)/5000
+					this.getPrice()
+				}
+				console.log(this.form.volume)
+				console.log(this.form.volumeWeight)
+			}catch (error) {
+				console.log('计算体积出错了',error)
+			}
+
+		},
+		heightChange(e) {
+			try{
+				if (this.form.width&&this.form.length) {
+					this.form.volume=Number(this.form.width)*Number(this.form.length)*e
+					this.form.volumeWeight=this.form.volume/5000
+					this.getPrice()
+				}
+				console.log(this.form.volume)
+				console.log(this.form.volumeWeight)
+			}catch (error) {
+				console.log('计算体积出错了',error)
+			}
+
 		},
 		// 获取寄件地址信息
 		async getSendAddr(){
@@ -974,8 +1047,18 @@ export default {
 					this.freight = '您选择了保价但是没有填写报价金额'
 					return
 				}
+				if (this.form.volumeWeight>20) {
+					this.freight = '您包裹的体积太大了,我们不能寄'
+					return
+				}
+				let formWeight = 0
+				if (this.form.weight>=this.form.volumeWeight) {
+					formWeight=this.form.weight
+				}else{
+					formWeight=this.form.volumeWeight
+				}
 				const payload = {
-					weight: this.form.weight,
+					weight: formWeight,
 					countryId: this.receAddrInfo[this.receAddrIndex].country,
 					packageTypeId: JSON.parse(this.form.packageType).id,
 					productTypeId: JSON.parse(this.form.productType).id
@@ -1062,10 +1145,10 @@ export default {
 		border-top: 1px #ddd solid;
 		border-bottom: 1px #ddd solid;
 		.el-form-item__label {
-		  width: 120px!important;
+		  width: 140px!important;
 		}
 		.el-form-item__content {
-		  margin-left: 120px!important;
+		  margin-left: 140px!important;
 		  margin-right: 40px!important;
 		}
 	}
@@ -1099,7 +1182,7 @@ export default {
 					position: relative;
 					img {
 						top: 11px;
-						left: -8px;
+						left: 12px;
 						width: 16px;
 						height: 16px;
 						position: absolute;

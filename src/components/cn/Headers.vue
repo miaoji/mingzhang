@@ -23,6 +23,7 @@
 				<li class="left"><router-link to="/cn/site">服务站点</router-link></li>
 				<li class="left"><router-link to="/cn/introduce">关于我们</router-link></li>
 				<li class="left"><router-link to="/cn/send">寄件流程</router-link></li>
+				<li class="left"><router-link to="/cn/cashier">收银台</router-link></li>
 			</ul>
 		</div>
 	</div>

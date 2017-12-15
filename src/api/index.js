@@ -15,7 +15,8 @@ if (process.env.NODE_ENV === 'production') {
 export const order = {
   getOrderInfoByOrderNo: `${API}/api/orderInfo/getOrderInfoByOrderNo`,
   queryByCompany: `${API}/api/order/queryByCompany`,
-  add: `${API}/api/orderInfo/add`
+  add: `${API}/api/orderInfo/add`,
+  addCargo: `${API}/api/orderInfo/addCargo`
 }
 
 // 用户信息

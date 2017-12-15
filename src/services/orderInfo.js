@@ -30,3 +30,12 @@ export async function createOrder (params) {
     params
   })
 }
+
+export async function createOrderSpare (data, params) {
+  return request({
+    url: order.addCargo,
+    method: 'post',
+    data: [data],
+    params
+  })
+}

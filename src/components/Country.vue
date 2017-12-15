@@ -72,6 +72,7 @@ import { query } from '@/services/country'
     	},
     	handleChange(){
     		this.$emit('coutryChange', this.country_data)
+        console.log(this.type)
     	}
     },
 
@@ -81,6 +82,9 @@ import { query } from '@/services/country'
       },
       values(val){
         this.country_data = val
+      },
+      type(val){
+        this.getCountry()
       }
     }
 

@@ -10,11 +10,13 @@ const cnindex = r => require.ensure([], () => r(require('@/views/cn/Index')), 'c
 const getorderinfo = r => require.ensure([], () => r(require('@/views/cn/GetOrderInfo')), 'getorderinfo')
 const introduce = r => require.ensure([], () => r(require('@/views/cn/Introduce')), 'introduce')
 const ordersend = r => require.ensure([], () => r(require('@/views/cn/OrderSend')), 'ordersend')
+const ordersendSpare = r => require.ensure([], () => r(require('@/views/cn/OrderSendSpare')), 'ordersendSpare')
 const prescription = r => require.ensure([], () => r(require('@/views/cn/Prescription')), 'prescription')
 const question = r => require.ensure([], () => r(require('@/views/cn/Question')), 'question')
 const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send')
 const site = r => require.ensure([], () => r(require('@/views/cn/Site')), 'site')
 const violate = r => require.ensure([], () => r(require('@/views/cn/Violate')), 'violate')
+const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
@@ -30,6 +32,16 @@ const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate'))
 
 export default new Router({
   base: __dirname,
+  scrollBehavior (to, from, savedPosition) {
+    console.log('to', to)
+    console.log('from', from)
+    console.log('savedPosition', savedPosition)
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  },
   routes: [{
     path: '/',
     component: cnContainer,
@@ -80,6 +92,13 @@ export default new Router({
         intro: '线下寄件'
       }
     },{
+      path: 'ordersendSpare',
+      name: 'ordersendSpare',
+      component: ordersendSpare,
+      meta: {
+        intro: '不登录寄件'
+      }
+    },{
       path: 'prescription',
       name: 'prescription',
       component: prescription,
@@ -113,6 +132,13 @@ export default new Router({
       component: violate,
       meta: {
         intro: '禁运物品'
+      }
+    },{
+      path: 'cashier',
+      name: 'cashier',
+      component: cashier,
+      meta: {
+        intro: '收银台'
       }
     }]
   },{

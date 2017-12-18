@@ -14,7 +14,7 @@ export async function getOrderInfoByOrderNo (data) {
 }
 
 export async function queryByCompany (data) {
-  const newdata = {...data,source:'php'}
+  const newdata = {...data, source:'php'}
   return request({
     url: order.queryByCompany,
     method: 'get',

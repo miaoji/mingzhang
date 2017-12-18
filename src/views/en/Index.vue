@@ -56,9 +56,8 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
-		this.$emit('location',location.hash)
+		this.$emit('location', location.hash)
 	},
 	methods:{
 		menu(){

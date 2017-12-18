@@ -18,18 +18,17 @@ export default {
 		Headers,
 		Footers
 	},
-  data(){
+  data () {
     return {
-      location:''
+      location: ''
     }
   },
   methods: {
-    listen(e){
-      console.log(e)
+    listen (e) {
       const hash = e.split('/')
       if (hash && hash.length === 3) {
         this.location = '/en/' + hash[2]
-      }else{
+      } else {
         this.location = '/en/'
       }
     }

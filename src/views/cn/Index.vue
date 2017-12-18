@@ -55,9 +55,7 @@ export default {
 			link: '/enIndex',
 		}
 	},
-	created(){
-		console.log('index')
-		window.document.title = '上海明彰网络科技有限公司'
+	created () {
 		this.menu()
 		this.$emit('location',location.hash)
 	},

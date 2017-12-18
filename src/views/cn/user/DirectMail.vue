@@ -1,0 +1,251 @@
+<template>
+	<div class="directmail">
+		<div class="directmail-container">
+		  <div class="pagination">
+	      <el-pagination
+	        @size-change="handleSizeChange"
+	        @current-change="handleCurrentChange"
+	        :current-page="currentPage"
+	        :page-size="10"
+	        layout="total, prev, pager, next"
+	        :total="total">
+	      </el-pagination>
+	    </div>
+			<el-table
+			  :data="listData"
+			  stripe
+			  border
+			  style="width: 100%"
+			  v-loading.body="loading"
+			>
+		    <el-table-column
+		      label="订单号"
+		      fixed="left"
+		      width="160"
+		      prop="ORDER_NO">
+		    </el-table-column>
+		    <el-table-column
+		      label="寄件人"
+		      prop="SENDER_NAME">
+		    </el-table-column>
+		    <el-table-column
+		      label="收件人"
+		      prop="RECEIVER_NAME">
+		    </el-table-column>
+		    <el-table-column
+		      label="订单金额"
+		      prop="TOTAL_FEE"
+		      :formatter="handleMoney">
+		    </el-table-column>
+		    <el-table-column
+		      label="订单状态">
+		      <template slot-scope="status">
+		      	<span>{{status.row.STATUS | orderstatus}}</span>
+		      	<div>
+		          <el-button @click="handleDetail(status.row.ID)" type="text" size="small">订单详情</el-button>
+		      	</div>
+		      	<div v-show="status.row.STATUS !== 1 && status.row.STATUS !== 0">
+		          <el-button @click="checkTrace(status.row.ORDER_NO)" type="text" size="small">查询物流</el-button>
+		      	</div>
+		      </template>
+		    </el-table-column>
+		    <el-table-column
+		      label="下单时间"
+		      prop="CREATE_TIME"
+		      width="170"
+		      sortable
+		      :formatter="handleTime">
+		    </el-table-column>
+		    <el-table-column
+          fixed="right"
+          label="操作"
+          width="100">
+          <template slot-scope="tools">
+            <el-button v-show="tools.row.STATUS === 1" type="success" size="small" @click.native="handelPay(tools.row)">立即付款</el-button>
+            <el-button type="text" size="small" v-show="tools.row.STATUS === 0 || tools.row.STATUS === 1 || tools.row.STATUS === 4" @click="handleDelete(tools.row.ID)">取消订单</el-button>
+          </template>
+        </el-table-column>
+			</el-table>
+		</div>
+	  <div class="pagination">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage"
+        :page-size="10"
+        layout="total, prev, pager, next"
+        :total="total">
+      </el-pagination>
+    </div>
+    <el-dialog 
+      title="微信支付" 
+      width="250px"
+      :visible.sync="payDialogVisible"
+      :close-on-press-escape="false"
+      :close-on-click-modal="false">
+      <div slot="title">
+      	<img src="../../../assets/images/icon16_wx_logo.png" alt="wxlogo" style="vertical-align: middle;">
+      	<span>
+      	  微信支付
+      	</span>
+      </div>
+      <div 
+        element-loading-background="rgba(0, 0, 0, 0.8)"
+        v-loading="qrLoading">
+      	<div v-html="payImg"></div>
+      </div>
+    </el-dialog>
+	</div>
+</template>
+<script>
+import { mapGetters, mapActions } from 'vuex'
+import { remove } from '@/services/directMail'
+import { getPayQr } from '@/services/wx'
+import { format } from '@/utils/time'
+import { makeQr } from '@/utils/qr'
+import { orderstatus } from '@/filters'
+
+export default {
+	name: 'directmail',
+	data(){
+		return {
+      currentPage: 1,
+      loading: true,
+      payDialogVisible: false,
+      payImg: '',
+      qrLoading: false
+		}
+	},
+	created () {
+		const page = this.$route.query['page'] || 1
+		this.currentPage = Number(page)
+		this.refreshTable({page})
+	},
+	computed: {
+	  ...mapGetters({
+	    'list': 'getDirectmailList'
+	  }),
+	  total () {
+	  	return this.list['total']
+	  },
+	  listData () {
+	  	return this.list['data']
+	  }
+	},
+	methods:{
+		...mapActions([
+		  'setDirectmailList'
+		]),
+		async refreshTable () {
+			try {
+				this.loading = true
+				const page = this.currentPage
+				const res = await this.setDirectmailList({page})
+				if (res.type !== 'success') {
+				  this.$message.error(res.msg)
+				}
+			} catch (e) {
+				console.error(e)
+				this.$message.error(e.message)
+			} finally {
+				this.loading = false
+			}
+		},
+		handleDetail(id) {
+		  this.$router.push({
+		  	path: '/cn/orderdetail',
+		  	query: {
+		  		id
+		  	}
+		  })
+		},
+		checkTrace (no) {
+			this.$router.push({
+				path: '/cn/getorderinfo',
+				query: {
+					order: no
+				}
+			})
+		},
+		handleSizeChange(val) {
+      console.log(`每页 ${val} 条`)
+    },
+    handleCurrentChange(val) {
+      this.currentPage = val
+      this.setDirectmailList({page: val})
+      this.$router.push({
+      	path: '/cn/user/directmail',
+      	query: {
+      		page: val
+      	}
+      })
+    },
+    handleStatus (val) {
+    	const status = Number(val.STATUS)
+    	return orderstatus(status)
+    },
+    handleMoney (val) {
+    	let money = val.TOTAL_FEE
+    	money = (Number(money)/100).toFixed(2)
+    	return `￥${money}`
+    },
+    handleTime (val) {
+    	const date  = new Date(val.CREATE_TIME)
+    	return format('yyyy-MM-dd hh:mm:ss', date)
+    },
+    async handelPay (val) {
+    	try {
+	    	this.payDialogVisible = true
+	    	this.qrLoading = true
+	    	const res = await getPayQr({
+	    		money: val.TOTAL_FEE,
+	    		orderNo: val.ORDER_NO,
+	    		body: '国际快递包裹',
+	    		payType: 0,
+	    		closingPriceId: 0,
+	    		trade_type: 'NATIVE'
+	    	})
+	    	const codeUrl = res.code_url
+	    	this.payImg = makeQr(codeUrl, 6, 5)
+    	} catch (e) {
+    		console.error(e)
+    	} finally {
+    		this.qrLoading = false
+    	}
+    },
+    async handleDelete (ids) {
+    	this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+	    	try {
+	    		this.loading = true
+	    	  const res = await remove({ids})
+	    	  if (res.code === 200) {
+	    	  	return this.$message({
+	    	  	  message: '删除成功',
+	    	  	  type: 'success'
+	    	  	})
+	    	  }
+	    	  const errorMsg = res.msg || '删除失败'
+	    	  return this.$message.error(errorMsg)
+	    	} catch (e) {
+	    		console.error(e)
+	    		this.$message.error(e.message)
+	    	} finally {
+	    		this.refreshTable()
+	    	}
+      }).catch(() => {
+      })
+    }
+	}
+}
+</script>
+<style scoped lang="less">
+.directmail {
+	.pagination {
+		padding: 1rem 0;
+	}
+}
+</style>

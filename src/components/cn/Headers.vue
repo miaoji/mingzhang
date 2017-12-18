@@ -13,6 +13,9 @@
 					<router-link to="/cn/index">中文</router-link>
 					<router-link to="/en/index">English</router-link>
 				</div>
+				<div class="login">
+					<el-button type="info" icon="login" @click="wxLogin">登录</el-button>
+				</div>
 			</li>
 		</ul>
 		<div class="header_nav_item" :class="{ toptoptop: addClass }">
@@ -23,30 +26,69 @@
 				<li class="left"><router-link to="/cn/site">服务站点</router-link></li>
 				<li class="left"><router-link to="/cn/introduce">关于我们</router-link></li>
 				<li class="left"><router-link to="/cn/send">寄件流程</router-link></li>
+				<li class="left"><router-link to="/cn/user/directmail">个人中心</router-link></li>
 			</ul>
 		</div>
+		<el-dialog
+		  title=""
+		  :visible.sync="loginContainerVisible"
+		  width="25%"
+		  center>
+		  <div>
+		  	<div id="login-container">
+		  		
+		  	</div>
+		  </div>
+		</el-dialog>
 	</div>
 </template>
 <script>
+
 export default {
 	name: 'Header',
-	data(){
+	data () {
 		return{
 			msg: 'Header',
-			addClass: false
+			addClass: false,
+			loginContainerVisible: false
 		}
 	},
-	created(){
+	created () {
 		this.menu()
 	},
 	methods:{
-		menu(){
+		menu () {
 			window.scrollTo(0,0)
+		},
+		wxLogin () {
+			this.loginContainerVisible = true
+			setTimeout(function () {
+				const redirect_uri = encodeURIComponent('http://api.mingz-tech.com/OAuth/')
+				new window.WxLogin({
+		      id: 'login-container',
+		      appid: 'wx9eca964047cb260f',
+		      scope: 'snsapi_login',
+		      redirect_uri: redirect_uri,
+		      state: 'web',
+		      style: '',
+		      href: ''
+		    })
+			}, 500)
 		}
 	},
-	mounted(){
+	mounted () {
+		// const redirect_uri = encodeURIComponent('http://www.mingz-tech.com/#/Send')
+		// new window.WxLogin({
+  //     id: 'login-container1',
+  //     appid: 'wx9eca964047cb260f',
+  //     scope: 'snsapi_login',
+  //     redirect_uri: redirect_uri,
+  //     state: '123',
+  //     style: '',
+  //     href: ''
+  //   })
 		let _this=this
-		window.onscroll=function(){
+		window.onscroll = function () {
 			if (document.documentElement.scrollTop>115) {
 				_this.addClass=true
 			}else{
@@ -70,6 +112,15 @@ export default {
 </script>
 
 <style scoped>
+.login {
+	float: right;
+	height: inherit;
+	line-height: 78px;
+}
+
+#login-container {
+  text-align: center;
+}
 /*头部导航栏*/
 .header_nav {
 	background-color: #fff;

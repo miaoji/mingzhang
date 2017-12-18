@@ -4,6 +4,7 @@ import { gettoken as getToken } from '@/utils'
 const fetch = (options) => {
   let {
     method = 'get',
+    paramkey = '',
     data,
     params,
     url,
@@ -36,7 +37,24 @@ const fetch = (options) => {
         data,
         params,
         timeout: 5000,
-        headers: auth ? {'token': token} : {}
+        headers: {
+          'token': auth ? token : ''
+        }
+      })
+    case 'parampost':
+      let param = new URLSearchParams()
+      console.log('params', params)
+      param.append(paramkey, params)
+      console.log('param', param)
+      return axios({
+        url,
+        method: 'post',
+        params,
+        timeout: 10000,
+        headers: {
+          'token': auth ? token : '',
+          'content-Type': 'application/x-www-form-urlencoded'
+        }
       })
     case 'put':
       return axios.put(url, data)

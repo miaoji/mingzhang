@@ -25,7 +25,6 @@ export default {
   },
   methods: {
     listen(e){
-      console.log(e)
       const hash = e.split('/')
       if (hash && hash.length === 3) {
         this.location = '/cn/' + hash[2]

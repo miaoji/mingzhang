@@ -21,7 +21,7 @@ export default {
   beforeCreate(){
     getToken()
   },
-  created(){
+  created() {
     if (process.env.NODE_ENV === 'development') {
       window.localStorage.setItem('mj_headimgurl', '//wx.qlogo.cn/mmopen/x9caeaMpHoWcicDmIZs0Ovicuibe1H0icp57ndKcmv4Rz0xB6khyCeSbN3miagPMuyHpia1JHraN9btZDAZibEBlaKJKkYiaGnDjic0Gic/0')
       window.localStorage.setItem('mj_nickname', '明华')
@@ -32,7 +32,7 @@ export default {
       window.localStorage.setItem('mj_mobile', '12345678900')
       // window.localStorage.setItem('mj_userId', '18')
       window.localStorage.setItem('mj_userId', '212')
-      window.localStorage.setItem('mj_token', 'eyJhbGciOiJIUzI1NiJ9.eyJ3eFVzZXJJZCI6ODMwLCJjcmVhdGVUaW1lIjoxNTEyOTYxNDY5NjEzLCJvcGVuaWQiOiJvc2RIN3Z3NzRQaktsNHg4anZ4cGxyYUMtdGlFIn0.jLYx8w8kpUqM6vkh6RSP7nhaXZ_eK27CwOcZTQiaUwo')
+      window.localStorage.setItem('mj_token', 'eyJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVUaW1lIjoiMTUxMzU3MzYyMzE3OSIsIm5vbmNlU3RyIjoiYjUxZjJkZjExZTUzZjVkNjA5ZmMzZDVlNDE4OTVmZWIiLCJ0aW1lc3RhbXAiOiIxNTEzNTczNjM3ODk5In0.X9UfmESFLircstxDM8zCwdF70sFWVeFw2Q7tzZfHLAg')
       return
     }
     if (document.body.offsetWidth<1300) {

@@ -55,24 +55,21 @@ export default {
 		}
 	},
 	created(){
-		window.document.title = '上海明彰网络科技有限公司'
-		const order = location.hash.split('?order=')[1]
-		this.order = order?order:''
-		this.order==='undefined'?this.order='':this.order=this.order
+		const { order } = this.$route.query
+		this.order = order || ''
 		this.menu()
 		this.$emit('location',location.hash)
 		this.getOrderInfo()
 	},
 	methods:{
 		menu() {
-			window.scrollTo(0,0);
+			window.scrollTo(0,0)
 		},
 		handleScroll(e){
 			console.log('e',e)
 		},
 		async getOrderInfo(){
 			this.orderLoading = true
-			this.$router.push({path:'/cn/getorderinfo?order='+this.order})
 			let res = await getOrderInfoByOrderNo({
 				orderNo:this.order
 			})

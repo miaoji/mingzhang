@@ -2,13 +2,18 @@
 
 let API
 // 本地
-// API = 'http://192.168.0.231:8077'
+API = 'http://192.168.0.231:8077'
 // 线上测试版
-API = 'http://api.didalive.net/mzkd'
+// API = 'http://api.didalive.net/mzkd'
+
+let BBS_API
+
+BBS_API = 'http://localhost:8000'
 
 // 线上正式版
 if (process.env.NODE_ENV === 'production') {
 	API = 'http://api.mingz-tech.com'
+	BBS_API = 'http://localhost:8000'
 }
 
 // 订单信息
@@ -101,4 +106,28 @@ export const sender = {
 // /api/intlPrice/getIntlPrice?weight=1&countryId=44&productTypeId=46&packageTypeId=86
 export const getIntlPrice = {
 	show: `${API}/api/intlPrice/getIntlPrice`
+}
+
+// 直邮订单
+export const directMail = {
+  query: `${API}/api/orderInfo/index`,
+  save: `${API}/api/orderInfo/add`,
+  show: `${API}/api/orderInfo/getOrderInfoById`,
+  update: `${API}/api/orderInfo/modOrderInfoById`,
+  delete: `${API}/api/orderInfo/delOrderInfoById`
+}
+
+// wx
+export const wx = {
+  // trade_type  = NATIVE`
+	getPayQr: `${API}/api/pay/pay`
+}
+
+// 帖子
+export const posts = {
+	query: `${BBS_API}/bbs/articles/`,
+	save: `${BBS_API}/api/orderInfo/add`,
+	show: `${BBS_API}/api/orderInfo/getOrderInfoById`,
+	update: `${BBS_API}/api/orderInfo/modOrderInfoById`,
+	delete: `${BBS_API}/api/orderInfo/delOrderInfoById`
 }

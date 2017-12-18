@@ -5,6 +5,7 @@ import cnContainer from '@/views/cn/Container'
 import enContainer from '@/views/en/Container'
 
 Vue.use(Router)
+
 // cn
 const cnindex = r => require.ensure([], () => r(require('@/views/cn/Index')), 'cnindex')
 const getorderinfo = r => require.ensure([], () => r(require('@/views/cn/GetOrderInfo')), 'getorderinfo')
@@ -16,6 +17,10 @@ const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send'
 const site = r => require.ensure([], () => r(require('@/views/cn/Site')), 'site')
 const violate = r => require.ensure([], () => r(require('@/views/cn/Violate')), 'violate')
 const usercenter = r => require.ensure([], () => r(require('@/views/cn/user/Index')), 'usercenter')
+const directmail = r => require.ensure([], () => r(require('@/views/cn/user/DirectMail')), 'directmail')
+const customer = r => require.ensure([], () => r(require('@/views/cn/user/Customer')), 'customer')
+const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDetail')), 'orderdetail')
+const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
@@ -31,6 +36,7 @@ const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate'))
 
 export default new Router({
   base: __dirname,
+  mode: 'history',
   routes: [{
     path: '/',
     component: cnContainer,
@@ -39,7 +45,14 @@ export default new Router({
       name: 'cnindex',
       component: cnindex,
       meta: {
-        intro: '首页'
+        intro: '上海明彰网络科技有限公司-首页'
+      }
+    }, {
+      path: 'bbs',
+      name: 'bbsindex',
+      component: bbsindex,
+      meta: {
+        intro: '交流社区'
       }
     }]
   },{
@@ -50,14 +63,14 @@ export default new Router({
       name: 'cnindex1',
       component: cnindex,
       meta: {
-        intro: '首页'
+        intro: '上海明彰网络科技有限公司-首页'
       }
     },{
       path: 'index',
       name: 'cnindex2',
       component: cnindex,
       meta: {
-        intro: '首页'
+        intro: '上海明彰网络科技有限公司-首页'
       }
     },{
       path: 'getorderinfo',
@@ -116,11 +129,29 @@ export default new Router({
         intro: '禁运物品'
       }
     },{
-      path: 'usercenter',
-      name: 'usercenter',
+      path: 'user',
       component: usercenter,
+      children: [{
+        path: 'directmail',
+        name: 'directmail',
+        component: directmail,
+        meta: {
+          intro: '直邮列表'
+        }
+      },{
+        path: 'customer',
+        name: 'customer',
+        component: customer,
+        meta: {
+          intro: '客服中心'
+        }
+      }]
+    },{
+      path: 'orderdetail',
+      name: 'orderdetail',
+      component: orderdetail,
       meta: {
-        intro: '用户中心'
+        intro: '订单详情'
       }
     }]
   },{
@@ -131,14 +162,14 @@ export default new Router({
       name: 'enindex1',
       component: enindex,
       meta: {
-        intro: '首页'
+        intro: 'International Express Service Center-Home Page'
       }
     },{
       path: '/',
       name: 'enindex2',
       component: enindex,
       meta: {
-        intro: '首页'
+        intro: 'International Express Service Center-Home Page'
       }
     },{
       path: 'getorderinfo',

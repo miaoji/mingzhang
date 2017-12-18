@@ -54,7 +54,7 @@
       return {
         msg: '',
         show: false,
-        link: '/',
+        link: '/'
       }
     },
     created () {
@@ -65,9 +65,9 @@
       menu () {
         window.scrollTo(0, 0)
       },
-      handleClick() {
+      handleClick () {
         // alert(this.msg)
-        if (this.msg == '') {
+        if (this.msg === '') {
           alert('您输入的订单号为空!!!')
         } else {
           this.$router.push({path: '/en/getorderinfo?order=' + this.msg})

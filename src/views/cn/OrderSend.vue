@@ -249,7 +249,7 @@
     addSendAddrInfo,
     delSendAddrInfo,
     getOneSendAddr,
-    updateOneSendAddr,
+    updateOneSendAddr
   } from '@/services/address'
 
   export default {
@@ -309,14 +309,14 @@
       this.getReceiveAddr()
     },
     mounted () {
-      window.onscroll = function  () {
+      window.onscroll = function () {
         if (location.hash !== '#/cn/ordersend' && location.hash !== '#/cn/ordersendSpare') {
           return
         }
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         const elItem = document.querySelectorAll('.anchor')
         for (let i = 0; i < elItem.length; i++) {
-          elItem[i].classList.remove("active")
+          elItem[i].classList.remove('active')
         }
         if (Number(scrollTop) <= 562) {
           elItem[0].className = 'active anchor'
@@ -324,7 +324,7 @@
           elItem[1].className = 'active anchor'
         } else if (Number(scrollTop) <= 1505) {
           elItem[2].className = 'active anchor'
-        } else if (1505 < Number(scrollTop)) {
+        } else if (Number(scrollTop) > 1505) {
           elItem[3].className = 'active anchor'
         }
       }
@@ -422,11 +422,11 @@
           }
           this.$refs[form].validate((valid) => {
             if (valid) {
-
+              console.log('test')
             } else {
-              return
+              return false
             }
-          });
+          })
           const data = await createOrder({...record})
           console.log('data', data.obj.orderNo)
           if (data.code === 200) {
@@ -455,8 +455,6 @@
             type: 'warning'
           })
         }
-
-
       },
       addAddrCountry (val) {
         this.item.countrydata = val
@@ -591,7 +589,7 @@
       menu () {
         window.scrollTo(0, 0)
       },
-      insuredChange(data) {
+      insuredChange (data) {
         console.log(this.form.insuredAmount)
         console.log('dataChange', data)
         if (data === '1') {
@@ -665,7 +663,6 @@
         } catch (error) {
           console.log('计算体积出错了', error)
         }
-
       },
       heightChange (e) {
         try {
@@ -679,7 +676,6 @@
         } catch (error) {
           console.log('计算体积出错了', error)
         }
-
       },
       // 获取寄件地址信息
       async getSendAddr () {
@@ -788,7 +784,6 @@
             type: 'success',
             message: '删除成功'
           })
-
         } else {
           this.getSendAddr()
           this.$message({
@@ -933,7 +928,6 @@
             type: 'success',
             message: '删除成功'
           })
-
         } else {
           this.getReceiveAddr()
           this.$message({

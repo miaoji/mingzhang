@@ -471,6 +471,9 @@ export default {
 			          message: '下单成功！！！',
 			          type: 'success'
 			        })
+			        
+			        this.$router.push('/cn/cashier?order='+data.obj.orderNo)
+			        this.onCancel('form')
 				}else{
 					this.loading2 = false
 					this.$notify({

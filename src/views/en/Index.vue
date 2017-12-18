@@ -68,7 +68,7 @@ export default {
 			if (this.msg == '') {
 				alert('您输入的订单号为空!!!')
 			}else{
-				this.$router.push({path:'/enGetOrderInfo?order='+this.msg})
+				this.$router.push({path:'/en/getorderinfo?order='+this.msg})
 			}
 		}
 	}

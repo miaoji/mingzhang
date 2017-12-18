@@ -7,12 +7,12 @@
 			<li class="right language">
 				<a href="javascript:;">Language</a>
 				<a href="javascript:;">|</a>
-				<router-link :to="link">English</router-link>
+				<router-link :to="location">English</router-link>
 				<!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
 				<div class="eject hide">
 					<!-- <router-link to="/cn/index">中文</router-link>
 					<router-link to="/en/index">English</router-link> -->
-					<el-dropdown @command="handleCommand">
+					<!-- <el-dropdown @command="handleCommand">
 					<span class="el-dropdown-link">
 					语言<i class="el-icon-arrow-down el-icon--right"></i>
 					</span>
@@ -23,7 +23,7 @@
 					<el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
 					<el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
 					</el-dropdown-menu>
-					</el-dropdown>
+					</el-dropdown> -->
 				</div>
 				<div class="login">
 					<el-button type="info" icon="login" @click="wxLogin">登录</el-button>
@@ -63,11 +63,16 @@ export default {
 		return{
 			msg: 'Header',
 			addClass: false,
-			loginContainerVisible: false
+			loginContainerVisible: false,
+			location: '/en/index'
 		}
 	},
 	created () {
+		console.log('location', location.pathname)
 		this.menu()
+		if (location.pathname!==''&&location.pathname!=='/'&&location.pathname!=='/cn'&&location.pathname!=='/cn/') {
+			this.location = '/en/'+location.pathname.split('/cn/')[1]
+		}
 	},
 	methods:{
 		menu () {
@@ -90,16 +95,6 @@ export default {
 		}
 	},
 	mounted () {
-		// const redirect_uri = encodeURIComponent('http://www.mingz-tech.com/#/Send')
-		// new window.WxLogin({
-  //     id: 'login-container1',
-  //     appid: 'wx9eca964047cb260f',
-  //     scope: 'snsapi_login',
-  //     redirect_uri: redirect_uri,
-  //     state: '123',
-  //     style: '',
-  //     href: ''
-  //   })
 		let _this=this
 		window.onscroll = function () {
 			if (document.documentElement.scrollTop>115) {
@@ -110,15 +105,12 @@ export default {
 		}
 	},
 	watch: {
-	},
-	props:{
-		show:{
-			type:Boolean,
-			default:true
-		},
-		link:{
-			type:String,
-			default:'/en/index'
+		'$route' (to) {
+			if (to.fullPath.split('/cn/').length > 1) {
+				this.location = '/en/' + to.fullPath.split('/cn/')[1]
+			}else{
+				this.location = '/en/index'
+			}
 		}
 	}
 }

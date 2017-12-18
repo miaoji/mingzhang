@@ -335,11 +335,7 @@ export default {
 					this.loading2 = false
 					return
 				}
-				// console.log(this.sendAddrInfo[this.sendAddrIndex].id)
 				await this.getOneSendAddr({id:this.sendAddrInfo[this.sendAddrIndex].id})
-				// console.log(this.sendAddr)
-				// console.log('.....收件地址ID')
-				// console.log(this.receAddrInfo[this.receAddrIndex].id)
 				await this.getOneReceAddr({id:this.receAddrInfo[this.receAddrIndex].id})
 				if (this.sendAddr === {} || this.receAddr === {}) {
 					this.$message({
@@ -349,13 +345,6 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log(this.receAddr)
-				console.log('.....包裹报关')
-				console.log(this.tablePackagedata)
-				console.log('.....重量')
-				console.log(this.form.weight)
-				console.log('.....是否保价')
-				console.log(this.form.insured)
 				if (this.form.insured !== '1' && this.form.insured !== '0') {
 					this.$message({
 						type: 'warning',
@@ -364,11 +353,6 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('.....保价金额')
-				console.log(this.form.insuredAmount)
-				console.log('.....是否退件')
-				console.log(this.form.returnGood)
-
 				if (this.form.returnGood !== '1' && this.form.returnGood !== '0') {
 					this.$message({
 						type: 'warning',
@@ -377,12 +361,6 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('.....备注信息')
-				console.log(this.form.remark)
-				console.log('.....运费')
-				console.log(this.freight)
-				console.log('.....运费Id')
-				console.log(this.freightId)
 				if (!this.freightId) {
 					this.$message({
 						type: 'warning',
@@ -391,7 +369,6 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('...............................')
 				let insuredPrice = 0
 				let insuredAmount = 0
 				if (this.form.insured === 1) {
@@ -431,7 +408,7 @@ export default {
 					}
 				});
 				const data = await createOrder({...record})
-				console.log('data', data)
+				console.log('data', data.obj.orderNo)
 				if (data.code === 200) {
 					this.loading2 = false
 					this.$notify({
@@ -439,7 +416,8 @@ export default {
 			          message: '下单成功！！！',
 			          type: 'success'
 			        })
-			        this.onCancel()
+			        this.$router.push('/cn/cashier?order='+data.obj.orderNo)
+			        this.onCancel('form')
 				}else{
 					this.loading2 = false
 					this.$notify({
@@ -582,6 +560,8 @@ export default {
 		},
 		onCancel(form){
 			this.form.cancel=!this.form.cancel
+			console.log('form', form)
+			console.log('this.$refs[form].', this.$refs[form])
 			this.$refs[form].resetFields()
 			this.form={}
 			this.freight = '请选择收件地址'

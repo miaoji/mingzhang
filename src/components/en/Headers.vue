@@ -33,25 +33,30 @@ export default {
 	name: 'Header',
 	data(){
 		return{
-			msg: 'Header'
+			msg: 'Header',
+			link: '/cn/index'
 		}
 	},
 	created(){
 		this.menu()
+		if (location.pathname!==''&&location.pathname!=='/'&&location.pathname!=='/en'&&location.pathname!=='/en/') {
+			this.link = '/cn/'+location.pathname.split('/en/')[1]
+		}
+		console.log('this.location', this.link)
 	},
 	methods:{
 		menu(){
 			window.scrollTo(0,0)
 		}
 	},
-	props:{
-		show:{
-			type:Boolean,
-			default:true
-		},
-		link:{
-			type:String,
-			default:'/cn/index'
+	watch: {
+		'$route' (to) {
+			console.log('to', to)
+			if (to.fullPath.split('/en/').length > 1) {
+				this.link = '/cn/' + to.fullPath.split('/en/')[1]
+			}else{
+				this.link = '/cn/index'
+			}
 		}
 	}
 }

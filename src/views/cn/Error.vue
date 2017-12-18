@@ -24,7 +24,6 @@ export default {
 	created(){
 		this.menu()
 		this.goIndex()
-		this.$emit('location',location.hash)
 	},
 	methods:{
 		goIndex(){

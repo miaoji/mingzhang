@@ -195,6 +195,9 @@ export default {
     },
     async handelPay (val) {
     	try {
+    		console.log('val', val)
+    		this.$router.push('/cn/cashier?order='+val.ORDER_NO)
+    		return
 	    	this.payDialogVisible = true
 	    	this.qrLoading = true
 	    	const res = await getPayQr({

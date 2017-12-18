@@ -103,7 +103,7 @@ export default {
 		}
 	},
 	created(){
-		const order = location.hash.split('?order=')[1]
+		const order = location.search.split('?order=')[1]
 		this.getOrderInfo(order)
 		window.scrollTo(0,110)
 	},

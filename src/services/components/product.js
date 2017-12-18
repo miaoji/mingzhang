@@ -3,13 +3,13 @@
  */
 
 import request from '@/utils/request'
-import { product } from '@/api'
+import {product} from '@/api'
 
 export async function query (params) {
-	console.log('params', params)
-	return request({
-		url: product.show,
-		methods: 'get',
-		data: params
-	})
+  console.log('params', params)
+  return request({
+    url: product.show,
+    methods: 'get',
+    data: params
+  })
 }

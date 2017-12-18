@@ -12,33 +12,30 @@
 </template>
 
 <script>
-export default {
-	name: 'country',
-  computed: {
-  },
-	props: {
-		title: {
-			type: String,
-			default: '空'
-		},
-    value: {
-      type: String
-    }
-	},
-	created(){
-	},
-  data() {
-    return {
-    }
-  },
-  methods: {
+  export default {
+    name: 'country',
+    computed: {},
+    props: {
+      title: {
+        type: String,
+        default: '空'
+      },
+      value: {
+        type: String
+      }
+    },
+    created () {
+    },
+    data () {
+      return {}
+    },
+    methods: {}
   }
-}
 </script>
 
 <style lang="less" scoped>
-.detailitem {
-  color: #666;
-  padding: 6px;
-}
+  .detailitem {
+    color: #666;
+    padding: 6px;
+  }
 </style>

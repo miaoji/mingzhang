@@ -35,7 +35,6 @@ const ensend = r => require.ensure([], () => r(require('@/views/en/Send')), 'ens
 const ensite = r => require.ensure([], () => r(require('@/views/en/Site')), 'ensite')
 const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate')), 'enviolate')
 
-
 export default new Router({
   base: __dirname,
   mode: 'history',
@@ -64,7 +63,7 @@ export default new Router({
         intro: '交流社区'
       }
     }]
-  },{
+  }, {
     path: '/cn',
     component: cnContainer,
     children: [{
@@ -74,77 +73,77 @@ export default new Router({
       meta: {
         intro: '上海明彰网络科技有限公司-首页'
       }
-    },{
+    }, {
       path: 'index',
       name: 'cnindex2',
       component: cnindex,
       meta: {
         intro: '上海明彰网络科技有限公司-首页'
       }
-    },{
+    }, {
       path: 'getorderinfo',
       name: 'getorderinfo',
       component: getorderinfo,
       meta: {
         intro: '订单查询'
       }
-    },{
+    }, {
       path: 'introduce',
       name: 'introduce',
       component: introduce,
       meta: {
         intro: '公司介绍'
       }
-    },{
+    }, {
       path: 'ordersend',
       name: 'ordersend',
       component: ordersend,
       meta: {
         intro: '线下寄件'
       }
-    },{
+    }, {
       path: 'ordersendSpare',
       name: 'ordersendSpare',
       component: ordersendSpare,
       meta: {
         intro: '不登录寄件'
       }
-    },{
+    }, {
       path: 'prescription',
       name: 'prescription',
       component: prescription,
       meta: {
         intro: '参考时效'
       }
-    },{
+    }, {
       path: 'question',
       name: 'question',
       component: question,
       meta: {
         intro: '疑难解答'
       }
-    },{
+    }, {
       path: 'send',
       name: 'send',
       component: send,
       meta: {
         intro: '寄件流程'
       }
-    },{
+    }, {
       path: 'site',
       name: 'site',
       component: site,
       meta: {
         intro: '服务站点'
       }
-    },{
+    }, {
       path: 'violate',
       name: 'violate',
       component: violate,
       meta: {
         intro: '禁运物品'
       }
-    },{
+    }, {
       path: 'user',
       component: usercenter,
       children: [{
@@ -154,7 +153,7 @@ export default new Router({
         meta: {
           intro: '直邮列表'
         }
-      },{
+      }, {
         path: 'customer',
         name: 'customer',
         component: customer,
@@ -162,14 +161,14 @@ export default new Router({
           intro: '客服中心'
         }
       }]
-    },{
+    }, {
       path: 'orderdetail',
       name: 'orderdetail',
       component: orderdetail,
       meta: {
         intro: '订单详情'
       }
-    },{
+    }, {
       path: 'cashier',
       name: 'cashier',
       component: cashier,
@@ -177,7 +176,7 @@ export default new Router({
         intro: '收银台'
       }
     }]
-  },{
+  }, {
     path: '/en',
     component: enContainer,
     children: [{
@@ -187,56 +186,56 @@ export default new Router({
       meta: {
         intro: 'International Express Service Center-Home Page'
       }
-    },{
+    }, {
       path: '/',
       name: 'enindex2',
       component: enindex,
       meta: {
         intro: 'International Express Service Center-Home Page'
       }
-    },{
+    }, {
       path: 'getorderinfo',
       name: 'engetorderinfo',
       component: engetorderinfo,
       meta: {
         intro: '英文寄件'
       }
-    },{
+    }, {
       path: 'introduce',
       name: 'enintroduce',
       component: enintroduce,
       meta: {
         intro: '公司介绍-英文'
       }
-    },{
+    }, {
       path: 'prescription',
       name: 'enprescription',
       component: enprescription,
       meta: {
         intro: '参考时效'
       }
-    },{
+    }, {
       path: 'question',
       name: 'enquestion',
       component: enquestion,
       meta: {
         intro: '疑难解答'
       }
-    },{
+    }, {
       path: 'send',
       name: 'ensend',
       component: ensend,
       meta: {
         intro: '寄件流程'
       }
-    },{
+    }, {
       path: 'site',
       name: 'ensite',
       component: ensite,
       meta: {
         intro: '服务站点'
       }
-    },{
+    }, {
       path: 'violate',
       name: 'enviolate',
       component: enviolate,

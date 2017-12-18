@@ -9,14 +9,14 @@
 </template>
 
 <script>
-import Headers from '@/components/en/Headers'
-import Footers from '@/components/en/Footers'
+  import Headers from '@/components/en/Headers'
+  import Footers from '@/components/en/Footers'
 
-export default {
-  name: 'container',
-  components: {
-    Headers,
-    Footers
+  export default {
+    name: 'container',
+    components: {
+      Headers,
+      Footers
+    }
   }
-}
 </script>

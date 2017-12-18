@@ -1,5 +1,5 @@
 import * as directMail from '@/services/directMail'
-import { storage } from '@/utils'
+// import { storage } from '@/utils'
 import * as types from '../mutation-types'
 
 export const state = {
@@ -20,7 +20,7 @@ export const actions = {
    * @param {[type]} options.commit   [description]
    * @param {[type]} options.openid   [description]
    */
-  async setDirectmailList ({ dispatch, commit }, { page = 1 }) {
+  async setDirectmailList ({dispatch, commit}, {page = 1}) {
     try {
       const res = await directMail.query({
         wxUserId: 212,
@@ -56,7 +56,7 @@ export const actions = {
 }
 
 export const mutations = {
-  [types.SET_DIRECTMAILLIST] (state, { list }) {
+  [types.SET_DIRECTMAILLIST] (state, {list}) {
     state.list = list
   }
 }

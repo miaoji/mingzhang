@@ -3,7 +3,7 @@
  */
 
 import request from '@/utils/request'
-import { packages } from '@/api'
+import {packages} from '@/api'
 
 export async function query (data) {
   return request({

@@ -32,6 +32,7 @@ const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate'))
 
 export default new Router({
   base: __dirname,
+  mode: 'history',
   scrollBehavior (to, from, savedPosition) {
     console.log('to', to)
     console.log('from', from)

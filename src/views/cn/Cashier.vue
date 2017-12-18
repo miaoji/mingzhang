@@ -6,7 +6,10 @@
 				<div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
 				<div class="title_text">订单付款请求提交失败</div>
 				<span class="title_info">请前往我的订单,刷新页面,3-5分钟后重试</span>
-				<div style="height:300px;"></div>
+				<div class="go_index">
+					<router-link to="/">回到首页</router-link>
+				</div>
+				<div style="height:470px;"></div>
 			</div>
 		</div>
 		<div class="order_info" v-show="!orderIsNo">
@@ -152,6 +155,14 @@ export default {
 	}
 	.order_info_no {
 		padding-top: 30px;
+		.title {
+			.go_index {
+				margin-left: 100px;
+				a {
+					color: #3a8ee6;
+				}
+			}
+		}
 	}
 	.order_info {
 		width: 1100px;

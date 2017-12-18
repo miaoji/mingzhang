@@ -582,10 +582,10 @@ export default {
 		},
 		onCancel(form){
 			this.form.cancel=!this.form.cancel
-			this.$refs[form].resetFields();
+			this.$refs[form].resetFields()
 			this.form={}
 			this.freight = '请选择收件地址'
-			this.showPackageList = {show: true,data:[]}
+			this.showPackageList = {show: true,data:''}
 			this.showProductList = {show: false}
 		},
 		menu(){

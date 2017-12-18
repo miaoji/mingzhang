@@ -54,7 +54,6 @@ import { query } from '@/services/components/package'
 
     methods: {
     	async getCountry(payload={}){
-        console.log('payload', payload)
     		let data = await query(payload)
     		if (data.code === 200 && data.obj) {
           this.options=[]
@@ -75,12 +74,13 @@ import { query } from '@/services/components/package'
     },
     watch: {
       showPackageList(data){
-        console.log('dadasda', data)
         this.select_package = undefined
         if (data.show === false) {
           return
         }
-        this.getCountry({countryId: JSON.parse(data.data).id || data.data})
+        if (data.data !== '') {
+          this.getCountry({countryId: JSON.parse(data.data).id || data.data})
+        }
       }
     }
 

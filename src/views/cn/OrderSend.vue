@@ -290,6 +290,9 @@ export default {
 	},
 	mounted(){
 		window.onscroll=function(){
+			if(location.hash!=='#/cn/ordersend' && location.hash!=='#/cn/ordersendSpare'){
+				return
+			}
 			const scrollTop = window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop
 			const elItem = document.querySelectorAll('.anchor')
 			for (let i= 0; i < elItem.length; i++) {

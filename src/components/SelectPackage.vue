@@ -13,7 +13,7 @@
       { required: true, message: '请选择产品类型'},
     ]"
   >
-	  <el-select v-model="select_package" size="large" :disabled="!showPackageList.show" @change="handleChange" style="width: 80%" filterable placeholder="请选择产品类型">
+	  <el-select v-model="select_package" size="large" :disabled="!showPackageList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择产品类型">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -54,7 +54,6 @@ import { query } from '@/services/components/package'
 
     methods: {
     	async getCountry(payload={}){
-        console.log('payload', payload)
     		let data = await query(payload)
     		if (data.code === 200 && data.obj) {
           this.options=[]
@@ -75,12 +74,13 @@ import { query } from '@/services/components/package'
     },
     watch: {
       showPackageList(data){
-        console.log('dadasda', data)
         this.select_package = undefined
         if (data.show === false) {
           return
         }
-        this.getCountry({countryId: JSON.parse(data.data).id || data.data})
+        if (data.data !== '') {
+          this.getCountry({countryId: JSON.parse(data.data).id || data.data})
+        }
       }
     }
 

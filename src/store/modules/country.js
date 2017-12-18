@@ -14,14 +14,12 @@ export const actions = {
         if (state.cnData.length>0) {
             return
         }
-        console.log('sdfsdf', state)
         let data = await query()
-        console.log('data1111', data)
         if (data.code === 200 && data.obj) {
             state.cnData = []
             for (let i = 0; i<data.obj.length; i++){
                 let item = data.obj[i]
-                state.cnData.push({value: JSON.stringify(item),label:item.country_cn})
+                state.cnData.push({value: JSON.stringify(item), label:item.country_cn})
             }
         }else{
             this.$message({
@@ -39,7 +37,7 @@ export const actions = {
             state.enData = []
             for (let i = 1; i<data.obj.length; i++){
                 let item = data.obj[i]
-                state.enData.push({value: JSON.stringify(item),label:item.country_cn})
+                state.enData.push({value: JSON.stringify(item), label:item.country_cn})
             }
         }else{
             this.$message({

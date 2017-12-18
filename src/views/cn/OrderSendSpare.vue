@@ -9,41 +9,79 @@
 	    ></div>
 		<div class="sendorder">
 			<el-form class="form" ref="form" :model="form" label-width="120px">
+
 				<div id="item1" class="sendorder_item" v-if="true">
 					<h1 class="page_tit">寄件人信息</h1>
-					<div @click='sendAddressClick(key,item)' v-show="showSendAddr||key===sendAddrIndex?true:false" :class="{ active: key===sendAddrIndex?true:false}" v-for="(item,key) in sendAddrInfo" class="sendAddrInfo">
-						<p class="item1">姓名 : {{item.name}}</p>
-						<p class="item2">电话 : {{item.mobile}}</p>
-						<p class="item3">地址 : {{item.address}}</p>
-						<p class="item4">备注 : {{item.remark}}</p>
-						<p class="item5">
-							<el-button type="text" @click.stop="updateAddr(item,'send')" style="color:#bd7e00">编辑</el-button>
-							<el-button type="text" @click.stop="delAddr(item,'send')" style="color:#fa5555">删除</el-button>
-						</p>
-					</div>
-					<div style="marginLeft: 28px">
-						<el-button type="text" size="mini" @click="addAddr('send')">创建新地址</el-button>
-						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false">更多地址</el-button>
-						<el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">收起</el-button>
-					</div>
+					<el-form-item label="寄件人姓名 : " prop="senderName"
+						:rules="[
+							{ required: true, message: '寄件人姓名不能为空'}
+						]"
+					>
+						<el-input placeholder="请输入寄件人姓名" v-model="form.senderName" />
+					</el-form-item>
+					<el-form-item label="电话 : " prop="senderMobile"
+						:rules="[
+							{ required: true, message: '电话号码不能为空'},
+							{ type: 'number', message: '电话号码必须是数字值'}
+						]"
+					>
+						<el-input placeholder="请输入电话号码" v-model.number="form.senderMobile" />
+					</el-form-item>
+					<el-row>
+						<el-col :span="10">
+							<country label="国家/地区 : " :cancel="form.cancel" @coutryChange="coutrySendChange"/>
+						</el-col>
+						<el-col :span="12">
+							<select-city label="地区选择 : " :cancel="form.cancel" @selectCityChange="selectCityChange" v-show="showSendCitySelect"/>
+						</el-col>
+					</el-row>
+					<el-form-item label="街道地址 : " prop="senderAddress"
+						:rules="[
+							{ required: true, message: '街道地址不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入详细的街道地址" v-model="form.senderAddress" />
+					</el-form-item>
+					<el-form-item label="邮编 : " prop="senderPostcode"
+						:rules="[
+							{ required: true, message: '邮编不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入邮编" v-model="form.senderPostcode" />
+					</el-form-item>
 				</div>
+
 				<div id="item2" class="sendorder_item" v-if="true">
 					<h1 class="page_tit">收件人信息</h1>
-					<div @click='receAddressClick(key,item)' v-show="showReceAddr||key===receAddrIndex?true:false" :class="{ active: key===receAddrIndex?true:false}" v-for="(item,key) in receAddrInfo" class="sendAddrInfo">
-						<p class="item1">姓名 : {{item.name}}</p>
-						<p class="item2">电话 : {{item.mobile}}</p>
-						<p class="item3">地址 : {{item.address}}</p>
-						<p class="item4">备注 : {{item.remark}}</p>
-						<p class="item5">
-							<el-button type="text" @click.stop="updateAddr(item,'rece')" style="color:#bd7e00">编辑</el-button>
-							<el-button type="text" @click.stop="delAddr(item,'rece')" style="color:#fa5555">删除</el-button>
-						</p>
-					</div>
-					<div style="marginLeft: 28px">
-						<el-button type="text" size="mini" @click="addAddr('rece')">创建新地址</el-button>
-						<el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false">更多地址</el-button>
-						<el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===true">收起</el-button>
-					</div>
+					<el-form-item label="收件人姓名 : " prop="receiverName"
+						:rules="[
+							{ required: true, message: '收件人姓名不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入收件人姓名" v-model="form.receiverName" />
+					</el-form-item>
+					<el-form-item label="电话 : " prop="receiverMobile"
+						:rules="[
+							{ required: true, message: '电话号码不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入电话号码" v-model="form.receiverMobile" />
+					</el-form-item>
+					<country v-model="form.aa" :cancel="form.cancel" label="国家/地区 : " type="en" @coutryChange="coutryReceiveChange"/>
+					<el-form-item label="街道地址 : " prop="receiverAddress"
+						:rules="[
+							{ required: true, message: '街道地址不能为空'},
+						]"
+					>
+						<el-input placeholder="请输入详细的街道地址" v-model="form.receiverAddress" />
+					</el-form-item>
+					<el-form-item label="邮编 : " prop="receiverPostcode"
+						:rules="[
+							{ required: true, message: '邮编不能为空'}
+						]"
+					>
+						<el-input placeholder="请输入邮编" v-model="form.receiverPostcode" />
+					</el-form-item>
 				</div>
 
 				<div id="item3" class="sendorder_item">
@@ -165,7 +203,7 @@
 				<el-form-item label="电话" :label-width="formLabelWidth">
 				  <el-input v-model="item.mobile" auto-complete="off"></el-input>
 				</el-form-item>
-				<country v-model="item.countrydata" :values="item.countrydata" label="国家/地区 : " :type="modalTitle==='新增寄件地址'||modalTitle==='修改寄件地址'?'cn':'en'" @coutryChange="addAddrCountry"/>
+				<country v-model="item.countrydata" :values="item.countrydata" label="国家/地区 : " type="cn" @coutryChange="addAddrCountry"/>
 				<transition name="el-zoom-in-top">
 				<select-city label="地区选择 : " :cancel="item.cancelCity" @selectCityChange="modalSeleteCity" v-show="showModalCitySelect"/>
  				</transition>
@@ -285,14 +323,11 @@ export default {
 	created(){
 		window.document.title = '上海明彰网络科技有限公司'
 		this.menu()
-		this.getSendAddr()
-		this.getReceiveAddr()
+		// this.getSendAddr()
+		// this.getReceiveAddr()
 	},
 	mounted(){
 		window.onscroll=function(){
-			if(location.hash!=='#/cn/ordersend' && location.hash!=='#/cn/ordersendSpare'){
-				return
-			}
 			const scrollTop = window.pageYOffset||document.documentElement.scrollTop||document.body.scrollTop
 			const elItem = document.querySelectorAll('.anchor')
 			for (let i= 0; i < elItem.length; i++) {
@@ -325,37 +360,34 @@ export default {
 		async submitForm(form) {
 			try {
 				this.loading2 = true
-				this.sendAddr = {}
-				this.receAddr = {}
-				if (!this.sendAddrInfo[this.sendAddrIndex].id) {
-					this.$message({
-						type: 'warning',
-						message: '请选择寄件地址,若没有寄件地址请创建'
-					})
-					this.loading2 = false
-					return
-				}
-				// console.log(this.sendAddrInfo[this.sendAddrIndex].id)
-				await this.getOneSendAddr({id:this.sendAddrInfo[this.sendAddrIndex].id})
-				// console.log(this.sendAddr)
-				// console.log('.....收件地址ID')
-				// console.log(this.receAddrInfo[this.receAddrIndex].id)
-				await this.getOneReceAddr({id:this.receAddrInfo[this.receAddrIndex].id})
-				if (this.sendAddr === {} || this.receAddr === {}) {
-					this.$message({
-						type: 'warning',
-						message: '网络故障,请稍后重试'
-					})
-					this.loading2 = false
-					return
-				}
-				console.log(this.receAddr)
-				console.log('.....包裹报关')
-				console.log(this.tablePackagedata)
-				console.log('.....重量')
-				console.log(this.form.weight)
-				console.log('.....是否保价')
-				console.log(this.form.insured)
+				this.$refs[form].validate((valid) => {
+					if (valid) {
+					} else {
+						this.$message({
+							type: 'warning',
+							message: '您的信息还不够完整，请填写完整'
+						})
+						throw '您的信息还不够完整，请填写完整'
+					}
+				})
+				// const aaaaaa = {
+				// 	senderAddress:this.form.senderAddress,
+				// 	senderCity:this.form.city,
+				// 	senderCountry:'中国',
+				// 	senderCounty:this.form.county,
+				// 	senderMobile:this.form.senderMobile,
+				// 	senderName:this.form.senderName,
+				// 	senderPostcode:this.form.senderPostcode,
+				// 	senderProv:this.form.province,
+				// }
+				// const bbbbbb = {
+				// 	receiverAddress: this.form.receiverAddress,
+				// 	receiverCountry: JSON.parse(this.form.receiverCountry).country_cn,
+				// 	receiverMobile: this.form.receiverMobile,
+				// 	receiverName: this.form.receiverName,
+				// 	receiverPostcode: this.form.receiverPostcode,
+				// }
+				
 				if (this.form.insured !== '1' && this.form.insured !== '0') {
 					this.$message({
 						type: 'warning',
@@ -364,11 +396,7 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('.....保价金额')
-				console.log(this.form.insuredAmount)
-				console.log('.....是否退件')
-				console.log(this.form.returnGood)
-
+				
 				if (this.form.returnGood !== '1' && this.form.returnGood !== '0') {
 					this.$message({
 						type: 'warning',
@@ -377,12 +405,7 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('.....备注信息')
-				console.log(this.form.remark)
-				console.log('.....运费')
-				console.log(this.freight)
-				console.log('.....运费Id')
-				console.log(this.freightId)
+				
 				if (!this.freightId) {
 					this.$message({
 						type: 'warning',
@@ -391,7 +414,6 @@ export default {
 					this.loading2 = false
 					return
 				}
-				console.log('...............................')
 				let insuredPrice = 0
 				let insuredAmount = 0
 				if (this.form.insured === 1) {
@@ -400,46 +422,55 @@ export default {
 				}
 
 				const record = {
-					weight: this.form.weigth,
-					length:this.form.length,
-					height:this.form.height,
-					volume:this.form.volume,
-					volumeWeight:this.form.volumeWeight,
-					wxUserId: localStorage.mj_userId,
-					mailingAddrId: this.sendAddrInfo[this.sendAddrIndex].id,
-					receiveAddrId: this.receAddrInfo[this.receAddrIndex].id,
-					returnGood: this.form.returnGood,
-					insured: this.form.insured,
+					weight: Number(this.form.weight),
+					length: Number(this.form.length),
+					height: Number(this.form.height),
+					volume: Number(this.form.volume),
+					volumeWeight: Number(this.form.volumeWeight),
+					returnGood: Number(this.form.returnGood),
+					insured: Number(this.form.insured),
 					insuredAmount,
 					insuredPrice,
-					priceId: this.freightId,
+					priceId: Number(this.freightId),
 					totalFee: Math.round(Number(this.freight) * 100),
 					remark: this.form.remark,
-					senderCountry: this.sendAddr.COUNTRY_CN,
-					senderProv: this.sendAddr.PROVINCE,
-					senderCity: this.sendAddr.cityName,
-					senderCounty: this.sendAddr.DISTRICT,
-					receiverCountry: this.receAddr.COUNTRY_CN,
+
+					senderAddress:this.form.senderAddress,
+					senderCity:this.form.city,
+					senderCountry:'中国',
+					senderCounty:this.form.county,
+					senderMobile:this.form.senderMobile,
+					senderName:this.form.senderName,
+					senderPostcode:this.form.senderPostcode,
+					senderProv:this.form.province,
+
+					receiverAddress: this.form.receiverAddress,
+					receiverCountry: JSON.parse(this.form.receiverCountry).country_cn,
+					receiverMobile: this.form.receiverMobile,
+					receiverName: this.form.receiverName,
+					receiverPostcode: this.form.receiverPostcode,
+
 					orderItems: JSON.stringify(this.tablePackagedata)||'[]',
+					type: 0,
 					orderType: 2
 				}
-				this.$refs[form].validate((valid) => {
-					if (valid) {
-
-					} else {
-					  return
-					}
-				});
 				const data = await createOrder({...record})
 				console.log('data', data)
 				if (data.code === 200) {
 					this.loading2 = false
+
+					this.form.cancel=!this.form.cancel
+					this.$refs[form].resetFields();
+					this.form={}
+					this.freight = '请选择收件地址'
+					this.showPackageList = {show: false,data:[]}
+					this.showProductList = {show: false}
+
 					this.$notify({
 			          title: '成功',
 			          message: '下单成功！！！',
 			          type: 'success'
 			        })
-			        this.onCancel()
 				}else{
 					this.loading2 = false
 					this.$notify({
@@ -451,11 +482,11 @@ export default {
 			} catch (error) {
 				console.warn('下单出错了', error)
 				this.loading2 = false
-				this.$notify({
-		          title: '失败',
-		          message: '下单失败,稍后请重试',
-		          type: 'warning'
-		        })
+				// this.$notify({
+		  //         title: '失败',
+		  //         message: error || '下单失败,稍后请重试',
+		  //         type: 'warning'
+		  //       })
 			}
 
 
@@ -582,10 +613,10 @@ export default {
 		},
 		onCancel(form){
 			this.form.cancel=!this.form.cancel
-			this.$refs[form].resetFields()
+			this.$refs[form].resetFields();
 			this.form={}
 			this.freight = '请选择收件地址'
-			this.showPackageList = {show: true,data:''}
+			this.showPackageList = {show: true,data:[]}
 			this.showProductList = {show: false}
 		},
 		menu(){
@@ -974,8 +1005,8 @@ export default {
 	     */
 	    async getPrice () {
 			try {
-				if(!this.receAddrInfo[this.receAddrIndex].country) {
-					this.freight = '请选择您的收件地址,若没有收件地址,请创建'
+				if(!this.form.receiverCountry) {
+					this.freight = '请选择您的收件地址'
 					return
 				}
 				if (!this.form.weight) {
@@ -1006,7 +1037,7 @@ export default {
 				}
 				const payload = {
 					weight: formWeight,
-					countryId: this.receAddrInfo[this.receAddrIndex].country,
+					countryId: JSON.parse(this.form.receiverCountry).id,
 					packageTypeId: JSON.parse(this.form.packageType).id,
 					productTypeId: JSON.parse(this.form.productType).id
 				}

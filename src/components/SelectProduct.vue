@@ -13,7 +13,7 @@
       { required: true, message: '请选择产品规格'},
     ]"
   >
-	  <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange" style="width: 80%" filterable placeholder="请选择产品规格">
+	  <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange" style="width: 100%" filterable placeholder="请选择产品规格">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"

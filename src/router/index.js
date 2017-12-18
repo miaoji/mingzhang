@@ -11,6 +11,7 @@ const cnindex = r => require.ensure([], () => r(require('@/views/cn/Index')), 'c
 const getorderinfo = r => require.ensure([], () => r(require('@/views/cn/GetOrderInfo')), 'getorderinfo')
 const introduce = r => require.ensure([], () => r(require('@/views/cn/Introduce')), 'introduce')
 const ordersend = r => require.ensure([], () => r(require('@/views/cn/OrderSend')), 'ordersend')
+const ordersendSpare = r => require.ensure([], () => r(require('@/views/cn/OrderSendSpare')), 'ordersendSpare')
 const prescription = r => require.ensure([], () => r(require('@/views/cn/Prescription')), 'prescription')
 const question = r => require.ensure([], () => r(require('@/views/cn/Question')), 'question')
 const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send')
@@ -21,6 +22,7 @@ const directmail = r => require.ensure([], () => r(require('@/views/cn/user/Dire
 const customer = r => require.ensure([], () => r(require('@/views/cn/user/Customer')), 'customer')
 const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDetail')), 'orderdetail')
 const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
+const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
@@ -37,6 +39,13 @@ const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate'))
 export default new Router({
   base: __dirname,
   mode: 'history',
+  scrollBehavior (to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        selector: to.hash
+      }
+    }
+  },
   routes: [{
     path: '/',
     component: cnContainer,
@@ -92,6 +101,13 @@ export default new Router({
       component: ordersend,
       meta: {
         intro: '线下寄件'
+      }
+    },{
+      path: 'ordersendSpare',
+      name: 'ordersendSpare',
+      component: ordersendSpare,
+      meta: {
+        intro: '不登录寄件'
       }
     },{
       path: 'prescription',
@@ -152,6 +168,13 @@ export default new Router({
       component: orderdetail,
       meta: {
         intro: '订单详情'
+      }
+    },{
+      path: 'cashier',
+      name: 'cashier',
+      component: cashier,
+      meta: {
+        intro: '收银台'
       }
     }]
   },{

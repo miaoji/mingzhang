@@ -10,8 +10,20 @@
 				<router-link :to="link">English</router-link>
 				<!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
 				<div class="eject hide">
-					<router-link to="/cn/index">中文</router-link>
-					<router-link to="/en/index">English</router-link>
+					<!-- <router-link to="/cn/index">中文</router-link>
+					<router-link to="/en/index">English</router-link> -->
+					<el-dropdown @command="handleCommand">
+					<span class="el-dropdown-link">
+					语言<i class="el-icon-arrow-down el-icon--right"></i>
+					</span>
+					<el-dropdown-menu slot="dropdown">
+					<el-dropdown-item command="a">黄金糕</el-dropdown-item>
+					<el-dropdown-item command="b">狮子头</el-dropdown-item>
+					<el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
+					<el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
+					<el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+					</el-dropdown-menu>
+					</el-dropdown>
 				</div>
 				<div class="login">
 					<el-button type="info" icon="login" @click="wxLogin">登录</el-button>
@@ -27,6 +39,7 @@
 				<li class="left"><router-link to="/cn/introduce">关于我们</router-link></li>
 				<li class="left"><router-link to="/cn/send">寄件流程</router-link></li>
 				<li class="left"><router-link to="/cn/user/directmail">个人中心</router-link></li>
+				<li class="left"><router-link to="/cn/cashier?order=MZ15082952851200">收银台</router-link></li>
 			</ul>
 		</div>
 		<el-dialog

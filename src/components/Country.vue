@@ -13,7 +13,7 @@
       { required: true, message: '国家不能为空'},
     ]"
   >
-	  <el-select v-model="country_name" size="large" @change="handleChange" style="width: 80%" filterable placeholder="请选择">
+	  <el-select v-model="country_data" size="large" @change="handleChange" style="width: 80%" filterable placeholder="请选择">
 	    <el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -25,17 +25,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import { query } from '@/services/country'
   export default {
   	
   	name: 'country',
-    computed: {
-      ...mapState({
-        cnDate: ({ country }) => country.cnDate,
-        enData: ({ country }) => country.enData,
-      }),
-    },
   	props: {
   		label: {
   			type: String,
@@ -48,42 +41,50 @@ import { query } from '@/services/country'
       type: {
         type: String,
         default: 'cn'
+      },
+      values: {
+        type: String,
+        default: ''
       }
   	},
 
-  	created(){
-      this.$store.dispatch('getCountryCnInfo')
-      this.$store.dispatch('getCountryEnInfo')
+  	async created(){
+      await this.$store.dispatch('getCountryCnInfo')
+      await this.$store.dispatch('getCountryEnInfo')
       this.getCountry()
+      console.log('123', this)
   	},
 
     data() {
       return {
         options: [],
-        country_name: ''
+        country_data: ''
       }
     },
 
     methods: {
-    	async getCountry(){
+    	getCountry(){
         if (this.type === 'cn') {
-          console.log('this.cnData',this.$store.state.country.cnData)
           this.options = this.$store.state.country.cnData
         }else{
-          console.log('this.enData',this.$store.state.country.enData)
-          console.log('this.enData',this.enData)
           this.options = this.$store.state.country.enData
         }
     	},
     	handleChange(){
-    		this.$emit('coutryChange', this.country_name)
+    		this.$emit('coutryChange', this.country_data)
+        console.log(this.type)
     	}
     },
 
     watch: {
       cancel(val){
-        console.log('123123456')
-        this.country_name = ''
+        this.country_data = ''
+      },
+      values(val){
+        this.country_data = val
+      },
+      type(val){
+        this.getCountry()
       }
     }
 

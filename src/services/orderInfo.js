@@ -2,7 +2,7 @@
  * 获取订单信息,获取快件轨迹信息
  */
 import request from '@/utils/request'
-import { order } from '@/api'
+import {order} from '@/api'
 
 export async function getOrderInfoByOrderNo (data) {
   return request({
@@ -14,7 +14,7 @@ export async function getOrderInfoByOrderNo (data) {
 }
 
 export async function queryByCompany (data) {
-  const newdata = {...data, source:'php'}
+  const newdata = {...data, source: 'php'}
   return request({
     url: order.queryByCompany,
     method: 'get',

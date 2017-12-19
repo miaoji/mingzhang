@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { gettoken as getToken } from '@/utils'
+import {gettoken as getToken} from '@/utils'
 
 const fetch = (options) => {
   let {
@@ -68,7 +68,7 @@ const fetch = (options) => {
 export default function request (options) {
   options.token = window.sessionStorage.winnerKey
   return fetch(options).then((response) => {
-    const { status } = response
+    const {status} = response
     let data = response.data
     data = typeof data === 'object' ? data : {'stringData': data}
     return {
@@ -77,11 +77,11 @@ export default function request (options) {
       ...data
     }
   }).catch((error) => {
-    const { response } = error
+    const {response} = error
     let msg
     let statusCode
     if (response && response instanceof Object) {
-      const { data, statusText } = response
+      const {data, statusText} = response
       statusCode = response.status
       msg = data.message || statusText
       // 判断token失效
@@ -89,12 +89,12 @@ export default function request (options) {
         window.sessionStorage.clear()
         // alert('网络故障,请刷新页面后重试!!!')
         getToken()
-        return { success: false, statusCode: 401, msg: '用户登陆状态已失效' }
+        return {success: false, statusCode: 401, msg: '用户登陆状态已失效'}
       }
     } else {
       statusCode = 600
       msg = error.message || '网络错误'
     }
-    return { success: false, statusCode, message: msg }
+    return {success: false, statusCode, message: msg}
   })
 }

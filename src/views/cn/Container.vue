@@ -1,37 +1,22 @@
 <template>
   <div>
-    <headers :link="location"/>
+    <headers/>
     <transition name="el-fade-in">
-      <router-view @location='listen'></router-view>
+      <router-view></router-view>
     </transition>
     <footers/>
   </div>
 </template>
 
 <script>
-import Headers from '@/components/cn/Headers'
-import Footers from '@/components/cn/Footers'
+  import Headers from '@/components/cn/Headers'
+  import Footers from '@/components/cn/Footers'
 
-export default {
-  name: 'container',
-	components: {
-		Headers,
-		Footers
-	},
-  data () {
-    return {
-      location: ''
-    }
-  },
-  methods: {
-    listen (e) {
-      const hash = e.split('/')
-      if (hash && hash.length === 3) {
-        this.location = '/en/' + hash[2]
-      } else {
-        this.location = '/en/'
-      }
+  export default {
+    name: 'container',
+    components: {
+      Headers,
+      Footers
     }
   }
-}
 </script>

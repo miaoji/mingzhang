@@ -8,13 +8,13 @@ import * as country from './modules/country'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-	modules: {
-		country,
-		demo,
-		directmail
-	},
-	// state,
-	// mutations,
-	// getters,
-	// actions
+  modules: {
+    country,
+    demo,
+    directmail
+  }
+  // state,
+  // mutations,
+  // getters,
+  // actions
 })

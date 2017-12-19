@@ -1,5 +1,5 @@
 import * as post from '@/services/post'
-import { storage } from '@/utils'
+import {storage} from '@/utils'
 import * as types from '../mutation-types'
 
 export const state = {
@@ -20,7 +20,7 @@ export const actions = {
    * @param {[type]} options.commit   [description]
    * @param {[type]} options.openid   [description]
    */
-  async setPostsList ({ dispatch, commit }, { page = 1 }) {
+  async setPostsList({dispatch, commit}, {page = 1}) {
     try {
       const res = await post.query({
         page,
@@ -55,7 +55,7 @@ export const actions = {
 }
 
 export const mutations = {
-  [types.SET_POST] (state, { list }) {
+  [types.SET_POST](state, {list}) {
     state.list = list
   }
 }

@@ -3,36 +3,36 @@
     <el-table
       :data="tableDate"
       style="width: 100%"
-      >
+    >
       <el-table-column
         prop="nameCn"
         label="中文品名"
         align="center"
-        >
+      >
       </el-table-column>
       <el-table-column
         prop="unitPrice"
         label="单价/元"
         align="center"
         width="180"
-        >
+      >
       </el-table-column>
       <el-table-column
         prop="quantity"
         label="数量"
         align="center"
-        >
+      >
       </el-table-column>
       <el-table-column
         prop="worth"
         label="价值/元"
         align="center"
-        >
+      >
       </el-table-column>
       <el-table-column
         label="操作"
         align="center"
-        >
+      >
         <template slot-scope="scope">
           <el-button @click="updatePackageInfo(scope.row, scope.$index)" type="text" size="mini">修改</el-button>
           <el-button @click="delPackageInfo(scope.$index)" style="color:red" type="text" size="mini">删除</el-button>
@@ -76,36 +76,36 @@
 <script>
   export default {
     methods: {
-      updatePackageInfo(data, id){
-        console.log('key',id)
-        console.log('data',data)
+      updatePackageInfo (data, id) {
+        console.log('key', id)
+        console.log('data', data)
         this.modalTitle = '修改报关信息'
         this.item = {...data, id}
         this.dialogFormVisible = true
       },
-      addPackageInfo(){
+      addPackageInfo () {
         this.modalTitle = '创建报关信息'
-        this.item={}
+        this.item = {}
         this.dialogFormVisible = true
       },
-      delPackageInfo(id){
+      delPackageInfo (id) {
         this.tableDate.splice(id, 1)
       },
-      confirm(){
+      confirm () {
         const item = this.item
-        if (this.test(item)===false) {
+        if (this.test(item) === false) {
           return
         }
         if (item.id || item.id === 0) {
           const id = item.id
           console.log('id', id)
-          this.tableDate.splice(id,1,{...item, worth: Number(item.quantity) * Number(item.unitPrice)})
-        }else{
-          this.tableDate.push({...item,worth: Number(item.quantity) * Number(item.unitPrice)})
+          this.tableDate.splice(id, 1, {...item, worth: Number(item.quantity) * Number(item.unitPrice)})
+        } else {
+          this.tableDate.push({...item, worth: Number(item.quantity) * Number(item.unitPrice)})
         }
-          this.dialogFormVisible = false
+        this.dialogFormVisible = false
       },
-      test(item){
+      test (item) {
         // 判空
         if (item.nameCn === undefined || item.nameCn === '') {
           this.$message({
@@ -146,9 +146,9 @@
         }
       }
     },
-    created(){
+    created () {
     },
-    data() {
+    data () {
       return {
         modalTitle: '创建报关信息',
         tableDate: [],
@@ -156,37 +156,35 @@
         form: {},
         formLabelWidth: '120px',
         item: {}
-
       }
     },
-    watch:{
-      tableDate(val){
+    watch: {
+      tableDate (val) {
         this.$emit('tablePackage', val)
       }
     }
   }
 </script>
 <style lang="less">
-.table_package {
-  .add_package {
-    // border-bottom: 1px #ddd solid;
-    text-align: center;
-    padding: 10px 0px;
-  }
-  .el-dialog__body {
-    padding:30px 50px 20px;
-    border-top: 1px #ddd solid;
-    border-bottom: 1px #ddd solid;
-    .el-form-item__label {
-      width: 80px!important;
+  .table_package {
+    .add_package {
+      // border-bottom: 1px #ddd solid;
+      text-align: center;
+      padding: 10px 0px;
     }
-    .el-form-item__content {
-      margin-left: 80px!important;
+    .el-dialog__body {
+      padding: 30px 50px 20px;
+      border-top: 1px #ddd solid;
+      border-bottom: 1px #ddd solid;
+      .el-form-item__label {
+        width: 80px !important;
+      }
+      .el-form-item__content {
+        margin-left: 80px !important;
+      }
+    }
+    .el-dialog__header {
+      padding: 15px 15px 10px 25px !important;
     }
   }
-  .el-dialog__header {
-    padding:15px 15px 10px 25px!important;
-  }
-}
-
 </style>

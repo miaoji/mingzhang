@@ -34,13 +34,13 @@
           <el-card class="box-card order_info">
             <div class="item_title">寄件地址信息</div>
             <div class="info"><span>寄件人</span> : <span>{{data.senderName}}</span></div>
-            <div class="info"><span>寄件地址</span> : <span>{{data.senderCountry}}/{{data.senderProv}}/{{data.senderCity}}/{{data.senderCounty}}/{{data.senderAddress}}</span>
+            <div class="info"><span>寄件地址</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
             </div>
             <div class="info"><span>联系方式</span> : <span>{{data.senderMobile}}</span></div>
             <div class="info"><span>邮编</span> : <span>{{data.senderPostcode}}</span></div>
             <div class="item_title">收件地址信息</div>
             <div class="info"><span>收件人</span> : <span>{{data.receiverName}}</span></div>
-            <div class="info"><span>收件地址</span> : <span>{{data.receiverCountry}}/{{data.receiverAddress}}</span></div>
+            <div class="info"><span>收件地址</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
             <div class="info"><span>联系方式</span> : <span>{{data.receiverMobile}}</span></div>
             <div class="info"><span>邮编</span> : <span>{{data.receiverPostcode}}</span></div>
             <div class="item_title">包裹信息</div>

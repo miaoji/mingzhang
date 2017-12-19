@@ -53,9 +53,9 @@
         <li class="left">
           <router-link to="/cn/user/directmail">个人中心</router-link>
         </li>
-        <li class="left">
+        <!-- <li class="left">
           <router-link to="/cn/cashier?order=MZ15082952851200">收银台</router-link>
-        </li>
+        </li> -->
       </ul>
     </div>
     <el-dialog

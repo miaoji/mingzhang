@@ -8,23 +8,6 @@
 				<a href="javascript:;">Language</a>
 				<a href="javascript:;">|</a>
 				<router-link :to="link">English</router-link>
-				<!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
-				<div class="eject hide">
-					<!-- <router-link to="/cn/index">中文</router-link>
-					<router-link to="/en/index">English</router-link> -->
-					<el-dropdown @command="handleCommand">
-					<span class="el-dropdown-link">
-					语言<i class="el-icon-arrow-down el-icon--right"></i>
-					</span>
-					<el-dropdown-menu slot="dropdown">
-					<el-dropdown-item command="a">黄金糕</el-dropdown-item>
-					<el-dropdown-item command="b">狮子头</el-dropdown-item>
-					<el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-					<el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
-					<el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
-					</el-dropdown-menu>
-					</el-dropdown>
-				</div>
 				<div class="login">
 					<el-button type="info" icon="login" @click="wxLogin">登录</el-button>
 				</div>
@@ -74,15 +57,18 @@ export default {
 			window.scrollTo(0,0)
 		},
 		wxLogin () {
+			const redirect_uri = encodeURIComponent('http://api.mingz-tech.com/OAuth/')
+			const state = 'web'
+			// const wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${redirect_uri}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
+			// window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
 			this.loginContainerVisible = true
 			setTimeout(function () {
-				const redirect_uri = encodeURIComponent('http://api.mingz-tech.com/OAuth/')
 				new window.WxLogin({
 		      id: 'login-container',
 		      appid: 'wx9eca964047cb260f',
 		      scope: 'snsapi_login',
 		      redirect_uri: redirect_uri,
-		      state: 'web',
+		      state: state,
 		      style: '',
 		      href: ''
 		    })

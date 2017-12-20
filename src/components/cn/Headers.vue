@@ -8,9 +8,6 @@
         <a href="javascript:;">Language</a>
         <a href="javascript:;">|</a>
         <router-link :to="location">English</router-link>
-        <!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
-        <div class="eject hide">
-        </div>
         <div class="login">
           <el-button type="info" icon="login" @click="wxLogin">登录</el-button>
         </div>
@@ -39,9 +36,6 @@
         <li class="left">
           <router-link to="/cn/user/directmail">个人中心</router-link>
         </li>
-        <li class="left">
-          <router-link to="/cn/cashier?order=MZ15082952851200">收银台</router-link>
-        </li>
       </ul>
     </div>
     <el-dialog
@@ -58,6 +52,8 @@
   </div>
 </template>
 <script>
+import {storage} from '@/utils'
+
 export default {
   name: 'Header',
   data () {
@@ -69,7 +65,6 @@ export default {
     }
   },
   created () {
-    console.log('location', location.pathname)
     this.menu()
     if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/cn' && location.pathname !== '/cn/') {
       this.location = '/en/' + location.pathname.split('/cn/')[1]
@@ -80,20 +75,32 @@ export default {
       window.scrollTo(0, 0)
     },
     wxLogin () {
-      this.loginContainerVisible = true
-      setTimeout(function () {
-        const redirectUri = encodeURIComponent('http://api.mingz-tech.com/OAuth/')
-        /* eslint-disable no-new */
-        new window.WxLogin({
-          id: 'login-container',
-          appid: 'wx9eca964047cb260f',
-          scope: 'snsapi_login',
-          redirect_uri: redirectUri,
-          state: 'web',
-          style: '',
-          href: ''
-        })
-      }, 500)
+      const browserId = storage({
+        type: 'get',
+        key: 'browserId'
+      })
+      const redirectUri = encodeURIComponent('http://api.mingz-tech.com/OAuth')
+      const state = `web${browserId}`
+      const wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
+      const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
+      const websocket = new WebSocket(webSocketUrl)
+      websocket.onmessage = function (event) {
+        alert(event.data)
+      }
+      window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
+      // this.loginContainerVisible = true
+      // setTimeout(function () {
+      //   /* eslint-disable no-new */
+      //   new window.WxLogin({
+      //     id: 'login-container',
+      //     appid: 'wx9eca964047cb260f',
+      //     scope: 'snsapi_login',
+      //     redirect_uri: redirectUri,
+      //     state: state,
+      //     style: '',
+      //     href: ''
+      //   })
+      // }, 500)
     }
   },
   mounted () {

@@ -23,7 +23,11 @@ const customer = r => require.ensure([], () => r(require('@/views/cn/user/Custom
 const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDetail')), 'orderdetail')
 const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
 const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
+
 const error = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error')
+
+const redirect = r => require.ensure([], () => r(require('@/views/Redirect')), 'redirect')
+
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')
@@ -35,6 +39,8 @@ const enquestion = r => require.ensure([], () => r(require('@/views/en/Question'
 const ensend = r => require.ensure([], () => r(require('@/views/en/Send')), 'ensend')
 const ensite = r => require.ensure([], () => r(require('@/views/en/Site')), 'ensite')
 const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate')), 'enviolate')
+
+const error404 = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error404')
 
 export default new Router({
   base: __dirname,
@@ -64,6 +70,13 @@ export default new Router({
         intro: '交流社区'
       }
     }]
+  }, {
+    path: '/redirect',
+    name: 'redirect',
+    component: redirect,
+    meta: {
+      intro: '登录跳转'
+    }
   }, {
     path: '/cn',
     component: cnContainer,
@@ -245,11 +258,11 @@ export default new Router({
       }
     }]
   }, {
-    path: '/*',
-    name: 'error',
-    component: error,
+    path: '*',
+    name: 'error404',
+    component: error404,
     meta: {
-      intro: '404页面'
+      intro: '404'
     }
   }]
 })

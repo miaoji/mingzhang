@@ -1,3 +1,4 @@
+import {Base64} from 'js-base64'
 import {show} from '@/services/user'
 import {storage} from '@/utils'
 
@@ -15,6 +16,7 @@ export const login = async function (openid) {
       let user = res.user
       const token = res.token
       user = JSON.stringify(user)
+      user = Base64.encode(user)
       storage({
         type: 'set',
         key: 'token',

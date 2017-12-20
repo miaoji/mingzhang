@@ -54,6 +54,7 @@
 <script>
 import {storage} from '@/utils'
 import {login} from '@/utils/user'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
   name: 'Header',
@@ -71,7 +72,26 @@ export default {
       this.location = '/en/' + location.pathname.split('/cn/')[1]
     }
   },
+  computed: {
+    ...mapGetters({
+      'isLogin': 'getLoginStatus',
+      'userinfo': 'getUserInfo'
+    })
+  },
+  mounted () {
+    let _this = this
+    window.onscroll = function () {
+      if (document.documentElement.scrollTop > 115) {
+        _this.addClass = true
+      } else {
+        _this.addClass = false
+      }
+    }
+  },
   methods: {
+    ...mapActions([
+      'setUserInfo'
+    ]),
     menu () {
       window.scrollTo(0, 0)
     },
@@ -110,16 +130,6 @@ export default {
       //     href: ''
       //   })
       // }, 500)
-    }
-  },
-  mounted () {
-    let _this = this
-    window.onscroll = function () {
-      if (document.documentElement.scrollTop > 115) {
-        _this.addClass = true
-      } else {
-        _this.addClass = false
-      }
     }
   },
   watch: {

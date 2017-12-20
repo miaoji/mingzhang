@@ -53,6 +53,7 @@
 </template>
 <script>
 import {storage} from '@/utils'
+import {login} from '@/utils/user'
 
 export default {
   name: 'Header',
@@ -84,8 +85,16 @@ export default {
       const wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
       const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
       const websocket = new WebSocket(webSocketUrl)
-      websocket.onmessage = function (event) {
-        alert(event.data)
+      websocket.onmessage = async function (event) {
+        // oLkdC0oNGqxcia09QWDCnRHWWLXk
+        const openid = event.data
+        websocket.close()
+        try {
+          const user = await login(openid)
+          console.log('user', user)
+        } catch (err) {
+          console.error(err)
+        }
       }
       window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
       // this.loginContainerVisible = true

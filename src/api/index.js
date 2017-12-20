@@ -4,7 +4,9 @@ let API
 // 本地
 // API = 'http://192.168.0.231:8077'
 // 线上测试版
-API = 'http://api.didalive.net/mzkd'
+// API = 'http://api.didalive.net/mzkd'
+// 线上生产环境
+API = 'http://api.mingz-tech.com'
 
 let BBS_API
 
@@ -26,7 +28,9 @@ export const order = {
 
 // 用户信息
 export const user = {
-  token: `${API}/login/getToken`
+  token: `${API}/login/getToken`,
+  // get query {openid: oPg2ZwiH1ASA_EiAj10XHcB2qgcM}
+  show: `${API}/login/wxLogin`
 }
 
 // 国家信息
@@ -96,12 +100,6 @@ export const directMail = {
   delete: `${API}/api/orderInfo/delOrderInfoById`
 }
 
-// wx
-export const wx = {
-  // trade_type  = NATIVE`
-  getPayQr: `${API}/api/pay/pay`
-}
-
 // 帖子
 export const posts = {
   query: `${BBS_API}/bbs/articles/`,
@@ -109,4 +107,10 @@ export const posts = {
   show: `${BBS_API}/api/orderInfo/getOrderInfoById`,
   update: `${BBS_API}/api/orderInfo/modOrderInfoById`,
   delete: `${BBS_API}/api/orderInfo/delOrderInfoById`
+}
+
+// wx
+export const wx = {
+  // trade_type  = NATIVE`
+  getPayQr: `${API}/api/pay/pay`
 }

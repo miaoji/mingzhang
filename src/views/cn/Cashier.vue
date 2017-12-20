@@ -74,7 +74,7 @@
         <div class="item">
           <el-card class="box-card">
             <div class="item_title">付款方式</div>
-            <div class="weixin_pay clear" @click="weixinPay">
+            <div class="weixin_pay clear" @click="weixinPayOpen">
               <div class="img left"><img src="/static/image/pay_weixin.png" alt="微信支付"></div>
               <div class="left">前往微信支付</div>
             </div>
@@ -119,6 +119,8 @@
   import {getOrderInfoByOrderNo} from '@/services/orderInfo'
   import {getPayQr} from '@/services/wx'
   import {makeQr} from '@/utils/qr'
+  // import {storage} from '@/utils'
+  import {saveOpenid} from '@/utils/user'
 
   export default {
     name: 'cashier',
@@ -142,7 +144,8 @@
       window.scrollTo(0, 110)
     },
     methods: {
-      async weixinPay () {
+      async weixinPayOpen () {
+        this.wxPay()
         try {
           this.payDialogVisible = true
           this.qrLoading = true
@@ -160,6 +163,37 @@
           console.error(e)
         } finally {
           this.qrLoading = false
+        }
+      },
+      wxPay () {
+        // const browserId = storage({
+        //   type: 'get',
+        //   key: 'browserId'
+        // })
+        const state = this.data.orderNo
+        const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
+        const websocket = new WebSocket(webSocketUrl)
+        const _this = this
+        websocket.onmessage = async function (event) {
+          console.log('event', event)
+          let openid = event.data
+          saveOpenid(openid)
+          websocket.close()
+          try {
+            const res = await _this.setUserInfo({openid})
+            console.log('res', res)
+            _this.$message({
+              showClose: true,
+              ...res
+            })
+          } catch (err) {
+            console.error(err)
+            _this.$message({
+              showClose: true,
+              message: '登录失败，请检测您的网络是否连接正常',
+              type: 'error'
+            })
+          }
         }
       },
       showOrderInfo () {

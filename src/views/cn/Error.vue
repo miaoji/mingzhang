@@ -29,7 +29,7 @@
       goIndex () {
         setTimeout(() => {
           this.$router.push({path: '/'})
-        }, 20)
+        }, 2000)
       },
       menu () {
         window.document.title = '上海明彰网络科技有限公司'

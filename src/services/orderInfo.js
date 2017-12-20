@@ -9,6 +9,7 @@ export async function getOrderInfoByOrderNo (data) {
     url: order.getOrderInfoByOrderNo,
     method: 'get',
     auth: true,
+    useSession: true,
     data
   })
 }
@@ -19,6 +20,7 @@ export async function queryByCompany (data) {
     url: order.queryByCompany,
     method: 'get',
     auth: true,
+    useSession: true,
     data: newdata
   })
 }

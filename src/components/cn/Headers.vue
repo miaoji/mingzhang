@@ -38,7 +38,8 @@
           <router-link to="/">首页</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/ordersend">我要寄件</router-link>
+          <router-link to="/cn/ordersend" v-show='isLogin'>我要寄件</router-link>
+          <router-link to="/cn/orderspare" v-show='!isLogin'>我要寄件</router-link>
         </li>
         <li class="left">
           <router-link to="/cn/prescription">参考时效</router-link>
@@ -154,6 +155,14 @@ export default {
     }
   },
   watch: {
+    isLogin (val) {
+      if (this.$route.fullPath === '/cn/ordersend' && val === false) {
+        this.$router.push({path: '/cn/orderspare'})
+      }
+      if (this.$route.fullPath === '/cn/orderspare' && val === true) {
+        this.$router.push({path: '/cn/ordersend'})
+      }
+    },
     '$route' (to) {
       if (to.fullPath.split('/cn/').length > 1) {
         this.location = '/en/' + to.fullPath.split('/cn/')[1]

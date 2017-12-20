@@ -232,6 +232,7 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
   import Country from '@/components/Country'
   import SelectCity from '@/components/SelectCity'
   import SelectPackage from '@/components/SelectPackage'
@@ -260,6 +261,12 @@
       SelectPackage,
       SelectProduct,
       TablePackage
+    },
+    computed: {
+      ...mapGetters({
+        'isLogin': 'getLoginStatus',
+        'userinfo': 'getUserInfo'
+      })
     },
     data () {
       return {
@@ -303,6 +310,10 @@
       }
     },
     created () {
+      if (!this.isLogin) {
+        this.$router.push({path: '/cn/orderspare'})
+        return
+      }
       window.document.title = '上海明彰网络科技有限公司'
       this.menu()
       this.getSendAddr()
@@ -402,7 +413,7 @@
             height: this.form.height,
             volume: this.form.volume,
             volumeWeight: this.form.volumeWeight,
-            wxUserId: localStorage.mj_userId,
+            wxUserId: this.userinfo.id,
             mailingAddrId: this.sendAddrInfo[this.sendAddrIndex].id,
             receiveAddrId: this.receAddrInfo[this.receAddrIndex].id,
             returnGood: this.form.returnGood,
@@ -683,7 +694,7 @@
       // 获取寄件地址信息
       async getSendAddr () {
         let data = await showSendAddr({
-          wxUserId: localStorage.mj_userId
+          wxUserId: this.userinfo.id
         })
         if (data.code === 200 && data.obj) {
           this.sendAddrInfo = data.obj
@@ -702,7 +713,7 @@
       },
       // 获取单条寄件地址信息
       async getOneSendAddr (item) {
-        const data = await getOneSendAddr({id: item.id, wxUserId: localStorage.mj_userId})
+        const data = await getOneSendAddr({id: item.id, wxUserId: this.userinfo.id})
         if (data.code === 200) {
           this.sendAddr = data.obj
           this.item = {
@@ -761,7 +772,7 @@
             return
           }
         }
-        newpayload.wxUserId = localStorage.mj_userId
+        newpayload.wxUserId = this.userinfo.id
         const data = await updateOneSendAddr({...newpayload})
         if (data.code === 200) {
           this.getSendAddr()
@@ -780,7 +791,7 @@
       },
       // 删除寄件地址信息
       async delSendAddr (id) {
-        const data = await delSendAddrInfo({ids: id, wxUserId: localStorage.mj_userId})
+        const data = await delSendAddrInfo({ids: id, wxUserId: this.userinfo.id})
         if (data.code === 200) {
           this.getSendAddr()
           this.$message({
@@ -799,7 +810,7 @@
       async addSendAddr (payload) {
         console.log('payload', payload)
         console.log('this.item', this.item)
-        payload.wxUserId = localStorage.mj_userId
+        payload.wxUserId = this.userinfo.id
         payload.country = JSON.parse(payload.countrydata).id
         const name = JSON.parse(payload.countrydata).country_cn
         if (name === '中国' && payload.citydata && payload.citydata.length === 3) {
@@ -845,7 +856,7 @@
       // 获取收件地址信息
       async getReceiveAddr () {
         const data = await showReceAddr({
-          wxUserId: localStorage.mj_userId
+          wxUserId: this.userinfo.id
         })
         if (data.code === 200 && data.obj) {
           this.receAddrInfo = data.obj
@@ -865,7 +876,7 @@
       },
       // 获取单条收件地址信息
       async getOneReceAddr (item) {
-        const data = await getOneReceAddr({id: item.id, wxUserId: localStorage.mj_userId})
+        const data = await getOneReceAddr({id: item.id, wxUserId: this.userinfo.id})
         if (data.code === 200) {
           this.receAddr = data.obj
           this.item = {
@@ -905,7 +916,7 @@
         } else {
           newpayload.country = JSON.parse(payload.countrydata).id
         }
-        newpayload.wxUserId = localStorage.mj_userId
+        newpayload.wxUserId = this.userinfo.id
         const data = await updateOneReceAddr({...newpayload})
         if (data.code === 200) {
           this.getReceiveAddr()
@@ -924,7 +935,7 @@
       },
       // 删除收件地址信息
       async delReceAddr (id) {
-        const data = await delReceAddrInfo({ids: id, wxUserId: localStorage.mj_userId})
+        const data = await delReceAddrInfo({ids: id, wxUserId: this.userinfo.id})
         if (data.code === 200) {
           this.getReceiveAddr()
           this.$message({
@@ -941,7 +952,7 @@
       },
       // 创建收件地址信息
       async addReceAddr (payload) {
-        payload.wxUserId = localStorage.mj_userId
+        payload.wxUserId = this.userinfo.id
         payload.country = JSON.parse(payload.countrydata).id
         delete payload.cancel
         delete payload.countrydata

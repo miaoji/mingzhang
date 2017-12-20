@@ -11,7 +11,7 @@ const cnindex = r => require.ensure([], () => r(require('@/views/cn/Index')), 'c
 const getorderinfo = r => require.ensure([], () => r(require('@/views/cn/GetOrderInfo')), 'getorderinfo')
 const introduce = r => require.ensure([], () => r(require('@/views/cn/Introduce')), 'introduce')
 const ordersend = r => require.ensure([], () => r(require('@/views/cn/OrderSend')), 'ordersend')
-const ordersendSpare = r => require.ensure([], () => r(require('@/views/cn/OrderSendSpare')), 'ordersendSpare')
+const ordersendspare = r => require.ensure([], () => r(require('@/views/cn/OrderSendSpare')), 'ordersendspare')
 const prescription = r => require.ensure([], () => r(require('@/views/cn/Prescription')), 'prescription')
 const question = r => require.ensure([], () => r(require('@/views/cn/Question')), 'question')
 const send = r => require.ensure([], () => r(require('@/views/cn/Send')), 'send')
@@ -112,14 +112,14 @@ export default new Router({
       name: 'ordersend',
       component: ordersend,
       meta: {
-        intro: '线下寄件'
+        intro: '寄件'
       }
     }, {
-      path: 'ordersendSpare',
-      name: 'ordersendSpare',
-      component: ordersendSpare,
+      path: 'orderspare',
+      name: 'ordersendspare',
+      component: ordersendspare,
       meta: {
-        intro: '不登录寄件'
+        intro: '寄件'
       }
     }, {
       path: 'prescription',

@@ -10,6 +10,7 @@ export async function query (data) {
     url: packages.show,
     method: 'get',
     auth: true,
+    useSession: true,
     data
   })
 }

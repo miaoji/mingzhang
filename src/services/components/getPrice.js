@@ -8,6 +8,7 @@ export async function getPrice (params) {
   return request({
     url: getIntlPrice.show,
     methods: 'get',
+    useSession: true,
     data: params
   })
 }

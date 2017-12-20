@@ -264,6 +264,7 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
   import Country from '@/components/Country'
   import SelectCity from '@/components/SelectCity'
   import SelectPackage from '@/components/SelectPackage'
@@ -285,13 +286,19 @@
   } from '@/services/address'
 
   export default {
-    name: 'orderSend',
+    name: 'OrderSendSpare',
     components: {
       Country,
       SelectCity,
       SelectPackage,
       SelectProduct,
       TablePackage
+    },
+    computed: {
+      ...mapGetters({
+        'isLogin': 'getLoginStatus',
+        'userinfo': 'getUserInfo'
+      })
     },
     data () {
       return {
@@ -335,6 +342,10 @@
       }
     },
     created () {
+      if (this.isLogin) {
+        this.$router.push({path: '/cn/ordersend'})
+        return
+      }
       window.document.title = '上海明彰网络科技有限公司'
       this.menu()
       // this.getSendAddr()

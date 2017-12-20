@@ -10,6 +10,7 @@ export async function query (params) {
   return request({
     url: product.show,
     methods: 'get',
+    useSession: true,
     data: params
   })
 }

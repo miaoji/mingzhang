@@ -9,7 +9,8 @@ export async function query () {
   return request({
     url: country.show,
     methods: 'get',
-    auth: true
+    useSession: true
+    // auth: true
   })
 }
 
@@ -17,6 +18,7 @@ export async function cascade () {
   return request({
     url: country.cascade,
     methods: 'get',
-    auth: true
+    useSession: true
+    // auth: true
   })
 }

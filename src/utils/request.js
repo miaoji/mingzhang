@@ -9,13 +9,13 @@ const fetch = (options) => {
     params,
     url,
     auth = true,
-    useSessionToken = false
+    useSession = false
   } = options
   let token = storage({
     type: 'get',
     key: 'authToken'
   })
-  if (useSessionToken) {
+  if (useSession) {
     token = window.sessionStorage.winnerKey
   }
 
@@ -73,7 +73,7 @@ const fetch = (options) => {
 }
 
 export default function request (options) {
-  const {useSessionToken} = options
+  const {useSession} = options
   return fetch(options).then((response) => {
     const {status} = response
     let data = response.data
@@ -93,7 +93,7 @@ export default function request (options) {
       msg = data.message || statusText
       // 判断token失效
       if (response.status === 401) {
-        if (useSessionToken) {
+        if (useSession) {
           window.sessionStorage.clear()
           getToken()
         }

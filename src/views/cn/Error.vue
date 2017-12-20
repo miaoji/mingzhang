@@ -6,8 +6,8 @@
   </div>
 </template>
 <script>
-  import Headers from '@/components/Headers'
-  import Footers from '@/components/Footers'
+  import Headers from '@/components/cn/Headers'
+  import Footers from '@/components/cn/Footers'
 
   export default {
     name: 'IndexMain',
@@ -18,7 +18,7 @@
     data () {
       return {
         msg: '',
-        show: true,
+        show: true
       }
     },
     created () {
@@ -29,11 +29,12 @@
       goIndex () {
         setTimeout(() => {
           this.$router.push({path: '/'})
-        }, 2000)
+        }, 20)
       },
       menu () {
         window.document.title = '上海明彰网络科技有限公司'
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 500)
+        console.log(1)
       }
     }
   }

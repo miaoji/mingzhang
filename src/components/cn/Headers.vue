@@ -10,20 +10,6 @@
         <router-link :to="location">English</router-link>
         <!-- <span><img src="/static/image/sca_ico_arr.png" alt="banner"></span> -->
         <div class="eject hide">
-          <!-- <router-link to="/cn/index">中文</router-link>
-                    <router-link to="/en/index">English</router-link> -->
-          <!-- <el-dropdown @command="handleCommand">
-                    <span class="el-dropdown-link">
-                    语言<i class="el-icon-arrow-down el-icon--right"></i>
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-                    <el-dropdown-item command="b">狮子头</el-dropdown-item>
-                    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-                    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
-                    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
-                    </el-dropdown-menu>
-                    </el-dropdown> -->
         </div>
         <div class="login">
           <el-button type="info" icon="login" @click="wxLogin">登录</el-button>
@@ -53,9 +39,9 @@
         <li class="left">
           <router-link to="/cn/user/directmail">个人中心</router-link>
         </li>
-        <!-- <li class="left">
+        <li class="left">
           <router-link to="/cn/cashier?order=MZ15082952851200">收银台</router-link>
-        </li> -->
+        </li>
       </ul>
     </div>
     <el-dialog
@@ -146,6 +132,7 @@ export default {
   /*头部导航栏*/
   .header_nav {
     background-color: #fff;
+    /*width: 100vw;*/
   }
 
   .header_nav > ul {
@@ -203,22 +190,7 @@ export default {
     background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
     background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
-    /*-webkit-transition: all .5s;
-         -moz-transition: all .5s;
-          -ms-transition: all .5s;
-           -o-transition: all .5s;
-              transition: all .5s;*/
   }
-
-  /*.header_nav>.header_nav_item.toptoptop{
-      width: 100%;
-      background: rgba(100, 100, 100, .8);
-      position:fixed;
-      top: 0px;
-      z-index: 99999;
-      left: 50%;
-      margin-left: -50%;
-  }*/
   .header_nav > .header_nav_item > ul {
     list-style: none;
     font-size: 14px;
@@ -239,11 +211,6 @@ export default {
 
   .header_nav > .header_nav_item > ul > li > a:hover {
     color: #ff1919;
-    /* border-color: #ff1919; */
-    /* background: -webkit-linear-gradient(#1a1a1a, #333);
-      background: -o-linear-gradient(#1a1a1a, #333);
-      background: -moz-linear-gradient(#1a1a1a, #333);
-      background: linear-gradient(#1a1a1a, #333); */
   }
 
   /* 回到首页按钮 */

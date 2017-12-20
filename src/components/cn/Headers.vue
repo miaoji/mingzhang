@@ -124,7 +124,6 @@ export default {
       const websocket = new WebSocket(webSocketUrl)
       const _this = this
       websocket.onmessage = async function (event) {
-        // oLkdC0oNGqxcia09QWDCnRHWWLXk
         let openid = event.data
         saveOpenid(openid)
         websocket.close()

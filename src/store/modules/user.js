@@ -25,6 +25,11 @@ export const actions = {
       const code = res.statusCode
       if (res.status === 1 && code === 200) {
         const token = res.token
+        storage({
+          type: 'set',
+          key: 'authToken',
+          val: token
+        })
         const user = res.user
         commit(types.SET_USER, {isLogin: true, token, user})
         return {
@@ -40,17 +45,16 @@ export const actions = {
     } catch (err) {
       console.error(err)
       return {
-        type: 'fail',
+        type: 'error',
         message: err.message,
         code: err.code
       }
     }
   },
   async loginOut ({dispatch, commit}) {
-    console.log(1)
     storage({
       type: 'remove',
-      key: 'token'
+      key: ['token', 'authToken']
     })
     commit(types.SET_USER, {isLogin: false, token: '', user: {}})
   }

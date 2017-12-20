@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {gettoken as getToken} from '@/utils'
+import {gettoken as getToken, storage} from '@/utils'
 
 const fetch = (options) => {
   let {
@@ -9,8 +9,15 @@ const fetch = (options) => {
     params,
     url,
     auth = true,
-    token
+    useSessionToken = false
   } = options
+  let token = storage({
+    type: 'get',
+    key: 'authToken'
+  })
+  if (useSessionToken) {
+    token = window.sessionStorage.winnerKey
+  }
 
   switch (method.toLowerCase()) {
     case 'get':
@@ -66,7 +73,7 @@ const fetch = (options) => {
 }
 
 export default function request (options) {
-  options.token = window.sessionStorage.winnerKey
+  const {useSessionToken} = options
   return fetch(options).then((response) => {
     const {status} = response
     let data = response.data
@@ -86,9 +93,10 @@ export default function request (options) {
       msg = data.message || statusText
       // 判断token失效
       if (response.status === 401) {
-        window.sessionStorage.clear()
-        // alert('网络故障,请刷新页面后重试!!!')
-        getToken()
+        if (useSessionToken) {
+          window.sessionStorage.clear()
+          getToken()
+        }
         return {success: false, statusCode: 401, msg: '用户登陆状态已失效'}
       }
     } else {

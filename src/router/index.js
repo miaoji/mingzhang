@@ -24,10 +24,9 @@ const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDet
 const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
 const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
 
-const error = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error')
+// const error = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error')
 
 const redirect = r => require.ensure([], () => r(require('@/views/Redirect')), 'redirect')
-
 
 // en
 const enindex = r => require.ensure([], () => r(require('@/views/en/Index')), 'enindex')

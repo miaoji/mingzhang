@@ -20,10 +20,14 @@ export const actions = {
    * @param {[type]} options.commit   [description]
    * @param {[type]} options.openid   [description]
    */
-  async setDirectmailList ({dispatch, commit}, {page = 1}) {
+  async setDirectmailList ({dispatch, commit, rootGetters}, {page = 1}) {
     try {
+      const {id} = rootGetters.getUserInfo
+      if (!id) {
+        throw new Error('请先登录')
+      }
       const res = await directMail.query({
-        wxUserId: 212,
+        wxUserId: id,
         page,
         rows: 10
       })
@@ -47,8 +51,8 @@ export const actions = {
     } catch (err) {
       console.error(err)
       return {
-        text: '网络错误',
-        width: '15rem',
+        text: err.message || '网络错误',
+        width: '18rem',
         type: 'warn'
       }
     }

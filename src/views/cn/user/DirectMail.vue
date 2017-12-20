@@ -105,9 +105,7 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import {remove} from '@/services/directMail'
-  // import {getPayQr} from '@/services/wx'
   import {format} from '@/utils/time'
-  // import {makeQr} from '@/utils/qr'
   import {orderstatus} from '@/filters'
 
   export default {

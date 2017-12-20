@@ -5,8 +5,6 @@
 </template>
 
 <script>
-  // import { getToken } from '@/services/token'
-  // import md5 from 'js-md5'
   import {gettoken as getToken, storage} from '@/utils'
   import {guid} from '@/utils/uuid'
 
@@ -17,7 +15,6 @@
         wid: 'width:1024px'
       }
     },
-    methods: {},
     beforeCreate () {
       getToken()
       // 如果browserId为空，则新增
@@ -33,20 +30,14 @@
         })
       }
     },
-    created () {
-      // 将userinfo传递到vue store中存储使用
-      const userinfo = storage({
-        type: 'get',
-        key: 'userinfo'
-      })
-      if (userinfo) {
-        console.log('111')
-      }
+    async created () {
       if (document.body.offsetWidth < 1300) {
         document.body.style.width = '1300px'
       } else {
         this.wid = 'width:' + document.body.offsetWidth + 'px'
       }
+    },
+    methods: {
     }
   }
 </script>

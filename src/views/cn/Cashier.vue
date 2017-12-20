@@ -20,7 +20,7 @@
           <span class="title_info">请在确认信息无误后付款！订单号：{{data.orderNo}}</span>
           <div class="right">实付金额 : <span class="totalFee">{{data.totalFee/100}}</span> 元</div>
           <div class="rece_info clear">
-            <span v-show="!orderInfoShow">收件地址信息 : {{data.receiverCountry}}/{{data.receiverAddress}}</span>
+            <span v-show="!orderInfoShow">收件地址信息 : {{data.receiverCountry}}, {{data.receiverAddress}}</span>
             <span class="right" @click="showOrderInfo">
               订单详情
               <i v-show="!orderInfoShow" class="el-icon-arrow-down"></i>
@@ -89,10 +89,36 @@
       </div>
     </div>
     <div style="height: 50px"></div>
+
+    <el-dialog
+      title="微信支付"
+      width="250px"
+      :visible.sync="payDialogVisible"
+      :close-on-press-escape="true"
+      :close-on-click-modal="false">
+      <div slot="title">
+        <img src="../../assets/images/icon32_appwx_logo.png" alt="wxlogo" style="vertical-align: middle;">
+        <span>
+          使用微信支付 <span class="totalFeeInfo">￥{{data.totalFee/100}}</span>
+        </span>
+      </div>
+      <div
+        v-loading="qrLoading">
+        <div v-html="payImg"></div>
+        <div class="prompt_text clear">
+          <div class="img left"><img src="/static/image/sao.png" alt=""></div>
+          <p>请使用微信扫一扫</p>
+          <p>扫描二维码完成支付</p>
+        </div>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 <script>
   import {getOrderInfoByOrderNo} from '@/services/orderInfo'
+  import {getPayQr} from '@/services/wx'
+  import {makeQr} from '@/utils/qr'
 
   export default {
     name: 'cashier',
@@ -101,20 +127,40 @@
         data: {},
         orderInfoShow: false,
         loading: true,
-        orderIsNo: false
+        orderIsNo: false,
+        payDialogVisible: false,
+        payImg: '',
+        qrLoading: false
       }
     },
     created () {
+      console.log('this.router', this.$router.query)
+      console.log('this.router', this.$router)
+      console.log('this.router', this)
       const order = location.search.split('?order=')[1]
       this.getOrderInfo(order)
       window.scrollTo(0, 110)
     },
     methods: {
-      weixinPay () {
-        this.$message({
-          type: 'success',
-          message: '开始进行微信支付'
-        })
+      async weixinPay () {
+        try {
+          this.payDialogVisible = true
+          this.qrLoading = true
+          const res = await getPayQr({
+            money: this.data.totalFee,
+            orderNo: this.data.orderNo,
+            body: '国际快递包裹',
+            payType: 0,
+            closingPriceId: 0,
+            trade_type: 'NATIVE'
+          })
+          const codeUrl = res.code_url
+          this.payImg = makeQr(codeUrl, 6, 5)
+        } catch (e) {
+          console.error(e)
+        } finally {
+          this.qrLoading = false
+        }
       },
       showOrderInfo () {
         this.orderInfoShow = !this.orderInfoShow
@@ -143,11 +189,56 @@
     font-family: '微软雅黑';
     margin: 30px auto 30px;
     overflow: hidden;
+    .el-dialog__wrapper {
+      overflow-y: scroll;
+      .el-dialog {
+        width: 500px!important;
+        height: 500px!important;
+        text-align: center;
+        .el-dialog__header {
+          padding-top: 40px!important;
+          .totalFeeInfo {
+            color: #f56c6c;
+            font-size: 18px;
+          }
+        }
+        .el-dialog__body {
+          height: 341px!important;
+          .prompt_text {
+            text-align: left;
+            background-color: #3a8ee6;
+            width: 300px;
+            margin: 10px auto 0px;
+            color: #fff;
+            padding: 10px 0px;
+            .left {
+              margin-top: 6px;
+              margin-left: 50px;
+              margin-right: 20px;
+              width: 34px;
+              height: 34px;
+              img {
+                width: inherit;
+                height: inherit;
+              }
+            }
+            p {
+              padding: 0px;
+              margin: 0px;
+            }
+          }
+          svg {
+            width: 258px;
+            height: 258px;
+          }
+        }
+      }  
+    }
     .cashier_bg {
       position: absolute;
-      top: 100px;
-      left: 50%;
-      margin-left: -650px;
+      top: 185px;
+      // left: 50%;
+      margin-left: -20px;
       background-image: url(/static/image/cashier_bg.png);
       background-repeat: no-repeat;
       background-size: 1300px;

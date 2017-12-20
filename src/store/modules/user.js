@@ -1,9 +1,10 @@
+import {show} from '@/services/user'
 import {storage} from '@/utils'
-import {Base64} from 'js-base64'
 import * as types from '../mutation-types'
 
 export const state = {
   isLogin: false,
+  token: '',
   user: {}
 }
 
@@ -14,28 +15,51 @@ export const getters = {
 
 export const actions = {
   /**
-   * [setUserInfo 将localStorage中userinfo赋值到user中]
+   * [setUserInfo 根据openid获取userinfo]
    * @param {[type]} options.dispatch [description]
    * @param {[type]} options.commit   [description]
    */
-  async setUserInfo ({dispatch, commit}) {
+  async setUserInfo ({dispatch, commit}, {openid}) {
     try {
-      let user = storage({
-        type: 'get',
-        key: 'userinfo'
-      })
-      user = Base64.decode(user)
-      user = JSON.parse(user)
-      commit(types.SET_USER, {user, isLogin: true})
+      const res = await show({openid})
+      const code = res.statusCode
+      if (res.status === 1 && code === 200) {
+        const token = res.token
+        const user = res.user
+        commit(types.SET_USER, {isLogin: true, token, user})
+        return {
+          type: 'success',
+          message: res.msg,
+          code
+        }
+      } else {
+        let err = new Error(res.msg)
+        err.code = code
+        throw err
+      }
     } catch (err) {
-      console.error(er)
+      console.error(err)
+      return {
+        type: 'fail',
+        message: err.message,
+        code: err.code
+      }
     }
+  },
+  async loginOut ({dispatch, commit}) {
+    console.log(1)
+    storage({
+      type: 'remove',
+      key: 'token'
+    })
+    commit(types.SET_USER, {isLogin: false, token: '', user: {}})
   }
 }
 
 export const mutations = {
-  [types.SET_USER] (state, {user, isLogin}) {
-    state.user = user
+  [types.SET_USER] (state, {isLogin, token, user}) {
     state.isLogin = isLogin
+    state.token = token
+    state.user = user
   }
 }

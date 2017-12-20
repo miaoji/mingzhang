@@ -9,7 +9,26 @@
         <a href="javascript:;">|</a>
         <router-link :to="location">English</router-link>
         <div class="login">
-          <el-button type="info" icon="login" @click="wxLogin">登录</el-button>
+          <el-button type="info" icon="login" v-show="!isLogin" @click="wxLogin">登录</el-button>
+          <div class="login-icon">
+            <el-dropdown trigger="click">
+              <span class="el-dropdown-link">
+                <img v-show="isLogin" :src="userinfo['headimgurl']" alt="用户头像">
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link to="/cn/user/directmail">
+                    <i class="el-icon-location"></i>个人中心
+                  </router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>
+                  <div @click="handleLoginOut">
+                    <i class="el-icon-caret-right"></i>登出
+                  </div>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
       </li>
     </ul>
@@ -33,9 +52,6 @@
         <li class="left">
           <router-link to="/cn/send">寄件流程</router-link>
         </li>
-        <li class="left">
-          <router-link to="/cn/user/directmail">个人中心</router-link>
-        </li>
       </ul>
     </div>
     <el-dialog
@@ -52,9 +68,9 @@
   </div>
 </template>
 <script>
-import {storage} from '@/utils'
-import {login} from '@/utils/user'
 import {mapActions, mapGetters} from 'vuex'
+import {storage} from '@/utils'
+import {saveOpenid} from '@/utils/user'
 
 export default {
   name: 'Header',
@@ -90,7 +106,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'setUserInfo'
+      'setUserInfo',
+      'loginOut'
     ]),
     menu () {
       window.scrollTo(0, 0)
@@ -105,31 +122,36 @@ export default {
       const wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
       const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
       const websocket = new WebSocket(webSocketUrl)
+      const _this = this
       websocket.onmessage = async function (event) {
         // oLkdC0oNGqxcia09QWDCnRHWWLXk
-        const openid = event.data
+        let openid = event.data
+        saveOpenid(openid)
         websocket.close()
         try {
-          const user = await login(openid)
-          console.log('user', user)
+          const res = await _this.setUserInfo({openid})
+          console.log('res', res)
+          _this.$message({
+            showClose: true,
+            ...res
+          })
         } catch (err) {
           console.error(err)
+          _this.$message({
+            showClose: true,
+            message: '登录失败，请检测您的网络是否连接正常',
+            type: 'error'
+          })
         }
       }
       window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
-      // this.loginContainerVisible = true
-      // setTimeout(function () {
-      //   /* eslint-disable no-new */
-      //   new window.WxLogin({
-      //     id: 'login-container',
-      //     appid: 'wx9eca964047cb260f',
-      //     scope: 'snsapi_login',
-      //     redirect_uri: redirectUri,
-      //     state: state,
-      //     style: '',
-      //     href: ''
-      //   })
-      // }, 500)
+    },
+    handleLoginOut () {
+      const res = window.confirm('确定要登出吗?')
+      if (res) {
+        this.loginOut()
+        window.location.reload()
+      }
     }
   },
   watch: {
@@ -150,6 +172,15 @@ export default {
     height: inherit;
     line-height: 78px;
   }
+  .login-icon {
+    cursor: pointer;
+  }
+  .login-icon img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
 
   #login-container {
     text-align: center;
@@ -158,6 +189,7 @@ export default {
   /*头部导航栏*/
   .header_nav {
     background-color: #fff;
+    /*width: 100vw;*/
   }
 
   .header_nav > ul {
@@ -215,22 +247,7 @@ export default {
     background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
     background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
-    /*-webkit-transition: all .5s;
-         -moz-transition: all .5s;
-          -ms-transition: all .5s;
-           -o-transition: all .5s;
-              transition: all .5s;*/
   }
-
-  /*.header_nav>.header_nav_item.toptoptop{
-      width: 100%;
-      background: rgba(100, 100, 100, .8);
-      position:fixed;
-      top: 0px;
-      z-index: 99999;
-      left: 50%;
-      margin-left: -50%;
-  }*/
   .header_nav > .header_nav_item > ul {
     list-style: none;
     font-size: 14px;

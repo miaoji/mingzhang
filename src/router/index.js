@@ -23,6 +23,9 @@ const customer = r => require.ensure([], () => r(require('@/views/cn/user/Custom
 const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDetail')), 'orderdetail')
 const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
 const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
+
+// const error = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error')
+
 const redirect = r => require.ensure([], () => r(require('@/views/Redirect')), 'redirect')
 
 // en
@@ -161,7 +164,8 @@ export default new Router({
         name: 'directmail',
         component: directmail,
         meta: {
-          intro: '直邮列表'
+          intro: '直邮列表',
+          needLogin: true
         }
       }, {
         path: 'customer',

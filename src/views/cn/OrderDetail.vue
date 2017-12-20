@@ -18,7 +18,7 @@
         </div>
         <div class="status-tools">
           您可以
-          <el-button type="success" size="small" v-show="detailData['status'] === 1">立即付款</el-button>
+          <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>立即付款</el-button>
           <el-button type="text" size="small" @click="handleDelete" v-show="detailData['status'] === 1">取消订单</el-button>
           <el-button type="success" size="small" @click="handleRoute" v-show="canCheckRoute">查看物流</el-button>
         </div>
@@ -117,6 +117,9 @@
       }
     },
     methods: {
+      payClick () {
+        this.$router.push('/cn/cashier?order=' + this.detailData['orderNo'])
+      },
       async initDetail () {
         try {
           this.fullscreenLoading = true

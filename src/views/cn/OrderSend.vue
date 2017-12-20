@@ -412,13 +412,16 @@
             priceId: this.freightId,
             totalFee: Math.round(Number(this.freight) * 100),
             remark: this.form.remark,
+            // 寄件地址信息
             senderCountry: this.sendAddr.COUNTRY_CN,
             senderProv: this.sendAddr.PROVINCE,
             senderCity: this.sendAddr.cityName,
             senderCounty: this.sendAddr.DISTRICT,
+            // 收件地址信息
             receiverCountry: this.receAddr.COUNTRY_CN,
             orderItems: JSON.stringify(this.tablePackagedata) || '[]',
-            orderType: 2
+            type: 0,
+            orderType: 3
           }
           this.$refs[form].validate((valid) => {
             if (valid) {

@@ -27,7 +27,7 @@
           <div class="login-icon">
             <el-dropdown trigger="hover">
               <div class="el-dropdown-link">
-                <img v-show="isLogin" :src="userinfo['headimgurl']" alt="用户头像">
+                <img v-show="isLogin" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
               </div>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>

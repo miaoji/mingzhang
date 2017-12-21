@@ -1,7 +1,7 @@
 <template>
   <div class="orderdetail" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="orderdetail-item normal" v-show="hiddenStatus === 1">
-      <div class="title">
+      <div class="tit">
         订单详情
       </div>
       <div class="detail">
@@ -17,21 +17,22 @@
           <i class="el-icon-info status-icon"></i>订单状态: {{statusList['content']}}
         </div>
         <div class="status-tools">
-          您可以
           <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>立即付款</el-button>
           <el-button type="text" size="small" @click="handleDelete" v-show="detailData['status'] === 1">取消订单</el-button>
           <el-button type="success" size="small" @click="handleRoute" v-show="canCheckRoute">查看物流</el-button>
         </div>
       </div>
     </div>
-    <div class="error" v-show="hiddenStatus === 0">
-      <div>
-        <el-alert
-          title="该订单已被删除，无法查看"
-          type="error"
-          show-icon>
-        </el-alert>
-      </div>
+    <div class="error" v-show="hiddenStatus === 0 || show">
+      <el-card class="box-card">
+        <div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
+        <div class="title_text">您提供的单号可能有误,请确认后重新查询</div>
+        <span class="title_info">若单号无误,请3-5分钟后刷新页面重试</span>
+        <div class="go_index">
+          <router-link to="/">回到首页</router-link>
+        </div>
+      </el-card>
+      <div style="height:170px;"></div>
     </div>
   </div>
 </template>
@@ -49,14 +50,15 @@
     },
     data () {
       return {
-        orderId: 0,
+        orderNo: 0,
         detailData: {},
-        fullscreenLoading: false
+        fullscreenLoading: false,
+        show: false
       }
     },
     created () {
-      const {id} = this.$route.query
-      this.orderId = id
+      const {orderNo} = this.$route.query
+      this.orderNo = orderNo
       this.initDetail()
     },
     computed: {
@@ -124,16 +126,19 @@
         try {
           this.fullscreenLoading = true
           const res = await show({
-            id: this.orderId
+            orderNo: this.orderNo
           })
+          console.log('data', res)
           if (res.code === 200) {
             this.detailData = res.obj
           } else {
-            this.$message.error(res.msg)
+            this.show = true
+            // this.$message.error(res.msg)
           }
           return
         } catch (e) {
           console.error(e)
+          this.show = true
           this.$message.error(e.message)
         } finally {
           this.fullscreenLoading = false
@@ -147,7 +152,7 @@
         }).then(async () => {
           try {
             this.fullscreenLoading = true
-            const ids = this.orderId
+            const ids = this.orderNo
             const res = await remove({ids})
             if (res.code === 200) {
               return this.$message({
@@ -177,24 +182,71 @@
   @import '../../assets/styles/helpers.less';
 
   .orderdetail {
+    max-width: 1200px;
     .normal-container;
+    .error {
+      .box-card {
+        font-size: 18px;
+        color: #333;
+        line-height: 2.2em;
+        margin: 0px auto;
+        padding: 20px;
+        .title_text {
+          margin-left: 100px;
+          font-size: 24px;
+          color: #333;
+          line-height: 1.8em;
+        }
+        .title_info {
+          font-size: 12px;
+          margin-left: 20px;
+        }
+        .go_index {
+          margin-left: 100px;
+          a {
+            color: #3a8ee6;
+          }
+        }
+        .ico_ok {
+          width: 80px;
+          height: 80px;
+          overflow: hidden;
+          img {
+            width: inherit;
+            height: inherit;
+          }
+        }
+      }
+    }
     &-item {
-      background: @grey-bg;
-      padding: 1rem 1rem;
-      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      // background: @grey-bg;
+      padding: 30px;
+      margin-bottom: 20px;
+      .tit {
+        color: red;
+        font-size: 20px;
+        line-height: 2em;
+        border-bottom: 1px solid #ddd;
+      }
       .title {
         color: #333;
         font-size: 18px;
+        line-height: 2.2em;
         padding-bottom: 1rem;
-        border-bottom: 1px solid #333;
+        border-bottom: 1px solid #ccc;
       }
       .detail {
-        border-bottom: 1px solid #333;
+        padding: 20px;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
       }
       .status {
         padding: 10px 0;
         &-content {
           padding-bottom: 20px;
+          padding-left: 20px;
           font-size: 16px;
           font-weight: 600;
           .status-icon {

@@ -18,7 +18,8 @@
           <div class="ico_ok left"><img src="/static/image/ico_ok.png" alt="OK"></div>
           <div class="title_text">订单创建完成,我要付款去~</div>
           <span class="title_info">请在确认信息无误后付款！订单号：{{data.orderNo}}</span>
-          <div class="right">实付金额 : <span class="totalFee">{{data.totalFee/100}}</span> 元</div>
+          <div class="right">付款状态 : <span class="totalFee">{{data.status===1?'待付款':'已完成支付'}}</span></div>
+          <div class="right">待付款金额 : <span class="totalFee">{{data.totalFee/100}}</span> 元</div>
           <div class="rece_info clear">
             <span v-show="!orderInfoShow">收件地址信息 : {{data.receiverCountry}}, {{data.receiverAddress}}</span>
             <span class="right" @click="showOrderInfo">
@@ -116,11 +117,12 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
   import {getOrderInfoByOrderNo} from '@/services/orderInfo'
   import {getPayQr} from '@/services/wx'
   import {makeQr} from '@/utils/qr'
   // import {storage} from '@/utils'
-  import {saveOpenid} from '@/utils/user'
+  // import {saveOpenid} from '@/utils/user'
 
   export default {
     name: 'cashier',
@@ -132,10 +134,19 @@
         orderIsNo: false,
         payDialogVisible: false,
         payImg: '',
-        qrLoading: false
+        qrLoading: false,
+        wxPayInfo: {}
       }
     },
+    computed: {
+      ...mapGetters({
+        'isLogin': 'getLoginStatus'
+      })
+    },
     created () {
+      // if (!this.isLogin) {
+      //   this.$router.push({path: '/cn/index'})
+      // }
       console.log('this.router', this.$router.query)
       console.log('this.router', this.$router)
       console.log('this.router', this)
@@ -145,7 +156,6 @@
     },
     methods: {
       async weixinPayOpen () {
-        this.wxPay()
         try {
           this.payDialogVisible = true
           this.qrLoading = true
@@ -157,6 +167,8 @@
             closingPriceId: 0,
             trade_type: 'NATIVE'
           })
+          this.wxPayInfo = res
+          this.wxPay()
           const codeUrl = res.code_url
           this.payImg = makeQr(codeUrl, 6, 5)
         } catch (e) {
@@ -170,29 +182,42 @@
         //   type: 'get',
         //   key: 'browserId'
         // })
-        const state = this.data.orderNo
+        console.log('wxpayinfo', this.wxPayInfo)
+        const state = this.wxPayInfo.out_trade_no
         const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
         const websocket = new WebSocket(webSocketUrl)
         const _this = this
         websocket.onmessage = async function (event) {
           console.log('event', event)
-          let openid = event.data
-          saveOpenid(openid)
+          let payInfo = event.data
           websocket.close()
           try {
-            const res = await _this.setUserInfo({openid})
-            console.log('res', res)
-            _this.$message({
-              showClose: true,
-              ...res
-            })
+            if (payInfo === '1') {
+              _this.$notify({
+                title: '付款成功',
+                message: '您已完成支付,我们将尽快安排工作人员上门取件',
+                type: 'success',
+                duration: 0
+              })
+              _this.$router.push({path: '/cn/orderdetail?orderNo=' + _this.data.orderNo})
+            } else {
+              _this.$notify({
+                title: '付款失败',
+                message: '本页面二维码将失效,若需继续付款请刷新页面,若您已成功付款,请前往个人中心查看订单状态',
+                type: 'warning',
+                duration: 0
+              })
+            }
+            _this.payDialogVisible = false
           } catch (err) {
             console.error(err)
-            _this.$message({
-              showClose: true,
-              message: '登录失败，请检测您的网络是否连接正常',
-              type: 'error'
+            _this.$notify({
+              title: '付款失败',
+              message: '付款异常，请检测您的网络是否连接正常',
+              type: 'error',
+              duration: 0
             })
+            _this.payDialogVisible = false
           }
         }
       },
@@ -205,6 +230,10 @@
         if (data.code === 200 && data.obj) {
           this.data = data.obj
           this.loading = false
+          console.log('data', data)
+          if (data.obj.status !== 1) {
+            this.$router.push({path: '/cn/orderdetail?orderNo=' + data.obj.orderNo})
+          }
         } else {
           this.$notify({
             title: '订单信息获取失败',

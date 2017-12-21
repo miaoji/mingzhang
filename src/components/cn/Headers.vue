@@ -5,25 +5,39 @@
         <router-link to="/"><img src="/static/image/logo.png"/><span class="logo">上海明彰网络科技有限公司</span></router-link>
       </li>
       <li class="right language">
-        <a href="javascript:;">Language</a>
-        <a href="javascript:;">|</a>
-        <router-link :to="location">English</router-link>
+        <div class='switch'>
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              语言<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item><router-link :to="location">English</router-link></el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+        <div class='hide'>
+          <a href="javascript:;">Language</a>
+          <a href="javascript:;">|</a>
+          <router-link :to="location">English</router-link>
+        </div>
+      </li>
+      <li class="right language">
         <div class="login">
-          <el-button type="info" icon="login" v-show="!isLogin" @click="wxLogin">登录</el-button>
+          <el-button type="text" icon="login" v-show="!isLogin" @click="wxLogin">登录</el-button>
           <div class="login-icon">
-            <el-dropdown trigger="click">
-              <span class="el-dropdown-link">
+            <el-dropdown trigger="hover">
+              <div class="el-dropdown-link">
                 <img v-show="isLogin" :src="userinfo['headimgurl']" alt="用户头像">
-              </span>
+              </div>
               <el-dropdown-menu slot="dropdown">
                 <el-dropdown-item>
                   <router-link to="/cn/user/directmail">
-                    <i class="el-icon-location"></i>个人中心
+                    <i class="el-icon-location"></i> 个人中心
                   </router-link>
                 </el-dropdown-item>
                 <el-dropdown-item>
                   <div @click="handleLoginOut">
-                    <i class="el-icon-caret-right"></i>登出
+                    <i class="el-icon-caret-right"></i> 登出
                   </div>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -85,6 +99,7 @@ export default {
   },
   created () {
     this.menu()
+    console.log('data', this.userinfo)
     if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/cn' && location.pathname !== '/cn/') {
       this.location = '/en/' + location.pathname.split('/cn/')[1]
     }
@@ -174,20 +189,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang='less'>
   .login {
-    float: right;
-    height: inherit;
-    line-height: 78px;
+    padding-top: 18px;
+    .login-icon {
+      cursor: pointer;
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+    }
   }
-  .login-icon {
-    cursor: pointer;
-  }
-  .login-icon img {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    vertical-align: middle;
+  .switch {
+    padding-top: 25px;
   }
 
   #login-container {
@@ -208,7 +224,7 @@ export default {
   .header_nav > ul > li {
     height: inherit;
     list-style: none;
-    margin-left: 85px;
+    margin-left: 20px;
   }
 
   .header_nav > ul > li:first-child {

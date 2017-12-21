@@ -131,7 +131,7 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="备注信息 : ">
-            <el-input type="textarea" style="width: 70%" placeholder="我想跟快递小哥说点什么" v-model="form.remark"/>
+            <el-input type="textarea" style="width: 80%" placeholder="我想跟快递小哥说点什么" v-model="form.remark"/>
           </el-form-item>
         </div>
 
@@ -406,9 +406,9 @@
             insuredPrice = Number(this.form.insuredAmount) * 0.005
             insuredAmount = Number(this.form.insuredAmount)
           }
-
           const record = {
-            weight: this.form.weigth,
+            weight: this.form.weight,
+            width: this.form.width,
             length: this.form.length,
             height: this.form.height,
             volume: this.form.volume,

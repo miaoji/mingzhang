@@ -29,6 +29,7 @@ export async function createOrder (params) {
   return request({
     url: order.add,
     method: 'post',
+    useSession: params.useSession,
     params
   })
 }

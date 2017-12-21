@@ -6,6 +6,7 @@ export async function getPayQr (params) {
     url: wx.getPayQr,
     params,
     method: 'post',
+    useSession: true,
     auth: true
   })
 }

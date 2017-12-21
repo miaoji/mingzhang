@@ -6,7 +6,10 @@
         <div class="info">快件查询</div>
         <div class="line"></div>
         <div class="input"><input placeholder="请输入单号进行查询" type="text" v-model='order'/></div>
-        <div class="button" @click="getOrderInfo">搜索</div>
+        <div class='clear'>
+          <div class="button left" @click="getOrderInfo">搜索</div>
+          <div class="button right" @click="goOrderInfo">查看订单信息</div>
+        </div>
       </div>
       <div class="order right">
         <div class="icon"><img src="/static/image/sen_res.png"/></div>
@@ -67,6 +70,19 @@
       },
       handleScroll (e) {
         console.log('e', e)
+      },
+      goOrderInfo () {
+        if (this.order.length < 16) {
+          this.$message({
+            type: 'warning',
+            message: '你输入的不是一个有效的订单'
+          })
+          return
+        }
+        this.$router.push({
+          path: '/cn/orderdetail',
+          query: { orderNo: this.order }
+        })
       },
       async getOrderInfo () {
         this.orderLoading = true
@@ -194,18 +210,22 @@
     color: #a3a1a6;
   }
 
-  .order_left > .button {
+  .order_left >div> .button {
     cursor: pointer;
     margin-left: 50px;
     width: 150px;
     height: 62px;
-    background-color: #d7132e;
+    background-color: #ea000a;
     color: #fff;
     line-height: 62px;
     text-align: center;
     font-size: 18px;
     border-radius: 5px;
     margin-bottom: 33px;
+  }
+  .order_left >div> .button.right {
+    background-color: #3a8ee6;
+    margin-right: 51px;
   }
 
   .order_left > .button:hover {
@@ -216,7 +236,7 @@
 
   .order {
     width: 770px;
-    min-height: 306px;
+    min-height: 373px;
     border: 1px solid #e1e1e0;
     background-color: #fff;
     padding: 0px 40px 100px;

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import {directMail} from '@/api'
+import {directMail, order} from '@/api'
 
 export async function query (data) {
   return request({
@@ -12,10 +12,11 @@ export async function query (data) {
 
 export async function show (data) {
   return request({
-    url: directMail.show,
-    data,
+    url: order.getOrderInfoByOrderNo,
     method: 'get',
-    auth: true
+    auth: true,
+    useSession: true,
+    data
   })
 }
 
@@ -23,6 +24,7 @@ export async function remove (params) {
   return request({
     url: directMail.delete,
     params,
+    useSession: true,
     method: 'delete',
     auth: true
   })

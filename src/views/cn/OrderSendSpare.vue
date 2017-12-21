@@ -261,6 +261,11 @@
       <p class="anchor"><a href='/#/cn/ordersend/#item3'>包裹信息<span class="el-icon-d-arrow-right"></span></a></p>
       <p class="anchor"><a href='/#/cn/ordersend/#item4'>包裹报关<span class="el-icon-d-arrow-right"></span></a></p> -->
     </div>
+    <el-dialog title="下单须知" custom-class="notice" :visible.sync="dialogVisible">
+      <p>1, 您现在为非登陆状态下单状态，付款成功后请保留订单号，以便查询订单信息</p>
+      <p>2, 建议关注公主号后登陆下单，或者直接网页登陆下单</p>
+      <p>3, 下单成功后，您可凭订单号在 首页 的看见查询中查询</p>
+    </el-dialog>
   </div>
 </template>
 <script>
@@ -307,7 +312,7 @@
         packageVisible: false,
         show: true,
         link: '/less',
-        dialogVisible: false,
+        dialogVisible: true,
         form: {
           senderName: '',
           cancel: true,
@@ -431,6 +436,7 @@
           const record = {
             weight: Number(this.form.weight),
             length: Number(this.form.length),
+            width: Number(this.form.width),
             height: Number(this.form.height),
             volume: Number(this.form.volume),
             volumeWeight: Number(this.form.volumeWeight),
@@ -458,6 +464,7 @@
             receiverPostcode: this.form.receiverPostcode,
 
             orderItems: JSON.stringify(this.tablePackagedata) || '[]',
+            useSession: true,
             type: 0,
             orderType: 2
           }
@@ -1110,6 +1117,9 @@
     }
     .el-dialog {
       width: 420px !important;
+    }
+    .el-dialog.notice {
+      width: 780px!important;
     }
     .el-dialog__header {
       padding: 15px 15px 10px 25px !important;

@@ -42,7 +42,7 @@
           <template slot-scope="status">
             <span>{{status.row.STATUS | orderstatus}}</span>
             <div>
-              <el-button @click="handleDetail(status.row.ID)" type="text" size="small">订单详情</el-button>
+              <el-button @click="handleDetail(status.row.ORDER_NO)" type="text" size="small">订单详情</el-button>
             </div>
             <div v-show="status.row.STATUS !== 1 && status.row.STATUS !== 0">
               <el-button @click="checkTrace(status.row.ORDER_NO)" type="text" size="small">查询物流</el-button>
@@ -154,11 +154,12 @@
           this.loading = false
         }
       },
-      handleDetail (id) {
+      handleDetail (orderNo) {
+        console.log(orderNo)
         this.$router.push({
           path: '/cn/orderdetail',
           query: {
-            id
+            orderNo
           }
         })
       },

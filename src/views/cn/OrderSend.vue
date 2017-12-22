@@ -16,16 +16,18 @@
                class="sendAddrInfo">
             <p class="item1">姓名 : {{item.name}}</p>
             <p class="item2">电话 : {{item.mobile}}</p>
-            <p class="item3">地址 : {{item.address}}</p>
-            <p class="item4">备注 : {{item.remark}}</p>
             <p class="item5">
               <el-button type="text" @click.stop="updateAddr(item,'send')" style="color:#bd7e00">编辑</el-button>
+            </p>
+            <p class="item3">地址 : {{item.address}}</p>
+            <p class="item4">备注 : {{item.remark}}</p>
+            <p class='item6'>
               <el-button type="text" @click.stop="delAddr(item,'send')" style="color:#fa5555">删除</el-button>
             </p>
           </div>
           <div style="marginLeft: 28px">
             <el-button type="text" size="mini" @click="addAddr('send')">创建新地址</el-button>
-            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false">更多地址
+            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false && sendAddrInfo.length > 1">更多地址
             </el-button>
             <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">收起
             </el-button>
@@ -38,16 +40,18 @@
                class="sendAddrInfo">
             <p class="item1">姓名 : {{item.name}}</p>
             <p class="item2">电话 : {{item.mobile}}</p>
-            <p class="item3">地址 : {{item.address}}</p>
-            <p class="item4">备注 : {{item.remark}}</p>
             <p class="item5">
               <el-button type="text" @click.stop="updateAddr(item,'rece')" style="color:#bd7e00">编辑</el-button>
+            </p>
+            <p class="item3">地址 : {{item.address}}</p>
+            <p class="item4">备注 : {{item.remark}}</p>
+            <p class='item6'>
               <el-button type="text" @click.stop="delAddr(item,'rece')" style="color:#fa5555">删除</el-button>
             </p>
           </div>
           <div style="marginLeft: 28px">
             <el-button type="text" size="mini" @click="addAddr('rece')">创建新地址</el-button>
-            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false">更多地址
+            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false && receAddrInfo.length > 1">更多地址
             </el-button>
             <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===true">收起
             </el-button>
@@ -321,21 +325,22 @@
     },
     mounted () {
       window.onscroll = function () {
-        if (location.hash !== '#/cn/ordersend' && location.hash !== '#/cn/ordersendSpare') {
+        if (location.pathname !== '/cn/ordersend' && location.pathname !== '/cn/ordersendSpare') {
           return
         }
+        console.log('local', location)
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         const elItem = document.querySelectorAll('.anchor')
         for (let i = 0; i < elItem.length; i++) {
           elItem[i].classList.remove('active')
         }
-        if (Number(scrollTop) <= 562) {
+        if (Number(scrollTop) <= 440) {
           elItem[0].className = 'active anchor'
-        } else if (Number(scrollTop) <= 916) {
+        } else if (Number(scrollTop) <= 672) {
           elItem[1].className = 'active anchor'
-        } else if (Number(scrollTop) <= 1505) {
+        } else if (Number(scrollTop) <= 1260) {
           elItem[2].className = 'active anchor'
-        } else if (Number(scrollTop) > 1505) {
+        } else if (Number(scrollTop) > 1260) {
           elItem[3].className = 'active anchor'
         }
       }
@@ -347,6 +352,7 @@
           return
         }
         const anchor = this.$el.querySelector(id)
+        console.log('aaa', anchor.offsetTop + 210)
         window.scrollTo(0, anchor.offsetTop + 210)
       },
       tablePackage (data) {
@@ -699,7 +705,7 @@
         if (data.code === 200 && data.obj) {
           this.sendAddrInfo = data.obj
         } else if (data.msg === '暂未查询到信息') {
-          this.receAddrInfo = []
+          this.sendAddrInfo = []
           this.$message({
             type: 'warning',
             message: '暂无查询到寄件地址信息,建议新增'
@@ -1171,35 +1177,38 @@
               line-height: 20px;
             }
             p.item1 {
-              width: 45%;
+              width: 40%;
               padding-right: 10px;
               text-overflow: ellipsis;
               white-space: nowrap;
               overflow: hidden;
             }
             p.item2 {
-              width: 45%;
+              width: 40%;
               padding-right: 10px;
               text-overflow: ellipsis;
               white-space: nowrap;
               overflow: hidden;
             }
             p.item3 {
-              width: 45%;
+              width: 40%;
               padding-right: 10px;
               text-overflow: ellipsis;
               white-space: nowrap;
               overflow: hidden;
             }
             p.item4 {
-              width: 45%;
+              width: 40%;
               padding-right: 10px;
               text-overflow: ellipsis;
               white-space: nowrap;
               overflow: hidden;
             }
             p.item5 {
-              width: 100%;
+              width: 5%;
+            }
+            p.item6 {
+              width: 5%;
             }
           }
           .send_submit {

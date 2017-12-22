@@ -263,7 +263,7 @@
     </div>
     <el-dialog title="下单须知" custom-class="notice" :visible.sync="dialogVisible">
       <p>1, 您现在为非登陆状态下单，付款成功后请 <span style='color: red'> <b>自行保留订单号，以便查询订单信息</b></span></p>
-      <p>2, 建议关注公主号后登陆下单，或者使用微信登陆后下单</p>
+      <p>2, 建议关注公众号后登陆下单，或者使用微信登陆后下单</p>
       <p>3, 下单成功后，您可凭订单号在<span style='color: red'><b> 首页 </b></span>的 <b>寄件查询</b> 功能中查询</p>
     </el-dialog>
   </div>

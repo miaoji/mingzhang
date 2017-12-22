@@ -99,7 +99,6 @@ export default {
   },
   created () {
     this.menu()
-    console.log('data', this.userinfo)
     if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/cn' && location.pathname !== '/cn/') {
       this.location = '/en/' + location.pathname.split('/cn/')[1]
     }
@@ -140,12 +139,13 @@ export default {
       const websocket = new WebSocket(webSocketUrl)
       const _this = this
       websocket.onmessage = async function (event) {
-        let openid = event.data
-        saveOpenid(openid)
+        const eventData = JSON.parse(event.data)
+        const openid = eventData.openidWeb
+        const unionid = eventData.unionid
+        saveOpenid({openid, unionid})
         websocket.close()
         try {
-          const res = await _this.setUserInfo({openid})
-          console.log('res', res)
+          const res = await _this.setUserInfo({openid, unionid, type: 1})
           _this.$message({
             showClose: true,
             ...res

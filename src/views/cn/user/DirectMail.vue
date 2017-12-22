@@ -155,7 +155,6 @@
         }
       },
       handleDetail (orderNo) {
-        console.log(orderNo)
         this.$router.push({
           path: '/cn/orderdetail',
           query: {
@@ -172,7 +171,7 @@
         })
       },
       handleSizeChange (val) {
-        console.log(`每页 ${val} 条`)
+        console.info(`每页 ${val} 条`)
       },
       handleCurrentChange (val) {
         this.currentPage = val
@@ -199,21 +198,8 @@
       },
       async handelPay (val) {
         try {
-          console.log('val', val)
           this.$router.push('/cn/cashier?order=' + val.ORDER_NO)
           return
-          // this.payDialogVisible = true
-          // this.qrLoading = true
-          // const res = await getPayQr({
-          //   money: val.TOTAL_FEE,
-          //   orderNo: val.ORDER_NO,
-          //   body: '国际快递包裹',
-          //   payType: 0,
-          //   closingPriceId: 0,
-          //   trade_type: 'NATIVE'
-          // })
-          // const codeUrl = res.code_url
-          // this.payImg = makeQr(codeUrl, 6, 5)
         } catch (e) {
           console.error(e)
         } finally {

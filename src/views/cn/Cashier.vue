@@ -144,12 +144,6 @@
       })
     },
     created () {
-      // if (!this.isLogin) {
-      //   this.$router.push({path: '/cn/index'})
-      // }
-      console.log('this.router', this.$router.query)
-      console.log('this.router', this.$router)
-      console.log('this.router', this)
       const order = location.search.split('?order=')[1]
       this.getOrderInfo(order)
       window.scrollTo(0, 110)
@@ -182,13 +176,11 @@
         //   type: 'get',
         //   key: 'browserId'
         // })
-        console.log('wxpayinfo', this.wxPayInfo)
         const state = this.wxPayInfo.out_trade_no
         const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
         const websocket = new WebSocket(webSocketUrl)
         const _this = this
         websocket.onmessage = async function (event) {
-          console.log('event', event)
           let payInfo = event.data
           websocket.close()
           try {
@@ -230,7 +222,6 @@
         if (data.code === 200 && data.obj) {
           this.data = data.obj
           this.loading = false
-          console.log('data', data)
           if (data.obj.status !== 1) {
             this.$router.push({path: '/cn/orderdetail?orderNo=' + data.obj.orderNo})
           }

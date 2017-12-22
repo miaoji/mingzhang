@@ -69,7 +69,6 @@
         window.scrollTo(0, 0)
       },
       handleScroll (e) {
-        console.log('e', e)
       },
       goOrderInfo () {
         if (this.order.length < 16) {
@@ -89,7 +88,6 @@
         let res = await getOrderInfoByOrderNo({
           orderNo: this.order
         })
-        console.log('daeee', res)
         if (res.code === 200) {
           if (res.obj.cnNo) {
             let cnorder = await queryByCompany({
@@ -97,10 +95,8 @@
               company: res.obj.kdCompanyCodeCn || 'zhongtong',
               source: 'frontend'
             })
-            console.log('cnorder', cnorder)
             if (cnorder.code === 200) {
               this.cnOrderdData = cnorder.obj.data
-              console.log('cnOrderdData', this.cnOrderdData)
             }
             if (cnorder.code === 200) {
               this.show = false
@@ -121,7 +117,6 @@
             if (intlorder.code === 200) {
               this.show = false
             }
-            console.log('intlorder111', intlorder)
           } else {
             this.intlOrderData = []
           }
@@ -129,7 +124,7 @@
             this.orderLoading = false
           }, 500)
         } else {
-          console.log('查询失败了', res)
+          console.info('查询失败了', res)
           this.show = true
           this.cnOrderdData = []
           this.intlOrderData = []

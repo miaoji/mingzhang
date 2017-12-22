@@ -14,8 +14,6 @@ export const mutations = {
     alert(123)
   },
   winner (state) {
-    console.log('state', state)
-    // state.dispatch('increment')
   }
 }
 
@@ -26,17 +24,12 @@ export const actions = {
     }, 500)
   },
   increment ({commit}) {
-    console.log('张一')
     setTimeout(function () {
-      console.log('王三')
     }, 500)
     setTimeout(function () {
-      console.log('李四')
     }, 500)
     setTimeout(function () {
-      console.log('刘五')
     }, 500)
-    console.log('李二')
   }
 }
 

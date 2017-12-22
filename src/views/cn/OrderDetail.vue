@@ -128,7 +128,6 @@
           const res = await show({
             orderNo: this.orderNo
           })
-          console.log('data', res)
           if (res.code === 200) {
             this.detailData = res.obj
           } else {

@@ -53,7 +53,6 @@
       if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/en' && location.pathname !== '/en/') {
         this.link = '/cn/' + location.pathname.split('/en/')[1]
       }
-      console.log('this.location', this.link)
     },
     methods: {
       menu () {
@@ -62,7 +61,6 @@
     },
     watch: {
       '$route' (to) {
-        console.log('to', to)
         if (to.fullPath.split('/en/').length > 1) {
           this.link = '/cn/' + to.fullPath.split('/en/')[1]
         } else {

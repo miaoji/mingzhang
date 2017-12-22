@@ -328,7 +328,6 @@
         if (location.pathname !== '/cn/ordersend' && location.pathname !== '/cn/ordersendSpare') {
           return
         }
-        console.log('local', location)
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
         const elItem = document.querySelectorAll('.anchor')
         for (let i = 0; i < elItem.length; i++) {
@@ -352,12 +351,10 @@
           return
         }
         const anchor = this.$el.querySelector(id)
-        console.log('aaa', anchor.offsetTop + 210)
         window.scrollTo(0, anchor.offsetTop + 210)
       },
       tablePackage (data) {
         this.tablePackagedata = data
-        console.log('tablePackage', data)
       },
       async submitForm (form) {
         try {
@@ -442,13 +439,11 @@
           }
           this.$refs[form].validate((valid) => {
             if (valid) {
-              console.log('test')
             } else {
               return false
             }
           })
           const data = await createOrder({...record})
-          console.log('data', data.obj.orderNo)
           if (data.code === 200) {
             this.loading2 = false
             this.$notify({
@@ -525,23 +520,18 @@
           })
         }
         if (this.type === 'add' && this.modalTitle === '新增寄件地址') {
-          console.log(this.modalTitle)
-          console.log('AAA', this.item)
           this.addSendAddr(this.item)
         }
 
         if (this.type === 'add' && this.modalTitle === '新增收件地址') {
-          console.log(this.modalTitle)
           this.addReceAddr(this.item)
         }
 
         if (this.type === 'update' && this.modalTitle === '修改寄件地址') {
-          console.log(this.modalTitle)
           this.updateSendAddr(this.item)
         }
 
         if (this.type === 'update' && this.modalTitle === '修改收件地址') {
-          console.log(this.modalTitle)
           this.updateReceAddr(this.item)
         }
       },
@@ -550,7 +540,6 @@
         this.dialogFormVisible = true
         this.type = 'add'
         this.item = {isDefault: '1'}
-        console.log('item', this.item)
         this.item.cancel = !this.item.cancel
       },
       updateAddr (item, type) {
@@ -598,8 +587,6 @@
       },
       onCancel (form) {
         this.form.cancel = !this.form.cancel
-        console.log('form', form)
-        console.log('this.$refs[form].', this.$refs[form])
         this.$refs[form].resetFields()
         this.form = {}
         this.freight = '请选择收件地址'
@@ -610,8 +597,6 @@
         window.scrollTo(0, 0)
       },
       insuredChange (data) {
-        console.log(this.form.insuredAmount)
-        console.log('dataChange', data)
         if (data === '1') {
           this.showInsuredAmount = true
         } else {
@@ -665,10 +650,7 @@
             this.form.volumeWeight = this.form.volume / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
         }
       },
       widthChange (e) {
@@ -678,10 +660,7 @@
             this.form.volumeWeight = Number(this.form.volume) / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
         }
       },
       heightChange (e) {
@@ -691,10 +670,7 @@
             this.form.volumeWeight = this.form.volume / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
         }
       },
       // 获取寄件地址信息
@@ -745,7 +721,6 @@
       },
       // 修改寄件地址信息
       async updateSendAddr (payload) {
-        console.log('payload', payload)
         const newpayload = {
           id: payload.data.ID,
           name: payload.name,
@@ -814,8 +789,6 @@
       },
       // 创建寄件地址信息
       async addSendAddr (payload) {
-        console.log('payload', payload)
-        console.log('this.item', this.item)
         payload.wxUserId = this.userinfo.id
         payload.country = JSON.parse(payload.countrydata).id
         const name = JSON.parse(payload.countrydata).country_cn
@@ -839,7 +812,6 @@
         delete payload.cancel
         delete payload.countrydata
         try {
-          console.log({...payload})
           const data = await addSendAddrInfo({...payload})
           if (data.code === 200) {
             this.getSendAddr()
@@ -856,7 +828,6 @@
             })
           }
         } catch (e) {
-          console.log('发生错误...', e)
         }
       },
       // 获取收件地址信息
@@ -979,7 +950,6 @@
             })
           }
         } catch (e) {
-          console.log('发生错误...', e)
         }
       },
       /**

@@ -38,6 +38,7 @@ const enquestion = r => require.ensure([], () => r(require('@/views/en/Question'
 const ensend = r => require.ensure([], () => r(require('@/views/en/Send')), 'ensend')
 const ensite = r => require.ensure([], () => r(require('@/views/en/Site')), 'ensite')
 const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate')), 'enviolate')
+const enordersendspare = r => require.ensure([], () => r(require('@/views/en/OrderSendSpare')), 'enordersendspare')
 
 const error404 = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error404')
 
@@ -213,6 +214,13 @@ export default new Router({
       component: engetorderinfo,
       meta: {
         intro: '英文寄件'
+      }
+    }, {
+      path: 'ordersendspare',
+      name: 'enordersendspare',
+      component: enordersendspare,
+      meta: {
+        intro: '寄件'
       }
     }, {
       path: 'introduce',

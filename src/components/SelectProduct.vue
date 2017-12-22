@@ -57,9 +57,7 @@
 
     methods: {
       async getCountry (payload = {}) {
-        console.log('payload', payload)
         let data = await query(payload)
-        console.log('data', data)
         if (data.code === 200 && data.obj) {
           this.options = []
           for (let i = 0; i < data.obj.length; i++) {

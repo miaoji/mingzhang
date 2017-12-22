@@ -15,10 +15,10 @@ export async function gettoken () {
     } else {
       window.sessionStorage.winnerKey = data.stringData
     }
-    console.log('成功的', data)
+    console.info('成功的', data)
   } else {
     window.sessionStorage.clear()
-    console.log('查询失败了', data)
+    console.info('查询失败了', data)
   }
 }
 

@@ -51,11 +51,12 @@ function getExpire (val = 30) {
  * @param  {[type]} openid [description]
  * @return {[type]}        [description]
  */
-export const saveOpenid = async function (openid) {
+export const saveOpenid = async function (payload) {
   try {
     // 设置过期时间为1星期
     let token = getExpire(10080)
-    token['openid'] = openid
+    token['openid'] = payload.openid
+    token['unionid'] = payload.unionid
     token = JSON.stringify(token)
     token = Base64.encode(token)
     storage({
@@ -88,7 +89,7 @@ export const autoLogin = function () {
     if (nowTimestamp >= token.expire) {
       return null
     } else {
-      return token.openid
+      return { openid: token.openid, unionid: token.unionid, type: 1 }
     }
   } catch (err) {
     console.error(err)

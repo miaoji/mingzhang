@@ -50,9 +50,7 @@ const fetch = (options) => {
       })
     case 'parampost':
       let param = new URLSearchParams()
-      console.log('params', params)
       param.append(paramkey, params)
-      console.log('param', param)
       return axios({
         url,
         method: 'post',

@@ -13,9 +13,9 @@ Vue.config.productionTip = false
 router.beforeEach(async (to, from, next) => {
   const isLogin = store.state.user.isLogin
   // 如果用户未登录，本地缓存中有token信息，则自动登录
-  const openid = autoLogin()
-  if (!isLogin && openid) {
-    await store.dispatch('setUserInfo', {openid})
+  const data = autoLogin()
+  if (!isLogin && data && data.openid) {
+    await store.dispatch('setUserInfo', data)
   }
   // 如果页面需要登录权限，则检测用户是否登录，没有则跳转到登录页面
   if (to.meta.needLogin) {

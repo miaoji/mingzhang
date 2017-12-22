@@ -4,99 +4,100 @@
       class="mask"
       v-show='loading2'
       v-loading="loading2"
-      element-loading-text="订单正在提交..."
+      element-loading-text="Orders are being submitted..."
       element-loading-background="rgba(100, 100, 100, 0.4)"
     ></div>
     <div class="sendorder">
       <el-form class="form" ref="form" :model="form" label-width="120px">
 
         <div id="item1" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">寄件人信息</h1>
-          <el-form-item label="寄件人姓名 : " prop="senderName"
+          <h1 class="page_tit">sender info</h1>
+          <el-form-item label="name : " prop="senderName"
                         :rules="[
-              { required: true, message: '寄件人姓名不能为空'}
+              { required: true, message: 'name cannot be null'}
             ]"
           >
-            <el-input placeholder="请输入寄件人姓名" v-model="form.senderName"/>
+            <el-input placeholder="please enter name" v-model="form.senderName"/>
           </el-form-item>
-          <el-form-item label="电话 : " prop="senderMobile"
+          <el-form-item label="Telephone : " prop="senderMobile"
                         :rules="[
-              { required: true, message: '电话号码不能为空'},
-              { type: 'number', message: '电话号码必须是数字值'}
+              { required: true, message: 'Telephone cannot be null'},
+              { type: 'number', message: 'The phone number must be a number'}
             ]"
           >
-            <el-input placeholder="请输入电话号码" v-model.number="form.senderMobile"/>
+            <el-input placeholder="Please enter telephone" v-model.number="form.senderMobile"/>
           </el-form-item>
           <el-row>
             <el-col :span="10">
-              <country label="国家/地区 : " :cancel="form.cancel" @coutryChange="coutrySendChange"/>
+              <country label="Country : " :cancel="form.cancel" @coutryChange="coutrySendChange"/>
             </el-col>
             <el-col :span="12">
-              <select-city label="地区选择 : " :cancel="form.cancel" @selectCityChange="selectCityChange"
+              <select-city label="City : " :cancel="form.cancel" @selectCityChange="selectCityChange"
                            v-show="showSendCitySelect"/>
             </el-col>
           </el-row>
-          <el-form-item label="街道地址 : " prop="senderAddress"
+          <el-form-item label="Address : " prop="senderAddress"
                         :rules="[
-              { required: true, message: '街道地址不能为空'},
+              { required: true, message: 'Address cannot be null'},
             ]"
           >
-            <el-input placeholder="请输入详细的街道地址" v-model="form.senderAddress"/>
+            <el-input placeholder="Please enter address" v-model="form.senderAddress"/>
           </el-form-item>
-          <el-form-item label="邮编 : " prop="senderPostcode"
+          <el-form-item label="Post Code : " prop="senderPostcode"
                         :rules="[
-              { required: true, message: '邮编不能为空'},
+              { required: true, message: 'Post Code cannot be null'},
             ]"
           >
-            <el-input placeholder="请输入邮编" v-model="form.senderPostcode"/>
+            <el-input placeholder="Please enter Post Code" v-model="form.senderPostcode"/>
           </el-form-item>
         </div>
 
         <div id="item2" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">收件人信息</h1>
-          <el-form-item label="收件人姓名 : " prop="receiverName"
+          <h1 class="page_tit">Recipient info</h1>
+          <el-form-item label="name : " prop="receiverName"
                         :rules="[
-              { required: true, message: '收件人姓名不能为空'},
+              { required: true, message: 'name cannot be null'},
             ]"
           >
-            <el-input placeholder="请输入收件人姓名" v-model="form.receiverName"/>
+            <el-input placeholder="Please enter recipient name" v-model="form.receiverName"/>
           </el-form-item>
-          <el-form-item label="电话 : " prop="receiverMobile"
+          <el-form-item label="Telephone : " prop="receiverMobile"
                         :rules="[
-              { required: true, message: '电话号码不能为空'},
+              { required: true, message: 'Telephone cannot be null'},
+              { type: 'number', message: 'The phone number must be a number'}
             ]"
           >
-            <el-input placeholder="请输入电话号码" v-model="form.receiverMobile"/>
+            <el-input placeholder="Please enter telephone" v-model="form.receiverMobile"/>
           </el-form-item>
-          <country v-model="form.aa" :cancel="form.cancel" label="国家/地区 : " type="en"
+          <country v-model="form.aa" :cancel="form.cancel" label="Country : " type="en"
                    @coutryChange="coutryReceiveChange"/>
-          <el-form-item label="街道地址 : " prop="receiverAddress"
+          <el-form-item label="Address : " prop="receiverAddress"
                         :rules="[
-              { required: true, message: '街道地址不能为空'},
+              { required: true, message: 'Address cannot be null'},
             ]"
           >
-            <el-input placeholder="请输入详细的街道地址" v-model="form.receiverAddress"/>
+            <el-input placeholder="Please enter address" v-model="form.receiverAddress"/>
           </el-form-item>
-          <el-form-item label="邮编 : " prop="receiverPostcode"
+          <el-form-item label="Post Code : " prop="receiverPostcode"
                         :rules="[
-              { required: true, message: '邮编不能为空'}
+              { required: true, message: 'Post Code cannot be null'}
             ]"
           >
-            <el-input placeholder="请输入邮编" v-model="form.receiverPostcode"/>
+            <el-input placeholder="Please enter Post Code" v-model="form.receiverPostcode"/>
           </el-form-item>
         </div>
 
         <div id="item3" class="sendorder_item">
-          <h1 class="page_tit">包裹信息</h1>
+          <h1 class="page_tit">Package info</h1>
           <el-row :gutter="12">
             <el-col :span="5">
-              <el-form-item label="包裹重量(kg) : ">
+              <el-form-item label="weight(kg) : ">
                 <el-input-number v-model="form.weight" controls-position="right" :step='1' @change="weightChange"
                                  :min="0" :max="20"/>
               </el-form-item>
             </el-col>
             <el-col :span="5" :offset="6">
-              <el-form-item label="包裹长度(cm) : ">
+              <el-form-item label="length(cm) : ">
                 <el-input-number v-model="form.length" controls-position="right" :step='10' @change="lengthChange"
                                  :min="0"/>
               </el-form-item>
@@ -105,13 +106,13 @@
           <el-row :gutter="12">
             <el-col :span="5">
 
-              <el-form-item label="包裹宽度(cm) : ">
+              <el-form-item label="width(cm) : ">
                 <el-input-number v-model="form.width" controls-position="right" :step='10' @change="widthChange"
                                  :min="0"/>
               </el-form-item>
             </el-col>
             <el-col :span="5" :offset="6">
-              <el-form-item label="包裹高度(cm) : ">
+              <el-form-item label="height(cm) : ">
                 <el-input-number v-model="form.height" controls-position="right" :step='10' @change="heightChange"
                                  :min="0"/>
               </el-form-item>
@@ -120,60 +121,60 @@
           </el-row>
           <el-row :gutter="12">
             <el-col :span="10">
-              <select-package :showPackageList="showPackageList" label="产品类型 : "
+              <select-package :showPackageList="showPackageList" label="product type : "
                               @selectPackageChange="selectPackageChange"/>
             </el-col>
             <el-col :span="10" :offset="1">
-              <select-product :showProductList="showProductList" label="产品规格 : "
+              <select-product :showProductList="showProductList" label="product spec : "
                               @selectProductChange="selectProductChange"/>
             </el-col>
           </el-row>
           <el-row :gutter="12">
             <el-col :span="11">
               <div class="img_ico"><img @click="dialogTableVisible = true" src="/static/image/question_ico.png"
-                                        alt="退件说明"></div>
-              <el-form-item label="是否保价 : " prop="insured"
+                                        alt="Regression description"></div>
+              <el-form-item label="insured : " prop="insured"
                             :rules="[
-                  { required: true, message: '请选择是否保价'},
+                  { required: true, message: 'select insured'},
                 ]"
               >
                 <el-radio-group @change='insuredChange' v-model="form.insured">
-                  <el-radio label="1">是</el-radio>
-                  <el-radio label="0">否</el-radio>
+                  <el-radio label="1">yes</el-radio>
+                  <el-radio label="0">no</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
             <el-col :span="11">
-              <el-form-item label="保价金额 : " v-show='showInsuredAmount'>
-                <el-input-number placeholder="请填写您的保价金额" @change='insuredAmountChange' controls-position="right"
+              <el-form-item label="premium : " v-show='showInsuredAmount'>
+                <el-input-number placeholder="Please enter premium" @change='insuredAmountChange' controls-position="right"
                                  v-model="form.insuredAmount" :step='100' :min='200' :max='200000'/>
               </el-form-item>
             </el-col>
           </el-row>
-          <div class="img_ico"><img @click="returnGoodVisible = true" src="/static/image/question_ico.png" alt="退件说明">
+          <div class="img_ico"><img @click="returnGoodVisible = true" src="/static/image/question_ico.png" alt="return explain">
           </div>
-          <el-form-item label="是否退件 : " prop="returnGood"
+          <el-form-item label="return : " prop="returnGood"
                         :rules="[
-              { required: true, message: '请选择是否退件'},
+              { required: true, message: 'select return'},
             ]"
           >
             <el-radio-group v-model="form.returnGood">
-              <el-radio label="1">是</el-radio>
-              <el-radio label="0">否</el-radio>
+              <el-radio label="1">yes</el-radio>
+              <el-radio label="0">no</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="备注信息 : ">
-            <el-input type="textarea" style="width: 70%" placeholder="我想跟快递小哥说点什么" v-model="form.remark"/>
+          <el-form-item label="Note : ">
+            <el-input type="textarea" style="width: 70%" placeholder="" v-model="form.remark"/>
           </el-form-item>
         </div>
 
         <div id="item4" class="sendorder_item">
-          <h1 class="page_tit">包裹报关</h1>
+          <h1 class="page_tit">Parcel declaration</h1>
           <table-package @tablePackage='tablePackage'></table-package>
-          <p class="freight">预付运费(￥): <span>{{freight}}</span></p>
+          <p class="freight">Prepaid freight(￥): <span>{{freight}}</span></p>
           <div class="send_submit">
-            <el-button type="success" @click="submitForm('form')">确认下单</el-button>
-            <el-button @click="onCancel('form')">重置</el-button>
+            <el-button type="success" @click="submitForm('form')">Comfirm the order</el-button>
+            <el-button @click="onCancel('form')">Reset</el-button>
           </div>
         </div>
 
@@ -385,7 +386,6 @@
       },
       tablePackage (data) {
         this.tablePackagedata = data
-        console.log('tablePackage', data)
       },
       async submitForm (form) {
         try {
@@ -469,7 +469,6 @@
             orderType: 2
           }
           const data = await createOrder({...record})
-          console.log('data', data)
           if (data.code === 200) {
             this.loading2 = false
             this.form.cancel = !this.form.cancel
@@ -547,23 +546,18 @@
           })
         }
         if (this.type === 'add' && this.modalTitle === '新增寄件地址') {
-          console.log(this.modalTitle)
-          console.log('AAA', this.item)
           this.addSendAddr(this.item)
         }
 
         if (this.type === 'add' && this.modalTitle === '新增收件地址') {
-          console.log(this.modalTitle)
           this.addReceAddr(this.item)
         }
 
         if (this.type === 'update' && this.modalTitle === '修改寄件地址') {
-          console.log(this.modalTitle)
           this.updateSendAddr(this.item)
         }
 
         if (this.type === 'update' && this.modalTitle === '修改收件地址') {
-          console.log(this.modalTitle)
           this.updateReceAddr(this.item)
         }
       },
@@ -572,7 +566,6 @@
         this.dialogFormVisible = true
         this.type = 'add'
         this.item = {isDefault: '1'}
-        console.log('item', this.item)
         this.item.cancel = !this.item.cancel
       },
       updateAddr (item, type) {
@@ -630,8 +623,6 @@
         window.scrollTo(0, 0)
       },
       insuredChange (data) {
-        console.log(this.form.insuredAmount)
-        console.log('dataChange', data)
         if (data === '1') {
           this.showInsuredAmount = true
         } else {
@@ -685,10 +676,8 @@
             this.form.volumeWeight = this.form.volume / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
+          console.info('计算体积出错了', error)
         }
       },
       widthChange (e) {
@@ -698,10 +687,8 @@
             this.form.volumeWeight = Number(this.form.volume) / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
+          console.info('计算体积出错了', error)
         }
       },
       heightChange (e) {
@@ -711,10 +698,8 @@
             this.form.volumeWeight = this.form.volume / 5000
             this.getPrice()
           }
-          console.log(this.form.volume)
-          console.log(this.form.volumeWeight)
         } catch (error) {
-          console.log('计算体积出错了', error)
+          console.info('计算体积出错了', error)
         }
       },
       // 获取寄件地址信息
@@ -765,7 +750,6 @@
       },
       // 修改寄件地址信息
       async updateSendAddr (payload) {
-        console.log('payload', payload)
         const newpayload = {
           id: payload.data.ID,
           name: payload.name,
@@ -834,8 +818,6 @@
       },
       // 创建寄件地址信息
       async addSendAddr (payload) {
-        console.log('payload', payload)
-        console.log('this.item', this.item)
         payload.wxUserId = localStorage.mj_userId
         payload.country = JSON.parse(payload.countrydata).id
         const name = JSON.parse(payload.countrydata).country_cn
@@ -859,7 +841,6 @@
         delete payload.cancel
         delete payload.countrydata
         try {
-          console.log({...payload})
           const data = await addSendAddrInfo({...payload})
           if (data.code === 200) {
             this.getSendAddr()
@@ -876,7 +857,7 @@
             })
           }
         } catch (e) {
-          console.log('发生错误...', e)
+          console.info('发生错误...', e)
         }
       },
       // 获取收件地址信息
@@ -999,7 +980,7 @@
             })
           }
         } catch (e) {
-          console.log('发生错误...', e)
+          console.info('发生错误...', e)
         }
       },
       /**

@@ -52,7 +52,6 @@
       await this.$store.dispatch('getCountryCnInfo')
       await this.$store.dispatch('getCountryEnInfo')
       this.getCountry()
-      console.log('123', this)
     },
 
     data () {
@@ -72,7 +71,6 @@
       },
       handleChange () {
         this.$emit('coutryChange', this.country_data)
-        console.log(this.type)
       }
     },
 

@@ -19,9 +19,9 @@ export const actions = {
    * @param {[type]} options.dispatch [description]
    * @param {[type]} options.commit   [description]
    */
-  async setUserInfo ({dispatch, commit}, {openid}) {
+  async setUserInfo ({ dispatch, commit }, payload) {
     try {
-      const res = await show({openid})
+      const res = await show({...payload})
       const code = res.statusCode
       if (res.status === 1 && code === 200) {
         const token = res.token

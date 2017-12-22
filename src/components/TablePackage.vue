@@ -77,8 +77,6 @@
   export default {
     methods: {
       updatePackageInfo (data, id) {
-        console.log('key', id)
-        console.log('data', data)
         this.modalTitle = '修改报关信息'
         this.item = {...data, id}
         this.dialogFormVisible = true
@@ -98,7 +96,6 @@
         }
         if (item.id || item.id === 0) {
           const id = item.id
-          console.log('id', id)
           this.tableDate.splice(id, 1, {...item, worth: Number(item.quantity) * Number(item.unitPrice)})
         } else {
           this.tableDate.push({...item, worth: Number(item.quantity) * Number(item.unitPrice)})

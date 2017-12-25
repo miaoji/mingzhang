@@ -45,11 +45,17 @@
     data () {
       return {
         options: [],
-        value: []
+        value: [],
+        info: {
+          msg1: ''
+        }
       }
     },
 
     created () {
+      if (this.$route.fullPath.split('/en/').length === 2) {
+        this.info = {}
+      }
       this.getSelectCity()
     },
 

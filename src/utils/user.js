@@ -92,7 +92,7 @@ export const autoLogin = function () {
       return { openid: token.openid, unionid: token.unionid, type: 1 }
     }
   } catch (err) {
-    console.error(err)
+    // console.info(err)
     return null
   }
 }

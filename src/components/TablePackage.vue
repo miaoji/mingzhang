@@ -6,83 +6,73 @@
     >
       <el-table-column
         prop="nameCn"
-        label="中文品名"
+        :label="info.name"
         align="center"
       >
       </el-table-column>
       <el-table-column
         prop="unitPrice"
-        label="单价/元"
+        :label="info.price"
         align="center"
         width="180"
       >
       </el-table-column>
       <el-table-column
         prop="quantity"
-        label="数量"
+        :label="info.size"
         align="center"
       >
       </el-table-column>
       <el-table-column
         prop="worth"
-        label="价值/元"
+        :label="info.worth"
         align="center"
       >
       </el-table-column>
       <el-table-column
-        label="操作"
+        :label="info.operation"
         align="center"
       >
         <template slot-scope="scope">
-          <el-button @click="updatePackageInfo(scope.row, scope.$index)" type="text" size="mini">修改</el-button>
-          <el-button @click="delPackageInfo(scope.$index)" style="color:red" type="text" size="mini">删除</el-button>
+          <el-button @click="updatePackageInfo(scope.row, scope.$index)" type="text" size="mini">{{info.update}}</el-button>
+          <el-button @click="delPackageInfo(scope.$index)" style="color:red" type="text" size="mini">{{info.delete}}</el-button>
         </template>
       </el-table-column>
     </el-table>
 
     <el-dialog calss="dialog" :title="modalTitle" width="600px" :visible.sync="dialogFormVisible">
       <el-form :model="item" label-width="20px">
-        <el-form-item label="中文品名" :label-width="formLabelWidth">
+        <el-form-item :label="info.name" :label-width="formLabelWidth">
           <el-input v-model="item.nameCn" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品单价" :label-width="formLabelWidth">
+        <el-form-item :label="info.price" :label-width="formLabelWidth">
           <el-input v-model="item.unitPrice" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="产品数量" :label-width="formLabelWidth">
+        <el-form-item :label="info.size" :label-width="formLabelWidth">
           <el-input v-model="item.quantity" auto-complete="off"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="confirm">确 定</el-button>
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm">{{info.confirm}}</el-button>
+        <el-button @click="dialogFormVisible = false">{{info.cancel}}</el-button>
       </div>
     </el-dialog>
     <div class="add_package">
-      <el-button type="info" plain @click="addPackageInfo">添加包裹</el-button>
+      <el-button type="info" plain @click="addPackageInfo">{{info.addPackage}}</el-button>
     </div>
   </div>
 </template>
-
-<style>
-  .el-table .warning-row {
-    background: oldlace;
-  }
-
-  .el-table .success-row {
-    background: #f0f9eb;
-  }
-</style>
 
 <script>
   export default {
     methods: {
       updatePackageInfo (data, id) {
-        this.modalTitle = '修改报关信息'
+        this.modalTitle = this.info.updModalTitle
         this.item = {...data, id}
         this.dialogFormVisible = true
       },
       addPackageInfo () {
-        this.modalTitle = '创建报关信息'
+        this.modalTitle = this.info.addModalTitle
         this.item = {}
         this.dialogFormVisible = true
       },
@@ -106,7 +96,7 @@
         // 判空
         if (item.nameCn === undefined || item.nameCn === '') {
           this.$message({
-            message: '您输入的中文品名不能为空',
+            message: this.info.msg1,
             type: 'warning'
           })
           return false
@@ -114,14 +104,14 @@
         // 判空
         if (item.unitPrice === undefined || item.unitPrice === '') {
           this.$message({
-            message: '您输入的单价不能为空',
+            message: this.info.msg2,
             type: 'warning'
           })
           return false
         }
         if (!Number(item.unitPrice)) {
           this.$message({
-            message: '您输入的单价不是一个有效的数字',
+            message: this.info.msg3,
             type: 'warning'
           })
           return false
@@ -129,14 +119,14 @@
         // 判空
         if (item.quantity === undefined || item.quantity === '') {
           this.$message({
-            message: '您输入的数量不能为空',
+            message: this.info.msg4,
             type: 'warning'
           })
           return false
         }
         if (!Number(item.quantity)) {
           this.$message({
-            message: '您输入的数量不是一个数字',
+            message: this.info.msg5,
             type: 'warning'
           })
           return false
@@ -144,15 +134,55 @@
       }
     },
     created () {
+      if (this.$route.fullPath.split('/en/').length === 2) {
+        this.info = {
+          addModalTitle: 'Create customs information',
+          updModalTitle: 'Update customs information',
+          name: 'Name',
+          price: 'Unit Price',
+          size: 'Number',
+          confirm: 'Confirm',
+          cancel: 'Cancel',
+          worth: 'Worth',
+          operation: 'Operation',
+          addPackage: 'addPackage',
+          update: 'Update',
+          delete: 'Delete',
+          msg1: 'The name of the Chinese character you entered can not be empty',
+          msg2: 'The unit price you entered can not be empty',
+          msg3: 'The unit price you enter is not a valid number',
+          msg4: 'The number you enter can not be empty',
+          msg5: 'The number you enter is not a number'
+        }
+      }
     },
     data () {
       return {
-        modalTitle: '创建报关信息',
         tableDate: [],
         dialogFormVisible: false,
         form: {},
         formLabelWidth: '120px',
-        item: {}
+        item: {},
+        info: {
+          addModalTitle: '创建报关信息',
+          updModalTitle: '修改报关信息',
+          modalTitle: '创建报关信息',
+          name: '中文品名',
+          price: '产品单价',
+          size: '产品数量',
+          confirm: '确认',
+          cancel: '取消',
+          worth: '价值',
+          operation: '操作',
+          addPackage: '添加包裹',
+          update: '修改',
+          delete: '删除',
+          msg1: '您输入的中文品名不能为空',
+          msg2: '您输入的单价不能为空',
+          msg3: '您输入的单价不是一个有效的数字',
+          msg4: '您输入的数量不能为空',
+          msg5: '您输入的数量不是一个数字'
+        }
       }
     },
     watch: {
@@ -163,6 +193,13 @@
   }
 </script>
 <style lang="less">
+  .el-table .warning-row {
+    background: oldlace;
+  }
+
+  .el-table .success-row {
+    background: #f0f9eb;
+  }
   .table_package {
     .add_package {
       // border-bottom: 1px #ddd solid;

@@ -11,7 +11,7 @@
       <el-form class="form" ref="form" :model="form" label-width="120px">
 
         <div id="item1" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">sender info</h1>
+          <h1 class="page_tit">Sender information</h1>
           <el-form-item label="name : " prop="senderName"
                         :rules="[
               { required: true, message: 'name cannot be null'}
@@ -53,7 +53,7 @@
         </div>
 
         <div id="item2" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">Recipient info</h1>
+          <h1 class="page_tit">Recipient information</h1>
           <el-form-item label="name : " prop="receiverName"
                         :rules="[
               { required: true, message: 'name cannot be null'},
@@ -63,8 +63,7 @@
           </el-form-item>
           <el-form-item label="Telephone : " prop="receiverMobile"
                         :rules="[
-              { required: true, message: 'Telephone cannot be null'},
-              { type: 'number', message: 'The phone number must be a number'}
+              { required: true, message: 'Telephone cannot be null'}
             ]"
           >
             <el-input placeholder="Please enter telephone" v-model="form.receiverMobile"/>
@@ -88,7 +87,7 @@
         </div>
 
         <div id="item3" class="sendorder_item">
-          <h1 class="page_tit">Package info</h1>
+          <h1 class="page_tit">Package information</h1>
           <el-row :gutter="12">
             <el-col :span="5">
               <el-form-item label="weight(kg) : ">
@@ -179,93 +178,41 @@
         </div>
 
         <div class="explain_info">
-          <p>体验微信下单</p>
+          <p>Experience WeChat</p>
           <div class="img"><img src="/static/image/weChat.jpg" alt="国际快递服务中心公众号"></div>
           <div class="img">
-            <p><a href="/#/Send" target="_blank">寄件流程</a></p>
-            <p @click="dialogTableVisible = true">关于保价</p>
-            <p @click="returnGoodVisible = true">关于退件</p>
-            <p @click="packageVisible = true">包裹报关</p>
+            <p><a href="/en/send" target="_blank">Sending process</a></p>
+            <p @click="dialogTableVisible = true">About insured</p>
+            <p @click="returnGoodVisible = true">About return</p>
+            <p @click="packageVisible = true">Parcel declaration</p>
           </div>
         </div>
 
       </el-form>
     </div>
 
-    <el-dialog title="关于保价" custom-class="dialog" :visible.sync="dialogTableVisible">
+    <el-dialog title="About insured" custom-class="dialog" :visible.sync="dialogTableVisible">
       <p>
-        此项服务以自愿为原则。寄件人选择此项服务时，应确定保价金额与每个邮件内件实际价值一致，每个邮件保价金额最高限额为二十万元人民币，保价费按申报的保价金额的0.5%收取，每件最低收取1.00元人民币。未按规定交纳保价费的快件，不属于保价快件。</p>
+        This service is voluntary. Sender choose this service, you should ensure that the insured amount and the actual value of each mail pieces of the same, the maximum amount of each mail insured amount of two hundred thousand yuan, insured fee at the declared premium of 0.5% charge, each The minimum charge of 1.00 yuan. Not in accordance with the provisions of the insurance fee to pay the shipment, does not belong to the insured express mail.</p>
     </el-dialog>
-    <el-dialog title="关于退件" custom-class="dialog" :visible.sync="returnGoodVisible">
-      <p>若快递妥投出现问题，我们会逆向返还给寄件人，逆向物流费用将由寄件人承担。</p>
+    <el-dialog title="About return" custom-class="dialog" :visible.sync="returnGoodVisible">
+      <p>If the delivery of a properly cast problems, we will reverse the return to the sender, reverse logistics costs will be borne by the sender.</p>
     </el-dialog>
-    <el-dialog title="包裹报关" custom-class="dialog" :visible.sync="packageVisible">
-      <p>包裹用于清关使用，若不填，清关另需其他材料我们会电话联系您。</p>
-    </el-dialog>
-
-    <el-dialog class="dialog" :title="modalTitle" width="600px" :visible.sync="dialogFormVisible">
-      <el-form v-loading="loading1"
-               element-loading-text="获取用户地址信息..."
-               element-loading-background="rgba(255, 255,255, 0.6)"
-               :model="item"
-               label-width="90px"
-      >
-        <el-form-item label="联系人姓名" :label-width="formLabelWidth">
-          <el-input v-model="item.name" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
-          <el-input v-model="item.mobile" auto-complete="off"></el-input>
-        </el-form-item>
-        <country v-model="item.countrydata" :values="item.countrydata" label="国家/地区 : " type="cn"
-                 @coutryChange="addAddrCountry"/>
-        <transition name="el-zoom-in-top">
-          <select-city label="地区选择 : " :cancel="item.cancelCity" @selectCityChange="modalSeleteCity"
-                       v-show="showModalCitySelect"/>
-        </transition>
-        <el-form-item label="地址" :label-width="formLabelWidth">
-          <el-input v-model="item.address" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="邮编" :label-width="formLabelWidth">
-          <el-input v-model="item.postcode" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="备注" :label-width="formLabelWidth">
-          <el-input v-model="item.remark" auto-complete="off"></el-input>
-        </el-form-item>
-
-        <el-form-item label="设为默认地址">
-          <el-radio-group v-model="item.isDefault">
-            <el-radio label="1">是</el-radio>
-            <el-radio label="0">否</el-radio>
-          </el-radio-group>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="confirm">确 定</el-button>
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-      </div>
+    <el-dialog title="Parcel declaration" custom-class="dialog" :visible.sync="packageVisible">
+      <p>Parcels used for customs clearance, if not fill, customs clearance and other materials we will call you.</p>
     </el-dialog>
 
     <div class="float_left">
-      <!-- <p class="anchor active" @click='goAnchor("#item1")'>寄件人信息<span class="el-icon-d-arrow-right"></span></p>
-      <p class="anchor" @click='goAnchor("#item2")'>收件人信息<span class="el-icon-d-arrow-right"></span></p>
-      <p class="anchor" @click='goAnchor("#item3")'>包裹信息<span class="el-icon-d-arrow-right"></span></p>
-      <p class="anchor" @click='goAnchor("#item4")'>包裹报关<span class="el-icon-d-arrow-right"></span></p> -->
-
-      <p class="anchor active" @click='goAnchor("#item1")'>寄</p>
-      <p class="anchor" @click='goAnchor("#item2")'>收</p>
-      <p class="anchor" @click='goAnchor("#item3")'>包</p>
-      <p class="anchor" @click='goAnchor("#item4")'>报</p>
+      <p class="anchor active" @click='goAnchor("#item1")'>1F</p>
+      <p class="anchor" @click='goAnchor("#item2")'>2F</p>
+      <p class="anchor" @click='goAnchor("#item3")'>3F</p>
+      <p class="anchor" @click='goAnchor("#item4")'>4F</p>
       <p class="anchor top" @click='goAnchor("#item9")'></p>
-
-      <!-- <p class="anchor"><a href='/#/cn/ordersend/#item1'>寄件人信息<span class="el-icon-d-arrow-right"></span></a></p>
-      <p class="anchor"><a href='/#/cn/ordersend/#item2'>收件人信息<span class="el-icon-d-arrow-right"></span></a></p>
-      <p class="anchor"><a href='/#/cn/ordersend/#item3'>包裹信息<span class="el-icon-d-arrow-right"></span></a></p>
-      <p class="anchor"><a href='/#/cn/ordersend/#item4'>包裹报关<span class="el-icon-d-arrow-right"></span></a></p> -->
     </div>
-    <el-dialog title="下单须知" custom-class="notice" :visible.sync="dialogVisible">
-      <p>1, 您现在为非登陆状态下单，付款成功后请 <span style='color: red'> <b>自行保留订单号，以便查询订单信息</b></span></p>
-      <p>2, 建议关注公众号后登陆下单，或者使用微信登陆后下单</p>
-      <p>3, 下单成功后，您可凭订单号在<span style='color: red'><b> 首页 </b></span>的 <b>寄件查询</b> 功能中查询</p>
+    <el-dialog title="Order notes" custom-class="notice" :visible.sync="dialogVisible">
+      <p>1, you can now log in non-state orders, the payment is successful please <span style='color: red'> <b>retain your order number to check your order information</b></span></p>
+      <p>2, it is recommended to pay attention to the public number landing orders, or use the micro-channel landing orders</p>
+      <p>3, after the order is successful, you rely order number in the<span style='color: red'><b> home  </b></span>of <b>mailing query</b> query functions</p>
     </el-dialog>
   </div>
 </template>
@@ -278,18 +225,6 @@
   import TablePackage from '@/components/TablePackage'
   import {getPrice} from '@/services/components/getPrice'
   import {createOrder} from '@/services/orderInfo'
-  import {
-    showReceAddr,
-    addReceAddrInfo,
-    delReceAddrInfo,
-    getOneReceAddr,
-    updateOneReceAddr,
-    showSendAddr,
-    addSendAddrInfo,
-    delSendAddrInfo,
-    getOneSendAddr,
-    updateOneSendAddr
-  } from '@/services/address'
 
   export default {
     name: 'OrderSendSpare',
@@ -323,7 +258,7 @@
         showSendCitySelect: false,
         showPackageList: {},
         showProductList: {},
-        freight: '填写快件信息后,自动获取',
+        freight: 'After filling out the express information, automatic acquisition',
         sendAddrInfo: [],
         sendAddrIndex: 0,
         showSendAddr: false,
@@ -395,7 +330,7 @@
             } else {
               this.$message({
                 type: 'warning',
-                message: '您的信息还不够完整，请填写完整'
+                message: 'Your information is not complete enough, please fill in the whole'
               })
               throw new Error('您的信息还不够完整，请填写完整')
             }
@@ -403,7 +338,7 @@
           if (this.form.insured !== '1' && this.form.insured !== '0') {
             this.$message({
               type: 'warning',
-              message: '请选择是否保价'
+              message: 'Please choose whether to keep the price'
             })
             this.loading2 = false
             return
@@ -412,7 +347,7 @@
           if (this.form.returnGood !== '1' && this.form.returnGood !== '0') {
             this.$message({
               type: 'warning',
-              message: '请选择是否退件'
+              message: 'Please choose whether to return a piece'
             })
             this.loading2 = false
             return
@@ -474,12 +409,12 @@
             this.form.cancel = !this.form.cancel
             this.$refs[form].resetFields()
             this.form = {}
-            this.freight = '请选择收件地址'
+            this.freight = 'Please choose the receiving address'
             this.showPackageList = {show: false, data: []}
             this.showProductList = {show: false}
             this.$notify({
-              title: '成功',
-              message: '下单成功！！！',
+              title: 'success',
+              message: 'The single success!!!',
               type: 'success'
             })
             this.$router.push('/cn/cashier?order=' + data.obj.orderNo)
@@ -487,8 +422,8 @@
           } else {
             this.loading2 = false
             this.$notify({
-              title: '失败',
-              message: '下单失败,稍后请重试',
+              title: 'fail',
+              message: 'A single failure, please try again later',
               type: 'warning'
             })
           }
@@ -509,113 +444,11 @@
       modalSeleteCity (val) {
         this.item.citydata = val
       },
-      // 模态框确认操作
-      confirm () {
-        if (!this.item.name) {
-          this.$message({
-            type: 'warning',
-            message: '联系人姓名不能为空'
-          })
-          return
-        }
-        if (!this.item.mobile) {
-          this.$message({
-            type: 'warning',
-            message: '联系人电话不能为空'
-          })
-          return
-        }
-        if (!this.item.countrydata) {
-          this.$message({
-            type: 'warning',
-            message: '联系人国家不能为空'
-          })
-          return
-        }
-        if (!this.item.address) {
-          this.$message({
-            type: 'warning',
-            message: '联系人地址不能为空'
-          })
-          return
-        }
-        if (!this.item.postcode) {
-          this.$message({
-            type: 'warning',
-            message: '邮编不能为空'
-          })
-        }
-        if (this.type === 'add' && this.modalTitle === '新增寄件地址') {
-          this.addSendAddr(this.item)
-        }
-
-        if (this.type === 'add' && this.modalTitle === '新增收件地址') {
-          this.addReceAddr(this.item)
-        }
-
-        if (this.type === 'update' && this.modalTitle === '修改寄件地址') {
-          this.updateSendAddr(this.item)
-        }
-
-        if (this.type === 'update' && this.modalTitle === '修改收件地址') {
-          this.updateReceAddr(this.item)
-        }
-      },
-      addAddr (type) {
-        this.modalTitle = type === 'send' ? '新增寄件地址' : '新增收件地址'
-        this.dialogFormVisible = true
-        this.type = 'add'
-        this.item = {isDefault: '1'}
-        this.item.cancel = !this.item.cancel
-      },
-      updateAddr (item, type) {
-        this.loading1 = true
-        this.modalTitle = type === 'send' ? '修改寄件地址' : '修改收件地址'
-        this.type = 'update'
-        this.item = {}
-        this.item.cancel = !this.item.cancel
-        this.dialogFormVisible = true
-        if (type === 'send') {
-          this.getOneSendAddr(item)
-        } else if (type === 'rece') {
-          this.getOneReceAddr(item)
-        }
-      },
-      delAddr (item, type) {
-        this.$confirm('地址删除将无法回复, 是否继续本次操作?', '删除本条地址', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          if (type === 'send') {
-            this.delSendAddr(item.id)
-          } else if (type === 'rece') {
-            this.delReceAddr(item.id)
-          }
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消删除'
-          })
-        })
-      },
-      sendAddressClick (e) {
-        this.sendAddrIndex = e
-        this.showSendAddr = false
-      },
-      receAddressClick (e) {
-        this.receAddrIndex = e
-        this.showReceAddr = false
-        this.form.receiverCountry = this.receAddrInfo[e].country
-        this.showPackageList = {show: true, data: this.receAddrInfo[e].country}
-        this.showProductList = {show: false}
-        this.getPrice()
-      },
       onCancel (form) {
         this.form.cancel = !this.form.cancel
         this.$refs[form].resetFields()
         this.form = {}
-        this.freight = '请选择收件地址'
+        this.freight = 'Please choose the receiving address'
         this.showPackageList = {show: true, data: []}
         this.showProductList = {show: false}
       },
@@ -702,287 +535,6 @@
           console.info('计算体积出错了', error)
         }
       },
-      // 获取寄件地址信息
-      async getSendAddr () {
-        let data = await showSendAddr({
-          wxUserId: localStorage.mj_userId
-        })
-        if (data.code === 200 && data.obj) {
-          this.sendAddrInfo = data.obj
-        } else if (data.msg === '暂未查询到信息') {
-          this.receAddrInfo = []
-          this.$message({
-            type: 'warning',
-            message: '暂无查询到寄件地址信息,建议新增'
-          })
-        } else {
-          this.$message({
-            message: '用户寄件地址列表获取失败',
-            type: 'warning'
-          })
-        }
-      },
-      // 获取单条寄件地址信息
-      async getOneSendAddr (item) {
-        const data = await getOneSendAddr({id: item.id, wxUserId: localStorage.mj_userId})
-        if (data.code === 200) {
-          this.sendAddr = data.obj
-          this.item = {
-            countrydata: data.obj.COUNTRY_CN,
-            name: data.obj.NAME,
-            postcode: data.obj.POSTCODE,
-            mobile: data.obj.MOBILE,
-            address: data.obj.ADDRESS,
-            isDefault: String(data.obj.IS_DEFAULT),
-            remark: data.obj.REMARK,
-            data: data.obj
-          }
-          this.loading1 = false
-        } else {
-          this.$message({
-            type: 'error',
-            message: '用户地址信息获取失败,无法修改当前地址'
-          })
-          this.loading1 = false
-          this.dialogFormVisible = false
-          this.showModalCitySelect = false
-        }
-      },
-      // 修改寄件地址信息
-      async updateSendAddr (payload) {
-        const newpayload = {
-          id: payload.data.ID,
-          name: payload.name,
-          address: payload.address,
-          isDefault: payload.isDefault,
-          mobile: payload.mobile,
-          postcode: payload.postcode,
-          remark: payload.remark
-        }
-        if (payload.countrydata === payload.data.COUNTRY_CN) {
-          newpayload.country = undefined
-        } else {
-          newpayload.country = JSON.parse(payload.countrydata).id
-          const name = JSON.parse(payload.countrydata).country_cn
-          if (name === '中国' && payload.citydata && payload.citydata.length === 3) {
-            newpayload.prov = payload.citydata[0].split('/')[0]
-            newpayload.city = payload.citydata[1].split('/')[0]
-            newpayload.county = payload.citydata[2].split('/')[0]
-          } else if (name === '中国' && !payload.citydata) {
-            this.$message({
-              type: 'warning',
-              message: '请选择省市县'
-            })
-            return
-          } else if (name === '中国' && payload.citydata && payload.citydata.length < 3) {
-            this.$message({
-              type: 'warning',
-              message: '省市县选择请精确到县级'
-            })
-            return
-          }
-        }
-        newpayload.wxUserId = localStorage.mj_userId
-        const data = await updateOneSendAddr({...newpayload})
-        if (data.code === 200) {
-          this.getSendAddr()
-          this.$message({
-            type: 'success',
-            message: '修改成功'
-          })
-          this.dialogFormVisible = false
-          this.showModalCitySelect = false
-        } else {
-          this.$message({
-            type: 'warning',
-            message: '修改失败'
-          })
-        }
-      },
-      // 删除寄件地址信息
-      async delSendAddr (id) {
-        const data = await delSendAddrInfo({ids: id, wxUserId: localStorage.mj_userId})
-        if (data.code === 200) {
-          this.getSendAddr()
-          this.$message({
-            type: 'success',
-            message: '删除成功'
-          })
-        } else {
-          this.getSendAddr()
-          this.$message({
-            type: 'error',
-            message: '删除失败'
-          })
-        }
-      },
-      // 创建寄件地址信息
-      async addSendAddr (payload) {
-        payload.wxUserId = localStorage.mj_userId
-        payload.country = JSON.parse(payload.countrydata).id
-        const name = JSON.parse(payload.countrydata).country_cn
-        if (name === '中国' && payload.citydata && payload.citydata.length === 3) {
-          payload.prov = payload.citydata[0].split('/')[0]
-          payload.city = payload.citydata[1].split('/')[0]
-          payload.county = payload.citydata[2].split('/')[0]
-        } else if (name === '中国' && !payload.citydata) {
-          this.$message({
-            type: 'warning',
-            message: '请选择省市县'
-          })
-          return
-        } else if (name === '中国' && payload.citydata && payload.citydata.length < 3) {
-          this.$message({
-            type: 'warning',
-            message: '省市县选择请精确到县级'
-          })
-          return
-        }
-        delete payload.cancel
-        delete payload.countrydata
-        try {
-          const data = await addSendAddrInfo({...payload})
-          if (data.code === 200) {
-            this.getSendAddr()
-            this.$message({
-              type: 'success',
-              message: '创建成功'
-            })
-            this.dialogFormVisible = false
-            this.showModalCitySelect = false
-          } else {
-            this.$message({
-              type: 'warning',
-              message: '创建失败'
-            })
-          }
-        } catch (e) {
-          console.info('发生错误...', e)
-        }
-      },
-      // 获取收件地址信息
-      async getReceiveAddr () {
-        const data = await showReceAddr({
-          wxUserId: localStorage.mj_userId
-        })
-        if (data.code === 200 && data.obj) {
-          this.receAddrInfo = data.obj
-          this.showPackageList = {show: true, data: data.obj[0].country}
-        } else if (data.msg === '暂未查询到信息') {
-          this.receAddrInfo = []
-          this.$message({
-            type: 'warning',
-            message: '暂无查询到收件地址信息,建议新增'
-          })
-        } else {
-          this.$message({
-            message: '用户收件地址列表获取失败',
-            type: 'warning'
-          })
-        }
-      },
-      // 获取单条收件地址信息
-      async getOneReceAddr (item) {
-        const data = await getOneReceAddr({id: item.id, wxUserId: localStorage.mj_userId})
-        if (data.code === 200) {
-          this.receAddr = data.obj
-          this.item = {
-            countrydata: data.obj.COUNTRY_CN,
-            name: data.obj.NAME,
-            postcode: data.obj.POSTCODE,
-            mobile: data.obj.MOBILE,
-            address: data.obj.ADDRESS,
-            isDefault: String(data.obj.IS_DEFAULT),
-            remark: data.obj.REMARK,
-            data: data.obj
-          }
-          this.loading1 = false
-        } else {
-          this.$message({
-            type: 'error',
-            message: '用户地址信息获取失败,无法修改当前地址'
-          })
-          this.loading1 = false
-          this.dialogFormVisible = false
-          this.showModalCitySelect = false
-        }
-      },
-      // 修改收件地址信息
-      async updateReceAddr (payload) {
-        const newpayload = {
-          id: payload.data.ID,
-          name: payload.name,
-          address: payload.address,
-          isDefault: payload.isDefault,
-          mobile: payload.mobile,
-          postcode: payload.postcode,
-          remark: payload.remark
-        }
-        if (payload.countrydata === payload.data.COUNTRY_CN) {
-          newpayload.country = undefined
-        } else {
-          newpayload.country = JSON.parse(payload.countrydata).id
-        }
-        newpayload.wxUserId = localStorage.mj_userId
-        const data = await updateOneReceAddr({...newpayload})
-        if (data.code === 200) {
-          this.getReceiveAddr()
-          this.$message({
-            type: 'success',
-            message: '修改成功'
-          })
-          this.dialogFormVisible = false
-          this.showModalCitySelect = false
-        } else {
-          this.$message({
-            type: 'warning',
-            message: '修改失败'
-          })
-        }
-      },
-      // 删除收件地址信息
-      async delReceAddr (id) {
-        const data = await delReceAddrInfo({ids: id, wxUserId: localStorage.mj_userId})
-        if (data.code === 200) {
-          this.getReceiveAddr()
-          this.$message({
-            type: 'success',
-            message: '删除成功'
-          })
-        } else {
-          this.getReceiveAddr()
-          this.$message({
-            type: 'error',
-            message: '删除失败'
-          })
-        }
-      },
-      // 创建收件地址信息
-      async addReceAddr (payload) {
-        payload.wxUserId = localStorage.mj_userId
-        payload.country = JSON.parse(payload.countrydata).id
-        delete payload.cancel
-        delete payload.countrydata
-        try {
-          const data = await addReceAddrInfo({...payload})
-          if (data.code === 200) {
-            this.getReceiveAddr()
-            this.$message({
-              type: 'success',
-              message: '创建成功'
-            })
-            this.dialogFormVisible = false
-            this.showModalCitySelect = false
-          } else {
-            this.$message({
-              type: 'warning',
-              message: '创建失败'
-            })
-          }
-        } catch (e) {
-          console.info('发生错误...', e)
-        }
-      },
       /**
        * [getPrice 获取预付费用]
        * @return {[type]} [description]
@@ -990,27 +542,27 @@
       async getPrice () {
         try {
           if (!this.form.receiverCountry) {
-            this.freight = '请选择您的收件地址'
+            this.freight = 'Please choose your receiving address'
             return
           }
           if (!this.form.weight) {
-            this.freight = '请填写您的包裹重量'
+            this.freight = 'Please fill in the weight of your package'
             return
           }
           if (!this.form.packageType) {
-            this.freight = '请选择您的产品类型'
+            this.freight = 'Please select your product type'
             return
           }
           if (!this.form.productType) {
-            this.freight = '请选择您的产品规格'
+            this.freight = 'Please choose your product specifications'
             return
           }
           if (this.form.insured === '1' && !this.form.insuredAmount) {
-            this.freight = '您选择了保价但是没有填写报价金额'
+            this.freight = 'You have chosen the price but did not fill in the price.'
             return
           }
           if (this.form.volumeWeight > 20) {
-            this.freight = '您包裹的体积太大了,我们不能寄'
+            this.freight = 'The volume of your package is too big, we can\'t send it'
             return
           }
           let formWeight = 0
@@ -1035,12 +587,12 @@
               this.freight = data.finalPrice
             }
           } else if (price.code === 500 && price.msg === '查询失败') {
-            this.freight = '很抱歉，您所选择产品规格暂不支持邮寄,请选择其他产品规格'
+            this.freight = 'I\'m sorry, you choose the product specifications temporarily not to support mailing, please choose other product specifications.'
           }
           return
         } catch (err) {
           console.error(err)
-          this.freight = '请先填写快件信息'
+          this.freight = 'Please fill out the express information first'
         }
       }
     }
@@ -1130,7 +682,7 @@
       border-radius: 3px;
       margin: 0px auto 20px;
       .page_tit {
-        background-image: url(/static/image/title.png);
+        background-image: url(/static/image/title_2.png);
         height: 48px;
         font-size: 20px;
         color: #ffffff;

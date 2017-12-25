@@ -216,7 +216,7 @@ export default new Router({
         intro: '英文寄件'
       }
     }, {
-      path: 'ordersendspare',
+      path: 'orderspare',
       name: 'enordersendspare',
       component: enordersendspare,
       meta: {

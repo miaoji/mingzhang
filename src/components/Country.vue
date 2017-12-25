@@ -10,11 +10,11 @@
 <template>
   <el-form-item :label="label"
                 :rules="[
-      { required: true, message: '国家不能为空'},
+      { required: true, message: this.info.msg},
     ]"
   >
     <el-select v-model="country_data" size="large" @change="handleChange" style="width: 80%" filterable
-               placeholder="请选择">
+               :placeholder="info.select">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -49,6 +49,12 @@
     },
 
     async created () {
+      if (this.$route.fullPath.split('/en/').length === 2) {
+        this.info = {
+          select: 'Please choose',
+          msg: 'The country can\'t be empty'
+        }
+      }
       await this.$store.dispatch('getCountryCnInfo')
       await this.$store.dispatch('getCountryEnInfo')
       this.getCountry()
@@ -57,7 +63,11 @@
     data () {
       return {
         options: [],
-        country_data: ''
+        country_data: '',
+        info: {
+          select: '请选择',
+          msg: '国家不能为空'
+        }
       }
     },
 

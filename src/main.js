@@ -12,9 +12,18 @@ import language from '@/assets/language'
 Vue.use(ElementUI)
 Vue.use(VueI18n)
 Vue.config.productionTip = false
-
 router.beforeEach(async (to, from, next) => {
   const isLogin = store.state.user.isLogin
+
+  if (to.fullPath.split('/en/').length === 2 && window.localStorage.locale !== 'en') {
+    console.log('这是一个英文版的页面')
+    window.localStorage.setItem('locale', 'en')
+    location.reload()
+  } else if (to.fullPath.split('/cn/').length === 2 && window.localStorage.locale !== 'cn') {
+    console.log('这是一个中文版的页面')
+    window.localStorage.setItem('locale', 'cn')
+    location.reload()
+  }
   // 如果用户未登录，本地缓存中有token信息，则自动登录
   const data = autoLogin()
   if (!isLogin && data && data.openid) {
@@ -46,14 +55,13 @@ const messages = {
   en: {
     message: language.en
   },
-  zhCN: {
+  cn: {
     message: language.zhCN
   }
 }
 
-// Create VueI18n instance with options
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: window.localStorage.locale || 'cn',
   messages
 })
 

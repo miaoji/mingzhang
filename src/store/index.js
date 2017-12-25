@@ -15,7 +15,9 @@ export default new Vuex.Store({
     directmail,
     user
   }
-  // state,
+  // state: {
+  //   locale: 'cn'
+  // }
   // mutations,
   // getters,
   // actions

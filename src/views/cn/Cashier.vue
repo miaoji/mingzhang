@@ -3,6 +3,7 @@
     <div class="cashier_bg"></div>
     <div class="order_info order_info_no" v-show='orderIsNo'>
       <div class="title">
+          <p>{{$t('message.pages.index.quality')}}<p>
         <div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
         <div class="title_text">{{text.text2}}</div>
         <span class="title_info">{{text.text3}}</span>
@@ -147,10 +148,13 @@
       })
     },
     created () {
+      // console.log('i18e', this.$t)
       if (this.$route.fullPath.split('/en/').length === 2) {
-        this.text = enText
+        console.log(enText)
+        // this.text = enText
       } else {
-        this.text = cnText
+        console.log(cnText)
+        // this.text = cnText
       }
 
       const order = location.search.split('?order=')[1]
@@ -181,10 +185,6 @@
         }
       },
       wxPay () {
-        // const browserId = storage({
-        //   type: 'get',
-        //   key: 'browserId'
-        // })
         const state = this.wxPayInfo.out_trade_no
         const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
         const websocket = new WebSocket(webSocketUrl)

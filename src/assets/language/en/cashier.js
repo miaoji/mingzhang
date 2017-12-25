@@ -38,6 +38,6 @@ export const cashierText = {
   text37: 'Confirm the delivery information before payment, so as to avoid the inconvenience caused to your delivery due to the wrong address information',
   text38: 'WeChat Pay',
   text39: 'Use WeChat to pay',
-  text40: 'Please use the micro-channel sweep',
-  text41: 'Scan the QR code to complete the payment'
+  text40: 'WeChat scan qr code',
+  text41: 'scan qr code payment'
 }

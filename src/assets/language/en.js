@@ -1,7 +1,7 @@
 export default {
   pages: {
     index: {
-      quality: 'q',
+      quality: 'q111',
       reasonable: 'r',
       highly: 'h',
       unrestrained: 'u'

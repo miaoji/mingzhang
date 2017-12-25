@@ -270,7 +270,6 @@
         item: {
           cancel: false
         },
-        modalTitle: 'send',
         type: 'add',
         loading1: false,
         loading2: false,

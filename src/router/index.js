@@ -264,6 +264,13 @@ export default new Router({
       meta: {
         intro: '禁运物品'
       }
+    }, {
+      path: 'cashier',
+      name: 'cashier',
+      component: cashier,
+      meta: {
+        intro: '收银台'
+      }
     }]
   }, {
     path: '*',

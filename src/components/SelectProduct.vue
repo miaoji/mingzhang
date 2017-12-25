@@ -10,11 +10,11 @@
 <template>
   <el-form-item :label="label"
                 :rules="[
-      { required: true, message: '请选择产品规格'},
+      { required: true, message: this.info.select},
     ]"
   >
     <el-select v-model="select_product" size="large" :disabled="!showProductList.show" @change="handleChange"
-               style="width: 100%" filterable placeholder="请选择产品规格">
+               style="width: 100%" filterable :placeholder="info.select">
       <el-option
         v-for="item in options"
         :key="item.value"
@@ -44,14 +44,22 @@
     },
 
     created () {
-      // this.getCountry()
-      // this.getCountry({packageTypeId: 53})
+      if (this.$route.fullPath.split('/en/').length === 2) {
+        this.info = {
+          select: 'Please choose',
+          msg1: 'Product type list acquisition failure'
+        }
+      }
     },
 
     data () {
       return {
         options: [],
-        select_product: ''
+        select_product: '',
+        info: {
+          select: '请选择',
+          msg1: '产品类型列表获取失败'
+        }
       }
     },
 
@@ -66,7 +74,7 @@
           }
         } else {
           this.$message({
-            message: '产品类型列表获取失败',
+            message: this.info.msg1,
             type: 'warning'
           })
         }

@@ -10,7 +10,7 @@
 <template>
   <el-form-item :label="label"
                 :rules="[
-      { required: true, message: '请选择您所在的城市'},
+      { required: true, message: this.info.msg1},
     ]"
   >
     <el-cascader
@@ -18,6 +18,7 @@
       change-on-select
       filterable
       @change="handleChange"
+      :placeholder="info.select"
       style="width: 80%"
       popper-class="select_model"
       :value='value'
@@ -47,14 +48,20 @@
         options: [],
         value: [],
         info: {
-          msg1: ''
+          msg1: '请选择您所在的城市',
+          msg2: '获取省份信息失败,请刷新页面重试 ！',
+          select: '请选择'
         }
       }
     },
 
     created () {
       if (this.$route.fullPath.split('/en/').length === 2) {
-        this.info = {}
+        this.info = {
+          msg1: 'Please choose the city you are in',
+          msg2: 'Access to provincial information failed, please refresh the page retry !',
+          select: 'Please choose'
+        }
       }
       this.getSelectCity()
     },
@@ -99,7 +106,7 @@
           }
         } else {
           this.$message({
-            message: '获取省份信息失败,请刷新页面重试！！！',
+            message: this.info.msg2,
             type: 'warning'
           })
         }

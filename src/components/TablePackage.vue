@@ -158,6 +158,7 @@
     },
     data () {
       return {
+        modalTitle: '',
         tableDate: [],
         dialogFormVisible: false,
         form: {},

@@ -1,13 +1,13 @@
 <template>
-  <div class="cashier" v-loading="loading" element-loading-text="订单信息正在向您飞奔~~~">
+  <div class="cashier" v-loading="loading" :element-loading-text='text.text1'>
     <div class="cashier_bg"></div>
     <div class="order_info order_info_no" v-show='orderIsNo'>
       <div class="title">
         <div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
-        <div class="title_text">订单付款请求提交失败</div>
-        <span class="title_info">请前往我的订单,刷新页面,3-5分钟后重试</span>
+        <div class="title_text">{{text.text2}}</div>
+        <span class="title_info">{{text.text3}}</span>
         <div class="go_index">
-          <router-link to="/">回到首页</router-link>
+          <router-link to="/">{{text.text4}}</router-link>
         </div>
         <div style="height:470px;"></div>
       </div>
@@ -16,14 +16,14 @@
       <el-card class="box-card">
         <div class="title">
           <div class="ico_ok left"><img src="/static/image/ico_ok.png" alt="OK"></div>
-          <div class="title_text">订单创建完成,我要付款去~</div>
-          <span class="title_info">请在确认信息无误后付款！订单号：{{data.orderNo}}</span>
-          <div class="right">付款状态 : <span class="totalFee">{{data.status===1?'待付款':'已完成支付'}}</span></div>
-          <div class="right">待付款金额 : <span class="totalFee">{{data.totalFee/100}}</span> 元</div>
+          <div class="title_text">{{text.text5}}</div>
+          <span class="title_info">{{text.text6}}{{data.orderNo}}</span>
+          <div class="right">{{text.text7}}<span class="totalFee">{{data.status===1?text.text12:text.text13}}</span></div>
+          <div class="right">{{text.text8}}<span class="totalFee">{{data.totalFee/100}}</span> {{text.text9}}</div>
           <div class="rece_info clear">
-            <span v-show="!orderInfoShow">收件地址信息 : {{data.receiverCountry}}, {{data.receiverAddress}}</span>
+            <span v-show="!orderInfoShow">{{text.text10}}{{data.receiverCountry}}, {{data.receiverAddress}}</span>
             <span class="right" @click="showOrderInfo">
-              订单详情
+              {{text.text11}}
               <i v-show="!orderInfoShow" class="el-icon-arrow-down"></i>
               <i v-show="orderInfoShow" class="el-icon-arrow-up"></i>
             </span>
@@ -33,58 +33,58 @@
       <div class="content">
         <div class="item item1" :class="{show_box_card: orderInfoShow}">
           <el-card class="box-card order_info">
-            <div class="item_title">寄件地址信息</div>
-            <div class="info"><span>寄件人</span> : <span>{{data.senderName}}</span></div>
-            <div class="info"><span>寄件地址</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
+            <div class="item_title">{{text.text14}}</div>
+            <div class="info"><span>{{text.text15}}</span> : <span>{{data.senderName}}</span></div>
+            <div class="info"><span>{{text.text16}}</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
             </div>
-            <div class="info"><span>联系方式</span> : <span>{{data.senderMobile}}</span></div>
-            <div class="info"><span>邮编</span> : <span>{{data.senderPostcode}}</span></div>
-            <div class="item_title">收件地址信息</div>
-            <div class="info"><span>收件人</span> : <span>{{data.receiverName}}</span></div>
-            <div class="info"><span>收件地址</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
-            <div class="info"><span>联系方式</span> : <span>{{data.receiverMobile}}</span></div>
-            <div class="info"><span>邮编</span> : <span>{{data.receiverPostcode}}</span></div>
-            <div class="item_title">包裹信息</div>
+            <div class="info"><span>{{text.text17}}</span> : <span>{{data.senderMobile}}</span></div>
+            <div class="info"><span>{{text.text18}}</span> : <span>{{data.senderPostcode}}</span></div>
+            <div class="item_title">{{text.text19}}</div>
+            <div class="info"><span>{{text.text20}}</span> : <span>{{data.receiverName}}</span></div>
+            <div class="info"><span>{{text.text21}}</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
+            <div class="info"><span>{{text.text22}}</span> : <span>{{data.receiverMobile}}</span></div>
+            <div class="info"><span>{{text.text23}}</span> : <span>{{data.receiverPostcode}}</span></div>
+            <div class="item_title">{{text.text24}}</div>
             <el-row :gutter="20">
               <el-col :span="6">
-                <div><span>重量</span> : <span>{{data.weight?data.weight:0}}kg</span></div>
+                <div><span>{{text.text25}}</span> : <span>{{data.weight?data.weight:0}}kg</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>长度</span> : <span>{{data.length?data.length:0}}cm</span></div>
+                <div><span>{{text.text26}}</span> : <span>{{data.length?data.length:0}}cm</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>宽度</span> : <span>{{data.width?data.width:0}}cm</span></div>
+                <div><span>{{text.text27}}</span> : <span>{{data.width?data.width:0}}cm</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>高度</span> : <span>{{data.height?data.height:0}}cm</span></div>
+                <div><span>{{text.text28}}</span> : <span>{{data.height?data.height:0}}cm</span></div>
               </el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="6">
-                <div><span>是否保价</span> : <span>{{data.insured===1?'是':'否'}}</span></div>
+                <div><span>{{text.text29}}</span> : <span>{{data.insured===1?text.text32:text.text33}}</span></div>
               </el-col>
               <el-col :span="6" v-show='data.insured===1'>
-                <div><span>保价金额</span> : <span>{{data.insuredAmount}}元</span></div>
+                <div><span>{{text.text30}}</span> : <span>{{data.insuredAmount}}{{text.text9}}</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>是否退件</span> : <span>{{data.returnGood===1?'是':'否'}}</span></div>
+                <div><span>{{text.text31}}</span> : <span>{{data.returnGood===1?text.text32:text.text33}}</span></div>
               </el-col>
             </el-row>
           </el-card>
         </div>
         <div class="item">
           <el-card class="box-card">
-            <div class="item_title">付款方式</div>
+            <div class="item_title">{{text.text34}}</div>
             <div class="weixin_pay clear" @click="weixinPayOpen">
               <div class="img left"><img src="/static/image/pay_weixin.png" alt="微信支付"></div>
-              <div class="left">前往微信支付</div>
+              <div class="left">{{text.text35}}</div>
             </div>
           </el-card>
         </div>
         <div class="item">
           <el-card class="box-card">
-            <div class="item_title">注意</div>
-            <div>请在付款前确认寄件信息,以免由于地址信息的错误,给您的投递带来不便</div>
+            <div class="item_title">{{text.text36}}</div>
+            <div>{{text.text37}}</div>
           </el-card>
         </div>
       </div>
@@ -92,7 +92,7 @@
     <div style="height: 50px"></div>
 
     <el-dialog
-      title="微信支付"
+      :title="text.text38"
       width="250px"
       :visible.sync="payDialogVisible"
       :close-on-press-escape="true"
@@ -100,7 +100,7 @@
       <div slot="title">
         <img src="../../assets/images/icon32_appwx_logo.png" alt="wxlogo" style="vertical-align: middle;">
         <span>
-          使用微信支付 <span class="totalFeeInfo">￥{{data.totalFee/100}}</span>
+          {{text.text39}} <span class="totalFeeInfo">￥{{data.totalFee/100}}</span>
         </span>
       </div>
       <div
@@ -108,8 +108,8 @@
         <div v-html="payImg"></div>
         <div class="prompt_text clear">
           <div class="img left"><img src="/static/image/sao.png" alt=""></div>
-          <p>请使用微信扫一扫</p>
-          <p>扫描二维码完成支付</p>
+          <p>{{text.text40}}</p>
+          <p>{{text.text41}}</p>
         </div>
       </div>
     </el-dialog>
@@ -121,6 +121,8 @@
   import {getOrderInfoByOrderNo} from '@/services/orderInfo'
   import {getPayQr} from '@/services/wx'
   import {makeQr} from '@/utils/qr'
+  import {cashierText as cnText} from '@/assets/language/cn/cashier'
+  import {cashierText as enText} from '@/assets/language/en/cashier'
   // import {storage} from '@/utils'
   // import {saveOpenid} from '@/utils/user'
 
@@ -128,6 +130,7 @@
     name: 'cashier',
     data () {
       return {
+        text: {},
         data: {},
         orderInfoShow: false,
         loading: true,
@@ -144,6 +147,12 @@
       })
     },
     created () {
+      if (this.$route.fullPath.split('/en/').length === 2) {
+        this.text = enText
+      } else {
+        this.text = cnText
+      }
+
       const order = location.search.split('?order=')[1]
       this.getOrderInfo(order)
       window.scrollTo(0, 110)

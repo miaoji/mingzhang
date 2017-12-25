@@ -174,7 +174,8 @@ export default new Router({
         component: customer,
         meta: {
           intro: '客服中心'
-        }
+        },
+        alias: ['/en/user/customer']
       }]
     }, {
       path: 'orderdetail',

@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 import 'element-ui/lib/theme-chalk/index.css'
 import App from '@/App'
 import ElementUI from 'element-ui'
@@ -6,8 +7,10 @@ import * as filters from '@/filters'
 import router from '@/router'
 import store from '@/store'
 import {autoLogin} from '@/utils/user'
+import language from '@/assets/language'
 
 Vue.use(ElementUI)
+Vue.use(VueI18n)
 Vue.config.productionTip = false
 
 router.beforeEach(async (to, from, next) => {
@@ -39,9 +42,25 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+const messages = {
+  en: {
+    message: language.en
+  },
+  zhCN: {
+    message: language.zhCN
+  }
+}
+
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+  locale: 'en',
+  messages
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   template: '<App/>',

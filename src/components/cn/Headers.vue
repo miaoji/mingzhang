@@ -11,7 +11,11 @@
               语言<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item><router-link :to="location">English</router-link></el-dropdown-item>
+              <router-link :to="location">
+                <el-dropdown-item>
+                  English
+                </el-dropdown-item>
+              </router-link>
             </el-dropdown-menu>
           </el-dropdown>
         </div>
@@ -30,11 +34,11 @@
                 <img v-show="isLogin" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
               </div>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>
-                  <router-link to="/cn/user/directmail">
+                <router-link to="/cn/user/directmail">
+                  <el-dropdown-item>
                     <i class="el-icon-location"></i> 个人中心
-                  </router-link>
-                </el-dropdown-item>
+                  </el-dropdown-item>
+                </router-link>
                 <el-dropdown-item>
                   <div @click="handleLoginOut">
                     <i class="el-icon-caret-right"></i> 登出

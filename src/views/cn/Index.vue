@@ -4,7 +4,9 @@
       <div class="banner"><img src="/static/image/index_banner.jpg"/></div>
       <div class="main w">
         <div class="main_inquire clear">
-          <div class="main_inquire_tit left"><span class="ico"></span>快件查询</div>
+          <div class="main_inquire_tit left">
+            <span class="ico"></span>快件查询
+          </div>
           <div class="main_inquire_inp left">
             <input id="input" type="text" placeholder="请输入单号进行查询" v-model='msg'/>
           </div>

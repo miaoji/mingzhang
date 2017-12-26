@@ -2,19 +2,47 @@
   <div class="header_nav">
     <ul class="w clear">
       <li class="left">
-        <router-link to="/"><img src="/static/image/logo.png"/><span
+        <router-link to="/en/"><img src="/static/image/logo.png"/><span
           class="logo">International Express Service Center</span></router-link>
       </li>
-      <!-- <li class="right btn" v-if='show'><router-link to="/enIndex">homepage</router-link></li> -->
       <li class="right language">
-        <!-- <router-link to="/enIndex">Language</router-link> -->
-        <a href="javascript:;">Language</a>
-        <a href="javascript:;">|</a>
-        <router-link :to="link">中文</router-link>
-        <!-- <span><img src="/static/image/sca_ico_arr.png" alt=""></span> -->
-        <div class="eject hide">
-          <router-link to="/cn/index">中文</router-link>
-          <router-link to="/en/index">English</router-link>
+        <div class='switch'>
+          <el-dropdown>
+            <span class="el-dropdown-link">
+              语言<i class="el-icon-arrow-down el-icon--right"></i>
+            </span>
+            <el-dropdown-menu slot="dropdown">
+              <router-link :to="location">
+                <el-dropdown-item>
+                  中文
+                </el-dropdown-item>
+              </router-link>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+      </li>
+      <li class='right language'>
+        <div class="login">
+          <el-button type="text" icon="login" v-show="!isLogin" @click="wxLogin">登录</el-button>
+          <div class="login-icon">
+            <el-dropdown trigger="hover">
+              <div class="el-dropdown-link">
+                <img v-show="isLogin" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
+              </div>
+              <el-dropdown-menu slot="dropdown">
+                <router-link to="/cn/user/directmail">
+                  <el-dropdown-item>
+                    <i class="el-icon-location"></i> 个人中心
+                  </el-dropdown-item>
+                </router-link>
+                <el-dropdown-item>
+                  <div @click="handleLoginOut">
+                    <i class="el-icon-caret-right"></i> 登出
+                  </div>
+                </el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
       </li>
     </ul>
@@ -40,41 +68,145 @@
   </div>
 </template>
 <script>
-  export default {
-    name: 'Header',
-    data () {
-      return {
-        msg: 'Header',
-        link: '/cn/index'
+import {mapActions, mapGetters} from 'vuex'
+import {storage} from '@/utils'
+import {saveOpenid} from '@/utils/user'
+
+export default {
+  name: 'Header',
+  data () {
+    return {
+      msg: 'Header',
+      addClass: false,
+      loginContainerVisible: false,
+      location: '/cn/index'
+    }
+  },
+  created () {
+    this.menu()
+    if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/en' && location.pathname !== '/en/') {
+      console.log(location)
+      this.location = '/cn/' + location.href.split('/en/')[1]
+    } else {
+      this.location = '/cn/index/'
+    }
+    console.log('ss', this.location)
+  },
+  computed: {
+    ...mapGetters({
+      'isLogin': 'getLoginStatus',
+      'userinfo': 'getUserInfo'
+    })
+  },
+  mounted () {
+    let _this = this
+    window.onscroll = function () {
+      if (document.documentElement.scrollTop > 115) {
+        _this.addClass = true
+      } else {
+        _this.addClass = false
       }
+    }
+  },
+  methods: {
+    ...mapActions([
+      'setUserInfo',
+      'loginOut'
+    ]),
+    menu () {
+      window.scrollTo(0, 0)
     },
-    created () {
-      this.menu()
-      if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/en' && location.pathname !== '/en/') {
-        this.link = '/cn/' + location.pathname.split('/en/')[1]
-      }
-    },
-    methods: {
-      menu () {
-        window.scrollTo(0, 0)
-      }
-    },
-    watch: {
-      '$route' (to) {
-        if (to.fullPath.split('/en/').length > 1) {
-          this.link = '/cn/' + to.fullPath.split('/en/')[1]
-        } else {
-          this.link = '/cn/index'
+    wxLogin () {
+      const browserId = storage({
+        type: 'get',
+        key: 'browserId'
+      })
+      const redirectUri = encodeURIComponent('http://api.mingz-tech.com/OAuth')
+      const state = `web${browserId}`
+      const wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${redirectUri}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
+      const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
+      const websocket = new WebSocket(webSocketUrl)
+      const _this = this
+      websocket.onmessage = async function (event) {
+        const eventData = JSON.parse(event.data)
+        const openid = eventData.openidWeb
+        const unionid = eventData.unionid
+        saveOpenid({openid, unionid})
+        websocket.close()
+        try {
+          const res = await _this.setUserInfo({openid, unionid, type: 1})
+          _this.$message({
+            showClose: true,
+            ...res
+          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 20)
+        } catch (err) {
+          console.error(err)
+          _this.$message({
+            showClose: true,
+            message: '登录失败，请检测您的网络是否连接正常',
+            type: 'error'
+          })
         }
+      }
+      window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
+    },
+    handleLoginOut () {
+      const res = window.confirm('确定要登出吗?')
+      if (res) {
+        this.loginOut()
+        window.location.reload()
+      }
+    }
+  },
+  watch: {
+    isLogin (val) {
+      if (this.$route.fullPath === '/cn/ordersend' && val === false) {
+        this.$router.push({path: '/cn/orderspare'})
+      }
+      if (this.$route.fullPath === '/cn/orderspare' && val === true) {
+        this.$router.push({path: '/cn/ordersend'})
+      }
+    },
+    '$route' (to) {
+      console.log('to', to)
+      if (to.fullPath.split('/en/').length > 1) {
+        this.location = '/cn/' + to.fullPath.split('/en/')[1]
+      } else {
+        this.location = '/cn/index'
       }
     }
   }
+}
 </script>
 
-<style scoped>
+<style lang='less'>
+  .login {
+    padding-top: 18px;
+    .login-icon {
+      cursor: pointer;
+      img {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        vertical-align: middle;
+      }
+    }
+  }
+  .switch {
+    padding-top: 25px;
+  }
+
+  #login-container {
+    text-align: center;
+  }
+
   /*头部导航栏*/
   .header_nav {
     background-color: #fff;
+    /*width: 100vw;*/
   }
 
   .header_nav > ul {
@@ -85,7 +217,7 @@
   .header_nav > ul > li {
     height: inherit;
     list-style: none;
-    margin-left: 85px;
+    margin-left: 20px;
   }
 
   .header_nav > ul > li:first-child {
@@ -133,24 +265,26 @@
     background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
     background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
   }
-
   .header_nav > .header_nav_item > ul {
     list-style: none;
-    color: #fff;
     font-size: 14px;
   }
 
   .header_nav > .header_nav_item > ul > li {
     margin-right: 20px;
-    padding: 0px 20px;
+    /* padding: 0px 10px; */
   }
 
   .header_nav > .header_nav_item > ul > li > a {
     line-height: 75px;
+    padding: 10px 20px;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 5px;
+    color: #fff;
   }
 
-  .header_nav > .header_nav_item > ul > li:hover {
-    color: #d7132e;
+  .header_nav > .header_nav_item > ul > li > a:hover {
+    color: #ff1919;
   }
 
   /* 回到首页按钮 */

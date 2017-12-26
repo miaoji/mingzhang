@@ -1,4 +1,4 @@
-export const cashierText = {
+export default {
   text1: 'loading~~~',
   text2: 'Failure to submit an order payment request',
   text3: 'Go to my order, refresh the page and try again after 3-5 minutes',
@@ -39,5 +39,12 @@ export const cashierText = {
   text38: 'WeChat Pay',
   text39: 'Use WeChat to pay',
   text40: 'WeChat scan qr code',
-  text41: 'scan qr code payment'
+  text41: 'scan qr code payment',
+  text42: 'Payment success',
+  text43: 'You have completed the payment, we will arrange the staff to pick up the piece as soon as possible.',
+  text44: 'Failure of payment',
+  text45: 'The two-dimensional code of this page will fail. If you need to continue payment, please refresh the page. If you have successfully paid, please go to the personal center and check the order status.',
+  text46: 'Payment exception, please check whether your network is connected to normal',
+  text47: 'Failure of order information acquisition',
+  text48: 'The order payment operation failed, please refresh the retry later'
 }

@@ -58,9 +58,9 @@
     created () {
       if (this.$route.fullPath.split('/en/').length === 2) {
         this.info = {
-          msg1: 'Please choose the city you are in',
-          msg2: 'Access to provincial information failed, please refresh the page retry !',
-          select: 'Please choose'
+          msg1: 'choose the city you are in',
+          msg2: 'Access to provincial information failed,refresh the page retry !',
+          select: 'choose'
         }
       }
       this.getSelectCity()

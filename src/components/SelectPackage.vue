@@ -46,8 +46,8 @@
     created () {
       if (this.$route.fullPath.split('/en/').length === 2) {
         this.info = {
-          msg: 'Please choose',
-          msg1: 'Package type list acquisition failure'
+          msg: 'choose',
+          msg1: 'type list acquisition failure'
         }
       }
     },

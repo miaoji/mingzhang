@@ -4,71 +4,73 @@
       class="mask"
       v-show='loading2'
       v-loading="loading2"
-      element-loading-text="订单正在提交..."
+      :element-loading-text="$t('message.ordersend.t1')"
       element-loading-background="rgba(100, 100, 100, 0.4)"
     ></div>
     <div class="sendorder">
       <el-form class="form" ref="form" :model="form" label-width="120px">
         <div id="item1" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">寄件人信息</h1>
+          <h1 class="page_tit">{{$t('message.ordersend.t2')}}</h1>
           <div @click='sendAddressClick(key,item)' v-show="showSendAddr||key===sendAddrIndex?true:false"
                :class="{ active: key===sendAddrIndex?true:false}" v-for="(item,key) in sendAddrInfo"
                class="sendAddrInfo">
-            <p class="item1">姓名 : {{item.name}}</p>
-            <p class="item2">电话 : {{item.mobile}}</p>
+            <p class="item1">{{$t('message.ordersend.t3')}} : {{item.name}}</p>
+            <p class="item2">{{$t('message.ordersend.t4')}} : {{item.mobile}}</p>
             <p class="item5">
-              <el-button type="text" @click.stop="updateAddr(item,'send')" style="color:#bd7e00">编辑</el-button>
+              <el-button type="text" @click.stop="updateAddr(item,'send')" style="color:#bd7e00">{{$t('message.ordersend.t5')}}</el-button>
             </p>
-            <p class="item3">地址 : {{item.address}}</p>
-            <p class="item4">备注 : {{item.remark}}</p>
+            <p class="item3">{{$t('message.ordersend.t6')}} : {{item.address}}</p>
+            <p class="item4">{{$t('message.ordersend.t7')}} : {{item.remark}}</p>
             <p class='item6'>
-              <el-button type="text" @click.stop="delAddr(item,'send')" style="color:#fa5555">删除</el-button>
+              <el-button type="text" @click.stop="delAddr(item,'send')" style="color:#fa5555">{{$t('message.ordersend.t8')}}</el-button>
             </p>
           </div>
           <div style="marginLeft: 28px">
-            <el-button type="text" size="mini" @click="addAddr('send')">创建新地址</el-button>
-            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false && sendAddrInfo.length > 1">更多地址
+            <el-button type="text" size="mini" @click="addAddr('send')">{{$t('message.ordersend.t9')}}</el-button>
+            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===false && sendAddrInfo.length > 1">
+              {{$t('message.ordersend.t98')}}
             </el-button>
-            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">收起
-            </el-button>
+            <el-button type="text" size="mini" @click="showSendAddr=!showSendAddr" v-show="showSendAddr===true">{{$t('message.ordersend.t10')}}</el-button>
           </div>
         </div>
         <div id="item2" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">收件人信息</h1>
+          <h1 class="page_tit">{{$t('message.ordersend.t11')}}</h1>
           <div @click='receAddressClick(key,item)' v-show="showReceAddr||key===receAddrIndex?true:false"
                :class="{ active: key===receAddrIndex?true:false}" v-for="(item,key) in receAddrInfo"
                class="sendAddrInfo">
-            <p class="item1">姓名 : {{item.name}}</p>
-            <p class="item2">电话 : {{item.mobile}}</p>
+            <p class="item1">{{$t('message.ordersend.t3')}} : {{item.name}}</p>
+            <p class="item2">{{$t('message.ordersend.t4')}} : {{item.mobile}}</p>
             <p class="item5">
-              <el-button type="text" @click.stop="updateAddr(item,'rece')" style="color:#bd7e00">编辑</el-button>
+              <el-button type="text" @click.stop="updateAddr(item,'rece')" style="color:#bd7e00">{{$t('message.ordersend.t5')}}</el-button>
             </p>
-            <p class="item3">地址 : {{item.address}}</p>
-            <p class="item4">备注 : {{item.remark}}</p>
+            <p class="item3">{{$t('message.ordersend.t6')}} : {{item.address}}</p>
+            <p class="item4">{{$t('message.ordersend.t7')}} : {{item.remark}}</p>
             <p class='item6'>
-              <el-button type="text" @click.stop="delAddr(item,'rece')" style="color:#fa5555">删除</el-button>
+              <el-button type="text" @click.stop="delAddr(item,'rece')" style="color:#fa5555">{{$t('message.ordersend.t8')}}</el-button>
             </p>
           </div>
           <div style="marginLeft: 28px">
-            <el-button type="text" size="mini" @click="addAddr('rece')">创建新地址</el-button>
-            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false && receAddrInfo.length > 1">更多地址
+            <el-button type="text" size="mini" @click="addAddr('rece')">{{$t('message.ordersend.t9')}}</el-button>
+            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===false && receAddrInfo.length > 1">
+              {{$t('message.ordersend.t98')}}
             </el-button>
-            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===true">收起
+            <el-button type="text" size="mini" @click="showReceAddr=!showReceAddr" v-show="showReceAddr===true">
+              {{$t('message.ordersend.t10')}}
             </el-button>
           </div>
         </div>
 
         <div id="item3" class="sendorder_item">
-          <h1 class="page_tit">包裹信息</h1>
+          <h1 class="page_tit">{{$t('message.ordersend.t12')}}</h1>
           <el-row :gutter="12">
             <el-col :span="5">
-              <el-form-item label="包裹重量(kg) : ">
+              <el-form-item :label="$t('message.ordersend.t13')">
                 <el-input-number v-model="form.weight" controls-position="right" :step='1' @change="weightChange"
                                  :min="0" :max="20"/>
               </el-form-item>
             </el-col>
             <el-col :span="5" :offset="6">
-              <el-form-item label="包裹长度(cm) : ">
+              <el-form-item :label="$t('message.ordersend.t14')">
                 <el-input-number v-model="form.length" controls-position="right" :step='10' @change="lengthChange"
                                  :min="0"/>
               </el-form-item>
@@ -77,13 +79,13 @@
           <el-row :gutter="12">
             <el-col :span="5">
 
-              <el-form-item label="包裹宽度(cm) : ">
+              <el-form-item :label="$t('message.ordersend.t15')">
                 <el-input-number v-model="form.width" controls-position="right" :step='10' @change="widthChange"
                                  :min="0"/>
               </el-form-item>
             </el-col>
             <el-col :span="5" :offset="6">
-              <el-form-item label="包裹高度(cm) : ">
+              <el-form-item :label="$t('message.ordersend.t16')">
                 <el-input-number v-model="form.height" controls-position="right" :step='10' @change="heightChange"
                                  :min="0"/>
               </el-form-item>
@@ -92,146 +94,135 @@
           </el-row>
           <el-row :gutter="12">
             <el-col :span="10">
-              <select-package :showPackageList="showPackageList" label="产品类型 : "
+              <select-package :showPackageList="showPackageList" :label="$t('message.ordersend.t17')"
                               @selectPackageChange="selectPackageChange"/>
             </el-col>
             <el-col :span="10" :offset="1">
-              <select-product :showProductList="showProductList" label="产品规格 : "
+              <select-product :showProductList="showProductList" :label="$t('message.ordersend.t18')"
                               @selectProductChange="selectProductChange"/>
             </el-col>
           </el-row>
           <el-row :gutter="12">
             <el-col :span="11">
               <div class="img_ico"><img @click="dialogTableVisible = true" src="/static/image/question_ico.png"
-                                        alt="退件说明"></div>
-              <el-form-item label="是否保价 : " prop="insured"
+                                        :alt="$t('message.ordersend.t19')"></div>
+              <el-form-item :label="$t('message.ordersend.t20')" prop="insured"
                             :rules="[
-									{ required: true, message: '请选择是否保价'},
+									{ required: true, message: this.$t('message.ordersend.t21')},
 								]"
               >
                 <el-radio-group @change='insuredChange' v-model="form.insured">
-                  <el-radio label="1">是</el-radio>
-                  <el-radio label="0">否</el-radio>
+                  <el-radio label="1">{{$t('message.ordersend.t22')}}</el-radio>
+                  <el-radio label="0">{{$t('message.ordersend.t23')}}</el-radio>
                 </el-radio-group>
               </el-form-item>
             </el-col>
             <el-col :span="11">
-              <el-form-item label="保价金额 : " v-show='showInsuredAmount'>
-                <el-input-number placeholder="请填写您的保价金额" @change='insuredAmountChange' controls-position="right"
+              <el-form-item :label="$t('message.ordersend.t24')" v-show='showInsuredAmount'>
+                <el-input-number :placeholder="$t('message.ordersend.t25')" @change='insuredAmountChange' controls-position="right"
                                  v-model="form.insuredAmount" :step='100' :min='200' :max='200000'/>
               </el-form-item>
             </el-col>
           </el-row>
           <div class="img_ico"><img @click="returnGoodVisible = true" src="/static/image/question_ico.png" alt="退件说明">
           </div>
-          <el-form-item label="是否退件 : " prop="returnGood"
+          <el-form-item :label="$t('message.ordersend.t26')" prop="returnGood"
                         :rules="[
-							{ required: true, message: '请选择是否退件'},
+							{ required: true, message: this.$t('message.ordersend.t27')},
 						]"
           >
             <el-radio-group v-model="form.returnGood">
-              <el-radio label="1">是</el-radio>
-              <el-radio label="0">否</el-radio>
+              <el-radio label="1">{{$t('message.ordersend.t22')}}</el-radio>
+              <el-radio label="0">{{$t('message.ordersend.t23')}}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="备注信息 : ">
-            <el-input type="textarea" style="width: 80%" placeholder="我想跟快递小哥说点什么" v-model="form.remark"/>
+          <el-form-item :label="$t('message.ordersend.t28')">
+            <el-input type="textarea" style="width: 80%" :placeholder="$t('message.ordersend.t29')" v-model="form.remark"/>
           </el-form-item>
         </div>
 
         <div id="item4" class="sendorder_item">
-          <h1 class="page_tit">包裹报关</h1>
+          <h1 class="page_tit">{{$t('message.ordersend.t30')}}</h1>
           <table-package @tablePackage='tablePackage'></table-package>
-          <p class="freight">预付运费(￥): <span>{{freight}}</span></p>
+          <p class="freight">{{$t('message.ordersend.t31')}}<span>{{freight}}</span></p>
           <div class="send_submit">
-            <el-button type="success" @click="submitForm('form')">确认下单</el-button>
-            <el-button @click="onCancel('form')">重置</el-button>
+            <el-button type="success" @click="submitForm('form')">{{$t('message.ordersend.t32')}}</el-button>
+            <el-button @click="onCancel('form')">{{$t('message.ordersend.t33')}}</el-button>
           </div>
         </div>
 
         <div class="explain_info">
-          <p>体验微信下单</p>
+          <p>{{$t('message.ordersend.t34')}}</p>
           <div class="img"><img src="/static/image/weChat.jpg" alt="国际快递服务中心公众号"></div>
           <div class="img">
-            <p><a href="/#/Send" target="_blank">寄件流程</a></p>
-            <p @click="dialogTableVisible = true">关于保价</p>
-            <p @click="returnGoodVisible = true">关于退件</p>
-            <p @click="packageVisible = true">包裹报关</p>
+            <p><a href="/#/Send" target="_blank">{{$t('message.ordersend.t35')}}</a></p>
+            <p @click="dialogTableVisible = true">{{$t('message.ordersend.t36')}}</p>
+            <p @click="returnGoodVisible = true">{{$t('message.ordersend.t37')}}</p>
+            <p @click="packageVisible = true">{{$t('message.ordersend.t38')}}</p>
           </div>
         </div>
 
       </el-form>
     </div>
 
-    <el-dialog title="关于保价" custom-class="dialog" :visible.sync="dialogTableVisible">
-      <p>
-        此项服务以自愿为原则。寄件人选择此项服务时，应确定保价金额与每个邮件内件实际价值一致，每个邮件保价金额最高限额为二十万元人民币，保价费按申报的保价金额的0.5%收取，每件最低收取1.00元人民币。未按规定交纳保价费的快件，不属于保价快件。</p>
+    <el-dialog :title="$t('message.ordersend.t36')" custom-class="dialog" :visible.sync="dialogTableVisible">
+      <p>{{$t('message.ordersend.t39')}}</p>
     </el-dialog>
-    <el-dialog title="关于退件" custom-class="dialog" :visible.sync="returnGoodVisible">
-      <p>若快递妥投出现问题，我们会逆向返还给寄件人，逆向物流费用将由寄件人承担。</p>
+    <el-dialog :title="$t('message.ordersend.t37')" custom-class="dialog" :visible.sync="returnGoodVisible">
+      <p>$t('message.ordersend.t40')</p>
     </el-dialog>
-    <el-dialog title="包裹报关" custom-class="dialog" :visible.sync="packageVisible">
-      <p>包裹用于清关使用，若不填，清关另需其他材料我们会电话联系您。</p>
+    <el-dialog :title="$t('message.ordersend.t38')" custom-class="dialog" :visible.sync="packageVisible">
+      <p>{{$t('message.ordersend.t41')}}</p>
     </el-dialog>
 
     <el-dialog class="dialog" :title="modalTitle" width="600px" :visible.sync="dialogFormVisible">
       <el-form v-loading="loading1"
-               element-loading-text="获取用户地址信息..."
+               :element-loading-text="$t('message.ordersend.t42')"
                element-loading-background="rgba(255, 255,255, 0.6)"
                :model="item"
                label-width="90px"
       >
-        <el-form-item label="联系人姓名" :label-width="formLabelWidth">
+        <el-form-item :label="$t('message.ordersend.t43')" :label-width="formLabelWidth">
           <el-input v-model="item.name" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="电话" :label-width="formLabelWidth">
+        <el-form-item :label="$t('message.ordersend.t4')" :label-width="formLabelWidth">
           <el-input v-model="item.mobile" auto-complete="off"></el-input>
         </el-form-item>
-        <country v-model="item.countrydata" :values="item.countrydata" label="国家/地区 : "
-                 :type="modalTitle==='新增寄件地址'||modalTitle==='修改寄件地址'?'cn':'en'" @coutryChange="addAddrCountry"/>
+        <country v-model="item.countrydata" :values="item.countrydata" :label="$t('message.ordersend.t44')"
+                 :type="modalTitle===this.$t('message.ordersend.t45')||modalTitle===this.$t('message.ordersend.t46')?'cn':'en'" @coutryChange="addAddrCountry"/>
         <transition name="el-zoom-in-top">
-          <select-city label="地区选择 : " :cancel="item.cancelCity" @selectCityChange="modalSeleteCity"
+          <select-city :label="$t('message.ordersend.t49')" :cancel="item.cancelCity" @selectCityChange="modalSeleteCity"
                        v-show="showModalCitySelect"/>
         </transition>
-        <el-form-item label="地址" :label-width="formLabelWidth">
+        <el-form-item :label="$t('message.ordersend.t50')" :label-width="formLabelWidth">
           <el-input v-model="item.address" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="邮编" :label-width="formLabelWidth">
+        <el-form-item :label="$t('message.ordersend.t51')" :label-width="formLabelWidth">
           <el-input v-model="item.postcode" auto-complete="off"></el-input>
         </el-form-item>
-        <el-form-item label="备注" :label-width="formLabelWidth">
+        <el-form-item :label="$t('message.ordersend.t52')" :label-width="formLabelWidth">
           <el-input v-model="item.remark" auto-complete="off"></el-input>
         </el-form-item>
 
-        <el-form-item label="设为默认地址">
+        <el-form-item :label="$t('message.ordersend.t53')">
           <el-radio-group v-model="item.isDefault">
-            <el-radio label="1">是</el-radio>
-            <el-radio label="0">否</el-radio>
+            <el-radio label="1">{{$t('message.ordersend.t22')}}</el-radio>
+            <el-radio label="0">{{$t('message.ordersend.t23')}}</el-radio>
           </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="confirm">确 定</el-button>
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="confirm">{{$t('message.ordersend.t54')}}</el-button>
+        <el-button @click="dialogFormVisible = false">{{$t('message.ordersend.t55')}}</el-button>
       </div>
     </el-dialog>
 
     <div class="float_left">
-      <!-- <p class="anchor active" @click='goAnchor("#item1")'>寄件人信息<span class="el-icon-d-arrow-right"></span></p>
-          <p class="anchor" @click='goAnchor("#item2")'>收件人信息<span class="el-icon-d-arrow-right"></span></p>
-          <p class="anchor" @click='goAnchor("#item3")'>包裹信息<span class="el-icon-d-arrow-right"></span></p>
-          <p class="anchor" @click='goAnchor("#item4")'>包裹报关<span class="el-icon-d-arrow-right"></span></p> -->
-
-      <p class="anchor active" @click='goAnchor("#item1")'>寄</p>
-      <p class="anchor" @click='goAnchor("#item2")'>收</p>
-      <p class="anchor" @click='goAnchor("#item3")'>包</p>
-      <p class="anchor" @click='goAnchor("#item4")'>报</p>
+      <p class="anchor active" @click='goAnchor("#item1")'>{{$t('message.ordersend.t56')}}</p>
+      <p class="anchor" @click='goAnchor("#item2")'>{{$t('message.ordersend.t57')}}</p>
+      <p class="anchor" @click='goAnchor("#item3")'>{{$t('message.ordersend.t58')}}</p>
+      <p class="anchor" @click='goAnchor("#item4")'>{{$t('message.ordersend.t59')}}</p>
       <p class="anchor top" @click='goAnchor("#item9")'></p>
-
-      <!-- <p class="anchor"><a href='/#/cn/ordersend/#item1'>寄件人信息<span class="el-icon-d-arrow-right"></span></a></p>
-          <p class="anchor"><a href='/#/cn/ordersend/#item2'>收件人信息<span class="el-icon-d-arrow-right"></span></a></p>
-          <p class="anchor"><a href='/#/cn/ordersend/#item3'>包裹信息<span class="el-icon-d-arrow-right"></span></a></p>
-          <p class="anchor"><a href='/#/cn/ordersend/#item4'>包裹报关<span class="el-icon-d-arrow-right"></span></a></p> -->
     </div>
   </div>
 </template>
@@ -244,6 +235,7 @@
   import TablePackage from '@/components/TablePackage'
   import {getPrice} from '@/services/components/getPrice'
   import {createOrder} from '@/services/orderInfo'
+  import {storage} from '@/utils'
   import {
     showReceAddr,
     addReceAddrInfo,
@@ -289,7 +281,7 @@
         showSendCitySelect: false,
         showPackageList: {},
         showProductList: {},
-        freight: '填写快件信息后,自动获取',
+        freight: this.$t('message.ordersend.t99'),
         sendAddrInfo: [],
         sendAddrIndex: 0,
         showSendAddr: false,
@@ -315,17 +307,20 @@
     },
     created () {
       if (!this.isLogin) {
-        this.$router.push({path: '/cn/orderspare'})
+        const href = storage({
+          key: 'locale',
+          prefix: false
+        }) || 'cn'
+        this.$router.push({path: '/' + href + '/orderspare'})
         return
       }
-      window.document.title = '上海明彰网络科技有限公司'
       this.menu()
       this.getSendAddr()
       this.getReceiveAddr()
     },
     mounted () {
       window.onscroll = function () {
-        if (location.pathname !== '/cn/ordersend' && location.pathname !== '/cn/ordersendSpare') {
+        if (location.pathname !== '/cn/ordersend' && location.pathname !== '/cn/ordersendSpare' && location.pathname !== '/en/ordersend' && location.pathname !== '/en/ordersendSpare') {
           return
         }
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
@@ -364,7 +359,7 @@
           if (!this.sendAddrInfo[this.sendAddrIndex].id) {
             this.$message({
               type: 'warning',
-              message: '请选择寄件地址,若没有寄件地址请创建'
+              message: this.$t('message.ordersend.t60')
             })
             this.loading2 = false
             return
@@ -374,7 +369,7 @@
           if (this.sendAddr === {} || this.receAddr === {}) {
             this.$message({
               type: 'warning',
-              message: '网络故障,请稍后重试'
+              message: this.$t('message.ordersend.t61')
             })
             this.loading2 = false
             return
@@ -382,7 +377,7 @@
           if (this.form.insured !== '1' && this.form.insured !== '0') {
             this.$message({
               type: 'warning',
-              message: '请选择是否保价'
+              message: this.$t('message.ordersend.t62')
             })
             this.loading2 = false
             return
@@ -390,7 +385,7 @@
           if (this.form.returnGood !== '1' && this.form.returnGood !== '0') {
             this.$message({
               type: 'warning',
-              message: '请选择是否退件'
+              message: this.$t('message.ordersend.t63')
             })
             this.loading2 = false
             return
@@ -447,8 +442,8 @@
           if (data.code === 200) {
             this.loading2 = false
             this.$notify({
-              title: '成功',
-              message: '下单成功！！！',
+              title: this.$t('message.ordersend.t64'),
+              message: this.$t('message.ordersend.t65'),
               type: 'success'
             })
             this.$router.push('/cn/cashier?order=' + data.obj.orderNo)
@@ -456,8 +451,8 @@
           } else {
             this.loading2 = false
             this.$notify({
-              title: '失败',
-              message: '下单失败,稍后请重试',
+              title: this.$t('message.ordersend.t66'),
+              message: this.$t('message.ordersend.t67'),
               type: 'warning'
             })
           }
@@ -465,8 +460,8 @@
           console.warn('下单出错了', error)
           this.loading2 = false
           this.$notify({
-            title: '失败',
-            message: '下单失败,稍后请重试',
+            title: this.$t('message.ordersend.t66'),
+            message: this.$t('message.ordersend.t67'),
             type: 'warning'
           })
         }
@@ -488,55 +483,55 @@
         if (!this.item.name) {
           this.$message({
             type: 'warning',
-            message: '联系人姓名不能为空'
+            message: this.$t('message.ordersend.t68')
           })
           return
         }
         if (!this.item.mobile) {
           this.$message({
             type: 'warning',
-            message: '联系人电话不能为空'
+            message: this.$t('message.ordersend.t69')
           })
           return
         }
         if (!this.item.countrydata) {
           this.$message({
             type: 'warning',
-            message: '联系人国家不能为空'
+            message: this.$t('message.ordersend.t70')
           })
           return
         }
         if (!this.item.address) {
           this.$message({
             type: 'warning',
-            message: '联系人地址不能为空'
+            message: this.$t('message.ordersend.t71')
           })
           return
         }
         if (!this.item.postcode) {
           this.$message({
             type: 'warning',
-            message: '邮编不能为空'
+            message: this.$t('message.ordersend.t72')
           })
         }
-        if (this.type === 'add' && this.modalTitle === '新增寄件地址') {
+        if (this.type === 'add' && this.modalTitle === this.$t('message.ordersend.t45')) {
           this.addSendAddr(this.item)
         }
 
-        if (this.type === 'add' && this.modalTitle === '新增收件地址') {
+        if (this.type === 'add' && this.modalTitle === this.$t('message.ordersend.t47')) {
           this.addReceAddr(this.item)
         }
 
-        if (this.type === 'update' && this.modalTitle === '修改寄件地址') {
+        if (this.type === 'update' && this.modalTitle === this.$t('message.ordersend.t46')) {
           this.updateSendAddr(this.item)
         }
 
-        if (this.type === 'update' && this.modalTitle === '修改收件地址') {
+        if (this.type === 'update' && this.modalTitle === this.$t('message.ordersend.t48')) {
           this.updateReceAddr(this.item)
         }
       },
       addAddr (type) {
-        this.modalTitle = type === 'send' ? '新增寄件地址' : '新增收件地址'
+        this.modalTitle = type === 'send' ? this.$t('message.ordersend.t45') : this.$t('message.ordersend.t47')
         this.dialogFormVisible = true
         this.type = 'add'
         this.item = {isDefault: '1'}
@@ -544,7 +539,7 @@
       },
       updateAddr (item, type) {
         this.loading1 = true
-        this.modalTitle = type === 'send' ? '修改寄件地址' : '修改收件地址'
+        this.modalTitle = type === 'send' ? this.$t('message.ordersend.t46') : this.$t('message.ordersend.t48')
         this.type = 'update'
         this.item = {}
         this.item.cancel = !this.item.cancel
@@ -556,9 +551,9 @@
         }
       },
       delAddr (item, type) {
-        this.$confirm('地址删除将无法回复, 是否继续本次操作?', '删除本条地址', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('message.ordersend.t73'), this.$t('message.ordersend.t74'), {
+          confirmButtonText: this.$t('message.ordersend.t54'),
+          cancelButtonText: this.$t('message.ordersend.t55'),
           type: 'warning'
         }).then(() => {
           if (type === 'send') {
@@ -569,7 +564,7 @@
         }).catch(() => {
           this.$message({
             type: 'info',
-            message: '已取消删除'
+            message: this.$t('message.ordersend.t75')
           })
         })
       },
@@ -589,7 +584,7 @@
         this.form.cancel = !this.form.cancel
         this.$refs[form].resetFields()
         this.form = {}
-        this.freight = '请选择收件地址'
+        this.freight = this.$t('message.ordersend.t76')
         this.showPackageList = {show: true, data: ''}
         this.showProductList = {show: false}
       },
@@ -684,11 +679,11 @@
           this.sendAddrInfo = []
           this.$message({
             type: 'warning',
-            message: '暂无查询到寄件地址信息,建议新增'
+            message: this.$t('message.ordersend.t77')
           })
         } else {
           this.$message({
-            message: '用户寄件地址列表获取失败',
+            message: this.$t('message.ordersend.t78'),
             type: 'warning'
           })
         }
@@ -712,7 +707,7 @@
         } else {
           this.$message({
             type: 'error',
-            message: '用户地址信息获取失败,无法修改当前地址'
+            message: this.$t('message.ordersend.t79')
           })
           this.loading1 = false
           this.dialogFormVisible = false
@@ -742,13 +737,13 @@
           } else if (name === '中国' && !payload.citydata) {
             this.$message({
               type: 'warning',
-              message: '请选择省市县'
+              message: this.$t('message.ordersend.t80')
             })
             return
           } else if (name === '中国' && payload.citydata && payload.citydata.length < 3) {
             this.$message({
               type: 'warning',
-              message: '省市县选择请精确到县级'
+              message: this.$t('message.ordersend.t81')
             })
             return
           }
@@ -759,14 +754,14 @@
           this.getSendAddr()
           this.$message({
             type: 'success',
-            message: '修改成功'
+            message: this.$t('message.ordersend.t82')
           })
           this.dialogFormVisible = false
           this.showModalCitySelect = false
         } else {
           this.$message({
             type: 'warning',
-            message: '修改失败'
+            message: this.$t('message.ordersend.t83')
           })
         }
       },
@@ -777,13 +772,13 @@
           this.getSendAddr()
           this.$message({
             type: 'success',
-            message: '删除成功'
+            message: this.$t('message.ordersend.t84')
           })
         } else {
           this.getSendAddr()
           this.$message({
             type: 'error',
-            message: '删除失败'
+            message: this.$t('message.ordersend.t85')
           })
         }
       },
@@ -799,13 +794,13 @@
         } else if (name === '中国' && !payload.citydata) {
           this.$message({
             type: 'warning',
-            message: '请选择省市县'
+            message: this.$t('message.ordersend.t80')
           })
           return
         } else if (name === '中国' && payload.citydata && payload.citydata.length < 3) {
           this.$message({
             type: 'warning',
-            message: '省市县选择请精确到县级'
+            message: this.$t('message.ordersend.t81')
           })
           return
         }
@@ -817,14 +812,14 @@
             this.getSendAddr()
             this.$message({
               type: 'success',
-              message: '创建成功'
+              message: this.$t('message.ordersend.t86')
             })
             this.dialogFormVisible = false
             this.showModalCitySelect = false
           } else {
             this.$message({
               type: 'warning',
-              message: '创建失败'
+              message: this.$t('message.ordersend.t87')
             })
           }
         } catch (e) {
@@ -842,11 +837,11 @@
           this.receAddrInfo = []
           this.$message({
             type: 'warning',
-            message: '暂无查询到收件地址信息,建议新增'
+            message: this.$t('message.ordersend.t88')
           })
         } else {
           this.$message({
-            message: '用户收件地址列表获取失败',
+            message: this.$t('message.ordersend.t89'),
             type: 'warning'
           })
         }
@@ -870,7 +865,7 @@
         } else {
           this.$message({
             type: 'error',
-            message: '用户地址信息获取失败,无法修改当前地址'
+            message: this.$t('message.ordersend.t79')
           })
           this.loading1 = false
           this.dialogFormVisible = false
@@ -899,14 +894,14 @@
           this.getReceiveAddr()
           this.$message({
             type: 'success',
-            message: '修改成功'
+            message: this.$t('message.ordersend.t82')
           })
           this.dialogFormVisible = false
           this.showModalCitySelect = false
         } else {
           this.$message({
             type: 'warning',
-            message: '修改失败'
+            message: this.$t('message.ordersend.t83')
           })
         }
       },
@@ -917,13 +912,13 @@
           this.getReceiveAddr()
           this.$message({
             type: 'success',
-            message: '删除成功'
+            message: this.$t('message.ordersend.t84')
           })
         } else {
           this.getReceiveAddr()
           this.$message({
             type: 'error',
-            message: '删除失败'
+            message: this.$t('message.ordersend.t85')
           })
         }
       },
@@ -939,14 +934,14 @@
             this.getReceiveAddr()
             this.$message({
               type: 'success',
-              message: '创建成功'
+              message: this.$t('message.ordersend.t86')
             })
             this.dialogFormVisible = false
             this.showModalCitySelect = false
           } else {
             this.$message({
               type: 'warning',
-              message: '创建失败'
+              message: this.$t('message.ordersend.t87')
             })
           }
         } catch (e) {
@@ -959,27 +954,27 @@
       async getPrice () {
         try {
           if (!this.receAddrInfo[this.receAddrIndex].country) {
-            this.freight = '请选择您的收件地址,若没有收件地址,请创建'
+            this.freight = this.$t('message.ordersend.t90')
             return
           }
           if (!this.form.weight) {
-            this.freight = '请填写您的包裹重量'
+            this.freight = this.$t('message.ordersend.t91')
             return
           }
           if (!this.form.packageType) {
-            this.freight = '请选择您的产品类型'
+            this.freight = this.$t('message.ordersend.t92')
             return
           }
           if (!this.form.productType) {
-            this.freight = '请选择您的产品规格'
+            this.freight = this.$t('message.ordersend.t93')
             return
           }
           if (this.form.insured === '1' && !this.form.insuredAmount) {
-            this.freight = '您选择了保价但是没有填写报价金额'
+            this.freight = this.$t('message.ordersend.t94')
             return
           }
           if (this.form.volumeWeight > 20) {
-            this.freight = '您包裹的体积太大了,我们不能寄'
+            this.freight = this.$t('message.ordersend.t95')
             return
           }
           let formWeight = 0
@@ -1004,12 +999,12 @@
               this.freight = data.finalPrice
             }
           } else if (price.code === 500 && price.msg === '查询失败') {
-            this.freight = '很抱歉，您所选择产品规格暂不支持邮寄,请选择其他产品规格'
+            this.freight = this.$t('message.ordersend.t96')
           }
           return
         } catch (err) {
           console.error(err)
-          this.freight = '请先填写快件信息'
+          this.freight = this.$t('message.ordersend.t97')
         }
       }
     }
@@ -1096,13 +1091,16 @@
       border-radius: 3px;
       margin: 0px auto 20px;
       .page_tit {
-        background-image: url(/static/image/title.png);
+        background-image: url(/static/image/title_2.png);
         height: 48px;
+        width: 267px;
+        text-align: center;
         font-size: 20px;
         color: #ffffff;
-        padding-left: 108px;
+        padding-left: 77px;
         line-height: 45px;
         margin-top: 30px;
+        padding-right: 363px;
       }
       .form {
         width: 800px;

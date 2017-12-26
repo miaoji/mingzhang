@@ -1,0 +1,20 @@
+export default {
+  t1: 'Order number',
+  t2: 'Sender',
+  t3: 'Recipients',
+  t4: 'Order amount',
+  t5: 'Order Status',
+  t6: 'order details',
+  t7: 'Query logistics',
+  t8: 'Order time',
+  t9: 'Operating',
+  t10: 'Go Pay',
+  t11: 'cancel',
+  t12: 'WeChat Pay',
+  t15: 'This operation will permanently delete the order, continue?',
+  t16: 'prompt',
+  t17: 'confirm',
+  t18: 'cancel',
+  t19: 'successfully deleted',
+  t20: 'failed to delete'
+}

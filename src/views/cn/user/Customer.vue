@@ -8,7 +8,7 @@
               <span style="line-height: 36px;">{{item.title}}</span>
             </div>
             <div style="padding: 14px;" v-for="iitem in item.content">
-              <span>{{iitem}}</span>
+              <span class='content'>{{iitem}}</span>
             </div>
           </el-card>
         </el-col>
@@ -23,19 +23,11 @@ export default {
   data () {
     return {
       customer: [{
-        title: '国内客服',
-        content: [
-          '微信号: IESC007',
-          'QQ: 3187904519',
-          'E-mail: custom_service@ming-tech.net',
-          '服务电话: 021-34120053'
-        ]
+        title: this.$t('message.userindex.t3'),
+        content: this.$t('message.userindex.t4')
       }, {
-        title: '国外客服',
-        content: [
-          '微信号: IESC007',
-          '热线: 647-995-2600'
-        ]
+        title: this.$t('message.userindex.t5'),
+        content: this.$t('message.userindex.t6')
       }]
     }
   },
@@ -49,5 +41,8 @@ export default {
     &-container {
       padding: 1rem 0;
     }
+  }
+  .content {
+    padding-left: 12px;
   }
 </style>

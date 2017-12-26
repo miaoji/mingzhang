@@ -4,14 +4,14 @@
       class="mask"
       v-show='loading2'
       v-loading="loading2"
-      element-loading-text="Orders are being submitted..."
+      element-loading-text="loading..."
       element-loading-background="rgba(100, 100, 100, 0.4)"
     ></div>
     <div class="sendorder">
       <el-form class="form" ref="form" :model="form" label-width="120px">
 
         <div id="item1" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">Sender information</h1>
+          <h1 class="page_tit">Sender\'s information</h1>
           <el-form-item label="name : " prop="senderName"
                         :rules="[
               { required: true, message: 'name cannot be null'}
@@ -283,7 +283,7 @@
     },
     created () {
       if (this.isLogin) {
-        this.$router.push({path: '/cn/ordersend'})
+        this.$router.push({path: '/en/ordersend'})
         return
       }
       window.document.title = '上海明彰网络科技有限公司'

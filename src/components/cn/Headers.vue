@@ -8,7 +8,7 @@
         <div class='switch'>
           <el-dropdown>
             <span class="el-dropdown-link">
-              语言<i class="el-icon-arrow-down el-icon--right"></i>
+              language<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <router-link :to="location">
@@ -18,11 +18,6 @@
               </router-link>
             </el-dropdown-menu>
           </el-dropdown>
-        </div>
-        <div class='hide'>
-          <a href="javascript:;">Language</a>
-          <a href="javascript:;">|</a>
-          <router-link :to="location">English</router-link>
         </div>
       </li>
       <li class="right language">
@@ -104,8 +99,9 @@ export default {
   created () {
     this.menu()
     if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/cn' && location.pathname !== '/cn/') {
-      this.location = '/en/' + location.pathname.split('/cn/')[1]
+      this.location = '/en/' + location.href.split('/cn/')[1]
     }
+    console.log('location', this.location)
   },
   computed: {
     ...mapGetters({
@@ -188,6 +184,7 @@ export default {
       } else {
         this.location = '/en/index'
       }
+      console.log('location', this.location)
     }
   }
 }

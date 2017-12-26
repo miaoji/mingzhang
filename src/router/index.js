@@ -174,8 +174,7 @@ export default new Router({
         component: customer,
         meta: {
           intro: '客服中心'
-        },
-        alias: ['/en/user/customer']
+        }
       }]
     }, {
       path: 'orderdetail',
@@ -214,7 +213,14 @@ export default new Router({
       name: 'engetorderinfo',
       component: engetorderinfo,
       meta: {
-        intro: '英文寄件'
+        intro: '英文查件'
+      }
+    }, {
+      path: 'ordersend',
+      name: 'enordersend',
+      component: ordersend,
+      meta: {
+        intro: '寄件'
       }
     }, {
       path: 'orderspare',
@@ -267,11 +273,37 @@ export default new Router({
       }
     }, {
       path: 'cashier',
-      name: 'cashier',
+      name: 'encashier',
       component: cashier,
       meta: {
         intro: '收银台'
       }
+    }, {
+      path: 'orderdetail',
+      name: 'enorderdetail',
+      component: orderdetail,
+      meta: {
+        intro: '订单详情'
+      }
+    }, {
+      path: 'user',
+      component: usercenter,
+      children: [{
+        path: 'directmail',
+        name: 'endirectmail',
+        component: directmail,
+        meta: {
+          intro: '直邮列表',
+          needLogin: true
+        }
+      }, {
+        path: 'customer',
+        name: 'encustomer',
+        component: customer,
+        meta: {
+          intro: '客服中心'
+        }
+      }]
     }]
   }, {
     path: '*',

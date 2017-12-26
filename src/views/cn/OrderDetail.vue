@@ -2,34 +2,34 @@
   <div class="orderdetail" v-loading.fullscreen.lock="fullscreenLoading">
     <div class="orderdetail-item normal" v-show="hiddenStatus === 1">
       <div class="tit">
-        订单详情
+        {{$t('message.orderdetail.t10')}}
       </div>
       <div class="detail">
-        <detail-item title="订单编号:" :value="detailData['orderNo']"></detail-item>
-        <detail-item title="订单总价:" :value="totalFee"></detail-item>
-        <detail-item title="订单状态:" :value="statusList['short']"></detail-item>
-        <detail-item title="下单时间:" :value="createdTime"></detail-item>
-        <detail-item title="寄件地址:" :value="senderAddress"></detail-item>
-        <detail-item title="收件地址:" :value="receiverAddress"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t11")' :value="detailData['orderNo']"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t12")' :value="totalFee"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t13")' :value="statusList['short']"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t14")' :value="createdTime"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t15")' :value="senderAddress"></detail-item>
+        <detail-item :title='$t("message.orderdetail.t16")' :value="receiverAddress"></detail-item>
       </div>
       <div class="status">
         <div class="status-content">
-          <i class="el-icon-info status-icon"></i>订单状态: {{statusList['content']}}
+          <i class="el-icon-info status-icon"></i>{{$t('message.orderdetail.t13')}} {{statusList['content']}}
         </div>
         <div class="status-tools">
-          <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>立即付款</el-button>
-          <el-button type="text" size="small" @click="handleDelete" v-show="detailData['status'] === 1">取消订单</el-button>
-          <el-button type="success" size="small" @click="handleRoute" v-show="canCheckRoute">查看物流</el-button>
+          <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>{{$t('message.orderdetail.t17')}}</el-button>
+          <el-button type="text" size="small" @click="handleDelete" v-show="detailData['status'] === 1">{{$t('message.orderdetail.t18')}}</el-button>
+          <el-button type="success" size="small" @click="handleRoute" v-show="canCheckRoute">{{$t('message.orderdetail.t19')}}</el-button>
         </div>
       </div>
     </div>
     <div class="error" v-show="hiddenStatus === 0 || show">
       <el-card class="box-card">
         <div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
-        <div class="title_text">您提供的单号可能有误,请确认后重新查询</div>
-        <span class="title_info">若单号无误,请3-5分钟后刷新页面重试</span>
+        <div class="title_text">{{$t('message.orderdetail.t1')}}</div>
+        <span class="title_info">{{$t('message.orderdetail.t2')}}</span>
         <div class="go_index">
-          <router-link to="/">回到首页</router-link>
+          <router-link to="/">{{$t('message.orderdetail.t3')}}</router-link>
         </div>
       </el-card>
       <div style="height:170px;"></div>
@@ -42,6 +42,7 @@
   import {show, remove} from '@/services/directMail'
   import {format} from '@/utils/time'
   import {orderstatus, statuscontent} from '@/filters'
+  import {storage} from '@/utils'
 
   export default {
     name: 'orderdetail',
@@ -120,7 +121,11 @@
     },
     methods: {
       payClick () {
-        this.$router.push('/cn/cashier?order=' + this.detailData['orderNo'])
+        const href = storage({
+          key: 'locale',
+          prefix: false
+        }) || 'cn'
+        this.$router.push('/' + href + '/cashier?order=' + this.detailData['orderNo'])
       },
       async initDetail () {
         try {
@@ -144,9 +149,9 @@
         }
       },
       async handleDelete () {
-        this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('message.orderdetail.t4'), this.$t('message.orderdetail.t5'), {
+          confirmButtonText: this.$t('message.orderdetail.t6'),
+          cancelButtonText: this.$t('message.orderdetail.t7'),
           type: 'warning'
         }).then(async () => {
           try {
@@ -155,11 +160,11 @@
             const res = await remove({ids})
             if (res.code === 200) {
               return this.$message({
-                message: '删除成功',
+                message: this.$t('message.orderdetail.t8'),
                 type: 'success'
               })
             }
-            const errorMsg = res.msg || '删除失败'
+            const errorMsg = res.msg || this.$t('message.orderdetail.t9')
             return this.$message.error(errorMsg)
           } catch (e) {
             console.error(e)

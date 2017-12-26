@@ -18,11 +18,15 @@ router.beforeEach(async (to, from, next) => {
   if (to.fullPath.split('/en/').length === 2 && window.localStorage.locale !== 'en') {
     console.log('这是一个英文版的页面')
     window.localStorage.setItem('locale', 'en')
-    location.reload()
+    setTimeout(() => {
+      location.reload()
+    }, 10)
   } else if (to.fullPath.split('/cn/').length === 2 && window.localStorage.locale !== 'cn') {
     console.log('这是一个中文版的页面')
     window.localStorage.setItem('locale', 'cn')
-    location.reload()
+    setTimeout(() => {
+      location.reload()
+    }, 10)
   }
   // 如果用户未登录，本地缓存中有token信息，则自动登录
   const data = autoLogin()
@@ -59,7 +63,7 @@ const messages = {
     message: language.zhCN
   }
 }
-
+console.log('message', messages)
 const i18n = new VueI18n({
   locale: window.localStorage.locale || 'cn',
   messages

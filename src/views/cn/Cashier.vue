@@ -1,14 +1,13 @@
 <template>
-  <div class="cashier" v-loading="loading" :element-loading-text='text.text1'>
+  <div class="cashier" v-loading="loading" :element-loading-text='$t("text.text1")'>
     <div class="cashier_bg"></div>
     <div class="order_info order_info_no" v-show='orderIsNo'>
       <div class="title">
-          <p>{{$t('message.pages.index.quality')}}<p>
         <div class="ico_ok left"><img src="/static/image/ico_no.png" alt="NO"></div>
-        <div class="title_text">{{text.text2}}</div>
-        <span class="title_info">{{text.text3}}</span>
+        <div class="title_text">{{$t("message.cashier.text2")}}</div>
+        <span class="title_info">{{$t("message.cashier.text3")}}</span>
         <div class="go_index">
-          <router-link to="/">{{text.text4}}</router-link>
+          <router-link to="/">{{$t("message.cashier.text4")}}</router-link>
         </div>
         <div style="height:470px;"></div>
       </div>
@@ -17,14 +16,14 @@
       <el-card class="box-card">
         <div class="title">
           <div class="ico_ok left"><img src="/static/image/ico_ok.png" alt="OK"></div>
-          <div class="title_text">{{text.text5}}</div>
-          <span class="title_info">{{text.text6}}{{data.orderNo}}</span>
-          <div class="right">{{text.text7}}<span class="totalFee">{{data.status===1?text.text12:text.text13}}</span></div>
-          <div class="right">{{text.text8}}<span class="totalFee">{{data.totalFee/100}}</span> {{text.text9}}</div>
+          <div class="title_text">{{$t("message.cashier.text5")}}</div>
+          <span class="title_info">{{$t("message.cashier.text6")}}{{data.orderNo}}</span>
+          <div class="right">{{$t("message.cashier.text7")}}<span class="totalFee">{{data.status===1?$t("message.cashier.text12"):$t("message.cashier.text13")}}</span></div>
+          <div class="right">{{$t("message.cashier.text8")}}<span class="totalFee">{{data.totalFee/100}}</span> {{$t("message.cashier.text9")}}</div>
           <div class="rece_info clear">
-            <span v-show="!orderInfoShow">{{text.text10}}{{data.receiverCountry}}, {{data.receiverAddress}}</span>
+            <span v-show="!orderInfoShow">{{$t("message.cashier.text10")}}{{data.receiverCountry}}, {{data.receiverAddress}}</span>
             <span class="right" @click="showOrderInfo">
-              {{text.text11}}
+              {{$t("message.cashier.text11")}}
               <i v-show="!orderInfoShow" class="el-icon-arrow-down"></i>
               <i v-show="orderInfoShow" class="el-icon-arrow-up"></i>
             </span>
@@ -34,58 +33,60 @@
       <div class="content">
         <div class="item item1" :class="{show_box_card: orderInfoShow}">
           <el-card class="box-card order_info">
-            <div class="item_title">{{text.text14}}</div>
-            <div class="info"><span>{{text.text15}}</span> : <span>{{data.senderName}}</span></div>
-            <div class="info"><span>{{text.text16}}</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
+            <div class="item_title">{{$t("message.cashier.text14")}}</div>
+            <div class="info"><span>{{$t("message.cashier.text15")}}</span> : <span>{{data.senderName}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text16")}}</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
             </div>
-            <div class="info"><span>{{text.text17}}</span> : <span>{{data.senderMobile}}</span></div>
-            <div class="info"><span>{{text.text18}}</span> : <span>{{data.senderPostcode}}</span></div>
-            <div class="item_title">{{text.text19}}</div>
-            <div class="info"><span>{{text.text20}}</span> : <span>{{data.receiverName}}</span></div>
-            <div class="info"><span>{{text.text21}}</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
-            <div class="info"><span>{{text.text22}}</span> : <span>{{data.receiverMobile}}</span></div>
-            <div class="info"><span>{{text.text23}}</span> : <span>{{data.receiverPostcode}}</span></div>
-            <div class="item_title">{{text.text24}}</div>
+            <div class="info"><span>{{$t("message.cashier.text17")}}</span> : <span>{{data.senderMobile}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text18")}}</span> : <span>{{data.senderPostcode}}</span></div>
+            <div class="item_title">{{$t("message.cashier.text19")}}</div>
+            <div class="info"><span>{{$t("message.cashier.text20")}}</span> : <span>{{data.receiverName}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text21")}}</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text22")}}</span> : <span>{{data.receiverMobile}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text23")}}</span> : <span>{{data.receiverPostcode}}</span></div>
+            <div class="item_title">{{$t("message.cashier.text24")}}</div>
             <el-row :gutter="20">
               <el-col :span="6">
-                <div><span>{{text.text25}}</span> : <span>{{data.weight?data.weight:0}}kg</span></div>
+                <div><span>{{$t("message.cashier.text25")}}</span> : <span>{{data.weight?data.weight:0}}kg</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>{{text.text26}}</span> : <span>{{data.length?data.length:0}}cm</span></div>
+                <div><span>{{$t("message.cashier.text26")}}</span> : <span>{{data.length?data.length:0}}cm</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>{{text.text27}}</span> : <span>{{data.width?data.width:0}}cm</span></div>
+                <div><span>{{$t("message.cashier.text27")}}</span> : <span>{{data.width?data.width:0}}cm</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>{{text.text28}}</span> : <span>{{data.height?data.height:0}}cm</span></div>
+                <div><span>{{$t("message.cashier.text28")}}</span> : <span>{{data.height?data.height:0}}cm</span></div>
               </el-col>
             </el-row>
             <el-row :gutter="20">
               <el-col :span="6">
-                <div><span>{{text.text29}}</span> : <span>{{data.insured===1?text.text32:text.text33}}</span></div>
+                <div><span>{{$t("message.cashier.text29")}}</span> : <span>{{data.insured===1?$t("message.cashier.text32"):$t("message.cashier.text33")}}</span></div>
               </el-col>
               <el-col :span="6" v-show='data.insured===1'>
-                <div><span>{{text.text30}}</span> : <span>{{data.insuredAmount}}{{text.text9}}</span></div>
+                <div><span>{{$t("message.cashier.text30")}}</span> : <span>{{data.insuredAmount}}{{$t("message.cashier.text9}")}</span></div>
               </el-col>
               <el-col :span="6">
-                <div><span>{{text.text31}}</span> : <span>{{data.returnGood===1?text.text32:text.text33}}</span></div>
+                <div>
+                  <span>{{$t("message.cashier.text31")}}</span> : <span>{{data.returnGood===1?$t("message.cashier.text32"):$t("message.cashier.text33")}}</span>
+                </div>
               </el-col>
             </el-row>
           </el-card>
         </div>
         <div class="item">
           <el-card class="box-card">
-            <div class="item_title">{{text.text34}}</div>
+            <div class="item_title">{{$t("message.cashier.text34")}}</div>
             <div class="weixin_pay clear" @click="weixinPayOpen">
               <div class="img left"><img src="/static/image/pay_weixin.png" alt="微信支付"></div>
-              <div class="left">{{text.text35}}</div>
+              <div class="left">{{$t("message.cashier.text35")}}</div>
             </div>
           </el-card>
         </div>
         <div class="item">
           <el-card class="box-card">
-            <div class="item_title">{{text.text36}}</div>
-            <div>{{text.text37}}</div>
+            <div class="item_title">{{$t("message.cashier.text36")}}</div>
+            <div>{{$t("message.cashier.text37")}}</div>
           </el-card>
         </div>
       </div>
@@ -101,7 +102,7 @@
       <div slot="title">
         <img src="../../assets/images/icon32_appwx_logo.png" alt="wxlogo" style="vertical-align: middle;">
         <span>
-          {{text.text39}} <span class="totalFeeInfo">￥{{data.totalFee/100}}</span>
+          {{$t("message.cashier.text39")}} <span class="totalFeeInfo">￥{{data.totalFee/100}}</span>
         </span>
       </div>
       <div
@@ -109,12 +110,11 @@
         <div v-html="payImg"></div>
         <div class="prompt_text clear">
           <div class="img left"><img src="/static/image/sao.png" alt=""></div>
-          <p>{{text.text40}}</p>
-          <p>{{text.text41}}</p>
+          <p>{{$t("message.cashier.text40")}}</p>
+          <p>{{$t("message.cashier.text41")}}</p>
         </div>
       </div>
     </el-dialog>
-
   </div>
 </template>
 <script>
@@ -122,16 +122,12 @@
   import {getOrderInfoByOrderNo} from '@/services/orderInfo'
   import {getPayQr} from '@/services/wx'
   import {makeQr} from '@/utils/qr'
-  import {cashierText as cnText} from '@/assets/language/cn/cashier'
-  import {cashierText as enText} from '@/assets/language/en/cashier'
-  // import {storage} from '@/utils'
-  // import {saveOpenid} from '@/utils/user'
 
   export default {
     name: 'cashier',
     data () {
       return {
-        text: {},
+        text: this.$t('message.cashier'),
         data: {},
         orderInfoShow: false,
         loading: true,
@@ -148,15 +144,6 @@
       })
     },
     created () {
-      // console.log('i18e', this.$t)
-      if (this.$route.fullPath.split('/en/').length === 2) {
-        console.log(enText)
-        // this.text = enText
-      } else {
-        console.log(cnText)
-        // this.text = cnText
-      }
-
       const order = location.search.split('?order=')[1]
       this.getOrderInfo(order)
       window.scrollTo(0, 110)
@@ -195,16 +182,16 @@
           try {
             if (payInfo === '1') {
               _this.$notify({
-                title: '付款成功',
-                message: '您已完成支付,我们将尽快安排工作人员上门取件',
+                title: this.$t('message.cashier.text42'),
+                message: this.$t('message.cashier.text43'),
                 type: 'success',
                 duration: 0
               })
               _this.$router.push({path: '/cn/orderdetail?orderNo=' + _this.data.orderNo})
             } else {
               _this.$notify({
-                title: '付款失败',
-                message: '本页面二维码将失效,若需继续付款请刷新页面,若您已成功付款,请前往个人中心查看订单状态',
+                title: this.$t('message.cashier.text44'),
+                message: this.$t(('message.cashier.text45')),
                 type: 'warning',
                 duration: 0
               })
@@ -213,8 +200,8 @@
           } catch (err) {
             console.error(err)
             _this.$notify({
-              title: '付款失败',
-              message: '付款异常，请检测您的网络是否连接正常',
+              title: this.$t('message.cashier.text44'),
+              message: this.$t('message.cashier.text46'),
               type: 'error',
               duration: 0
             })
@@ -236,8 +223,8 @@
           }
         } else {
           this.$notify({
-            title: '订单信息获取失败',
-            message: '订单支付操作失败,请稍后刷新重试',
+            title: this.$t('message.cashier.text47'),
+            message: this.$t('message.cashier.text48'),
             type: 'warning'
           })
           this.loading = false

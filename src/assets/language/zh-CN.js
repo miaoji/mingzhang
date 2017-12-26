@@ -1,4 +1,15 @@
+import cashier from './cn/cashier'
+import orderdetail from './cn/orderdetail'
+import directmail from './cn/directmail'
+import userindex from './cn/userindex'
+import ordersend from './cn/ordersend'
+
 export default {
+  cashier,
+  orderdetail,
+  directmail,
+  ordersend,
+  userindex,
   // 页面中显示的文字
   pages: {
     index: {

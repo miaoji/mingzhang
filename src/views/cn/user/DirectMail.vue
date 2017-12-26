@@ -7,8 +7,9 @@
           @current-change="handleCurrentChange"
           :current-page="currentPage"
           :page-size="10"
-          layout="total, prev, pager, next"
-          :total="total">
+          layout="prev, pager, next"
+          :total="total"
+        >
         </el-pagination>
       </div>
       <el-table
@@ -19,38 +20,38 @@
         v-loading.body="loading"
       >
         <el-table-column
-          label="订单号"
+          :label="$t('message.directmail.t1')"
           fixed="left"
           width="160"
           prop="ORDER_NO">
         </el-table-column>
         <el-table-column
-          label="寄件人"
+          :label="$t('message.directmail.t2')"
           prop="SENDER_NAME">
         </el-table-column>
         <el-table-column
-          label="收件人"
+          :label="$t('message.directmail.t3')"
           prop="RECEIVER_NAME">
         </el-table-column>
         <el-table-column
-          label="订单金额"
+          :label="$t('message.directmail.t4')"
           prop="TOTAL_FEE"
           :formatter="handleMoney">
         </el-table-column>
         <el-table-column
-          label="订单状态">
+          :label="$t('message.directmail.t5')">
           <template slot-scope="status">
             <span>{{status.row.STATUS | orderstatus}}</span>
             <div>
-              <el-button @click="handleDetail(status.row.ORDER_NO)" type="text" size="small">订单详情</el-button>
+              <el-button @click="handleDetail(status.row.ORDER_NO)" type="text" size="small">{{$t('message.directmail.t6')}}</el-button>
             </div>
             <div v-show="status.row.STATUS !== 1 && status.row.STATUS !== 0">
-              <el-button @click="checkTrace(status.row.ORDER_NO)" type="text" size="small">查询物流</el-button>
+              <el-button @click="checkTrace(status.row.ORDER_NO)" type="text" size="small">{{$t('message.directmail.t7')}}</el-button>
             </div>
           </template>
         </el-table-column>
         <el-table-column
-          label="下单时间"
+          :label="$t('message.directmail.t8')"
           prop="CREATE_TIME"
           width="170"
           sortable
@@ -58,15 +59,16 @@
         </el-table-column>
         <el-table-column
           fixed="right"
-          label="操作"
+          :label="$t('message.directmail.t9')"
           width="100">
           <template slot-scope="tools">
             <el-button v-show="tools.row.STATUS === 1" type="success" size="small" @click.native="handelPay(tools.row)">
-              立即付款
+              {{$t('message.directmail.t10')}}
             </el-button>
             <el-button type="text" size="small"
                        v-show="tools.row.STATUS === 0 || tools.row.STATUS === 1 || tools.row.STATUS === 4"
-                       @click="handleDelete(tools.row.ID)">取消订单
+                       @click="handleDelete(tools.row.ID)">
+              {{$t('message.directmail.t11')}}
             </el-button>
           </template>
         </el-table-column>
@@ -78,12 +80,12 @@
         @current-change="handleCurrentChange"
         :current-page="currentPage"
         :page-size="10"
-        layout="total, prev, pager, next"
+        layout="prev, pager, next"
         :total="total">
       </el-pagination>
     </div>
     <el-dialog
-      title="微信支付"
+      :title="$t('message.directmail.t12')"
       width="250px"
       :visible.sync="payDialogVisible"
       :close-on-press-escape="false"
@@ -91,7 +93,7 @@
       <div slot="title">
         <img src="../../../assets/images/icon16_wx_logo.png" alt="wxlogo" style="vertical-align: middle;">
         <span>
-      	  微信支付
+      	  {{$t('message.directmail.t12')}}
       	</span>
       </div>
       <div
@@ -107,6 +109,7 @@
   import {remove} from '@/services/directMail'
   import {format} from '@/utils/time'
   import {orderstatus} from '@/filters'
+  import {storage} from '@/utils'
 
   export default {
     name: 'directmail',
@@ -155,16 +158,24 @@
         }
       },
       handleDetail (orderNo) {
+        const href = storage({
+          key: 'locale',
+          prefix: false
+        }) || 'cn'
         this.$router.push({
-          path: '/cn/orderdetail',
+          path: '/' + href + '/orderdetail',
           query: {
             orderNo
           }
         })
       },
       checkTrace (no) {
+        const href = storage({
+          key: 'locale',
+          prefix: false
+        }) || 'cn'
         this.$router.push({
-          path: '/cn/getorderinfo',
+          path: '/' + href + '/getorderinfo',
           query: {
             order: no
           }
@@ -176,8 +187,12 @@
       handleCurrentChange (val) {
         this.currentPage = val
         this.setDirectmailList({page: val})
+        const href = storage({
+          key: 'locale',
+          prefix: false
+        }) || 'cn'
         this.$router.push({
-          path: '/cn/user/directmail',
+          path: '/' + href + '/user/directmail',
           query: {
             page: val
           }
@@ -198,7 +213,11 @@
       },
       async handelPay (val) {
         try {
-          this.$router.push('/cn/cashier?order=' + val.ORDER_NO)
+          const href = storage({
+            key: 'locale',
+            prefix: false
+          }) || 'cn'
+          this.$router.push('/' + href + '/cashier?order=' + val.ORDER_NO)
           return
         } catch (e) {
           console.error(e)
@@ -207,9 +226,9 @@
         }
       },
       async handleDelete (ids) {
-        this.$confirm('此操作将永久删除该订单, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
+        this.$confirm(this.$t('message.directmail.t15'), this.$t('message.directmail.t16'), {
+          confirmButtonText: this.$t('message.directmail.t17'),
+          cancelButtonText: this.$t('message.directmail.t18'),
           type: 'warning'
         }).then(async () => {
           try {
@@ -217,11 +236,11 @@
             const res = await remove({ids})
             if (res.code === 200) {
               return this.$message({
-                message: '删除成功',
+                message: this.$t('message.directmail.t19'),
                 type: 'success'
               })
             }
-            const errorMsg = res.msg || '删除失败'
+            const errorMsg = res.msg || this.$t('message.directmail.t20')
             return this.$message.error(errorMsg)
           } catch (e) {
             console.error(e)

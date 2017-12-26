@@ -3,26 +3,26 @@
     <div class="user-container">
       <el-row :gutter="40">
         <!-- 导航栏 -->
-        <el-col :xs="6" :sm="6" :md="6" :lg="4">
+        <el-col :xs="5" :sm="5" :md="5" :lg="5">
           <div class="grid-content menu">
             <el-menu default-active="1" class="el-menu-vertical-demo">
-              <router-link to="/cn/user/directmail">
+              <router-link :to="linkdirectmail">
                 <el-menu-item index="1">
                   <i class="el-icon-menu"></i>
-                  直邮列表
+                  {{$t('message.userindex.t1')}}
                 </el-menu-item>
               </router-link>
-              <router-link to="/cn/user/customer">
+              <router-link :to="linkcustomer">
                 <el-menu-item index="2">
                   <i class="el-icon-message"></i>
-                  客服中心
+                  {{$t('message.userindex.t2')}}
                 </el-menu-item>
               </router-link>
             </el-menu>
           </div>
         </el-col>
         <!-- 内容 -->
-        <el-col :xs="18" :sm="18" :md="18" :lg="18" class="content">
+        <el-col :xs="17" :sm="17" :md="17" :lg="17" class="content">
           <div class="grid-content">
             <transition>
               <router-view></router-view>
@@ -34,12 +34,22 @@
   </div>
 </template>
 <script>
+  import {storage} from '@/utils'
   export default {
     name: 'usercenter',
     data () {
-      return {}
+      return {
+        linkdirectmail: '/cn/user/directmail',
+        linkcustomer: '/cn/user/customer'
+      }
     },
     created () {
+      const href = storage({
+        key: 'locale',
+        prefix: false
+      }) || 'cn'
+      this.linkdirectmail = '/' + href + '/user/directmail'
+      this.linkcustomer = '/' + href + '/user/customer'
     },
     methods: {}
   }

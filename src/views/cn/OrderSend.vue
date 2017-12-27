@@ -235,7 +235,7 @@
   import TablePackage from '@/components/TablePackage'
   import {getPrice} from '@/services/components/getPrice'
   import {createOrder} from '@/services/orderInfo'
-  import {storage} from '@/utils'
+  // import {storage} from '@/utils'
   import {
     showReceAddr,
     addReceAddrInfo,
@@ -307,10 +307,7 @@
     },
     created () {
       if (!this.isLogin) {
-        const href = storage({
-          key: 'locale',
-          prefix: false
-        }) || 'cn'
+        const href = window.sessionStorage.locale || 'cn'
         this.$router.push({path: '/' + href + '/orderspare'})
         return
       }

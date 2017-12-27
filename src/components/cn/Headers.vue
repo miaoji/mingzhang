@@ -94,7 +94,7 @@ export default {
       addClass: false,
       loginContainerVisible: false,
       location: '/en/index',
-      href: storage({ key: 'locale', prefix: false }) || 'cn'
+      href: window.sessionStorage.locale || 'cn'
     }
   },
   created () {

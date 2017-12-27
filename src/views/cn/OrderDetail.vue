@@ -42,7 +42,7 @@
   import {show, remove} from '@/services/directMail'
   import {format} from '@/utils/time'
   import {orderstatus, statuscontent} from '@/filters'
-  import {storage} from '@/utils'
+  // import {storage} from '@/utils'
 
   export default {
     name: 'orderdetail',
@@ -121,10 +121,7 @@
     },
     methods: {
       payClick () {
-        const href = storage({
-          key: 'locale',
-          prefix: false
-        }) || 'cn'
+        const href = window.sessionStorage.locale || 'cn'
         this.$router.push('/' + href + '/cashier?order=' + this.detailData['orderNo'])
       },
       async initDetail () {

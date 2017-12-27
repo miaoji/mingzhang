@@ -109,7 +109,7 @@
   import {remove} from '@/services/directMail'
   import {format} from '@/utils/time'
   import {orderstatus} from '@/filters'
-  import {storage} from '@/utils'
+  // import {storage} from '@/utils'
 
   export default {
     name: 'directmail',
@@ -119,7 +119,8 @@
         loading: true,
         payDialogVisible: false,
         payImg: '',
-        qrLoading: false
+        qrLoading: false,
+        href: window.sessionStorage.locale || 'cn'
       }
     },
     created () {
@@ -158,24 +159,16 @@
         }
       },
       handleDetail (orderNo) {
-        const href = storage({
-          key: 'locale',
-          prefix: false
-        }) || 'cn'
         this.$router.push({
-          path: '/' + href + '/orderdetail',
+          path: '/' + this.href + '/orderdetail',
           query: {
             orderNo
           }
         })
       },
       checkTrace (no) {
-        const href = storage({
-          key: 'locale',
-          prefix: false
-        }) || 'cn'
         this.$router.push({
-          path: '/' + href + '/getorderinfo',
+          path: '/' + this.href + '/getorderinfo',
           query: {
             order: no
           }
@@ -187,12 +180,8 @@
       handleCurrentChange (val) {
         this.currentPage = val
         this.setDirectmailList({page: val})
-        const href = storage({
-          key: 'locale',
-          prefix: false
-        }) || 'cn'
         this.$router.push({
-          path: '/' + href + '/user/directmail',
+          path: '/' + this.href + '/user/directmail',
           query: {
             page: val
           }
@@ -213,11 +202,7 @@
       },
       async handelPay (val) {
         try {
-          const href = storage({
-            key: 'locale',
-            prefix: false
-          }) || 'cn'
-          this.$router.push('/' + href + '/cashier?order=' + val.ORDER_NO)
+          this.$router.push('/' + this.href + '/cashier?order=' + val.ORDER_NO)
           return
         } catch (e) {
           console.error(e)

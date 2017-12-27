@@ -15,15 +15,15 @@ Vue.config.productionTip = false
 router.beforeEach(async (to, from, next) => {
   const isLogin = store.state.user.isLogin
 
-  if (to.fullPath.split('/en/').length === 2 && window.localStorage.locale !== 'en') {
+  if (to.fullPath.split('/en/').length === 2 && window.sessionStorage.locale !== 'en') {
     console.log('这是一个英文版的页面')
-    window.localStorage.setItem('locale', 'en')
+    window.sessionStorage.setItem('locale', 'en')
     setTimeout(() => {
       location.reload()
     }, 30)
-  } else if (to.fullPath.split('/cn/').length === 2 && window.localStorage.locale !== 'cn') {
+  } else if (to.fullPath.split('/cn/').length === 2 && window.sessionStorage.locale !== 'cn') {
     console.log('这是一个中文版的页面')
-    window.localStorage.setItem('locale', 'cn')
+    window.sessionStorage.setItem('locale', 'cn')
     setTimeout(() => {
       location.reload()
     }, 30)
@@ -65,7 +65,7 @@ const messages = {
 }
 console.log('message', messages)
 const i18n = new VueI18n({
-  locale: window.localStorage.locale || 'cn',
+  locale: window.sessionStorage.locale || 'cn',
   messages
 })
 

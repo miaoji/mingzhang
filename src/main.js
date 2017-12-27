@@ -20,13 +20,13 @@ router.beforeEach(async (to, from, next) => {
     window.localStorage.setItem('locale', 'en')
     setTimeout(() => {
       location.reload()
-    }, 10)
+    }, 30)
   } else if (to.fullPath.split('/cn/').length === 2 && window.localStorage.locale !== 'cn') {
     console.log('这是一个中文版的页面')
     window.localStorage.setItem('locale', 'cn')
     setTimeout(() => {
       location.reload()
-    }, 10)
+    }, 30)
   }
   // 如果用户未登录，本地缓存中有token信息，则自动登录
   const data = autoLogin()

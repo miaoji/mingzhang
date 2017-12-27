@@ -3,11 +3,13 @@ import orderdetail from './en/orderdetail'
 import directmail from './en/directmail'
 import userindex from './en/userindex'
 import ordersend from './en/ordersend'
+import headers from './en/headers'
 
 export default {
   cashier,
   orderdetail,
   directmail,
+  headers,
   ordersend,
   userindex,
   pages: {

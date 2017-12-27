@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import Headers from '@/components/en/Headers'
+  import Headers from '@/components/cn/Headers'
   import Footers from '@/components/en/Footers'
 
   export default {

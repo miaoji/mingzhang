@@ -3,11 +3,13 @@ import orderdetail from './cn/orderdetail'
 import directmail from './cn/directmail'
 import userindex from './cn/userindex'
 import ordersend from './cn/ordersend'
+import headers from './cn/headers'
 
 export default {
   cashier,
   orderdetail,
   directmail,
+  headers,
   ordersend,
   userindex,
   // 页面中显示的文字

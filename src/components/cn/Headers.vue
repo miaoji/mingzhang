@@ -2,18 +2,18 @@
   <div class="header_nav">
     <ul class="w clear">
       <li class="left">
-        <router-link to="/"><img src="/static/image/logo.png"/><span class="logo">上海明彰网络科技有限公司</span></router-link>
+        <router-link :to="'/'+this.href+'/index'"><img src="/static/image/logo.png"/><span class="logo">{{$t('message.headers.t1')}}</span></router-link>
       </li>
       <li class="right language">
         <div class='switch'>
           <el-dropdown>
             <span class="el-dropdown-link">
-              language<i class="el-icon-arrow-down el-icon--right"></i>
+              {{$t('message.headers.t2')}}<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
               <router-link :to="location">
                 <el-dropdown-item>
-                  English
+                  {{$t('message.headers.t3')}}
                 </el-dropdown-item>
               </router-link>
             </el-dropdown-menu>
@@ -22,7 +22,7 @@
       </li>
       <li class="right language">
         <div class="login">
-          <el-button type="text" icon="login" v-show="!isLogin" @click="wxLogin">登录</el-button>
+          <el-button type="text" icon="login" v-show="!isLogin" @click="wxLogin">{{$t('message.headers.t4')}}</el-button>
           <div class="login-icon">
             <el-dropdown trigger="hover">
               <div class="el-dropdown-link">
@@ -31,12 +31,12 @@
               <el-dropdown-menu slot="dropdown">
                 <router-link to="/cn/user/directmail">
                   <el-dropdown-item>
-                    <i class="el-icon-location"></i> 个人中心
+                    <i class="el-icon-location"></i> {{$t('message.headers.t5')}}
                   </el-dropdown-item>
                 </router-link>
                 <el-dropdown-item>
                   <div @click="handleLoginOut">
-                    <i class="el-icon-caret-right"></i> 登出
+                    <i class="el-icon-caret-right"></i> {{$t('message.headers.t6')}}
                   </div>
                 </el-dropdown-item>
               </el-dropdown-menu>
@@ -48,23 +48,23 @@
     <div class="header_nav_item" :class="{ toptoptop: addClass }">
       <ul class="w clear">
         <li class="left">
-          <router-link to="/">首页</router-link>
+          <router-link :to="'/'+this.href+'/index'">{{$t('message.headers.t7')}}</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/ordersend" v-show='isLogin'>我要寄件</router-link>
-          <router-link to="/cn/orderspare" v-show='!isLogin'>我要寄件</router-link>
+          <router-link :to="'/'+this.href+'/ordersend'" v-show='isLogin'>{{$t('message.headers.t8')}}</router-link>
+          <router-link :to="'/'+this.href+'/orderspare'" v-show='!isLogin'>{{$t('message.headers.t8')}}</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/prescription">参考时效</router-link>
+          <router-link :to="'/'+this.href+'/prescription'">{{$t('message.headers.t9')}}</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/site">服务站点</router-link>
+          <router-link :to="'/'+this.href+'/site'">{{$t('message.headers.t10')}}</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/introduce">关于我们</router-link>
+          <router-link :to="'/'+this.href+'/introduce'">{{$t('message.headers.t11')}}</router-link>
         </li>
         <li class="left">
-          <router-link to="/cn/send">寄件流程</router-link>
+          <router-link :to="'/'+this.href+'/send'">{{$t('message.headers.t12')}}</router-link>
         </li>
       </ul>
     </div>
@@ -93,15 +93,15 @@ export default {
       msg: 'Header',
       addClass: false,
       loginContainerVisible: false,
-      location: '/en/index'
+      location: '/en/index',
+      href: storage({ key: 'locale', prefix: false }) || 'cn'
     }
   },
   created () {
     this.menu()
-    if (location.pathname !== '' && location.pathname !== '/' && location.pathname !== '/cn' && location.pathname !== '/cn/') {
-      this.location = '/en/' + location.href.split('/cn/')[1]
+    if (location.pathname !== '' && location.pathname !== '/') {
+      this.location = '/' + (this.href === 'cn' ? 'en' : 'cn') + location.href.split(this.href)[1]
     }
-    console.log('location', this.location)
   },
   computed: {
     ...mapGetters({
@@ -145,16 +145,19 @@ export default {
         saveOpenid({openid, unionid})
         websocket.close()
         try {
-          const res = await _this.setUserInfo({openid, unionid, type: 1})
-          _this.$message({
-            showClose: true,
-            ...res
-          })
+          setTimeout(() => {
+            window.location.reload()
+          }, 30)
+          // const res = await _this.setUserInfo({openid, unionid, type: 1})
+          // _this.$message({
+          //   showClose: true,
+          //   ...res
+          // })
         } catch (err) {
           console.error(err)
           _this.$message({
             showClose: true,
-            message: '登录失败，请检测您的网络是否连接正常',
+            message: this.$t('message.headers.t13'),
             type: 'error'
           })
         }
@@ -162,7 +165,7 @@ export default {
       window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
     },
     handleLoginOut () {
-      const res = window.confirm('确定要登出吗?')
+      const res = window.confirm(this.$t('message.headers.t14'))
       if (res) {
         this.loginOut()
         window.location.reload()
@@ -179,8 +182,8 @@ export default {
       }
     },
     '$route' (to) {
-      if (to.fullPath.split('/cn/').length > 1) {
-        this.location = '/en/' + to.fullPath.split('/cn/')[1]
+      if (to.fullPath.split(this.href).length > 1) {
+        this.location = '/' + (this.href === 'cn' ? 'en' : 'cn') + to.fullPath.split(this.href)[1]
       } else {
         this.location = '/en/index'
       }

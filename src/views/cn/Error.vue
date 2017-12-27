@@ -28,7 +28,7 @@
     methods: {
       goIndex () {
         setTimeout(() => {
-          this.$router.push({path: '/'})
+          this.$router.push({path: '/cn/index'})
         }, 2000)
       },
       menu () {

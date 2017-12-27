@@ -155,7 +155,7 @@
           <p>{{$t('message.ordersend.t34')}}</p>
           <div class="img"><img src="/static/image/weChat.jpg" alt="国际快递服务中心公众号"></div>
           <div class="img">
-            <p><a href="/#/Send" target="_blank">{{$t('message.ordersend.t35')}}</a></p>
+            <p><a href="/cn/send" target="_blank">{{$t('message.ordersend.t35')}}</a></p>
             <p @click="dialogTableVisible = true">{{$t('message.ordersend.t36')}}</p>
             <p @click="returnGoodVisible = true">{{$t('message.ordersend.t37')}}</p>
             <p @click="packageVisible = true">{{$t('message.ordersend.t38')}}</p>

@@ -11,7 +11,7 @@
       <el-form class="form" ref="form" :model="form" label-width="120px">
 
         <div id="item1" class="sendorder_item" v-if="true">
-          <h1 class="page_tit">Sender\'s information</h1>
+          <h1 class="page_tit">Sender's information</h1>
           <el-form-item label="name : " prop="senderName"
                         :rules="[
               { required: true, message: 'name cannot be null'}
@@ -281,15 +281,20 @@
         receAddr: {}
       }
     },
+    beforeCreate () {
+      console.log('this.isLogin', this.isLogin)
+      if (this.isLogin) {
+        this.$router.push({path: '/en/ordersend'})
+      }
+    },
     created () {
+      console.log('this.isLogin', this.isLogin)
       if (this.isLogin) {
         this.$router.push({path: '/en/ordersend'})
         return
       }
       window.document.title = '上海明彰网络科技有限公司'
       this.menu()
-      // this.getSendAddr()
-      // this.getReceiveAddr()
     },
     mounted () {
       window.onscroll = function () {

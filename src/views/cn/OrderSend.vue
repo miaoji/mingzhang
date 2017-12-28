@@ -302,13 +302,13 @@
         tablePackagedata: [],
         freightId: '',
         sendAddr: {},
-        receAddr: {}
+        receAddr: {},
+        href: window.sessionStorage.locale || '/cn/'
       }
     },
     created () {
       if (!this.isLogin) {
-        const href = window.sessionStorage.locale || 'cn'
-        this.$router.push({path: '/' + href + '/orderspare'})
+        this.$router.push({path: this.href + 'orderspare'})
         return
       }
       this.menu()
@@ -443,7 +443,7 @@
               message: this.$t('message.ordersend.t65'),
               type: 'success'
             })
-            this.$router.push('/cn/cashier?order=' + data.obj.orderNo)
+            this.$router.push(this.href + 'cashier?order=' + data.obj.orderNo)
             this.onCancel('form')
           } else {
             this.loading2 = false
@@ -1098,6 +1098,9 @@
         line-height: 45px;
         margin-top: 30px;
         padding-right: 363px;
+      }
+      .el-form-item__content {
+        width: 80%;
       }
       .form {
         width: 800px;

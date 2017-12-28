@@ -15,10 +15,4 @@ export default new Vuex.Store({
     directmail,
     user
   }
-  // state: {
-  //   locale: 'cn'
-  // }
-  // mutations,
-  // getters,
-  // actions
 })

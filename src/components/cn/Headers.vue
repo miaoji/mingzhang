@@ -2,7 +2,7 @@
   <div class="header_nav">
     <ul class="w clear">
       <li class="left">
-        <router-link :to="'/'+this.href+'/index'"><img src="/static/image/logo.png"/><span class="logo">{{$t('message.headers.t1')}}</span></router-link>
+        <router-link :to="this.href+'index'"><img src="/static/image/logo.png"/><span class="logo">{{$t('message.headers.t1')}}</span></router-link>
       </li>
       <li class="right language">
         <div class='switch'>
@@ -29,7 +29,7 @@
                 <img v-show="isLogin" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
               </div>
               <el-dropdown-menu slot="dropdown">
-                <router-link to="/cn/user/directmail">
+                <router-link :to="this.href+'user/directmail'">
                   <el-dropdown-item>
                     <i class="el-icon-location"></i> {{$t('message.headers.t5')}}
                   </el-dropdown-item>
@@ -48,23 +48,23 @@
     <div class="header_nav_item" :class="{ toptoptop: addClass }">
       <ul class="w clear">
         <li class="left">
-          <router-link :to="'/'+this.href+'/index'">{{$t('message.headers.t7')}}</router-link>
+          <router-link :to="this.href+'index'">{{$t('message.headers.t7')}}</router-link>
         </li>
         <li class="left">
-          <router-link :to="'/'+this.href+'/ordersend'" v-show='isLogin'>{{$t('message.headers.t8')}}</router-link>
-          <router-link :to="'/'+this.href+'/orderspare'" v-show='!isLogin'>{{$t('message.headers.t8')}}</router-link>
+          <router-link :to="this.href+'ordersend'" v-show='isLogin'>{{$t('message.headers.t8')}}</router-link>
+          <router-link :to="this.href+'orderspare'" v-show='!isLogin'>{{$t('message.headers.t8')}}</router-link>
         </li>
         <li class="left">
-          <router-link :to="'/'+this.href+'/prescription'">{{$t('message.headers.t9')}}</router-link>
+          <router-link :to="this.href+'prescription'">{{$t('message.headers.t9')}}</router-link>
         </li>
         <li class="left">
-          <router-link :to="'/'+this.href+'/site'">{{$t('message.headers.t10')}}</router-link>
+          <router-link :to="this.href+'site'">{{$t('message.headers.t10')}}</router-link>
         </li>
         <li class="left">
-          <router-link :to="'/'+this.href+'/introduce'">{{$t('message.headers.t11')}}</router-link>
+          <router-link :to="this.href+'introduce'">{{$t('message.headers.t11')}}</router-link>
         </li>
         <li class="left">
-          <router-link :to="'/'+this.href+'/send'">{{$t('message.headers.t12')}}</router-link>
+          <router-link :to="this.href+'send'">{{$t('message.headers.t12')}}</router-link>
         </li>
       </ul>
     </div>
@@ -94,13 +94,13 @@ export default {
       addClass: false,
       loginContainerVisible: false,
       location: '/en/index',
-      href: window.sessionStorage.locale || 'cn'
+      href: window.sessionStorage.locale || '/cn/'
     }
   },
   created () {
     this.menu()
     if (location.pathname !== '' && location.pathname !== '/') {
-      this.location = '/' + (this.href === 'cn' ? 'en' : 'cn') + location.href.split(this.href)[1]
+      this.location = (this.href === '/cn/' ? '/en/' : '/cn/') + location.href.split(this.href)[1]
     }
   },
   computed: {
@@ -173,21 +173,12 @@ export default {
     }
   },
   watch: {
-    isLogin (val) {
-      if (this.$route.fullPath === '/cn/ordersend' && val === false) {
-        this.$router.push({path: '/cn/orderspare'})
-      }
-      if (this.$route.fullPath === '/cn/orderspare' && val === true) {
-        this.$router.push({path: '/cn/ordersend'})
-      }
-    },
     '$route' (to) {
       if (to.fullPath.split(this.href).length > 1) {
-        this.location = '/' + (this.href === 'cn' ? 'en' : 'cn') + to.fullPath.split(this.href)[1]
+        this.location = (this.href === '/cn/' ? '/en/' : '/cn/') + to.fullPath.split(this.href)[1]
       } else {
         this.location = '/en/index'
       }
-      console.log('location', this.location)
     }
   }
 }

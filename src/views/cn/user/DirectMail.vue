@@ -120,7 +120,7 @@
         payDialogVisible: false,
         payImg: '',
         qrLoading: false,
-        href: window.sessionStorage.locale || 'cn'
+        href: window.sessionStorage.locale || '/cn/'
       }
     },
     created () {
@@ -160,7 +160,7 @@
       },
       handleDetail (orderNo) {
         this.$router.push({
-          path: '/' + this.href + '/orderdetail',
+          path: this.href + 'orderdetail',
           query: {
             orderNo
           }
@@ -168,7 +168,7 @@
       },
       checkTrace (no) {
         this.$router.push({
-          path: '/' + this.href + '/getorderinfo',
+          path: this.href + 'getorderinfo',
           query: {
             order: no
           }
@@ -181,7 +181,7 @@
         this.currentPage = val
         this.setDirectmailList({page: val})
         this.$router.push({
-          path: '/' + this.href + '/user/directmail',
+          path: this.href + 'user/directmail',
           query: {
             page: val
           }
@@ -202,7 +202,7 @@
       },
       async handelPay (val) {
         try {
-          this.$router.push('/' + this.href + '/cashier?order=' + val.ORDER_NO)
+          this.$router.push(this.href + 'cashier?order=' + val.ORDER_NO)
           return
         } catch (e) {
           console.error(e)

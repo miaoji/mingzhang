@@ -1122,13 +1122,19 @@
       border-radius: 3px;
       margin: 0px auto 20px;
       .page_tit {
-        background-image: url(/static/image/title.png);
+        background-image: url(/static/image/title_2.png);
         height: 48px;
+        width: 267px;
+        text-align: center;
         font-size: 20px;
         color: #ffffff;
-        padding-left: 108px;
+        padding-left: 77px;
         line-height: 45px;
         margin-top: 30px;
+        padding-right: 363px;
+      }
+      .el-form-item__content {
+        width: 80%;
       }
       .form {
         width: 800px;

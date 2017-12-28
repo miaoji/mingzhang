@@ -121,8 +121,8 @@
     },
     methods: {
       payClick () {
-        const href = window.sessionStorage.locale || 'cn'
-        this.$router.push('/' + href + '/cashier?order=' + this.detailData['orderNo'])
+        const href = window.sessionStorage.locale || '/cn/'
+        this.$router.push(href + 'cashier?order=' + this.detailData['orderNo'])
       },
       async initDetail () {
         try {

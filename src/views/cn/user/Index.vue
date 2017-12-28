@@ -34,7 +34,6 @@
   </div>
 </template>
 <script>
-  // import {storage} from '@/utils'
   export default {
     name: 'usercenter',
     data () {
@@ -45,8 +44,8 @@
     },
     created () {
       const href = window.sessionStorage.locale || 'cn'
-      this.linkdirectmail = '/' + href + '/user/directmail'
-      this.linkcustomer = '/' + href + '/user/customer'
+      this.linkdirectmail = href + 'user/directmail'
+      this.linkcustomer = href + 'user/customer'
     },
     methods: {}
   }

@@ -690,9 +690,6 @@
         margin-top: 30px;
         padding-right: 363px;
       }
-      .el-form-item__content {
-        width: 80%;
-      }
       .form {
         width: 800px;
         margin: 0px auto;

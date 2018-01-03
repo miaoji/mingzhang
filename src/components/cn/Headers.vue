@@ -208,12 +208,13 @@ export default {
   /*头部导航栏*/
   .header_nav {
     background-color: #fff;
-    /*width: 100vw;*/
   }
 
   .header_nav > ul {
     height: 110px;
     overflow: hidden;
+    box-sizing: border-box;
+    padding-right: 40px;
   }
 
   .header_nav > ul > li {

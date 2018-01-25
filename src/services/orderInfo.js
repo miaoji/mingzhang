@@ -42,3 +42,12 @@ export async function createOrderSpare (data, params) {
     params
   })
 }
+
+export async function getByOrderId (params) {
+  return request({
+    url: order.getByOrderId,
+    method: 'get',
+    useSession: true,
+    params
+  })
+}

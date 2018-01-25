@@ -1,10 +1,10 @@
 let API
 // 本地
-// API = 'http://192.168.0.231:8077'
+API = 'http://192.168.0.231:8077'
 // 线上测试版
 // API = 'http://api.didalive.net/mzkd'
 // 正式线上
-API = 'http://api.mingz-tech.com'
+// API = 'http://api.mingz-tech.com'
 
 let BBS_API
 
@@ -21,7 +21,8 @@ export const order = {
   getOrderInfoByOrderNo: `${API}/api/orderInfo/getOrderInfoByOrderNo`,
   queryByCompany: `${API}/api/order/queryByCompany`,
   add: `${API}/api/orderInfo/add`,
-  addCargo: `${API}/api/orderInfo/addCargo`
+  addCargo: `${API}/api/orderInfo/addCargo`,
+  getByOrderId: `${API}/api/route/getByOrderId`
 }
 
 // 用户信息

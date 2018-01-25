@@ -22,6 +22,11 @@
         ></div>
         <div class="order_info" v-show="!orderLoading">
           <ul>
+            <li v-for='item in mengalOrderData'>
+              <span class='order_info_tit'>{{filterTime(item.routeTime)}}</span>
+              <span class='icon'><span class='line'></span></span>
+              <span class='order_info_content' :title="item.route">{{item.route}}</span>
+            </li>
             <li v-for='item in cnOrderdData'>
               <span class='order_info_tit'>{{item.time}}</span>
               <span class='icon'><span class='line'></span></span>
@@ -40,7 +45,8 @@
   </div>
 </template>
 <script>
-  import {getOrderInfoByOrderNo, queryByCompany} from '@/services/orderInfo'
+  import {getOrderInfoByOrderNo, queryByCompany, getByOrderId} from '@/services/orderInfo'
+  import {formatedatestamp} from '../../utils/time'
   export default {
     name: 'GetOrderInfo',
     data () {
@@ -48,6 +54,7 @@
         order: '',
         cnOrderdData: [],
         intlOrderData: [],
+        mengalOrderData: [],
         show: true,
         link: '/enGetOrderInfo',
         orderLoading: true
@@ -63,6 +70,9 @@
       this.getOrderInfo()
     },
     methods: {
+      filterTime (item) {
+        return formatedatestamp(item)
+      },
       menu () {
         window.scrollTo(0, 0)
       },
@@ -75,6 +85,24 @@
           orderNo: this.order
         })
         if (res.code === 200) {
+          if (res.obj.orderType === 4) {
+            let bengalOrderInfo = await getByOrderId({
+              orderId: res.obj.id
+              // orderId: 2
+            })
+            if (bengalOrderInfo.code === 200 && bengalOrderInfo.obj) {
+              this.mengalOrderData = bengalOrderInfo.obj
+            }
+            this.show = false
+            setTimeout(() => {
+              this.orderLoading = false
+            }, 500)
+            return true
+          } else {
+            this.mengalOrderData = []
+            this.show = true
+          }
+
           if (res.obj.cnNo) {
             let cnorder = await queryByCompany({
               num: res.obj.cnNo,
@@ -203,10 +231,6 @@
     font-size: 18px;
     border-radius: 5px;
     margin-bottom: 33px;
-  }
-
-  .order_left > .button:hover {
-
   }
 
   /* 右侧边栏 */

@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === 'production') {
   API = 'http://api.mingz-tech.com'
   BBS_API = 'http://localhost:8000'
 }
-
 // 订单信息
 export const order = {
   getOrderInfoByOrderNo: `${API}/api/orderInfo/getOrderInfoByOrderNo`,

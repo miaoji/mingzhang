@@ -1,5 +1,5 @@
 <template>
-  <div class="cashier" v-loading="loading" :element-loading-text='$t("text.text1")'>
+  <div class="cashier" v-loading="loading" :element-loading-text="$t('message.cashier.text1')">
     <div class="cashier_bg"></div>
     <div class="order_info order_info_no" v-show='orderIsNo'>
       <div class="title">
@@ -68,7 +68,7 @@
               </el-col>
               <el-col :span="6">
                 <div>
-                  <span>{{$t("message.cashier.text31")}}</span> : <span>{{data.returnGood===1?$t("message.cashier.text32"):$t("message.cashier.text33")}}</span>
+                  <span>{{$t('message.cashier.text31')}}</span> : <span>{{data.returnGood===1?$t("message.cashier.text32"):$t("message.cashier.text33")}}</span>
                 </div>
               </el-col>
             </el-row>
@@ -127,7 +127,7 @@
     name: 'cashier',
     data () {
       return {
-        text: this.$t('message.cashier'),
+        text: '',
         data: {},
         orderInfoShow: false,
         loading: true,
@@ -182,16 +182,16 @@
           try {
             if (payInfo === '1') {
               _this.$notify({
-                title: this.$t('message.cashier.text42'),
-                message: this.$t('message.cashier.text43'),
+                title: _this.$t('message.cashier.text42'),
+                message: _this.$t('message.cashier.text43'),
                 type: 'success',
                 duration: 0
               })
               _this.$router.push({path: '/cn/orderdetail?orderNo=' + _this.data.orderNo})
             } else {
               _this.$notify({
-                title: this.$t('message.cashier.text44'),
-                message: this.$t(('message.cashier.text45')),
+                title: _this.$t('message.cashier.text44'),
+                message: _this.$t(('message.cashier.text45')),
                 type: 'warning',
                 duration: 0
               })
@@ -378,8 +378,6 @@
             .item_title {
               line-height: 2em;
               font-size: 18px;
-            }
-            .info {
             }
             .weixin_pay {
               cursor: pointer;

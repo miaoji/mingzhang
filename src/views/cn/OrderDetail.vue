@@ -80,8 +80,8 @@
       senderAddress () {
         const detail = this.detailData
         let sendList = [
-          detail['senderName'],
-          detail['senderMobile'],
+          // detail['senderName'],
+          // detail['senderMobile'],
           detail['senderCountry'],
           detail['senderProv'],
           detail['senderCity'],
@@ -95,8 +95,8 @@
       receiverAddress () {
         const detail = this.detailData
         let receiverList = [
-          detail['receiverName'],
-          detail['receiverMobile'],
+          // detail['receiverName'],
+          // detail['receiverMobile'],
           detail['receiverCountry'],
           detail['receiverProv'],
           detail['receiverCity'],

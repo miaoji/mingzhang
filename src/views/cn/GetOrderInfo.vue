@@ -64,7 +64,7 @@
       }
     },
     created () {
-      const {order} = this.$route.query
+      const order = window.sessionStorage.getItem('order')
       this.order = order || ''
       this.menu()
       this.$emit('location', location.hash)
@@ -87,6 +87,7 @@
           })
           return
         }
+        window.sessionStorage.setItem('order', this.order)
         this.$router.push({
           path: '/cn/orderdetail',
           query: { orderNo: this.order }
@@ -97,6 +98,7 @@
         let res = await getOrderInfoByOrderNo({
           orderNo: this.order
         })
+        window.sessionStorage.setItem('order', this.order)
         if (res.code === 200) {
           if (res.obj.orderType === 4) {
             let bengalOrderInfo = await getByOrderId({

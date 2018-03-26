@@ -68,9 +68,10 @@
       handleClick () {
         // alert(this.msg)
         if (this.msg === '') {
-          alert('您输入的订单号为空!!!')
+          alert('order is null!!!')
         } else {
-          this.$router.push({path: '/en/getorderinfo?order=' + this.msg})
+          this.$router.push({path: '/en/getorderinfo'})
+          window.sessionStorage.setItem('order', this.msg)
         }
       }
     }

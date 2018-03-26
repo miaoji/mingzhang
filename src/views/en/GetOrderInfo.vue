@@ -6,7 +6,8 @@
         <div class="info">EXPRESS TRACK</div>
         <div class="line"></div>
         <div class="input"><input placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
-        <div class="button" @click="getOrderInfo">Search</div>
+        <div class="button left" @click="getOrderInfo">Search</div>
+        <div class="button right" @click="goOrderInfo">Order Info</div>
       </div>
       <div class="order right">
         <div class="icon"><img src="/static/image/sen_res.png"/></div>
@@ -61,8 +62,7 @@
       }
     },
     created () {
-      // window.document.title = '上海明彰网络科技有限公司'
-      const order = location.hash.split('?order=')[1]
+      const order = window.sessionStorage.getItem('order')
       this.order = order || ''
       this.order === 'undefined' ? this.order = '' : this.order = this.order
       this.menu()
@@ -78,12 +78,27 @@
       },
       handleScroll (e) {
       },
+      goOrderInfo () {
+        if (this.order.length < 16) {
+          this.$message({
+            type: 'warning',
+            message: 'order is invalid'
+          })
+          return
+        }
+        window.sessionStorage.setItem('order', this.order)
+        this.$router.push({
+          path: '/en/orderdetail',
+          query: { orderNo: this.order }
+        })
+      },
       async getOrderInfo () {
         this.orderLoading = true
         this.$router.push({path: '/en/getorderinfo?order=' + this.order})
         let res = await getOrderInfoByOrderNo({
           orderNo: this.order
         })
+        window.sessionStorage.setItem('order', this.order)
         if (res.code === 200) {
           if (res.obj.orderType === 4) {
             let bengalOrderInfo = await getByOrderId({
@@ -219,6 +234,13 @@
     color: #a3a1a6;
   }
 
+  .order_left > .button.left {
+
+  }
+  .order_left > .button.right {
+    margin-right: 51px;
+    background-color: #3a8ee6;
+  }
   .order_left > .button {
     cursor: pointer;
     margin-left: 50px;

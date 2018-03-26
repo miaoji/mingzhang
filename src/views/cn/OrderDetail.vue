@@ -18,8 +18,8 @@
         </div>
         <div class="status-tools">
           <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>{{$t('message.orderdetail.t17')}}</el-button>
-          <el-button type="text" size="small" @click="handleDelete" v-show="detailData['status'] === 1">{{$t('message.orderdetail.t18')}}</el-button>
-          <el-button type="success" size="small" @click="handleRoute" v-show="canCheckRoute">{{$t('message.orderdetail.t19')}}</el-button>
+          <el-button type="warning" size="small" @click="handleDelete" v-show="detailData['status'] === 1">{{$t('message.orderdetail.t18')}}</el-button>
+          <el-button type="success" size="small" @click="handleRoute">{{$t('message.orderdetail.t19')}}</el-button>
         </div>
       </div>
     </div>
@@ -173,7 +173,13 @@
         })
       },
       handleRoute () {
-
+        console.log(this.$route.path.split('/en/'))
+        window.sessionStorage.setItem('order', this.orderNo)
+        if (this.$route.path.split('/en/') && this.$route.path.split('/en/').length === 2) {
+          this.$router.push({path: '/en/getorderinfo'})
+        } else {
+          this.$router.push({path: '/cn/getorderinfo'})
+        }
       }
     }
   }

@@ -80,7 +80,7 @@
       handleScroll (e) {
       },
       goOrderInfo () {
-        if (this.order.length < 16) {
+        if (this.order.length < 15) {
           this.$message({
             type: 'warning',
             message: '你输入的不是一个有效的订单'

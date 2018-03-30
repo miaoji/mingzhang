@@ -79,7 +79,7 @@
       handleScroll (e) {
       },
       goOrderInfo () {
-        if (this.order.length < 15) {
+        if (this.order.length < 5) {
           this.$message({
             type: 'warning',
             message: 'order is invalid'

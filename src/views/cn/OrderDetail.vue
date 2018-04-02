@@ -17,8 +17,8 @@
           <i class="el-icon-info status-icon"></i>{{$t('message.orderdetail.t13')}} {{statusList['content']}}
         </div>
         <div class="status-tools">
-          <el-button type="success" size="small" v-show="detailData['status'] === 1" @click='payClick'>{{$t('message.orderdetail.t17')}}</el-button>
-          <el-button type="warning" size="small" @click="handleDelete" v-show="detailData['status'] === 1">{{$t('message.orderdetail.t18')}}</el-button>
+          <el-button type="success" size="small" v-show="detailData['status'] === 1 && isLogin" @click='payClick'>{{$t('message.orderdetail.t17')}}</el-button>
+          <el-button type="warning" size="small" @click="handleDelete" v-show="detailData['status'] === 1 && isLogin">{{$t('message.orderdetail.t18')}}</el-button>
           <el-button type="success" size="small" @click="handleRoute">{{$t('message.orderdetail.t19')}}</el-button>
         </div>
       </div>
@@ -37,12 +37,12 @@
   </div>
 </template>
 <script>
+  import {mapGetters} from 'vuex'
   import compact from 'lodash/compact'
   import DetailItem from '@/components/DetailItem.vue'
   import {show, remove} from '@/services/directMail'
   import {format} from '@/utils/time'
   import {orderstatus, statuscontent} from '@/filters'
-  // import {storage} from '@/utils'
 
   export default {
     name: 'orderdetail',
@@ -63,6 +63,9 @@
       this.initDetail()
     },
     computed: {
+      ...mapGetters({
+        'isLogin': 'getLoginStatus'
+      }),
       hiddenStatus () {
         const hiddenStatus = this.detailData['hiddenStatus']
         return hiddenStatus
@@ -259,9 +262,6 @@
           .status-icon {
             padding-right: 5px;
           }
-        }
-        &-tools {
-
         }
       }
     }

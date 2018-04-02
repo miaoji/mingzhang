@@ -8,7 +8,7 @@
             <span class="ico"></span>快件查询
           </div>
           <div class="main_inquire_inp left">
-            <input id="input" type="text" placeholder="请输入单号进行查询" v-model='msg'/>
+            <input @keyup.13="handleClick" id="input" type="text" placeholder="请输入单号进行查询" v-model='msg'/>
           </div>
           <div class="main_inquire_btn_box right">
             <div @click='handleClick' id="btn" class="main_inquire_btn left">查询</div>
@@ -100,9 +100,6 @@
   }
 
   /* 快件查询部分-查询按钮部分 */
-
-  .main {
-  }
 
   .main > .main_inquire {
     border-radius: 5px;
@@ -216,16 +213,7 @@
     background-color: #ea000a;
   }
 
-  .main_hint > .main_hint_img {
-  }
-
-  .main_hint > .main_hint_img > img {
-  }
-
   /* 体验区 */
-
-  .main_experience {
-  }
 
   .main_experience > ul {
     padding: 0px;
@@ -304,14 +292,6 @@
   }
 
   /* 客户服务 */
-
-  .service {
-    /*background-color: #fff;*/
-  }
-
-  .service > .service_items {
-  }
-
   .service > .service_items > ul {
     padding: 0px 0px 30px 0px;
     margin: 0px 0px 50px;

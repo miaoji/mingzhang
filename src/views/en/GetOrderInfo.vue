@@ -5,7 +5,7 @@
         <div class="icon"><img src="/static/image/sen_sea.png"/></div>
         <div class="info">EXPRESS TRACK</div>
         <div class="line"></div>
-        <div class="input"><input placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
+        <div class="input"><input @keyup.13="getOrderInfo" placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
         <div class="button left" @click="getOrderInfo">Search</div>
         <div class="button right" @click="goOrderInfo">Order Info</div>
       </div>
@@ -79,13 +79,6 @@
       handleScroll (e) {
       },
       goOrderInfo () {
-        if (this.order.length < 5) {
-          this.$message({
-            type: 'warning',
-            message: 'order is invalid'
-          })
-          return
-        }
         window.sessionStorage.setItem('order', this.order)
         this.$router.push({
           path: '/en/orderdetail',
@@ -234,9 +227,6 @@
     color: #a3a1a6;
   }
 
-  .order_left > .button.left {
-
-  }
   .order_left > .button.right {
     margin-right: 51px;
     background-color: #3a8ee6;

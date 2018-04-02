@@ -305,9 +305,6 @@ export default {
     color: #313131;
   }
 
-  .header_nav > ul > li.btn {
-  }
-
   .header_nav > ul > li.btn > a {
     padding: 5px 10px;
     font-size: 16px;

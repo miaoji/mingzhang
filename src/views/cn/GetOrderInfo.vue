@@ -5,7 +5,7 @@
         <div class="icon"><img src="/static/image/sen_sea.png"/></div>
         <div class="info">快件查询</div>
         <div class="line"></div>
-        <div class="input"><input placeholder="请输入单号进行查询" type="text" v-model='order'/></div>
+        <div class="input"><input @keyup.13="getOrderInfo" placeholder="请输入单号进行查询" type="text" v-model='order'/></div>
         <div class='clear'>
           <div class="button left" @click="getOrderInfo">搜索</div>
           <div class="button right" @click="goOrderInfo">查看订单信息</div>
@@ -80,13 +80,6 @@
       handleScroll (e) {
       },
       goOrderInfo () {
-        if (this.order.length < 5) {
-          this.$message({
-            type: 'warning',
-            message: '你输入的不是一个有效的订单'
-          })
-          return
-        }
         window.sessionStorage.setItem('order', this.order)
         this.$router.push({
           path: '/cn/orderdetail',

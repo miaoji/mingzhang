@@ -6,7 +6,7 @@
         <div class="main_inquire clear">
           <div class="main_inquire_tit left"><span class="ico"></span>EXPRESS TRACK</div>
           <div class="main_inquire_inp left">
-            <input id="input" type="text" placeholder="Please Input Your Courier Number " v-model='msg'/>
+            <input @keyup.13="handleClick" id="input" type="text" placeholder="Please Input Your Courier Number " v-model='msg'/>
           </div>
           <div class="main_inquire_btn_box right">
             <div @click='handleClick' id="btn" class="main_inquire_btn left">Search</div>
@@ -100,9 +100,6 @@
   }
 
   /* 快件查询部分-查询按钮部分 */
-
-  .main {
-  }
 
   .main > .main_inquire {
     border-radius: 5px;
@@ -217,16 +214,7 @@
     background-color: #ea000a;
   }
 
-  .main_hint > .main_hint_img {
-  }
-
-  .main_hint > .main_hint_img > img {
-  }
-
   /* 体验区 */
-
-  .main_experience {
-  }
 
   .main_experience > ul {
     padding: 0px;
@@ -308,9 +296,6 @@
 
   .service {
     background-color: #fff;
-  }
-
-  .service > .service_items {
   }
 
   .service > .service_items > ul {

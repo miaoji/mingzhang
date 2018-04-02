@@ -26,7 +26,8 @@
           <div class="login-icon">
             <el-dropdown trigger="hover">
               <div class="el-dropdown-link">
-                <img v-show="isLogin" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
+                <img v-show="isLogin" :onerror="loginimg" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
+                <span style="margin-left:10px" v-show="isLogin">{{userinfo['nickName'] || ''}}</span>
               </div>
               <el-dropdown-menu slot="dropdown">
                 <router-link :to="this.href+'user/directmail'">
@@ -90,6 +91,7 @@ export default {
   name: 'Header',
   data () {
     return {
+      loginimg: 'this.src="/static/image/timg.jpg"',
       msg: 'Header',
       addClass: false,
       loginContainerVisible: false,

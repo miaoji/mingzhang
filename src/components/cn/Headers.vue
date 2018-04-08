@@ -22,7 +22,8 @@
       </li>
       <li class="right language">
         <div class="login">
-          <el-button type="text" icon="login" v-show="!isLogin" @click="wxLogin">{{$t('message.headers.t4')}}</el-button>
+          <el-button class="login_btn" type="text" v-show="!isLogin" @click="wxLogin">{{$t('message.headers.login')}}</el-button>
+          <el-button class="reg_btn" type="text" v-show="!isLogin" @click="handleRegister">{{$t('message.headers.register')}}</el-button>
           <div class="login-icon">
             <el-dropdown trigger="hover">
               <div class="el-dropdown-link">
@@ -75,9 +76,7 @@
       width="25%"
       center>
       <div>
-        <div id="login-container">
-
-        </div>
+        <div id="login-container"></div>
       </div>
     </el-dialog>
   </div>
@@ -128,6 +127,16 @@ export default {
     ]),
     menu () {
       window.scrollTo(0, 0)
+    },
+    handleRegister () {
+      // const { host } = window.location
+      const local = window.sessionStorage.getItem('locale')
+      if (local) {
+        this.$router.push(`${local}register`)
+        // window.open(`http://${host}${local}register`)
+      }
+      this.$router.push('/cn/register')
+      // window.open(`http://${host}/cn/register`)
     },
     wxLogin () {
       const browserId = storage({
@@ -187,6 +196,24 @@ export default {
 </script>
 
 <style scoped lang='less'>
+  .login_btn {
+    color: #333;
+    &:hover {
+      color: #f00;
+    }
+    &:active {
+      color: #ff2020
+    }
+  }
+  .reg_btn {
+    color: #333;
+    &:hover {
+      color: #f00;
+    }
+    &:active {
+      color: #ff2020;
+    }
+  }
   .login {
     padding-top: 18px;
     .login-icon {

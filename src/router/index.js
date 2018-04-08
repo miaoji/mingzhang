@@ -41,11 +41,12 @@ const enviolate = r => require.ensure([], () => r(require('@/views/en/Violate'))
 const enordersendspare = r => require.ensure([], () => r(require('@/views/en/OrderSendSpare')), 'enordersendspare')
 
 const error404 = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error404')
+const register = r => require.ensure([], () => r(require('@/views/cn/Register')), 'register')
 
 export default new Router({
   base: __dirname,
   mode: 'history',
-  scrollBehavior (to, from, savedPosition) {
+  scrollBehavior(to, from, savedPosition) {
     if (to.hash) {
       return {
         selector: to.hash
@@ -76,6 +77,20 @@ export default new Router({
     component: redirect,
     meta: {
       intro: '登录跳转'
+    }
+  }, {
+    path: 'register',
+    name: 'register',
+    component: register,
+    meta: {
+      intro: 'register'
+    }
+  }, {
+    path: '/cn/register',
+    name: 'register',
+    component: register,
+    meta: {
+      intro: '注册'
     }
   }, {
     path: '/cn',

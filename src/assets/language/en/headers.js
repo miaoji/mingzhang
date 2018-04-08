@@ -2,7 +2,7 @@ export default {
   t1: 'International Express Service Center',
   t2: '语言',
   t3: '中文',
-  t4: 'Login',
+  login: 'Login',
   t5: 'User Info',
   t6: 'Sign out',
   t7: 'HOME',
@@ -12,5 +12,6 @@ export default {
   t11: 'ABOUT  US',
   t12: 'SENDING  PROCESS',
   t13: 'Login failed, please check whether your network is connected properly!',
-  t14: 'Are you sure you want to log out?'
+  t14: 'Are you sure you want to log out?',
+  register: 'register'
 }

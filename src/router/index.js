@@ -42,6 +42,7 @@ const enordersendspare = r => require.ensure([], () => r(require('@/views/en/Ord
 
 const error404 = r => require.ensure([], () => r(require('@/views/cn/Error')), 'error404')
 const register = r => require.ensure([], () => r(require('@/views/cn/Register')), 'register')
+const login = r => require.ensure([], () => r(require('@/views/cn/Login')), 'login')
 
 export default new Router({
   base: __dirname,
@@ -79,18 +80,18 @@ export default new Router({
       intro: '登录跳转'
     }
   }, {
-    path: 'register',
-    name: 'register',
-    component: register,
+    path: '/cn/login',
+    name: 'login',
+    component: login,
     meta: {
-      intro: 'register'
+      intro: '用户登录'
     }
   }, {
     path: '/cn/register',
     name: 'register',
     component: register,
     meta: {
-      intro: '注册'
+      intro: '用户注册'
     }
   }, {
     path: '/cn',

@@ -1,5 +1,5 @@
 <template>
-  <div class="register">
+  <div class="login">
     <div class="hader-content">
       <div class="header">
         <div class="left">
@@ -7,38 +7,34 @@
             <img src="/static/image/logo.png"/>
           </div>
           <div class="left-item">
-            <span class="logo">上海明彰网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎注册</span>
+            <span class="logo">上海明彰网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎登录</span>
           </div>
         </div>
         <div class="right">
-          <router-link to="/cn/login">已有账号,前往登陆</router-link>
+          <router-link to="/cn/register">没有账号,前往注册</router-link>
         </div>
       </div>
     </div>
-    <div class="register-container">
-        <div class="register-container-left">
-            <div class="group">
-              <div class="input">
-                <input type="text" @input='usernameBlur' v-model='form.username' placeholder='请输入您的用户名' />
-              </div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="usernameMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!usernameMsg"></i>
-              </div>
-            </div>
-            <div class="msg">{{usernameMsg}}</div>
+    <div class="login-container">
+        <div class="login-container-left">
             <div class="group">
               <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
               <div class="icon">
-                <span @click='getVerificationCode'>{{getCodeInfo}}</span>
                 <i class="el-icon-circle-close-outline" v-if="emailMsg"></i>
                 <i class="el-icon-circle-check-outline" v-if="!emailMsg"></i>
               </div>
             </div>
             <div class="msg">{{emailMsg}}</div>
             <div class="group">
+              <div class="text">验证码:</div>
+              <div class="img"><img :src="codeimg" alt="图片验证码"></div>
+              <div class="icon">
+                <span @click='getVerificationCode'>{{getCodeInfo}}</span>
+              </div>
+            </div>
+            <div class="group">
               <!-- <div class="text">邮箱验证码</div> -->
-              <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入您的邮箱验证码" type="text" /></div>
+              <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入图片验证码信息" type="text" /></div>
               <div class="icon">
                 <i class="el-icon-circle-close-outline" v-if="codeMsg"></i>
                 <i class="el-icon-circle-check-outline" v-if="!codeMsg"></i>
@@ -55,70 +51,61 @@
             </div>
             <div class="msg">{{passwordMsg}}</div>
             <div class="group">
-              <!-- <div class="text">确认密码</div> -->
-              <div class="input"><input @change='repassBlur' v-model='form.repass' placeholder="请确认您的密码" type="password" /></div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="repassMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!repassMsg"></i>
-              </div>
-            </div>
-            <div class="msg">{{repassMsg}}</div>
-            <div class="group">
-              <div class="submit" @click='handleRegister'>注册</div>
+              <div class="submit" @click='handleLogin'>登录</div>
             </div>
         </div>
-        <div class="register-container-right"></div>
+        <div class="login-container-right"></div>
     </div>
     <footers />
   </div>
 </template>
 <script>
-import { getEmailCode, reg } from '../../services/register'
+import { login as loginService } from '../../services/login'
 import Footers from '../../components/cn/Footers'
+import { login } from '../../api'
+import uuid from 'uuid/v4'
 
 export default {
-  name: 'register',
+  name: 'login',
   components: {
     Footers
   },
   data() {
     return {
-      getCodeInfo: '获取邮箱验证码',
+      getCodeInfo: '看不清,换一下',
       form: {
-        username: 'winner',
         email: '975080391@qq.com',
         password: '123456',
-        repass: '123456',
         code: ''
       },
-      usernameMsg: '',
       emailMsg: '',
       codeMsg: '',
       passwordMsg: '',
-      repassMsg: '',
-      codeTime: 30
+      codeTime: 30,
+      codeimg: '',
+      uuid: ''
     }
   },
   created() {
+    this.uuid = uuid()
+    this.codeimg = `${login.code}?uuid=${this.uuid}`
   },
   methods: {
-    async handleRegister() {
-      const { username, email, password, code } = this.form
-      this.usernameBlur()
+    async handleLogin() {
+      const { email, password, code } = this.form
       this.emailBlur()
       this.passwordBlur()
-      this.repassBlur()
       this.codeBlur()
-      if (this.usernameMsg !== '' || this.emailMsg !== '' || this.codeMsg !== '' || this.passwordMsg !== '' || this.repassMsg !== '') {
+      if (this.emailMsg !== '' || this.codeMsg !== '' || this.passwordMsg !== '') {
         return
       }
       console.log('form', this.form)
-      const data = await reg({ name: username, email, code, password })
+      const data = await loginService({ email, code, password, uuid: this.uuid })
       console.log('data', data)
-      if (data.code === 200) {
+      if (data.status === 200) {
         this.$notify({
           title: '提示',
-          message: '注册成功,自动登录',
+          message: '登录成功',
           type: 'success',
           duration: 5000
         })
@@ -132,55 +119,9 @@ export default {
       }
     },
     async getVerificationCode() { // 点击获取验证码
-      if (this.getCodeInfo !== '获取邮箱验证码') {
-        this.$notify({
-          title: '提示',
-          message: '距离上次获取验证码时间太近',
-          type: 'info',
-          duration: 5000
-        })
-        return
-      }
-      this.$notify({
-        title: '提示',
-        message: '正在发送验证码',
-        type: 'info',
-        duration: 5000
-      })
-      const data = await getEmailCode({ email: this.form.email })
-      console.log('data', data)
-      if (data.code === 200) {
-        this.$notify({
-          title: '提示',
-          message: '验证发送成功',
-          type: 'success',
-          duration: 5000
-        })
-        const time = window.setInterval(() => {
-          this.getCodeInfo = `请在${this.codeTime}秒后重试`
-          this.codeTime--
-          if (this.codeTime === 0) {
-            window.clearInterval(time)
-            this.getCodeInfo = '获取邮箱验证码'
-            this.codeTime = 30
-          }
-        }, 1000)
-      } else {
-        this.$notify({
-          title: '提示',
-          message: '验证码发送失败,请重试',
-          type: 'error',
-          duration: 5000
-        })
-      }
-    },
-    usernameBlur() {
-      const { username } = this.form
-      if (!username || username === '') {
-        this.usernameMsg = '用户名不能为空'
-      } else {
-        this.usernameMsg = ''
-      }
+      console.log('1231')
+      this.uuid = uuid()
+      this.codeimg = `${login.code}?uuid=${this.uuid}`
     },
     emailBlur() {
       const { email } = this.form
@@ -207,23 +148,14 @@ export default {
       if (!password || password === '') {
         this.passwordMsg = '密码不能为空'
       } else {
-        this.repassBlur()
         this.passwordMsg = ''
-      }
-    },
-    repassBlur() {
-      const { repass, password } = this.form
-      if (repass !== password) {
-        this.repassMsg = '两次输入的密码不一致'
-      } else {
-        this.repassMsg = ''
       }
     }
   }
 }
 </script>
 <style scoped lang="less">
-.register {
+.login {
   background-image: url("/static/image/0.jpg");
   // background-color: #fff;
   background-repeat: no-repeat;
@@ -313,9 +245,17 @@ export default {
           margin-top: 0px;
         }
         .text {
+          color: #666;
           width: 23%;
-          text-align: right;
+          padding-left: 30px;
           float: left;
+        }
+        .img {
+          float: left;
+          height: 50px;
+          img {
+            height: inherit;
+          }
         }
         .input {
           width: 58%;

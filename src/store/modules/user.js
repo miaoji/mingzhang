@@ -22,7 +22,6 @@ export const actions = {
   async setUserInfo({ dispatch, commit }, payload) {
     try {
       if (storage({ key: 'loginType' }) !== 'email') {
-        console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,')
         const res = await show({ ...payload })
         const code = res.statusCode
         if (res.status === 1 && code === 200) {
@@ -45,7 +44,6 @@ export const actions = {
           throw err
         }
       } else {
-        console.log('/////////////////////////////////////////////////////////////')
         let user = storage({ type: 'get', key: 'userInfo' })
         user = JSON.parse(user)
         const token = user.token

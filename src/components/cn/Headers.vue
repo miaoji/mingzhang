@@ -80,17 +80,27 @@
         <div id="login-container"></div>
       </div>
     </el-dialog>
+    <login :show="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
+    <reg :show="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
   </div>
 </template>
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import { storage } from '@/utils'
 import { saveOpenid } from '@/utils/user'
+import Login from '@/components/login'
+import Reg from '@/components/register'
 
 export default {
   name: 'Header',
+  components: {
+    Login,
+    Reg
+  },
   data() {
     return {
+      loginShow: false,
+      regShow: false,
       loginimg: 'this.src="/static/image/img001.png"',
       msg: 'Header',
       addClass: false,
@@ -130,24 +140,10 @@ export default {
       window.scrollTo(0, 0)
     },
     emailLogin() {
-      // const { host } = window.location
-      const local = window.sessionStorage.getItem('locale')
-      if (local) {
-        this.$router.push(`${local}login`)
-        // window.open(`http://${host}${local}login`)
-      }
-      this.$router.push('/cn/login')
-      // window.open(`http://${host}/cn/login`)
+      this.loginShow = !this.loginShow
     },
     handleRegister() {
-      // const { host } = window.location
-      const local = window.sessionStorage.getItem('locale')
-      if (local) {
-        this.$router.push(`${local}register`)
-        // window.open(`http://${host}${local}register`)
-      }
-      this.$router.push('/cn/register')
-      // window.open(`http://${host}/cn/register`)
+      this.regShow = !this.regShow
     },
     wxLogin() {
       const browserId = storage({
@@ -170,11 +166,7 @@ export default {
           setTimeout(() => {
             window.location.reload()
           }, 30)
-          // const res = await _this.setUserInfo({openid, unionid, type: 1})
-          // _this.$message({
-          //   showClose: true,
-          //   ...res
-          // })
+          storage({ type: 'set', key: 'loginType', val: 'wechat' })
         } catch (err) {
           console.error(err)
           _this.$message({
@@ -184,14 +176,21 @@ export default {
           })
         }
       }
-      window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
+      const iWidth = 600
+      const iHeight = 600
+      const iTop = (window.screen.availHeight - 30 - iHeight) / 2
+      const iLeft = (window.screen.availWidth - 10 - iWidth) / 2
+      window.open(wxLoginUrl, '', 'height=' + iHeight + ', width=' + iWidth + ', top=' + iTop + ', left=' + iLeft)
     },
     handleLoginOut() {
-      const res = window.confirm(this.$t('message.headers.t14'))
-      if (res) {
+      this.$confirm('您即将退出登录, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
         this.loginOut()
         window.location.reload()
-      }
+      })
     }
   },
   watch: {

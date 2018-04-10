@@ -176,7 +176,6 @@
         })
       },
       handleRoute () {
-        console.log(this.$route.path.split('/en/'))
         window.sessionStorage.setItem('order', this.orderNo)
         if (this.$route.path.split('/en/') && this.$route.path.split('/en/').length === 2) {
           this.$router.push({path: '/en/getorderinfo'})

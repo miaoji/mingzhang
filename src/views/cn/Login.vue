@@ -104,9 +104,7 @@ export default {
       if (this.emailMsg !== '' || this.codeMsg !== '' || this.passwordMsg !== '') {
         return
       }
-      console.log('form', this.form)
       const data = await loginService({ email, code, password, uuid: this.uuid })
-      console.log('data', data)
       if (data.status === 200) {
         this.$notify({
           title: '提示',
@@ -125,8 +123,6 @@ export default {
           val: 'email'
         })
         const local = window.sessionStorage.getItem('locale')
-        console.log('local', local)
-        console.log('this', this)
         this.$router.push(local)
       } else {
         this.$notify({
@@ -138,7 +134,6 @@ export default {
       }
     },
     async getVerificationCode() { // 点击获取验证码
-      console.log('1231')
       this.uuid = uuid()
       this.codeimg = `${login.code}?uuid=${this.uuid}`
     },
@@ -148,7 +143,6 @@ export default {
         this.emailMsg = '邮箱地址不能为空'
       } else {
         const aa = email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
-        console.log('aa', aa)
         if (aa < 0) {
           this.emailMsg = '邮箱格式不正确'
         }

@@ -1,23 +1,11 @@
 <template>
-  <div class="register">
-    <div class="hader-content">
-      <div class="header">
-        <div class="left" @click="goIndex">
-          <div class="left-item">
-            <img src="/static/image/logo.png"/>
-          </div>
-          <div class="left-item">
-            <span class="logo">上海明彰网络科技有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;欢迎注册</span>
-          </div>
-        </div>
-        <div class="right">
-          <router-link to="/">回到首页</router-link>
-          <router-link to="/cn/login">已有账号,前往登陆</router-link>
-        </div>
-      </div>
-    </div>
+  <div class="register" v-if="regShow">
     <div class="register-container">
         <div class="register-container-left">
+          <div class="header">
+            <span class="left">用户注册</span>
+            <span class="right"><i @click="()=>{this.regShow = false}" class="el-icon-circle-close-outline"></i></span>
+          </div>
             <div class="group">
               <div class="input">
                 <input type="text" @input='usernameBlur' v-model='form.username' placeholder='请输入您的用户名' />
@@ -65,34 +53,41 @@
             </div>
             <div class="msg">{{repassMsg}}</div>
             <div class="group">
-              <div class="submit" @click='handleRegister'>注册</div>
+              <div class="submit" @click='handleRegister'>点击注册</div>
             </div>
+        <div class="footer">
+          <span @click="handleReg">已有账号,前往登陆</span>
         </div>
-        <div class="register-container-right"></div>
+        </div>
     </div>
-    <footers />
   </div>
 </template>
 <script>
-import { getEmailCode, reg } from '../../services/register'
-import Footers from '../../components/cn/Footers'
+import { getEmailCode, reg } from '@/services/register'
 import { storage } from '@/utils'
 
 export default {
   name: 'register',
-  components: {
-    Footers
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    },
+    showLogin: {
+      type: Function
+    }
   },
   data() {
     return {
       getCodeInfo: '获取邮箱验证码',
       form: {
-        username: 'winner',
-        email: '975080391@qq.com',
-        password: '123456',
-        repass: '123456',
+        username: '',
+        email: '',
+        password: '',
+        repass: '',
         code: ''
       },
+      regShow: false,
       usernameMsg: '',
       emailMsg: '',
       codeMsg: '',
@@ -101,11 +96,37 @@ export default {
       codeTime: 30
     }
   },
+  watch: {
+    show(val) {
+      this.regShow = true
+      this.form = {
+        username: '',
+        email: '',
+        password: '',
+        repass: '',
+        code: ''
+      }
+      this.usernameMsg = ''
+      this.emailMsg = ''
+      this.codeMsg = ''
+      this.passwordMsg = ''
+      this.repassMsg = ''
+    }
+  },
   created() {
   },
+  mounted() {
+    const _this = this
+    window.onkeydown = function (e) {
+      if (e.keyCode === 27) {
+        _this.regShow = false
+      }
+    }
+  },
   methods: {
-    goIndex() {
-      this.$router.push('/')
+    handleReg() {
+      this.regShow = false
+      this.showLogin()
     },
     async handleRegister() {
       const { username, email, password, code } = this.form
@@ -135,8 +156,9 @@ export default {
           key: 'loginType',
           val: 'email'
         })
-        const local = window.sessionStorage.getItem('locale')
-        this.$touter.push(local)
+        setTimeout(() => {
+          window.location.reload()
+        }, 30)
       } else {
         this.$notify({
           title: '提示',
@@ -219,10 +241,15 @@ export default {
       const { password } = this.form
       if (!password || password === '') {
         this.passwordMsg = '密码不能为空'
-      } else {
-        this.repassBlur()
-        this.passwordMsg = ''
+        return
       }
+      var aLvTxt = ['密码长度过短', '密码需要同时含有数字和字母', '']
+      var lv = 0
+      if (password.match(/[a-z]/g)) { lv++ }
+      if (password.match(/[0-9]/g)) { lv++ }
+      if (password.length < 6) { lv = 0 }
+      if (lv > 3) { lv = 3 }
+      this.passwordMsg = aLvTxt[lv]
     },
     repassBlur() {
       const { repass, password } = this.form
@@ -237,79 +264,28 @@ export default {
 </script>
 <style scoped lang="less">
 .register {
-  background-image: url("/static/image/0.jpg");
-  // background-color: #fff;
-  background-repeat: no-repeat;
-  background-size: 740px auto;
-  background-position: 7% 39%;
-  .hader-content {
-    width: 100%;
-    box-shadow: 0px 0px 5px #888888;
-    .header {
-      width: 1300px;
-      margin: auto;
-      zoom: 1;
-      &:after {
-        content: "";
-        height: 0;
-        line-height: 0;
-        display: block;
-        visibility: hidden;
-        clear: both;
-      }
-      .right {
-        float: right;
-        a {
-          color: #03a9f4;
-          line-height: 80px;
-          padding-left: 20px;
-        }
-      }
-      .left {
-        cursor: pointer;
-        float: left;
-        height: 80px;
-        overflow: hidden;
-        width: auto;
-        .left-item {
-          float: left;
-          img {
-            height: 60px;
-            margin: 10px 0;
-          }
-          span {
-            padding-left: 20px;
-            line-height: 80px;
-            font-size: 24px;
-            color: #03061f;
-            font-weight: 600;
-          }
-        }
-      }
-    }
-  }
-
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background-color: #0006;
   &-container {
-    margin: auto;
-    width: 1300px;
-    zoom: 1;
-    &:after {
-      content: "";
-      height: 0;
-      line-height: 0;
-      display: block;
-      visibility: hidden;
-      clear: both;
-    }
     &-left {
-      float: right;
-      margin-right: 50px;
-      margin-top: 60px;
-      margin-bottom: 60px;
-      box-shadow: 0px 0px 5px #888888;
-      background-color: #fffc;
+      top: 50%;
+      left: 50%;
+      z-index: 3;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      box-shadow: 0px 0px 5px #99999999;
+      background-color: #fff;
       width: 400px;
-      padding: 50px;
+      padding: 0 50px;
       .msg {
         height: 30px;
         width: 100%;
@@ -317,6 +293,31 @@ export default {
         color: red;
         padding-left: 30px;
         box-sizing: content-box;
+      }
+      .header {
+        height: 80px;
+        line-height: 80px;
+        margin-bottom: 20px;
+        .left {
+          float: left;
+        }
+        .right {
+          float: right;
+          font-size: 30px;
+          color: #333;
+          cursor: pointer;
+        }
+      }
+      .footer {
+        height: 70px;
+        line-height: 70px;
+        text-align: right;
+        font-size: 14px;
+        color: #03a9f4;
+        span {
+          cursor: pointer;
+          user-select: none;
+        }
       }
       .group {
         border-bottom: 1px #ddd solid;
@@ -328,9 +329,17 @@ export default {
           margin-top: 0px;
         }
         .text {
+          color: #666;
           width: 23%;
-          text-align: right;
+          padding-left: 30px;
           float: left;
+        }
+        .img {
+          float: left;
+          height: 50px;
+          img {
+            height: inherit;
+          }
         }
         .input {
           width: 58%;
@@ -375,11 +384,6 @@ export default {
           }
         }
       }
-    }
-    &-right {
-      float: right;
-      height: 100%;
-      width: 50%;
     }
   }
 }

@@ -2,7 +2,7 @@
   <div class="register">
     <div class="hader-content">
       <div class="header">
-        <div class="left">
+        <div class="left" @click="goIndex">
           <div class="left-item">
             <img src="/static/image/logo.png"/>
           </div>
@@ -11,6 +11,7 @@
           </div>
         </div>
         <div class="right">
+          <router-link to="/">回到首页</router-link>
           <router-link to="/cn/login">已有账号,前往登陆</router-link>
         </div>
       </div>
@@ -75,6 +76,7 @@
 <script>
 import { getEmailCode, reg } from '../../services/register'
 import Footers from '../../components/cn/Footers'
+import { storage } from '@/utils'
 
 export default {
   name: 'register',
@@ -102,6 +104,9 @@ export default {
   created() {
   },
   methods: {
+    goIndex() {
+      this.$router.push('/')
+    },
     async handleRegister() {
       const { username, email, password, code } = this.form
       this.usernameBlur()
@@ -122,6 +127,18 @@ export default {
           type: 'success',
           duration: 5000
         })
+        storage({
+          type: 'set',
+          key: 'userInfo',
+          val: JSON.stringify({ ...data.obj, token: data.token })
+        })
+        storage({
+          type: 'set',
+          key: 'loginType',
+          val: 'email'
+        })
+        const local = window.sessionStorage.getItem('locale')
+        this.$touter.push(local)
       } else {
         this.$notify({
           title: '提示',
@@ -249,9 +266,11 @@ export default {
         a {
           color: #03a9f4;
           line-height: 80px;
+          padding-left: 20px;
         }
       }
       .left {
+        cursor: pointer;
         float: left;
         height: 80px;
         overflow: hidden;

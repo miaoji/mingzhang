@@ -1,6 +1,6 @@
-import {Base64} from 'js-base64'
-import {show} from '@/services/user'
-import {storage} from '@/utils'
+import { Base64 } from 'js-base64'
+import { show } from '@/services/user'
+import { storage } from '@/utils'
 
 /**
  * [login 根据传来的openid获取用户信息，将token和userinfo存储在localStorage中
@@ -11,7 +11,7 @@ import {storage} from '@/utils'
  */
 export const login = async function (openid) {
   try {
-    const res = await show({openid})
+    const res = await show({ openid })
     if (res.status === 1 && res.statusCode === 200) {
       let user = res.user
       const token = res.token
@@ -36,7 +36,7 @@ export const login = async function (openid) {
 }
 
 // 获取过期时间json val单位 分钟
-function getExpire (val = 30) {
+function getExpire(val = 30) {
   let time = new Date()
   return {
     'now': new Date().getTime(),
@@ -78,6 +78,9 @@ export const saveOpenid = async function (payload) {
  */
 export const autoLogin = function () {
   try {
+    if (storage({ type: 'get', key: 'loginType' }) === 'email') {
+      return { openid: true }
+    }
     // 设置过期时间为1星期
     let token = storage({
       type: 'get',

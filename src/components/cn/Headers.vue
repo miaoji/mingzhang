@@ -22,12 +22,13 @@
       </li>
       <li class="right language">
         <div class="login">
-          <el-button class="login_btn" type="text" v-show="!isLogin" @click="wxLogin">{{$t('message.headers.login')}}</el-button>
+          <el-button class="login_btn" type="text" v-show="!isLogin" @click="wxLogin">{{$t('message.headers.wxLogin')}}</el-button>
+          <el-button class="login_btn" type="text" v-show="!isLogin" @click="emailLogin">{{$t('message.headers.EmailLogin')}}</el-button>
           <el-button class="reg_btn" type="text" v-show="!isLogin" @click="handleRegister">{{$t('message.headers.register')}}</el-button>
           <div class="login-icon">
             <el-dropdown trigger="hover">
               <div class="el-dropdown-link">
-                <img v-show="isLogin" :onerror="loginimg" :src="userinfo['headimgurl'] || '/static/image/timg.jpg'" alt="用户头像">
+                <img v-show="isLogin" :onerror="loginimg" :src="userinfo['headimgurl'] || '/static/image/img001.png'" alt="用户头像">
                 <span style="margin-left:10px" v-show="isLogin">{{userinfo['nickName'] || ''}}</span>
               </div>
               <el-dropdown-menu slot="dropdown">
@@ -82,15 +83,15 @@
   </div>
 </template>
 <script>
-import {mapActions, mapGetters} from 'vuex'
-import {storage} from '@/utils'
-import {saveOpenid} from '@/utils/user'
+import { mapActions, mapGetters } from 'vuex'
+import { storage } from '@/utils'
+import { saveOpenid } from '@/utils/user'
 
 export default {
   name: 'Header',
-  data () {
+  data() {
     return {
-      loginimg: 'this.src="/static/image/timg.jpg"',
+      loginimg: 'this.src="/static/image/img001.png"',
       msg: 'Header',
       addClass: false,
       loginContainerVisible: false,
@@ -98,7 +99,7 @@ export default {
       href: window.sessionStorage.locale || '/cn/'
     }
   },
-  created () {
+  created() {
     this.menu()
     if (location.pathname !== '' && location.pathname !== '/') {
       this.location = (this.href === '/cn/' ? '/en/' : '/cn/') + location.href.split(this.href)[1]
@@ -110,7 +111,7 @@ export default {
       'userinfo': 'getUserInfo'
     })
   },
-  mounted () {
+  mounted() {
     let _this = this
     window.onscroll = function () {
       if (document.documentElement.scrollTop > 115) {
@@ -125,10 +126,20 @@ export default {
       'setUserInfo',
       'loginOut'
     ]),
-    menu () {
+    menu() {
       window.scrollTo(0, 0)
     },
-    handleRegister () {
+    emailLogin() {
+      // const { host } = window.location
+      const local = window.sessionStorage.getItem('locale')
+      if (local) {
+        this.$router.push(`${local}login`)
+        // window.open(`http://${host}${local}login`)
+      }
+      this.$router.push('/cn/login')
+      // window.open(`http://${host}/cn/login`)
+    },
+    handleRegister() {
       // const { host } = window.location
       const local = window.sessionStorage.getItem('locale')
       if (local) {
@@ -138,7 +149,7 @@ export default {
       this.$router.push('/cn/register')
       // window.open(`http://${host}/cn/register`)
     },
-    wxLogin () {
+    wxLogin() {
       const browserId = storage({
         type: 'get',
         key: 'browserId'
@@ -153,7 +164,7 @@ export default {
         const eventData = JSON.parse(event.data)
         const openid = eventData.openidWeb
         const unionid = eventData.unionid
-        saveOpenid({openid, unionid})
+        saveOpenid({ openid, unionid })
         websocket.close()
         try {
           setTimeout(() => {
@@ -175,7 +186,7 @@ export default {
       }
       window.open(wxLoginUrl, '', 'top=0,left=0,width=600,height=600')
     },
-    handleLoginOut () {
+    handleLoginOut() {
       const res = window.confirm(this.$t('message.headers.t14'))
       if (res) {
         this.loginOut()
@@ -184,7 +195,7 @@ export default {
     }
   },
   watch: {
-    '$route' (to) {
+    '$route'(to) {
       if (to.fullPath.split(this.href).length > 1) {
         this.location = (this.href === '/cn/' ? '/en/' : '/cn/') + to.fullPath.split(this.href)[1]
       } else {
@@ -196,150 +207,150 @@ export default {
 </script>
 
 <style scoped lang='less'>
-  .login_btn {
-    color: #333;
-    &:hover {
-      color: #f00;
+.login_btn {
+  color: #333;
+  &:hover {
+    color: #f00;
+  }
+  &:active {
+    color: #ff2020;
+  }
+}
+.reg_btn {
+  color: #333;
+  &:hover {
+    color: #f00;
+  }
+  &:active {
+    color: #ff2020;
+  }
+}
+.login {
+  padding-top: 18px;
+  .login-icon {
+    cursor: pointer;
+    img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      vertical-align: middle;
     }
-    &:active {
-      color: #ff2020
-    }
   }
-  .reg_btn {
-    color: #333;
-    &:hover {
-      color: #f00;
-    }
-    &:active {
-      color: #ff2020;
-    }
-  }
-  .login {
-    padding-top: 18px;
-    .login-icon {
-      cursor: pointer;
-      img {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        vertical-align: middle;
-      }
-    }
-  }
-  .switch {
-    padding-top: 25px;
-  }
+}
+.switch {
+  padding-top: 25px;
+}
 
-  #login-container {
-    text-align: center;
-  }
+#login-container {
+  text-align: center;
+}
 
-  /*头部导航栏*/
-  .header_nav {
-    background-color: #fff;
-  }
+/*头部导航栏*/
+.header_nav {
+  background-color: #fff;
+}
 
-  .header_nav > ul {
-    height: 110px;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding-right: 40px;
-  }
+.header_nav > ul {
+  height: 110px;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-right: 40px;
+}
 
-  .header_nav > ul > li {
-    height: inherit;
-    list-style: none;
-    margin-left: 20px;
-  }
+.header_nav > ul > li {
+  height: inherit;
+  list-style: none;
+  margin-left: 20px;
+}
 
-  .header_nav > ul > li:first-child {
-    margin-left: 0px;
-  }
+.header_nav > ul > li:first-child {
+  margin-left: 0px;
+}
 
-  .header_nav > ul > li > span {
-    display: inline-block;
-    /*line-height: 80px;*/
-    font-size: 18px;
-  }
+.header_nav > ul > li > span {
+  display: inline-block;
+  /*line-height: 80px;*/
+  font-size: 18px;
+}
 
-  .header_nav > ul > li > a {
-    line-height: 80px;
-    font-size: 18px;
-    color: #3c3c3c;
-    text-decoration: none;
-  }
+.header_nav > ul > li > a {
+  line-height: 80px;
+  font-size: 18px;
+  color: #3c3c3c;
+  text-decoration: none;
+}
 
-  .header_nav > ul > li > a:hover {
-    color: #ff525e;
-  }
+.header_nav > ul > li > a:hover {
+  color: #ff525e;
+}
 
-  .header_nav > ul > li > a > img {
-    height: 60px;
-    margin: 25px 0px;
-  }
+.header_nav > ul > li > a > img {
+  height: 60px;
+  margin: 25px 0px;
+}
 
-  .header_nav > ul > li > a > span.logo {
-    line-height: 80px;
-    position: relative;
-    top: -44px;
-    left: 15px;
-    font-size: 24px;
-    color: #03061f;
-    font-weight: 600;
-  }
+.header_nav > ul > li > a > span.logo {
+  line-height: 80px;
+  position: relative;
+  top: -44px;
+  left: 15px;
+  font-size: 24px;
+  color: #03061f;
+  font-weight: 600;
+}
 
-  /*横向导航栏*/
+/*横向导航栏*/
 
-  .header_nav > .header_nav_item {
-    height: 75px;
-    background: -webkit-linear-gradient(#494949, #1d1d1d); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
-    background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
-  }
-  .header_nav > .header_nav_item > ul {
-    list-style: none;
-    font-size: 14px;
-  }
+.header_nav > .header_nav_item {
+  height: 75px;
+  background: -webkit-linear-gradient(#494949, #1d1d1d); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#494949, #1d1d1d); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#494949, #1d1d1d); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#494949, #1d1d1d); /* 标准的语法 */
+}
+.header_nav > .header_nav_item > ul {
+  list-style: none;
+  font-size: 14px;
+}
 
-  .header_nav > .header_nav_item > ul > li {
-    margin-right: 20px;
-    /* padding: 0px 10px; */
-  }
+.header_nav > .header_nav_item > ul > li {
+  margin-right: 20px;
+  /* padding: 0px 10px; */
+}
 
-  .header_nav > .header_nav_item > ul > li > a {
-    line-height: 75px;
-    padding: 10px 20px;
-    border: 1px solid rgba(0, 0, 0, 0);
-    border-radius: 5px;
-    color: #fff;
-  }
+.header_nav > .header_nav_item > ul > li > a {
+  line-height: 75px;
+  padding: 10px 20px;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 5px;
+  color: #fff;
+}
 
-  .header_nav > .header_nav_item > ul > li > a:hover {
-    color: #ff1919;
-  }
+.header_nav > .header_nav_item > ul > li > a:hover {
+  color: #ff1919;
+}
 
-  /* 回到首页按钮 */
-  .header_nav > ul > li.language {
-    margin-top: 18px;
-  }
+/* 回到首页按钮 */
+.header_nav > ul > li.language {
+  margin-top: 18px;
+}
 
-  .header_nav > ul > li.language > a {
-    margin-right: 10px;
-    color: #313131;
-    font-size: 13px;
-  }
+.header_nav > ul > li.language > a {
+  margin-right: 10px;
+  color: #313131;
+  font-size: 13px;
+}
 
-  .header_nav > ul > li.language > a:hover {
-    color: #313131;
-  }
+.header_nav > ul > li.language > a:hover {
+  color: #313131;
+}
 
-  .header_nav > ul > li.btn > a {
-    padding: 5px 10px;
-    font-size: 16px;
-    background-color: #333;
-    color: #fff;
-    position: relative;
-    left: -22px;
-  }
+.header_nav > ul > li.btn > a {
+  padding: 5px 10px;
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  position: relative;
+  left: -22px;
+}
 </style>

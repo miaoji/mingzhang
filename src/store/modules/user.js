@@ -1,5 +1,5 @@
-import {show} from '@/services/user'
-import {storage} from '@/utils'
+import { show } from '@/services/user'
+import { storage } from '@/utils'
 import * as types from '../mutation-types'
 
 export const state = {
@@ -19,28 +19,42 @@ export const actions = {
    * @param {[type]} options.dispatch [description]
    * @param {[type]} options.commit   [description]
    */
-  async setUserInfo ({ dispatch, commit }, payload) {
+  async setUserInfo({ dispatch, commit }, payload) {
     try {
-      const res = await show({...payload})
-      const code = res.statusCode
-      if (res.status === 1 && code === 200) {
-        const token = res.token
+      if (storage({ key: 'loginType' }) !== 'email') {
+        console.log(',,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,')
+        const res = await show({ ...payload })
+        const code = res.statusCode
+        if (res.status === 1 && code === 200) {
+          const token = res.token
+          storage({
+            type: 'set',
+            key: 'authToken',
+            val: token
+          })
+          const user = res.user
+          commit(types.SET_USER, { isLogin: true, token, user })
+          return {
+            type: 'success',
+            message: res.msg,
+            code
+          }
+        } else {
+          let err = new Error(res.msg)
+          err.code = code
+          throw err
+        }
+      } else {
+        console.log('/////////////////////////////////////////////////////////////')
+        let user = storage({ type: 'get', key: 'userInfo' })
+        user = JSON.parse(user)
+        const token = user.token
         storage({
           type: 'set',
           key: 'authToken',
           val: token
         })
-        const user = res.user
-        commit(types.SET_USER, {isLogin: true, token, user})
-        return {
-          type: 'success',
-          message: res.msg,
-          code
-        }
-      } else {
-        let err = new Error(res.msg)
-        err.code = code
-        throw err
+        commit(types.SET_USER, { isLogin: true, token, user })
       }
     } catch (err) {
       console.error(err)
@@ -51,17 +65,16 @@ export const actions = {
       }
     }
   },
-  async loginOut ({dispatch, commit}) {
+  async loginOut({ dispatch, commit }) {
     storage({
-      type: 'remove',
-      key: ['token', 'authToken']
+      type: 'clear'
     })
-    commit(types.SET_USER, {isLogin: false, token: '', user: {}})
+    commit(types.SET_USER, { isLogin: false, token: '', user: {} })
   }
 }
 
 export const mutations = {
-  [types.SET_USER] (state, {isLogin, token, user}) {
+  [types.SET_USER](state, { isLogin, token, user }) {
     state.isLogin = isLogin
     state.token = token
     state.user = user

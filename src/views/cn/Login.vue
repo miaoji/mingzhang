@@ -2,7 +2,7 @@
   <div class="login">
     <div class="hader-content">
       <div class="header">
-        <div class="left">
+        <div class="left" @click="goIndex">
           <div class="left-item">
             <img src="/static/image/logo.png"/>
           </div>
@@ -11,6 +11,7 @@
           </div>
         </div>
         <div class="right">
+          <router-link to="/">回到首页</router-link>
           <router-link to="/cn/register">没有账号,前往注册</router-link>
         </div>
       </div>
@@ -64,6 +65,7 @@ import { login as loginService } from '../../services/login'
 import Footers from '../../components/cn/Footers'
 import { login } from '../../api'
 import uuid from 'uuid/v4'
+import { storage } from '@/utils'
 
 export default {
   name: 'login',
@@ -91,6 +93,9 @@ export default {
     this.codeimg = `${login.code}?uuid=${this.uuid}`
   },
   methods: {
+    goIndex() {
+      this.$router.push('/')
+    },
     async handleLogin() {
       const { email, password, code } = this.form
       this.emailBlur()
@@ -109,6 +114,20 @@ export default {
           type: 'success',
           duration: 5000
         })
+        storage({
+          type: 'set',
+          key: 'userInfo',
+          val: JSON.stringify({ ...data.user, token: data.token })
+        })
+        storage({
+          type: 'set',
+          key: 'loginType',
+          val: 'email'
+        })
+        const local = window.sessionStorage.getItem('locale')
+        console.log('local', local)
+        console.log('this', this)
+        this.$router.push(local)
       } else {
         this.$notify({
           title: '提示',
@@ -181,9 +200,11 @@ export default {
         a {
           color: #03a9f4;
           line-height: 80px;
+          padding-left: 20px;
         }
       }
       .left {
+        cursor: pointer;
         float: left;
         height: 80px;
         overflow: hidden;

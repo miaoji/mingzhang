@@ -226,6 +226,8 @@ export default {
         const aa = email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
         if (aa < 0) {
           this.emailMsg = '邮箱格式不正确'
+        } else {
+          this.emailMsg = ''
         }
       }
     },

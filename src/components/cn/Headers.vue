@@ -80,8 +80,12 @@
         <div id="login-container"></div>
       </div>
     </el-dialog>
-    <login :show="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
-    <reg :show="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
+    <transition name="el-fade-in">
+      <login :show="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
+    </transition>
+    <transition name="el-fade-in">
+      <reg :show="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
+    </transition>
   </div>
 </template>
 <script>

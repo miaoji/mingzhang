@@ -20,6 +20,7 @@ const violate = r => require.ensure([], () => r(require('@/views/cn/Violate')), 
 const usercenter = r => require.ensure([], () => r(require('@/views/cn/user/Index')), 'usercenter')
 const directmail = r => require.ensure([], () => r(require('@/views/cn/user/DirectMail')), 'directmail')
 const customer = r => require.ensure([], () => r(require('@/views/cn/user/Customer')), 'customer')
+const userinfo = r => require.ensure([], () => r(require('@/views/cn/user/UserInfo')), 'userinfo')
 const orderdetail = r => require.ensure([], () => r(require('@/views/cn/OrderDetail')), 'orderdetail')
 const bbsindex = r => require.ensure([], () => r(require('@/views/cn/bbs/Index')), 'bbsindex')
 const cashier = r => require.ensure([], () => r(require('@/views/cn/Cashier')), 'cashier')
@@ -175,6 +176,13 @@ export default new Router({
         meta: {
           intro: '客服中心'
         }
+      }, {
+        path: 'userinfo',
+        name: 'userinfo',
+        component: userinfo,
+        meta: {
+          intro: '用户信息'
+        }
       }]
     }, {
       path: 'orderdetail',
@@ -300,6 +308,13 @@ export default new Router({
         path: 'customer',
         name: 'encustomer',
         component: customer,
+        meta: {
+          intro: '客服中心'
+        }
+      }, {
+        path: 'userinfo',
+        name: 'enuserinfo',
+        component: userinfo,
         meta: {
           intro: '客服中心'
         }

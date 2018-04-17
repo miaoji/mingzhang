@@ -18,6 +18,12 @@
                   {{$t('message.userindex.t2')}}
                 </el-menu-item>
               </router-link>
+              <router-link :to="linkuserinfo">
+                <el-menu-item index="3">
+                  <i class="el-icon-message"></i>
+                  用户信息
+                </el-menu-item>
+              </router-link>
             </el-menu>
           </div>
         </el-col>
@@ -39,13 +45,15 @@
     data () {
       return {
         linkdirectmail: '/cn/user/directmail',
-        linkcustomer: '/cn/user/customer'
+        linkcustomer: '/cn/user/customer',
+        linkuserinfo: '/cn/user/userinfo'
       }
     },
     created () {
       const href = window.sessionStorage.locale || 'cn'
       this.linkdirectmail = href + 'user/directmail'
       this.linkcustomer = href + 'user/customer'
+      this.linkuserinfo = href + 'user/userinfo'
     },
     methods: {}
   }

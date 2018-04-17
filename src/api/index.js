@@ -1,10 +1,11 @@
 let API
 // 本地
-API = 'http://192.168.231.239:8077'
+// API = 'http://192.168.231.239:8077'
+
 // 线上测试版
 // API = 'http://api.didalive.net/mzkd'
 // 正式线上
-// API = 'http://api.mingz-tech.com'
+API = 'http://api.mingz-tech.com'
 
 let BBS_API
 
@@ -120,5 +121,6 @@ export const register = {
 
 export const login = {
   code: `${API}/login/imageCode`,
-  loginByEmail: `${API}/login/loginByEmail`
+  loginByEmail: `${API}/login/loginByEmail`,
+  bindingEmail: `${API}/bindingEmail`
 }

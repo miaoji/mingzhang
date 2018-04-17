@@ -15,12 +15,22 @@
           </div>
           <div class="msg">{{emailMsg}}</div>
           <div class="group">
+            <!-- <div class="text">密码</div> -->
+            <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
+            <div class="icon">
+              <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
+              <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
+            </div>
+          </div>
+          <div class="msg">{{passwordMsg}}</div>
+          <div class="group">
             <div class="text">验证码:</div>
             <div class="img"><img :src="codeimg" alt="图片验证码"></div>
             <div class="icon">
               <span @click='getVerificationCode'>{{getCodeInfo}}</span>
             </div>
           </div>
+          <div class="msg"></div>
           <div class="group">
             <!-- <div class="text">邮箱验证码</div> -->
             <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入图片验证码信息" type="text" /></div>
@@ -30,15 +40,6 @@
             </div>
           </div>
           <div class="msg">{{codeMsg}}</div>
-          <div class="group">
-            <!-- <div class="text">密码</div> -->
-            <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
-            <div class="icon">
-              <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
-              <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
-            </div>
-          </div>
-          <div class="msg">{{passwordMsg}}</div>
           <div class="group">
             <div class="submit" @click='handleLogin'>点击登录</div>
           </div>

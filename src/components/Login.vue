@@ -75,7 +75,7 @@ export default {
         password: '',
         code: ''
       },
-      loginShow: false,
+      loginShow: true,
       emailMsg: '',
       codeMsg: '',
       passwordMsg: '',
@@ -83,30 +83,9 @@ export default {
       uuid: ''
     }
   },
-  watch: {
-    show(val) {
-      this.loginShow = true
-      this.form = {
-        email: '',
-        password: '',
-        code: ''
-      }
-      this.emailMsg = ''
-      this.codeMsg = ''
-      this.passwordMsg = ''
-    }
-  },
   created() {
     this.uuid = uuid()
     this.codeimg = `${login.code}?uuid=${this.uuid}`
-  },
-  mounted() {
-    const _this = this
-    window.onkeydown = function (e) {
-      if (e.keyCode === 27) {
-        _this.loginShow = false
-      }
-    }
   },
   methods: {
     handleReg() {
@@ -139,9 +118,7 @@ export default {
           key: 'loginType',
           val: 'email'
         })
-        setTimeout(() => {
-          window.location.reload()
-        }, 30)
+        window.location.reload()
       } else {
         this.$notify({
           title: '提示',

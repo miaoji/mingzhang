@@ -10,14 +10,17 @@
   </div>
 </template>
 <script>
-import { login } from '@/api'
-// import { storage } from '@/utils'
+import { userInfo as userInfoApi } from '@/api'
+import { merge } from '@/services/userInfo'
+import { storage } from '@/utils'
+import { saveOpenid } from '@/utils/user'
 import { mapGetters } from 'vuex'
 export default {
   name: 'userinfo',
   data() {
     return {
-      wxLoginUrl: ''
+      wxLoginUrl: '',
+      obj: {}
     }
   },
   computed: {
@@ -30,55 +33,88 @@ export default {
     if (this.isLogin === false) {
       this.$router.push('/')
     }
-    console.log('userinfo', this.user)
-    // console.log('this.wxLoginUrl', this.wxLoginUrl)
-    // this.user = JSON.parse(storage({ type: 'get', key: 'userInfo' }))
-    // console.log(storage({ type: 'get', key: 'userInfo' }))
   },
   methods: {
+    async handleMerge({ wxUserId }) {
+      this.$notify.info({
+        title: '提示',
+        message: '后台正在努力的帮您合并数据!!'
+      })
+      const res = await merge({ wxUserId, email: this.user.email })
+      console.log('resssss', res)
+      if (res && res.code === 200) {
+        this.$notify({
+          title: '合并成功',
+          type: 'success'
+        })
+        const eventData = this.obj
+        const openid = eventData.openidWeb
+        const unionid = eventData.unionid
+        saveOpenid({ openid, unionid })
+        storage({ type: 'set', key: 'loginType', val: 'wechat' })
+        window.location.reload()
+      } else {
+        this.$notify({
+          title: res.msg || '当前网络暂时无法使用, 请刷新页面查看结果',
+          type: 'error'
+        })
+      }
+    },
     handleCilck() {
-      const url = encodeURIComponent(login.bindingEmail)
+      const url = encodeURIComponent(userInfoApi.bindingEmail)
       const state = this.user.email
       this.wxLoginUrl = `https://open.weixin.qq.com/connect/qrconnect?appid=wx9eca964047cb260f&redirect_uri=${url}&response_type=code&scope=snsapi_login&state=${state}#wechat_redirect`
 
       const webSocketUrl = `ws://api.mingz-tech.com/webSocket/${state}`
       const websocket = new WebSocket(webSocketUrl)
+      if (!websocket) {
+        console.log(websocket)
+      }
+      window.onbeforeunload = () => {
+        websocket.close()
+      }
+      window.onunload = () => {
+        websocket.close()
+      }
       const _this = this
+      _this.$notify.info({
+        title: '提示信息',
+        message: '正在为您准备关联微信账号的页面，请稍待...'
+      })
       websocket.onmessage = async function (event) {
-        const res = JSON.parse(event.data)
-        if (res.code === 200) {
-          this.$message({
-            type: 'success',
-            message: '关联成功!'
-          })
-          websocket.close()
-        } else {
-          this.$confirm('此微信号关联邮箱需要选择是否合并用户！！！', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            this.$message({
-              type: 'success',
-              message: '删除成功!'
-            })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            })
-          })
-          websocket.close()
-        }
-        // const eventData = JSON.parse(event.data)
-        // const openid = eventData.openidWeb
-        // const unionid = eventData.unionid
-        // saveOpenid({ openid, unionid })
         try {
-          // setTimeout(() => {
-          //   window.location.reload()
-          // }, 30)
-          // storage({ type: 'set', key: 'loginType', val: 'wechat' })
+          const res = JSON.parse(event.data)
+          if (res.code === 200) {
+            _this.$message({
+              type: 'success',
+              message: '关联成功!'
+            })
+            const eventData = res.obj
+            const openid = eventData.openidWeb
+            const unionid = eventData.unionid
+            saveOpenid({ openid, unionid })
+            storage({ type: 'set', key: 'loginType', val: 'wechat' })
+            window.location.reload()
+          } else if (res.code === 501) {
+            _this.obj = res.obj
+            _this.$confirm('您提供的微信号非新用户, 如果需要继续关联账号, 请选择合并用户, 取消本次操作请选择取消 ! \b 注: 合并用户是指将两个用户的订单信息,合并到同一用户上', '关联提示', {
+              confirmButtonText: '合并用户',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              _this.handleMerge({ wxUserId: res.obj.id })
+            }).catch(() => {
+              _this.$message({
+                type: 'info',
+                message: '取消关联'
+              })
+            })
+          } else {
+            _this.$message({
+              type: 'warning',
+              message: '当前网络无法使用'
+            })
+          }
         } catch (err) {
           console.error(err)
           _this.$message({
@@ -87,12 +123,25 @@ export default {
             type: 'error'
           })
         }
+        websocket.close()
       }
+      websocket.onerror = () => {
+        console.log('websocket连接断开了')
+        _this.$notify.error({
+          title: '抱歉了',
+          message: '由于网络原因本次关联操作被取消,请稍后刷新重试!!'
+        })
+      }
+
       const iWidth = 600
       const iHeight = 600
       const iTop = (window.screen.availHeight - 30 - iHeight) / 2
       const iLeft = (window.screen.availWidth - 10 - iWidth) / 2
-      window.open(this.wxLoginUrl, '', 'height=' + iHeight + ', width=' + iWidth + ', top=' + iTop + ', left=' + iLeft)
+      window.open(_this.wxLoginUrl, '', 'height=' + iHeight + ', width=' + iWidth + ', top=' + iTop + ', left=' + iLeft)
+
+      websocket.onopen = function () {
+        console.log('websocket连接成功...')
+      }
     }
   }
 }

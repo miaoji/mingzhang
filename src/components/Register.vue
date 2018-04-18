@@ -87,7 +87,7 @@ export default {
         repass: '',
         code: ''
       },
-      regShow: false,
+      regShow: true,
       usernameMsg: '',
       emailMsg: '',
       codeMsg: '',
@@ -117,6 +117,7 @@ export default {
   },
   mounted() {
     const _this = this
+    window.onkeydown = null
     window.onkeydown = function (e) {
       if (e.keyCode === 27) {
         _this.regShow = false

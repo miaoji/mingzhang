@@ -81,10 +81,10 @@
       </div>
     </el-dialog>
     <transition name="el-fade-in">
-      <login :show="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
+      <login v-if="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
     </transition>
     <transition name="el-fade-in">
-      <reg :show="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
+      <reg v-if="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
     </transition>
   </div>
 </template>
@@ -127,6 +127,13 @@ export default {
   },
   mounted() {
     let _this = this
+
+    window.onkeydown = function (e) {
+      if (e.keyCode === 27) {
+        _this.loginShow = false
+        _this.regShow = false
+      }
+    }
     window.onscroll = function () {
       if (document.documentElement.scrollTop > 115) {
         _this.addClass = true
@@ -145,6 +152,7 @@ export default {
     },
     emailLogin() {
       this.loginShow = !this.loginShow
+      this.loginShow = true
     },
     handleRegister() {
       this.regShow = !this.regShow
@@ -167,10 +175,8 @@ export default {
         saveOpenid({ openid, unionid })
         websocket.close()
         try {
-          setTimeout(() => {
-            window.location.reload()
-          }, 30)
           storage({ type: 'set', key: 'loginType', val: 'wechat' })
+          window.location.reload()
         } catch (err) {
           console.error(err)
           _this.$message({

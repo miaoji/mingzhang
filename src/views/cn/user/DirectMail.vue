@@ -148,12 +148,11 @@
           this.loading = true
           const page = this.currentPage
           const res = await this.setDirectmailList({page})
-          if (res.type !== 'success') {
-            this.$message.error(res.msg)
+          if (!res || res.type !== 'success') {
+            this.$message.error(res.msg || '当前网络不可用')
           }
         } catch (e) {
-          console.error(e)
-          this.$message.error(e.message)
+          console.info(e)
         } finally {
           this.loading = false
         }

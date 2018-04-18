@@ -121,6 +121,9 @@ export const register = {
 
 export const login = {
   code: `${API}/login/imageCode`,
-  loginByEmail: `${API}/login/loginByEmail`,
-  bindingEmail: `${API}/bindingEmail`
+  loginByEmail: `${API}/login/loginByEmail`
+}
+export const userInfo = {
+  bindingEmail: `${API}/bindingEmail`,
+  merge: `${API}/api/wxUser/mergeEmailAndWx`
 }

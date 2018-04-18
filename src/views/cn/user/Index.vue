@@ -5,7 +5,7 @@
         <!-- 导航栏 -->
         <el-col :xs="5" :sm="5" :md="5" :lg="5">
           <div class="grid-content menu">
-            <el-menu default-active="1" class="el-menu-vertical-demo">
+            <el-menu :default-active="active" class="el-menu-vertical-demo">
               <router-link :to="linkdirectmail">
                 <el-menu-item index="1">
                   <i class="el-icon-menu"></i>
@@ -20,7 +20,7 @@
               </router-link>
               <router-link :to="linkuserinfo">
                 <el-menu-item index="3">
-                  <i class="el-icon-message"></i>
+                  <i class="el-icon-setting"></i>
                   用户信息
                 </el-menu-item>
               </router-link>
@@ -44,6 +44,7 @@
     name: 'usercenter',
     data () {
       return {
+        active: '1',
         linkdirectmail: '/cn/user/directmail',
         linkcustomer: '/cn/user/customer',
         linkuserinfo: '/cn/user/userinfo'
@@ -54,6 +55,20 @@
       this.linkdirectmail = href + 'user/directmail'
       this.linkcustomer = href + 'user/customer'
       this.linkuserinfo = href + 'user/userinfo'
+      switch (this.$route.name) {
+        case 'directmail':
+          this.active = '1'
+          break
+        case 'customer':
+          this.active = '2'
+          break
+        case 'userinfo':
+          this.active = '3'
+          break
+        default:
+          this.active = '1'
+          break
+      }
     },
     methods: {}
   }

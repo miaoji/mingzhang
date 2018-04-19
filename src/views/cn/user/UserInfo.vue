@@ -4,9 +4,13 @@
       <div class="user_img"><img :src="user.headimgurl || '/static/image/img001.png'" alt=""></div>
       <div>用户名: {{user.nickName}}</div>
       <div>客户编码: {{user.customerNo || '暂无'}}</div>
-      <div>邮箱: {{user.email}}<el-button v-if="!user.email" @click="handleCilck()" type="text">[关联已有邮箱]</el-button></div>
+      <div>邮箱: {{user.email}}<el-button v-if="!user.email" @click="handleEmailCilck()" type="text">[关联邮箱]</el-button></div>
       <div>绑定微信号: <img src="/static/image/wechart.png" alt="明彰"><span v-if="user.unionid">已绑定</span><el-button v-if="!user.unionid" @click="handleCilck()" type="text">[关联账号]</el-button></div>
     </div>
+    
+    <transition name="el-fade-in">
+      <bind-email v-if="regShow" :showReg="()=>{this.regShow = !this.regShow}" />
+    </transition>
   </div>
 </template>
 <script>
@@ -15,10 +19,16 @@ import { merge } from '@/services/userInfo'
 import { storage } from '@/utils'
 import { saveOpenid } from '@/utils/user'
 import { mapGetters } from 'vuex'
+import BindEmail from '@/components/BindEmail'
+
 export default {
   name: 'userinfo',
+  components: {
+    BindEmail
+  },
   data() {
     return {
+      regShow: false,
       wxLoginUrl: '',
       obj: {}
     }
@@ -35,6 +45,9 @@ export default {
     }
   },
   methods: {
+    handleEmailCilck() {
+      this.regShow = true
+    },
     async handleMerge({ wxUserId }) {
       this.$notify.info({
         title: '提示',

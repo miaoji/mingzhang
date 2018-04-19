@@ -15,7 +15,7 @@ export async function show (data) {
     url: order.getOrderInfoByOrderNo,
     method: 'get',
     auth: true,
-    useSession: true,
+    // useSession: true,
     data
   })
 }
@@ -24,7 +24,7 @@ export async function remove (params) {
   return request({
     url: directMail.delete,
     params,
-    useSession: true,
+    // useSession: true,
     method: 'delete',
     auth: true
   })

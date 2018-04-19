@@ -3,75 +3,62 @@
     <div class="register-container">
         <div class="register-container-left">
           <div class="header">
-            <span class="left">用户注册</span>
+            <span class="left">关联邮箱</span>
             <span class="right"><i @click="()=>{showReg()}" class="el-icon-circle-close-outline"></i></span>
           </div>
-            <div class="group">
-              <div class="input">
-                <input type="text" @input='usernameBlur' v-model='form.username' placeholder='请输入您的用户名' />
-              </div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="usernameMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!usernameMsg"></i>
-              </div>
+          <div class="group">
+            <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
+            <div class="icon">
+              <span @click='getVerificationCode'>{{getCodeInfo}}</span>
+              <i class="el-icon-circle-close-outline" v-if="emailMsg"></i>
+              <i class="el-icon-circle-check-outline" v-if="!emailMsg"></i>
             </div>
-            <div class="msg">{{usernameMsg}}</div>
-            <div class="group">
-              <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
-              <div class="icon">
-                <span @click='getVerificationCode'>{{getCodeInfo}}</span>
-                <i class="el-icon-circle-close-outline" v-if="emailMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!emailMsg"></i>
-              </div>
+          </div>
+          <div class="msg">{{emailMsg}}</div>
+          <div class="group">
+            <!-- <div class="text">邮箱验证码</div> -->
+            <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入您的邮箱验证码" type="text" /></div>
+            <div class="icon">
+              <i class="el-icon-circle-close-outline" v-if="codeMsg"></i>
+              <i class="el-icon-circle-check-outline" v-if="!codeMsg"></i>
             </div>
-            <div class="msg">{{emailMsg}}</div>
-            <div class="group">
-              <!-- <div class="text">邮箱验证码</div> -->
-              <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入您的邮箱验证码" type="text" /></div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="codeMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!codeMsg"></i>
-              </div>
+          </div>
+          <div class="msg">{{codeMsg}}</div>
+          <div class="group">
+            <!-- <div class="text">密码</div> -->
+            <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
+            <div class="icon">
+              <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
+              <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
             </div>
-            <div class="msg">{{codeMsg}}</div>
-            <div class="group">
-              <!-- <div class="text">密码</div> -->
-              <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
-              </div>
+          </div>
+          <div class="msg">{{passwordMsg}}</div>
+          <div class="group">
+            <!-- <div class="text">确认密码</div> -->
+            <div class="input"><input @change='repassBlur' v-model='form.repass' placeholder="请确认您的密码" type="password" /></div>
+            <div class="icon">
+              <i class="el-icon-circle-close-outline" v-if="repassMsg"></i>
+              <i class="el-icon-circle-check-outline" v-if="!repassMsg"></i>
             </div>
-            <div class="msg">{{passwordMsg}}</div>
-            <div class="group">
-              <!-- <div class="text">确认密码</div> -->
-              <div class="input"><input @change='repassBlur' v-model='form.repass' placeholder="请确认您的密码" type="password" /></div>
-              <div class="icon">
-                <i class="el-icon-circle-close-outline" v-if="repassMsg"></i>
-                <i class="el-icon-circle-check-outline" v-if="!repassMsg"></i>
-              </div>
-            </div>
-            <div class="msg">{{repassMsg}}</div>
-            <div class="group">
-              <div class="submit" @click='handleRegister'>点击注册</div>
-            </div>
-        <div class="footer">
-          <span @click="handleReg">已有账号,前往登陆</span>
-        </div>
+          </div>
+          <div class="msg">{{repassMsg}}</div>
+          <div class="group">
+            <div class="submit" @click='handleRegister'>点击关联</div>
+          </div>
+          <div class="footer">
+          </div>
         </div>
     </div>
   </div>
 </template>
 <script>
-import { getEmailCode, reg } from '@/services/register'
-import { storage } from '@/utils'
+import { getEmailCode } from '@/services/register'
+import { bindEmail } from '@/services/userInfo'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'register',
+  name: 'bindeamil',
   props: {
-    showLogin: {
-      type: Function
-    },
     showReg: {
       type: Function
     }
@@ -80,13 +67,11 @@ export default {
     return {
       getCodeInfo: '获取邮箱验证码',
       form: {
-        username: '',
         email: '',
         password: '',
         repass: '',
         code: ''
       },
-      usernameMsg: '',
       emailMsg: '',
       codeMsg: '',
       passwordMsg: '',
@@ -94,42 +79,34 @@ export default {
       codeTime: 30
     }
   },
+  computed: {
+    ...mapGetters({
+      'userinfo': 'getUserInfo'
+    })
+  },
+  created() {
+    console.log('userinfo', this.userinfo)
+  },
   methods: {
     handleReg() {
       this.showReg()
-      this.showLogin()
     },
     async handleRegister() {
-      const { username, email, password, code } = this.form
-      this.usernameBlur()
+      const { email, password, code } = this.form
       this.emailBlur()
       this.passwordBlur()
       this.repassBlur()
       this.codeBlur()
-      if (this.usernameMsg !== '' || this.emailMsg !== '' || this.codeMsg !== '' || this.passwordMsg !== '' || this.repassMsg !== '') {
+      if (this.emailMsg !== '' || this.codeMsg !== '' || this.passwordMsg !== '' || this.repassMsg !== '') {
         return
       }
-      const data = await reg({ name: username, email, code, password })
+      if (!this.userinfo.id) {
+        return
+      }
+      const id = this.userinfo.id
+      const data = await bindEmail({ id, email, code, password })
       if (data.code === 200) {
-        this.$notify({
-          title: '提示',
-          message: '注册成功,自动登录',
-          type: 'success',
-          duration: 5000
-        })
-        storage({
-          type: 'set',
-          key: 'userInfo',
-          val: JSON.stringify({ ...data.obj, token: data.token })
-        })
-        storage({
-          type: 'set',
-          key: 'loginType',
-          val: 'email'
-        })
-        setTimeout(() => {
-          window.location.reload()
-        }, 30)
+        window.location.reload()
       } else {
         this.$notify({
           title: '提示',
@@ -179,14 +156,6 @@ export default {
           type: 'error',
           duration: 5000
         })
-      }
-    },
-    usernameBlur() {
-      const { username } = this.form
-      if (!username || username === '') {
-        this.usernameMsg = '用户名不能为空'
-      } else {
-        this.usernameMsg = ''
       }
     },
     emailBlur() {

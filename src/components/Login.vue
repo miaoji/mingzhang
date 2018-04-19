@@ -1,10 +1,10 @@
 <template>
-  <div class="login" v-if="loginShow">
+  <div class="login">
     <div class="login-container">
       <div class="login-container-left">
         <div class="header">
           <span class="left">用户登录</span>
-          <span class="right"><i @click="()=>{this.loginShow = false}" class="el-icon-circle-close-outline"></i></span>
+          <span class="right"><i @click="()=>{showLogin()}" class="el-icon-circle-close-outline"></i></span>
         </div>
           <div class="group">
             <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
@@ -59,11 +59,10 @@ import { storage } from '@/utils'
 export default {
   name: 'login',
   props: {
-    show: {
-      type: Boolean,
-      default: false
-    },
     showReg: {
+      type: Function
+    },
+    showLogin: {
       type: Function
     }
   },
@@ -75,7 +74,6 @@ export default {
         password: '',
         code: ''
       },
-      loginShow: true,
       emailMsg: '',
       codeMsg: '',
       passwordMsg: '',
@@ -89,7 +87,7 @@ export default {
   },
   methods: {
     handleReg() {
-      this.loginShow = false
+      this.showLogin()
       this.showReg()
     },
     async handleLogin() {

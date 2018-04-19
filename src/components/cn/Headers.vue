@@ -81,10 +81,10 @@
       </div>
     </el-dialog>
     <transition name="el-fade-in">
-      <login v-if="loginShow" :showReg="()=>{this.regShow = !this.regShow}" />
+      <login v-if="loginShow" :showLogin="()=>{this.loginShow = !this.loginShow}" :showReg="()=>{this.regShow = !this.regShow}" />
     </transition>
     <transition name="el-fade-in">
-      <reg v-if="regShow" :showLogin="()=>{this.loginShow = !this.loginShow}" />
+      <reg v-if="regShow" :showReg="()=>{this.regShow = !this.regShow}" :showLogin="()=>{this.loginShow = !this.loginShow}" />
     </transition>
   </div>
 </template>

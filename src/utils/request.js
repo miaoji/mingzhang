@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {gettoken as getToken, storage} from '@/utils'
+import { gettoken as getToken, storage } from '@/utils'
 
 const fetch = (options) => {
   let {
@@ -26,7 +26,7 @@ const fetch = (options) => {
         method: 'get',
         params: data || params,
         timeout: 5000,
-        headers: auth ? {'token': token} : {}
+        headers: auth ? { 'token': token } : {}
       })
     case 'delete':
       return axios({
@@ -35,7 +35,7 @@ const fetch = (options) => {
         data,
         params,
         timeout: 5000,
-        headers: auth ? {'token': token} : {}
+        headers: auth ? { 'token': token } : {}
       })
     case 'post':
       return axios({
@@ -70,37 +70,38 @@ const fetch = (options) => {
   }
 }
 
-export default function request (options) {
-  const {useSession} = options
+export default function request(options) {
+  const { useSession } = options
   return fetch(options).then((response) => {
-    const {status} = response
+    const { status } = response
     let data = response.data
-    data = typeof data === 'object' ? data : {'stringData': data}
+    data = typeof data === 'object' ? data : { 'stringData': data }
     return {
       success: true,
       statusCode: status,
       ...data
     }
   }).catch((error) => {
-    const {response} = error
+    const { response } = error
     let msg
     let statusCode
     if (response && response instanceof Object) {
-      const {data, statusText} = response
+      const { data, statusText } = response
       statusCode = response.status
       msg = data.message || statusText
       // 判断token失效
       if (response.status === 401) {
+        window.localStorage.clear()
         if (useSession) {
           window.sessionStorage.clear()
           getToken()
         }
-        return {success: false, statusCode: 401, msg: '用户登陆状态已失效'}
+        this.$router.push('/')
       }
     } else {
       statusCode = 600
       msg = error.message || '网络错误'
     }
-    return {success: false, statusCode, message: msg}
+    return { success: false, statusCode, message: msg }
   })
 }

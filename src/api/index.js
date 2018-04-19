@@ -1,11 +1,10 @@
 let API
 // 本地
-// API = 'http://192.168.231.239:8077'
-
+API = 'http://192.168.231.239:8077'
 // 线上测试版
 // API = 'http://api.didalive.net/mzkd'
 // 正式线上
-API = 'http://api.mingz-tech.com'
+// API = 'http://api.mingz-tech.com'
 
 let BBS_API
 
@@ -125,5 +124,6 @@ export const login = {
 }
 export const userInfo = {
   bindingEmail: `${API}/bindingEmail`,
-  merge: `${API}/api/wxUser/mergeEmailAndWx`
+  merge: `${API}/api/wxUser/mergeEmailAndWx`,
+  bindEmail: `${API}/api/wxUser/updateBindingEmail`
 }

@@ -2,10 +2,10 @@
   <div class="userinfo">
     <div class="content">
       <div class="user_img"><img :src="user.headimgurl || '/static/image/img001.png'" alt=""></div>
-      <div>用户名: {{user.nickName}}</div>
-      <div>客户编码: {{user.customerNo || '暂无'}}</div>
-      <div>邮箱: {{user.email}}<el-button v-if="!user.email" @click="handleEmailCilck()" type="text">[关联邮箱]</el-button></div>
-      <div>绑定微信号: <img src="/static/image/wechart.png" alt="明彰"><span v-if="user.unionid">已绑定</span><el-button v-if="!user.unionid" @click="handleCilck()" type="text">[关联账号]</el-button></div>
+      <div>{{$t('message.userindex.username')}}: {{user.nickName}}</div>
+      <div>{{$t('message.userindex.customerCode')}}: {{user.customerNo || '暂无'}}</div>
+      <div>{{$t('message.userindex.email')}}: {{user.email}}<el-button v-if="!user.email" @click="handleEmailCilck()" type="text">[{{$t('message.userindex.relationEmail')}}]</el-button></div>
+      <div>{{$t('message.userindex.binding')}}: <img src="/static/image/wechart.png" alt="明彰"><span v-if="user.unionid">{{$t('message.userindex.Association')}}</span><el-button v-if="!user.unionid" @click="handleCilck()" type="text">[{{$t('message.userindex.relationWeChat')}}]</el-button></div>
     </div>
     
     <transition name="el-fade-in">
@@ -56,10 +56,6 @@ export default {
       const res = await merge({ wxUserId, email: this.user.email })
       console.log('resssss', res)
       if (res && res.code === 200) {
-        this.$notify({
-          title: '合并成功',
-          type: 'success'
-        })
         const eventData = this.obj
         const openid = eventData.openidWeb
         const unionid = eventData.unionid
@@ -68,7 +64,7 @@ export default {
         window.location.reload()
       } else {
         this.$notify({
-          title: res.msg || '当前网络暂时无法使用, 请刷新页面查看结果',
+          title: res.msg,
           type: 'error'
         })
       }

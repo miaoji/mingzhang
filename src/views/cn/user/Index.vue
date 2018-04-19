@@ -21,7 +21,7 @@
               <router-link :to="linkuserinfo">
                 <el-menu-item index="3">
                   <i class="el-icon-setting"></i>
-                  用户信息
+                  {{$t('message.userindex.userinfo')}}
                 </el-menu-item>
               </router-link>
             </el-menu>

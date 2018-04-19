@@ -12,5 +12,13 @@ export default {
   t6: [
     '微信号: IESC007',
     '热线: 647-995-2600'
-  ]
+  ],
+  userinfo: '用户信息',
+  username: '用户名',
+  customerCode: '客户编码',
+  email: '邮箱',
+  relationEmail: '关联邮箱',
+  relationWeChat: '关联微信',
+  binding: '绑定',
+  Association: '已关联'
 }

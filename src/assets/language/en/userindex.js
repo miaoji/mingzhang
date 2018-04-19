@@ -12,5 +12,13 @@ export default {
   t6: [
     'WeChat: IESC007',
     'Telephone: 647-995-2600'
-  ]
+  ],
+  userinfo: 'User information',
+  username: 'User name',
+  customerCode: 'Customer code',
+  email: 'Email',
+  relationEmail: 'Relation email',
+  relationWeChat: 'Relation WeChat',
+  binding: 'Binding',
+  Association: 'Association'
 }

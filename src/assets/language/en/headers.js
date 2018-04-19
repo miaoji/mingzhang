@@ -14,5 +14,9 @@ export default {
   t12: 'SENDING  PROCESS',
   t13: 'Login failed, please check whether your network is connected properly!',
   t14: 'Are you sure you want to log out?',
-  register: 'register'
+  register: 'register',
+  confirm: 'confirm',
+  cancel: 'cancel',
+  infotitle: 'You are going to quit logon and go on?',
+  prompt: 'prompt'
 }

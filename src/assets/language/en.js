@@ -14,7 +14,7 @@ export default {
   userindex,
   pages: {
     index: {
-      quality: 'q111',
+      quality: 'q',
       reasonable: 'r',
       highly: 'h',
       unrestrained: 'u'

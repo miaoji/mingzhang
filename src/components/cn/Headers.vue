@@ -193,9 +193,9 @@ export default {
       window.open(wxLoginUrl, '', 'height=' + iHeight + ', width=' + iWidth + ', top=' + iTop + ', left=' + iLeft)
     },
     handleLoginOut() {
-      this.$confirm('您即将退出登录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$t('message.headers.infotitle'), this.$t('message.headers.prompt'), {
+        confirmButtonText: this.$t('message.headers.confirm'),
+        cancelButtonText: this.$t('message.headers.cancel'),
         type: 'warning'
       }).then(() => {
         this.loginOut()

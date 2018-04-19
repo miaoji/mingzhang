@@ -14,5 +14,9 @@ export default {
   t12: '寄件流程',
   t13: '登录失败，请检测您的网络是否连接正常',
   t14: '确定要登出吗?',
-  register: '注册'
+  register: '注册',
+  confirm: '确定',
+  cancel: '取消',
+  infotitle: '您即将退出登录, 是否继续?',
+  prompt: '提示'
 }

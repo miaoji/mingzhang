@@ -4,6 +4,7 @@ import directmail from './en/directmail'
 import userindex from './en/userindex'
 import ordersend from './en/ordersend'
 import headers from './en/headers'
+import login from './en/login'
 
 export default {
   cashier,
@@ -12,6 +13,7 @@ export default {
   headers,
   ordersend,
   userindex,
+  login,
   pages: {
     index: {
       quality: 'q',

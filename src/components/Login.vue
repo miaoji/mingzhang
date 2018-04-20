@@ -3,11 +3,11 @@
     <div class="login-container">
       <div class="login-container-left">
         <div class="header">
-          <span class="left">用户登录</span>
+          <span class="left">{{$t('message.login.userlogin')}}</span>
           <span class="right"><i @click="()=>{showLogin()}" class="el-icon-circle-close-outline"></i></span>
         </div>
           <div class="group">
-            <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
+            <div class="input"><input @input='emailBlur' v-model='form.email' :placeholder="$t('message.login.fillemail')" type="text" /></div>
             <div class="icon">
               <i class="el-icon-circle-close-outline" v-if="emailMsg"></i>
               <i class="el-icon-circle-check-outline" v-if="!emailMsg"></i>
@@ -16,7 +16,7 @@
           <div class="msg">{{emailMsg}}</div>
           <div class="group">
             <!-- <div class="text">密码</div> -->
-            <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
+            <div class="input"><input @input='passwordBlur' v-model='form.password' :placeholder="$t('message.login.fillpassword')" type="password" /></div>
             <div class="icon">
               <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
               <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
@@ -24,7 +24,7 @@
           </div>
           <div class="msg">{{passwordMsg}}</div>
           <div class="group">
-            <div class="text">验证码:</div>
+            <div class="text">{{$t('message.login.code')}}:</div>
             <div class="img"><img :src="codeimg" alt="图片验证码"></div>
             <div class="icon">
               <span @click='getVerificationCode'>{{getCodeInfo}}</span>
@@ -33,7 +33,7 @@
           <div class="msg"></div>
           <div class="group">
             <!-- <div class="text">邮箱验证码</div> -->
-            <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入图片验证码信息" type="text" /></div>
+            <div class="input"><input @input='codeBlur' v-model='form.code' :placeholder="$t('message.login.codeinfo')" type="text" /></div>
             <div class="icon">
               <i class="el-icon-circle-close-outline" v-if="codeMsg"></i>
               <i class="el-icon-circle-check-outline" v-if="!codeMsg"></i>
@@ -41,10 +41,10 @@
           </div>
           <div class="msg">{{codeMsg}}</div>
           <div class="group">
-            <div class="submit" @click='handleLogin'>点击登录</div>
+            <div class="submit" @click='handleLogin'>{{$t('message.login.clicklogin')}}</div>
           </div>
         <div class="footer">
-          <span @click="handleReg">没有账号,前往注册</span>
+          <span @click="handleReg">{{$t('message.login.goregister')}}</span>
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ export default {
   },
   data() {
     return {
-      getCodeInfo: '看不清,换一下',
+      getCodeInfo: this.$t('message.login.change'),
       form: {
         email: '',
         password: '',
@@ -101,8 +101,8 @@ export default {
       const data = await loginService({ email, code, password, uuid: this.uuid })
       if (data.status === 200) {
         this.$notify({
-          title: '提示',
-          message: '登录成功',
+          title: this.$t('message.login.prompt'),
+          message: this.$t('message.login.loginsussess'),
           type: 'success',
           duration: 5000
         })
@@ -119,8 +119,8 @@ export default {
         window.location.reload()
       } else {
         this.$notify({
-          title: '提示',
-          message: data.msg || '当前网络无法使用',
+          title: this.$t('message.login.prompt'),
+          message: data.msg || this.$t('message.login.networkerror'),
           type: 'error',
           duration: 5000
         })
@@ -133,11 +133,11 @@ export default {
     emailBlur() {
       const { email } = this.form
       if (!email || email === '') {
-        this.emailMsg = '邮箱地址不能为空'
+        this.emailMsg = this.$t('message.login.emailvacant')
       } else {
         const aa = email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
         if (aa < 0) {
-          this.emailMsg = '邮箱格式不正确'
+          this.emailMsg = this.$t('message.login.emailerror')
         } else {
           this.emailMsg = ''
         }
@@ -146,7 +146,7 @@ export default {
     codeBlur() {
       const { code } = this.form
       if (!code || code === '') {
-        this.codeMsg = '验证码不能为空'
+        this.codeMsg = this.$t('message.login.codevacant')
       } else {
         this.codeMsg = ''
       }
@@ -154,7 +154,7 @@ export default {
     passwordBlur() {
       const { password } = this.form
       if (!password || password === '') {
-        this.passwordMsg = '密码不能为空'
+        this.passwordMsg = this.$t('message.login.passwordvacant')
       } else {
         this.passwordMsg = ''
       }

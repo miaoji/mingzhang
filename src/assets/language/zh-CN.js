@@ -4,6 +4,7 @@ import directmail from './cn/directmail'
 import userindex from './cn/userindex'
 import ordersend from './cn/ordersend'
 import headers from './cn/headers'
+import login from './cn/login'
 
 export default {
   cashier,
@@ -12,6 +13,7 @@ export default {
   headers,
   ordersend,
   userindex,
+  login,
   // 页面中显示的文字
   pages: {
     index: {

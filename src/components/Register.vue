@@ -3,12 +3,12 @@
     <div class="register-container">
         <div class="register-container-left">
           <div class="header">
-            <span class="left">用户注册</span>
+            <span class="left">{{$t('message.login.userregister')}}</span>
             <span class="right"><i @click="()=>{showReg()}" class="el-icon-circle-close-outline"></i></span>
           </div>
             <div class="group">
               <div class="input">
-                <input type="text" @input='usernameBlur' v-model='form.username' placeholder='请输入您的用户名' />
+                <input type="text" @input='usernameBlur' v-model='form.username' :placeholder="$t('message.login.fillusername')" />
               </div>
               <div class="icon">
                 <i class="el-icon-circle-close-outline" v-if="usernameMsg"></i>
@@ -17,7 +17,7 @@
             </div>
             <div class="msg">{{usernameMsg}}</div>
             <div class="group">
-              <div class="input"><input @input='emailBlur' v-model='form.email' placeholder="请输入您的邮箱" type="text" /></div>
+              <div class="input"><input @input='emailBlur' v-model='form.email' :placeholder="$t('message.login.fillemail')" type="text" /></div>
               <div class="icon">
                 <span @click='getVerificationCode'>{{getCodeInfo}}</span>
                 <i class="el-icon-circle-close-outline" v-if="emailMsg"></i>
@@ -27,7 +27,7 @@
             <div class="msg">{{emailMsg}}</div>
             <div class="group">
               <!-- <div class="text">邮箱验证码</div> -->
-              <div class="input"><input @input='codeBlur' v-model='form.code' placeholder="请输入您的邮箱验证码" type="text" /></div>
+              <div class="input"><input @input='codeBlur' v-model='form.code' :placeholder="$t('message.login.fillemailcode')" type="text" /></div>
               <div class="icon">
                 <i class="el-icon-circle-close-outline" v-if="codeMsg"></i>
                 <i class="el-icon-circle-check-outline" v-if="!codeMsg"></i>
@@ -36,7 +36,7 @@
             <div class="msg">{{codeMsg}}</div>
             <div class="group">
               <!-- <div class="text">密码</div> -->
-              <div class="input"><input @input='passwordBlur' v-model='form.password' placeholder="请输入您的密码" type="password" /></div>
+              <div class="input"><input @input='passwordBlur' v-model='form.password' :placeholder="$t('message.login.fillpassword')" type="password" /></div>
               <div class="icon">
                 <i class="el-icon-circle-close-outline" v-if="passwordMsg"></i>
                 <i class="el-icon-circle-check-outline" v-if="!passwordMsg"></i>
@@ -45,7 +45,7 @@
             <div class="msg">{{passwordMsg}}</div>
             <div class="group">
               <!-- <div class="text">确认密码</div> -->
-              <div class="input"><input @change='repassBlur' v-model='form.repass' placeholder="请确认您的密码" type="password" /></div>
+              <div class="input"><input @change='repassBlur' v-model='form.repass' :placeholder="$t('message.login.confirmpassword')" type="password" /></div>
               <div class="icon">
                 <i class="el-icon-circle-close-outline" v-if="repassMsg"></i>
                 <i class="el-icon-circle-check-outline" v-if="!repassMsg"></i>
@@ -53,10 +53,10 @@
             </div>
             <div class="msg">{{repassMsg}}</div>
             <div class="group">
-              <div class="submit" @click='handleRegister'>点击注册</div>
+              <div class="submit" @click='handleRegister'>{{$t('message.login.clickregister')}}</div>
             </div>
         <div class="footer">
-          <span @click="handleReg">已有账号,前往登陆</span>
+          <span @click="handleReg">{{$t('message.login.gologin')}}</span>
         </div>
         </div>
     </div>
@@ -78,7 +78,7 @@ export default {
   },
   data() {
     return {
-      getCodeInfo: '获取邮箱验证码',
+      getCodeInfo: this.$t('message.login.getemailcode'),
       form: {
         username: '',
         email: '',
@@ -112,8 +112,8 @@ export default {
       const data = await reg({ name: username, email, code, password })
       if (data.code === 200) {
         this.$notify({
-          title: '提示',
-          message: '注册成功,自动登录',
+          title: this.$t('message.login.prompt'),
+          message: this.$t('message.login.registersuccess'),
           type: 'success',
           duration: 5000
         })
@@ -132,50 +132,50 @@ export default {
         }, 30)
       } else {
         this.$notify({
-          title: '提示',
-          message: data.msg || '当前网络无法使用',
+          title: this.$t('message.login.prompt'),
+          message: data.msg || this.$t('message.login.networkerror'),
           type: 'error',
           duration: 5000
         })
       }
     },
     async getVerificationCode() { // 点击获取验证码
-      if (this.getCodeInfo !== '获取邮箱验证码') {
+      if (this.getCodeInfo !== this.$t('message.login.getemailcode')) {
         this.$notify({
-          title: '提示',
-          message: '距离上次获取验证码时间太近',
+          title: this.$t('message.login.prompt'),
+          message: this.$t('message.login.wait'),
           type: 'info',
           duration: 5000
         })
         return
       }
       this.$notify({
-        title: '提示',
-        message: '正在发送验证码',
+        title: this.$t('message.login.prompt'),
+        message: this.$t('message.login.sendcode'),
         type: 'info',
         duration: 5000
       })
       const data = await getEmailCode({ email: this.form.email })
       if (data.code === 200) {
         this.$notify({
-          title: '提示',
-          message: '验证发送成功',
+          title: this.$t('message.login.prompt'),
+          message: this.$t('message.login.codesendsuccess'),
           type: 'success',
           duration: 5000
         })
         const time = window.setInterval(() => {
-          this.getCodeInfo = `请在${this.codeTime}秒后重试`
+          this.getCodeInfo = this.$t('message.login.retry', { 'num': this.codeTime })
           this.codeTime--
           if (this.codeTime === 0) {
             window.clearInterval(time)
-            this.getCodeInfo = '获取邮箱验证码'
+            this.getCodeInfo = this.$t('message.login.getemailcode')
             this.codeTime = 30
           }
         }, 1000)
       } else {
         this.$notify({
-          title: '提示',
-          message: '验证码发送失败,请重试',
+          title: this.$t('message.login.prompt'),
+          message: this.$t('message.login.codesenderror'),
           type: 'error',
           duration: 5000
         })
@@ -184,7 +184,7 @@ export default {
     usernameBlur() {
       const { username } = this.form
       if (!username || username === '') {
-        this.usernameMsg = '用户名不能为空'
+        this.usernameMsg = this.$t('message.login.usernamevacant')
       } else {
         this.usernameMsg = ''
       }
@@ -192,11 +192,11 @@ export default {
     emailBlur() {
       const { email } = this.form
       if (!email || email === '') {
-        this.emailMsg = '邮箱地址不能为空'
+        this.emailMsg = this.$t('message.login.emailvacant')
       } else {
         const aa = email.search(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/)
         if (aa < 0) {
-          this.emailMsg = '邮箱格式不正确'
+          this.emailMsg = this.$t('message.login.emailerror')
         } else {
           this.emailMsg = ''
         }
@@ -205,7 +205,7 @@ export default {
     codeBlur() {
       const { code } = this.form
       if (!code || code === '') {
-        this.codeMsg = '验证码不能为空'
+        this.codeMsg = this.$t('message.login.codevacant')
       } else {
         this.codeMsg = ''
       }
@@ -213,10 +213,10 @@ export default {
     passwordBlur() {
       const { password } = this.form
       if (!password || password === '') {
-        this.passwordMsg = '密码不能为空'
+        this.passwordMsg = this.$t('message.login.passwordvacant')
         return
       }
-      var aLvTxt = ['密码长度过短', '密码需要同时含有数字和字母', '']
+      var aLvTxt = [this.$t('message.login.passwordlv1'), this.$t('message.login.passwordlv2'), '']
       var lv = 0
       if (password.match(/[a-z]/g)) { lv++ }
       if (password.match(/[0-9]/g)) { lv++ }
@@ -227,7 +227,7 @@ export default {
     repassBlur() {
       const { repass, password } = this.form
       if (repass !== password) {
-        this.repassMsg = '两次输入的密码不一致'
+        this.repassMsg = this.$t('message.login.repasserror')
       } else {
         this.repassMsg = ''
       }

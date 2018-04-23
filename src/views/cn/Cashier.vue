@@ -35,13 +35,13 @@
           <el-card class="box-card order_info">
             <div class="item_title">{{$t("message.cashier.text14")}}</div>
             <div class="info"><span>{{$t("message.cashier.text15")}}</span> : <span>{{data.senderName}}</span></div>
-            <div class="info"><span>{{$t("message.cashier.text16")}}</span> : <span>{{data.senderCountry}}, {{data.senderProv}}, {{data.senderCity}}, {{data.senderCounty}}, {{data.senderAddress}}</span>
+            <div class="info"><span>{{$t("message.cashier.text16")}}</span> : <span>{{data.senderCountry}} {{data.senderProv}} {{data.senderCity}} {{data.senderCounty}} {{data.senderAddress}}</span>
             </div>
             <div class="info"><span>{{$t("message.cashier.text17")}}</span> : <span>{{data.senderMobile}}</span></div>
             <div class="info"><span>{{$t("message.cashier.text18")}}</span> : <span>{{data.senderPostcode}}</span></div>
             <div class="item_title">{{$t("message.cashier.text19")}}</div>
             <div class="info"><span>{{$t("message.cashier.text20")}}</span> : <span>{{data.receiverName}}</span></div>
-            <div class="info"><span>{{$t("message.cashier.text21")}}</span> : <span>{{data.receiverCountry}}, {{data.receiverAddress}}</span></div>
+            <div class="info"><span>{{$t("message.cashier.text21")}}</span> : <span>{{data.receiverCountry}} {{data.receiverAddress}}</span></div>
             <div class="info"><span>{{$t("message.cashier.text22")}}</span> : <span>{{data.receiverMobile}}</span></div>
             <div class="info"><span>{{$t("message.cashier.text23")}}</span> : <span>{{data.receiverPostcode}}</span></div>
             <div class="item_title">{{$t("message.cashier.text24")}}</div>

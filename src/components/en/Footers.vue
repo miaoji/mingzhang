@@ -121,8 +121,8 @@
 
   .footer > .footer_main > ul > li > .img {
     margin: 0px auto;
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
   }
 
   .footer > .footer_main > ul > li > .img > img {

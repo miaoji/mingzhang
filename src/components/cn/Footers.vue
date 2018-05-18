@@ -82,7 +82,7 @@
   }
 
   .footer > .footer_main > ul {
-    padding: 30px 350px;
+    padding: 30px 300px;
     margin: 0px;
   }
 
@@ -119,8 +119,8 @@
 
   .footer > .footer_main > ul > li > .img {
     margin: 0px auto;
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
   }
 
   .footer > .footer_main > ul > li > .img > img {

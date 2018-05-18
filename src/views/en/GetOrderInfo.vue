@@ -7,7 +7,7 @@
         <div class="line"></div>
         <div class="input"><input @keyup.13="getOrderInfo" placeholder="Please Input Your Courier Number" type="text" v-model='order'/></div>
         <div class="button left" @click="getOrderInfo">Search</div>
-        <div class="button right" @click="goOrderInfo">Order Info</div>
+        <!-- <div class="button right" @click="goOrderInfo">Order Info</div> -->
       </div>
       <div class="order right">
         <div class="icon"><img src="/static/image/sen_res.png"/></div>
@@ -100,8 +100,10 @@
             })
             if (bengalOrderInfo.code === 200 && bengalOrderInfo.obj) {
               this.mengalOrderData = bengalOrderInfo.obj
+              this.show = false
+            } else {
+              this.show = true
             }
-            this.show = false
             setTimeout(() => {
               this.orderLoading = false
             }, 500)

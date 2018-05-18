@@ -6,7 +6,7 @@
       </div>
       <div class="detail">
         <detail-item :title='$t("message.orderdetail.t11")' :value="detailData['orderNo']"></detail-item>
-        <detail-item :title='$t("message.orderdetail.t12")' :value="totalFee"></detail-item>
+        <!-- <detail-item :title='$t("message.orderdetail.t12")' :value="totalFee"></detail-item> -->
         <detail-item :title='$t("message.orderdetail.t13")' :value="statusList['short']"></detail-item>
         <detail-item :title='$t("message.orderdetail.t14")' :value="createdTime"></detail-item>
         <detail-item :title='$t("message.orderdetail.t15")' :value="senderAddress"></detail-item>

@@ -15,7 +15,7 @@ export async function show (data) {
     url: order.getOrderInfoByOrderNo,
     method: 'get',
     auth: true,
-    // useSession: true,
+    useSession: true,
     data
   })
 }

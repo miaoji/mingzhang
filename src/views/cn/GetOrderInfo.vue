@@ -8,7 +8,7 @@
         <div class="input"><input @keyup.13="getOrderInfo" placeholder="请输入单号进行查询" type="text" v-model='order'/></div>
         <div class='clear'>
           <div class="button left" @click="getOrderInfo">搜索</div>
-          <div class="button right" @click="goOrderInfo">查看订单信息</div>
+          <!-- <div class="button right" @click="goOrderInfo">查看订单信息</div> -->
         </div>
       </div>
       <div class="order right">
@@ -99,8 +99,10 @@
             })
             if (bengalOrderInfo.code === 200 && bengalOrderInfo.obj) {
               this.mengalOrderData = bengalOrderInfo.obj
+              this.show = false
+            } else {
+              this.show = true
             }
-            this.show = false
             setTimeout(() => {
               this.orderLoading = false
             }, 500)

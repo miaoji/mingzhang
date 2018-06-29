@@ -23,7 +23,7 @@
           <div class="tit">联系我们</div>
           <div class="footer_item">服务时间 : 9:00 - 18:00</div>
           <div class="footer_item">服务电话 : 021-34120053</div>
-          <div class="footer_item">加拿大客服热线 : 647-995-2600</div>
+          <!-- <div class="footer_item">加拿大客服热线 : 647-995-2600</div> -->
           <div class="footer_item">地址 : 上海市闵行区泰虹路168弄1号楼302室</div>
           <div class="footer_item">微信号 : IESC007</div>
           <div class="footer_item">QQ : 3187904519</div>

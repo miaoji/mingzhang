@@ -23,7 +23,7 @@
           <div class="tit">Contact Us</div>
           <div class="footer_item">Operating Hours : 9:00-18:00</div>
           <div class="footer_item">TEL : 021-34120053</div>
-          <div class="footer_item">Canada Hotline : 647-995-2600</div>
+          <!-- <div class="footer_item">Canada Hotline : 647-995-2600</div> -->
           <div class="footer_item">Address : Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai,
             China.
           </div>

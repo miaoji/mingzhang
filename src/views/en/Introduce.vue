@@ -5,7 +5,7 @@
         <div class="info">Contact Us</div>
         <div class="line"></div>
         <div class="content">TEL: 021-34120053</div>
-        <div class="content">Canada Hotline : 647-995-2600</div>
+        <!-- <div class="content">Canada Hotline : 647-995-2600</div> -->
         <div class="content">Operating Hours : 9:00-18:00</div>
         <div class="content">Website : www.mingz-tech.com</div>
         <div class="content">Address : Room No.1, 168 alley, Hongtai Road, Hongqiao business district, Shanghai,
@@ -95,9 +95,6 @@
     line-height: 30px;
     margin: 0px 38px 10px;
     border-bottom: 1px #555 solid;
-  }
-
-  .introduce_left > .info:last-child {
   }
 
   .introduce_left > .img {

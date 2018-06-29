@@ -6,7 +6,7 @@
         <div class="line"></div>
         <div class="content">服务电话 ： 021-34120053</div>
         <div class="content">服务时间 : 9:00-18:00</div>
-        <div class="content">加拿大客服热线 : 647-995-2600</div>
+        <!-- <div class="content">加拿大客服热线 : 647-995-2600</div> -->
         <div class="content">网址：www.mingz-tech.com</div>
         <div class="content">地址: 上海市闵行区泰虹路168弄1号楼302室</div>
         <div class="content">微信号: IESC007</div>
@@ -90,9 +90,6 @@
     line-height: 30px;
     margin: 0px 38px 10px;
     border-bottom: 1px #555 solid;
-  }
-
-  .introduce_left > .info:last-child {
   }
 
   .introduce_left > .img {

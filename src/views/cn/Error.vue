@@ -6,44 +6,42 @@
   </div>
 </template>
 <script>
-  import Headers from '@/components/cn/Headers'
-  import Footers from '@/components/cn/Footers'
+import Headers from '@/components/cn/Headers'
+import Footers from '@/components/cn/Footers'
 
-  export default {
-    name: 'IndexMain',
-    components: {
-      Headers,
-      Footers
+export default {
+  name: 'IndexMain',
+  components: {
+    Headers,
+    Footers
+  },
+  data() {
+    return {
+      msg: '',
+      show: true
+    }
+  },
+  created() {
+    this.menu()
+    this.goIndex()
+  },
+  methods: {
+    goIndex() {
+      this.$router.push({ path: '/cn/index' })
     },
-    data () {
-      return {
-        msg: '',
-        show: true
-      }
-    },
-    created () {
-      this.menu()
-      this.goIndex()
-    },
-    methods: {
-      goIndex () {
-        setTimeout(() => {
-          this.$router.push({path: '/cn/index'})
-        }, 2000)
-      },
-      menu () {
-        window.document.title = '上海明彰网络科技有限公司'
-        window.scrollTo(0, 500)
-      }
+    menu() {
+      window.document.title = '上海明彰网络科技有限公司'
+      window.scrollTo(0, 500)
     }
   }
+}
 </script>
 <style scoped>
-  .error {
-    background-color: #fff;
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    padding: 100px 0px;
-  }
+.error {
+  background-color: #fff;
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 100px 0px;
+}
 </style>

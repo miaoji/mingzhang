@@ -1,5 +1,5 @@
 export default {
-  t1: '上海明彰网络科技有限公司',
+  t1: '明彰国际快递服务中心（IESC）',
   t2: 'language',
   t3: 'English',
   wxLogin: '微信登录',

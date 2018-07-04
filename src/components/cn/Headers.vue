@@ -2,7 +2,7 @@
   <div class="header_nav">
     <ul class="w clear">
       <li class="left">
-        <router-link :to="this.href+'index'"><img src="/static/image/logo.jpg"/><span class="logo">{{$t('message.headers.t1')}}</span></router-link>
+        <router-link :to="this.href+'index'"><img src="/static/image/logo.jpg" alt="网站logo"/><span class="logo">{{$t('message.headers.t1')}}</span></router-link>
       </li>
       <li class="right language">
         <div class='switch'>
